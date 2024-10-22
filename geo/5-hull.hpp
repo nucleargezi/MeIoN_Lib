@@ -1,5 +1,6 @@
 #pragma once
 #include "1-base.hpp"
+// https://qoj.ac/problem/218
 template <typename T, bool allow_180 = false>
 vector<int> convex_hull(vector<point<T>> &p, string mode = "full",
                         bool sorted = false) {
