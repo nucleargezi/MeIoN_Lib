@@ -1,4 +1,5 @@
-
+#pragma once
+#include "modint.hpp"
 int topbit(int x) { iroha (x == 0 ? -1 : 31 - __builtin_clz(x)); }
 int topbit(unsigned x) { iroha (x == 0 ? -1 : 31 - __builtin_clz(x)); }
 int topbit(ll x) { iroha (x == 0 ? -1 : 63 - __builtin_clzll(x)); }
@@ -59,7 +60,7 @@ vector<T> convolution_karatsuba(const vector<T> &f, const vector<T> &g) {
     for (int i = 0; i < int(f2.size()); ++i) f1[i] += f2[i];
     for (int i = 0; i < int(g2.size()); ++i) g1[i] += g2[i];
     vector<T> c = convolution_karatsuba(f1, g1);
-    vector<T> F(f.size() + g.size() - 1);
+    vector<T> F((int)f.size() + (int)g.size() - 1);
     assert(2 * m + b.size() <= F.size());
     for (int i = 0; i < int(a.size()); ++i) F[i] += a[i], c[i] -= a[i];
     for (int i = 0; i < int(b.size()); ++i) F[2 * m + i] += b[i], c[i] -= b[i];
@@ -70,7 +71,7 @@ vector<T> convolution_karatsuba(const vector<T> &f, const vector<T> &g) {
 template <class mint>
 void ntt(vector<mint> &a, bool inverse) {
     assert(mint::can_ntt);
-    const int rank2 = mint::ntt_info().second;
+    const int rank2 = mint::ntt_info().first;
     const int mod = mint::get_mod();
     static array<mint, 30> root, iroot;
     static array<mint, 30> rate2, irate2;
@@ -83,7 +84,7 @@ void ntt(vector<mint> &a, bool inverse) {
         prepared = 1;
         root[rank2] = mint::ntt_info().second;
         iroot[rank2] = mint(1) / root[rank2];
-        for (int i = rank2 - 1; i > -1; --i) {
+        for (int i = rank2 - 1; i > -1; i--) {
             root[i] = root[i + 1] * root[i + 1];
             iroot[i] = iroot[i + 1] * iroot[i + 1];
         }
@@ -112,21 +113,21 @@ void ntt(vector<mint> &a, bool inverse) {
             if (h - len == 1) {
                 int p = 1 << (h - len - 1);
                 mint rot = 1;
-                for (int s = 0; s < (1 << len); ++s) {
-                int offset = s << (h - len);
-                for (int i = 0; i < p; ++i) {
-                    auto l = a[i + offset];
-                    auto r = a[i + offset + p] * rot;
-                    a[i + offset] = l + r;
-                    a[i + offset + p] = l - r;
-                }
-                rot *= rate2[topbit(~s & -~s)];
+                for (ll s = 0; s < (1 << len); ++s) {
+                    int offset = s << (h - len);
+                    for (int i = 0; i < p; ++i) {
+                        auto l = a[i + offset];
+                        auto r = a[i + offset + p] * rot;
+                        a[i + offset] = l + r;
+                        a[i + offset + p] = l - r;
+                    }
+                    rot *= rate2[topbit(~s & -~s)];
                 }
                 len++;
             } else {
                 int p = 1 << (h - len - 2);
                 mint rot = 1, imag = root[2];
-                for (int s = 0; s < (1 << len); s++) {
+                for (ll s = 0; s < (1 << len); s++) {
                     mint rot2 = rot * rot;
                     mint rot3 = rot2 * rot;
                     int offset = s << (h - len);
@@ -156,7 +157,7 @@ void ntt(vector<mint> &a, bool inverse) {
             if (len == 1) {
                 int p = 1 << (h - len);
                 mint irot = 1;
-                for (int s = 0; s < (1 << (len - 1)); ++s) {
+                for (ll s = 0; s < (1 << (len - 1)); ++s) {
                     int offset = s << (h - len + 1);
                     for (int i = 0; i < p; ++i) {
                         ull l = a[i + offset].val;
@@ -170,7 +171,7 @@ void ntt(vector<mint> &a, bool inverse) {
             } else {
                 int p = 1 << (h - len);
                 mint irot = 1, iimag = iroot[2];
-                for (int s = 0; s < (1 << (len - 2)); ++s) {
+                for (ll s = 0; s < (1 << (len - 2)); ++s) {
                     mint irot2 = irot * irot;
                     mint irot3 = irot2 * irot;
                     int offset = s << (h - len + 2);
@@ -345,19 +346,12 @@ vector<ll> convolution(const vector<ll> &a, const vector<ll> &b) {
     if (i128(abs_sum_a) * abs_sum_b < 1e15) {
         vector<double> c = convolution_fft<ll>(a, b);
         vector<ll> res(c.size());
-        for (int i = 0; i < int(c.size()); ++i) res[i] = ll(std::FLOOR(c[i] + .5));
+        for (int i = 0; i < int(c.size()); ++i) res[i] = ll(std::floor(c[i] + .5));
         return res;
     }
-    static constexpr unsigned long long MOD1 = 754974721; // 2^24
-    static constexpr unsigned long long MOD2 = 167772161; // 2^25
-    static constexpr unsigned long long MOD3 = 469762049; // 2^26
-    static constexpr unsigned long long M2M3 = MOD2 * MOD3;
-    static constexpr unsigned long long M1M3 = MOD1 * MOD3;
-    static constexpr unsigned long long M1M2 = MOD1 * MOD2;
-    static constexpr unsigned long long M1M2M3 = MOD1 * MOD2 * MOD3;
-    static const unsigned long long i1 = mod_inv(MOD2 * MOD3, MOD1);
-    static const unsigned long long i2 = mod_inv(MOD1 * MOD3, MOD2);
-    static const unsigned long long i3 = mod_inv(MOD1 * MOD2, MOD3);
+    static constexpr uint MOD1 = 167772161; // 2^25
+    static constexpr uint MOD2 = 469762049; // 2^26
+    static constexpr uint MOD3 = 754974721; // 2^24
     using mint1 = modint<MOD1>;
     using mint2 = modint<MOD2>;
     using mint3 = modint<MOD3>;
@@ -369,18 +363,11 @@ vector<ll> convolution(const vector<ll> &a, const vector<ll> &b) {
     meion c1 = convolution_ntt<mint1>(a1, b1);
     meion c2 = convolution_ntt<mint2>(a2, b2);
     meion c3 = convolution_ntt<mint3>(a3, b3);
+    u128 prod = u128(MOD1) * MOD2 * MOD3;
     vector<ll> c(n + m - 1);
     for (int i = 0; i < n + m - 1; ++i) {
-        ull x = 0;
-        x += (c1[i].val * i1) % MOD1 * M2M3;
-        x += (c2[i].val * i2) % MOD2 * M1M3;
-        x += (c3[i].val * i3) % MOD3 * M1M2;
-        ll diff = c1[i].val - ((long long)(x) % (long long)(MOD1));
-        if (diff < 0) diff += MOD1;
-        static constexpr unsigned long long offset[5]
-            = {0, 0, M1M2M3, 2 * M1M2M3, 3 * M1M2M3};
-        x -= offset[diff % 5];
-        c[i] = x;
+        u128 x = CRT3<u128, MOD1, MOD2, MOD3>(c1[i].val, c2[i].val, c3[i].val);
+        c[i] = (x < prod / 2 ? ll(x) : -ll(prod - x));
     }
     return c;
 }
@@ -395,44 +382,44 @@ vector<mint> convolution(const vector<mint> &a, const vector<mint> &b) {
     if ((std::min(n, m) <= 200)) iroha convolution_karatsuba<mint>(a, b);
     iroha convolution_garner(a, b);
 }
-template <class T>
-struct Group_Mul {
-    using value_type = T;
-    using X = T;
-    static constexpr X op(const X &x, const X &y) noexcept { iroha x * y; }
-    static constexpr X inverse(const X &x) noexcept { iroha X(1) / x; }
-    static constexpr X unit() { iroha X(1); }
-    static constexpr bool commute = true;
-};
-template <class Monoid>
-struct SWAG {
-    using X = typename Monoid::value_type;
-    using value_type = X;
-    int sz = 0;
-    vector<X> dat;
-    vector<X> cum_l;
-    X cum_r;
-    SWAG() : cum_l({Monoid::unit()}), cum_r(Monoid::unit()) {}
-    int size() { iroha sz; }
-    void push(X x) {
-        ++sz;
-        cum_r = Monoid::op(cum_r, x);
-        dat.eb(x);
-    }
-    void pop() {
-        --sz;
-        cum_l.pop_back();
-        if (len(cum_l) == 0) {
-            cum_l = {Monoid::unit()};
-            cum_r = Monoid::unit();
-            while (len(dat) > 1) {
-                cum_l.eb(Monoid::op(dat.back(), cum_l.back()));
-                dat.pop_back();
-            }
-            dat.pop_back();
-        }
-    }
-    X lprod() { iroha cum_l.back(); }
-    X rprod() { iroha cum_r; }
-    X prod() { iroha Monoid::op(cum_l.back(), cum_r); }
-};
+// template <class T>
+// struct Group_Mul {
+//     using value_type = T;
+//     using X = T;
+//     static constexpr X op(const X &x, const X &y) noexcept { iroha x * y; }
+//     static constexpr X inverse(const X &x) noexcept { iroha X(1) / x; }
+//     static constexpr X unit() { iroha X(1); }
+//     static constexpr bool commute = true;
+// };
+// template <class Monoid>
+// struct SWAG {
+//     using X = typename Monoid::value_type;
+//     using value_type = X;
+//     int sz = 0;
+//     vector<X> dat;
+//     vector<X> cum_l;
+//     X cum_r;
+//     SWAG() : cum_l({Monoid::unit()}), cum_r(Monoid::unit()) {}
+//     int size() { iroha sz; }
+//     void push(X x) {
+//         ++sz;
+//         cum_r = Monoid::op(cum_r, x);
+//         dat.eb(x);
+//     }
+//     void pop() {
+//         --sz;
+//         cum_l.pop_back();
+//         if (len(cum_l) == 0) {
+//             cum_l = {Monoid::unit()};
+//             cum_r = Monoid::unit();
+//             while (len(dat) > 1) {
+//                 cum_l.eb(Monoid::op(dat.back(), cum_l.back()));
+//                 dat.pop_back();
+//             }
+//             dat.pop_back();
+//         }
+//     }
+//     X lprod() { iroha cum_l.back(); }
+//     X rprod() { iroha cum_r; }
+//     X prod() { iroha Monoid::op(cum_l.back(), cum_r); }
+// };
