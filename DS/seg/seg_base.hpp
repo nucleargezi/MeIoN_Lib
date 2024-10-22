@@ -1,5 +1,3 @@
-#pragma once
-#include <MeIoN_all.hpp>
 template <class Monoid>
 struct MeIoN_seg {
     using MX = Monoid;

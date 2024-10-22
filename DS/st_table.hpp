@@ -1,6 +1,3 @@
-#pragma once
-#include <MeIoN_all.hpp>
-
 namespace RMQ {
     vector<int> lg(2);
     template <typename T> struct maxtable {

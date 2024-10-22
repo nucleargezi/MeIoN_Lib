@@ -1,6 +1,3 @@
-#pragma once
-#include <MeIoN_all.hpp>
-
 using DAT = int;
 struct coler_seg {
     int l, r;

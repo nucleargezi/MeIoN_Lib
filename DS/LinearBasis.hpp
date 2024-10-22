@@ -1,6 +1,3 @@
-#pragma once
-#include <MeIoN_all.hpp>
-
 struct LinearBasis {
     static const int B = 30;
     LinearBasis() { memset(basis, -1, sizeof(basis)); }

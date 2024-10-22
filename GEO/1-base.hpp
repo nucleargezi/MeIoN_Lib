@@ -1,5 +1,3 @@
-#include "MeIoN_all.hpp"
-
 using RE = long double;
 template <typename T = int>
 struct point {

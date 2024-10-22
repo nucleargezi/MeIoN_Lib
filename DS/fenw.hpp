@@ -1,6 +1,3 @@
-#pragma once
-#include <MeIoN_all.hpp>
-
 template <class T = ll>
 struct Fenw {
 public: 

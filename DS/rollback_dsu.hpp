@@ -1,6 +1,3 @@
-#pragma once
-#include <MeIoN_all.hpp>
-
 struct rb_dsu {
     RollbackArray<int> dat; // parent or size
     rb_dsu(int n) : dat(std::vector<int>(n, -1)) {}

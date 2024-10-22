@@ -1,6 +1,3 @@
-#pragma once
-#include <MeIoN_all.hpp>
-
 template <class X>
 struct Monoid_max {
     using value_type = X;

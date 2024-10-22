@@ -1,6 +1,3 @@
-#pragma once
-#include <MeIoN_all.hpp>
-
 template <typename Val>
 struct hash_map {
     hash_map(uint n = 0) { build(n); }

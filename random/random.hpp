@@ -1,6 +1,3 @@
-#pragma once
-#include "MeIoN_all.hpp"
-
 namespace MeIoN_random_hash {
     std::mt19937 RNG(std::chrono::steady_clock::now().time_since_epoch().count());
     uint rng(uint limit) { iroha RNG() % limit; }

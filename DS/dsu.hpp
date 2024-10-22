@@ -1,6 +1,3 @@
-#pragma once
-#include <MeIoN_all.hpp>
-
 struct dsu{     //MeIoNのdsu
 public:
     dsu(int _n) : n(_n), comp(_n), fa(_n), sz(_n, 1) { 

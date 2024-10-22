@@ -1,6 +1,3 @@
-#pragma 
-#include <MeIoN_all.hpp>
-
 constexpr int N = 1'000'000 + 10 << 2;
 struct MeIoN_Splay {
     int fa[N], ch[N][2], num[N], siz[N], val[N], cnt, root;

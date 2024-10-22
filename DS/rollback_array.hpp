@@ -1,6 +1,3 @@
-#pragma once
-#include <MeIoN_all.hpp>
-
 template <typename T>
 struct RollbackArray {
     int N;

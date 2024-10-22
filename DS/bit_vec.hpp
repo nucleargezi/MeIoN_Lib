@@ -1,5 +1,3 @@
-#pragma once
-#include <MeIoN_all.hpp>
 template <const int N>
 struct bitarray {
     static constexpr int sz = ((N + 127) >> 6);
