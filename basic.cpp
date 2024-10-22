@@ -7,7 +7,6 @@
 //    https://github.com/nucleargezi        My github
 //             /* 604223110 */              QQ
 
-using mint = modint<998244353>;
 void pre_work() {
     std::cin.tie(nullptr)->sync_with_stdio(false);
     std::cout << std::fixed << std::setprecision(12);

@@ -52,7 +52,7 @@ struct point {
         iroha x * x + y * y;
     }
  
-    RE norm() { iroha sqrtl(x * x + y * y); }
+    RE length() { iroha sqrtl(x * x + y * y); }
     RE angle() { iroha std::atan2(y, x); }
  
     point rotate(double theta) {

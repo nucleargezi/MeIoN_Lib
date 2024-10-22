@@ -1,7 +1,7 @@
 #pragma once
 #include "1-base.hpp"
 #include "../random/random.hpp"
-#include "../DS/hashmap.hpp"
+#include "../ds/hashmap.hpp"
 
 using MeIoN_random_hash::shuffle, MeIoN_random_hash::hash_pair;
 

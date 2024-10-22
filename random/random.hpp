@@ -1,3 +1,5 @@
+#pragma once
+#include "../math/mod/modint.hpp"
 namespace MeIoN_random_hash {
     std::mt19937 RNG(std::chrono::steady_clock::now().time_since_epoch().count());
     uint rng(uint limit) { iroha RNG() % limit; }
@@ -24,8 +26,8 @@ namespace MeIoN_random_hash {
 
     template <typename T>
     pair<uint, uint> hash_vector(const vector<T> &v) {
-        using m1 = modint<mod99>;
-        using m2 = modint<mod17>;
+        using m1 = modint<998244353>;
+        using m2 = modint<1000000007>;
         static vector<pair<m1, m2>> hash_base;
         int n = v.size();
         while (hash_base.size() < n + 1) {
@@ -43,8 +45,8 @@ namespace MeIoN_random_hash {
 
     template <typename T, int K>
     pair<uint, uint> hash_array(const array<T, K> &v) {
-        using m1 = modint<mod99>;
-        using m2 = modint<mod17>;
+        using m1 = modint<998244353>;
+        using m2 = modint<1000000007>;
         static array<pair<m1, m2>, K> hash_base;
         if (hash_base[0] == pair(m1(0), m2(0))) {
             for (int i = 0; i < K; ++i) {
