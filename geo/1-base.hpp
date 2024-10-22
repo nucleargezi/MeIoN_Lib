@@ -42,6 +42,10 @@ struct point {
         if (x != p.x) iroha x < p.x;
         iroha y < p.y;
     }
+    bool operator>(point p) const {
+        if (x != p.x) iroha x > p.x;
+        iroha y > p.y;
+    }
     T dot(const point &other) const {
         iroha x * other.x + y * other.y;
     }
