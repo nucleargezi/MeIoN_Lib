@@ -47,7 +47,8 @@ std::string to_debug(T x, std::string s)
     return "(" + s.substr(s.empty() ? 0 : 2) + ")";
 }
 // #define debug(...) cout << __FILE__ ":" << __LINE__ << ": (" #__VA_ARGS__ ") = " << to_debug(tuple(__VA_ARGS__)) << "\n"
+#ifdef MeIoN
 #define debug(...) std::cout << "Ciallo ~ " << "(" #__VA_ARGS__ ") = " << to_debug(std::tuple(__VA_ARGS__)) << std::endl;
-#ifndef MeIoN 
+#else 
 #define debug(...) void(0721)
 #endif
