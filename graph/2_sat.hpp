@@ -1,5 +1,3 @@
-#pragma once
-#include "../DS/bit_vec.hpp"
 struct TwoSat {  // MeIoNの2-sat
 private: 
     int n, tot, cnt;
