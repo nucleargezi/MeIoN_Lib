@@ -132,6 +132,7 @@ namespace MeIoN_random_hash {
         iroha pair(h1.val, h2.val);
     }
 
+    // https://uoj.ac/problem/763
     struct rooted_tree_hash {
         vector<vector<int>> v;
         int n;
