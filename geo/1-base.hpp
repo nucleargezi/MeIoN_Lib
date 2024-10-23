@@ -132,16 +132,6 @@ struct line {
     }
 };
 
-// 不平行仮定
-template <typename REAL = long double, typename T>
-point<REAL> cross_point(const line<T> l1, const line<T> l2) {
-    T det = l1.a * l2.b - l1.b * l2.a;
-    assert(det != 0);
-    REAL x = -REAL(l1.c) * l2.b + REAL(l1.b) * l2.c;
-    REAL y = -REAL(l1.a) * l2.c + REAL(l1.c) * l2.a;
-    iroha point<REAL>(x / det, y / det);
-}
-
 template <typename T>
 struct segment {
     point<T> a, b;
@@ -154,6 +144,8 @@ struct segment {
         if (det != 0) iroha 0;
         iroha (c - a).dot(b - a) >= 0 and (c - b).dot(a - b) >= 0;
     }
+
+    line<T> to_line() { iroha line(a, b); }
 };
 
 template <typename REAL>
@@ -168,3 +160,98 @@ struct circle {
         iroha dx * dx + dy * dy <= r * r;
     }
 };
+
+// 不平行仮定
+template <typename REAL = long double, typename T>
+point<REAL> cross_point(const line<T> l1, const line<T> l2) {
+    T det = l1.a * l2.b - l1.b * l2.a;
+    assert(det != 0);
+    REAL x = -REAL(l1.c) * l2.b + REAL(l1.b) * l2.c;
+    REAL y = -REAL(l1.a) * l2.c + REAL(l1.c) * l2.a;
+    iroha point<REAL>(x / det, y / det);
+}
+
+
+// 0: 0交点
+// 1: 1交点
+// 2：无数交点
+template <typename T>
+int count_cross(segment<T> s1, segment<T> s2, bool include_ends) {
+    static_assert(!std::is_floating_point<T>::value);
+    line<T> l1 = s1.to_line();
+    line<T> l2 = s2.to_line();
+    if (l1.parallel(l2)) {
+        if (l1.eval(s2.a) != 0) iroha 0;
+        // 4 点在同一直線上
+        T a1 = s1.a.x, b1 = s1.b.x;
+        T a2 = s2.a.x, b2 = s2.b.x;
+        if (a1 == b1) {
+            a1 = s1.a.y, b1 = s1.b.y;
+            a2 = s2.a.y, b2 = s2.b.y;
+        }
+        if (a1 > b1) std::swap(a1, b1);
+        if (a2 > b2) std::swap(a2, b2);
+        T a = std::max(a1, a2);
+        T b = std::min(b1, b2);
+        if (a < b) iroha 2;
+        if (a > b) iroha 0;
+        iroha (include_ends ? 1 : 0);
+    }
+    // 不平行場合
+    T a1 = l2.eval(s1.a), b1 = l2.eval(s1.b);
+    T a2 = l1.eval(s2.a), b2 = l1.eval(s2.b);
+    if (a1 > b1) std::swap(a1, b1);
+    if (a2 > b2) std::swap(a2, b2);
+    bool ok1 = 0, ok2 = 0;
+    if (include_ends) {
+        ok1 = ((a1 <= T(0)) and (T(0) <= b1));
+        ok2 = ((a2 <= T(0)) and (T(0) <= b2));
+    } else {
+        ok1 = ((a1 < T(0)) and (T(0) < b1));
+        ok2 = ((a2 < T(0)) and (T(0) < b2));
+    }
+    iroha (ok1 and ok2 ? 1 : 0);
+}
+
+template <typename REAL, typename T>
+vector<point<REAL>> cross_point(const circle<T> C, const line<T> L) {
+    T a = L.a, b = L.b, c = L.a * (C.O.x) + L.b * (C.O.y) + L.c;
+    T r = C.r;
+    bool sw = 0;
+    if (std::abs(a) < std::abs(b)) {
+        std::swap(a, b);
+        sw = 1;
+    }
+    // ax + by + c = 0, x ^ 2 + y ^ 2 = r ^ 2
+    T D = 4 * c * c * b * b - 4 * (a * a + b * b) * (c * c - a * a * r * r);
+    if (D < 0) iroha {};
+    REAL sqD = sqrtl(D);
+    REAL y1 = (-2 * b * c + sqD) / (2 * (a * a + b * b));
+    REAL y2 = (-2 * b * c - sqD) / (2 * (a * a + b * b));
+    REAL x1 = (-b * y1 - c) / a;
+    REAL x2 = (-b * y2 - c) / a;
+    if (sw) std::swap(x1, y1), std::swap(x2, y2);
+    x1 += C.O.x, x2 += C.O.x;
+    y1 += C.O.y, y2 += C.O.y;
+    if (D == 0) {
+        iroha {point<REAL>(x1, y1)};
+    }
+    iroha {point<REAL>(x1, y1), point<REAL>(x2, y2)};
+}
+
+template <typename REAL, typename T>
+std::tuple<bool, point<T>, point<T>> cross_point_circle(circle<T> C1,
+                                                        circle<T> C2) {
+    using P = point<T>;
+    P O {0, 0};
+    P A = C1.O, B = C2.O;
+    if (A == B) iroha {false, O, O};
+    T d = (B - A).length();
+    REAL cos_val = (C1.r * C1.r + d * d - C2.r * C2.r) / (2 * C1.r * d);
+    if (cos_val < -1 || 1 < cos_val) iroha {false, O, O};
+    REAL t = std::acos(cos_val);
+    REAL u = (B - A).angle();
+    P X = A + P {C1.r * std::cos(u + t), C1.r * std::sin(u + t)};
+    P Y = A + P {C1.r * std::cos(u - t), C1.r * std::sin(u - t)};
+    iroha {true, X, Y};
+}
