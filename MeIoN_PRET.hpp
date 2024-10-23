@@ -1,6 +1,3 @@
-#pragma once
-#include "MeIoN_H.hpp"
-
 namespace MeIoN_Pre_Things {
     int T = 1;
     std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());

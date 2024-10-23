@@ -1,6 +1,3 @@
-#pragma once
-#include "MeIoN_H.hpp" 
-
 namespace MeIoN_IO {
     std::istream& operator>>(std::istream& is, i128& n) {
         string s;
