@@ -9,6 +9,7 @@ struct convex_polygon {
     int n;
     vector<P> points;
 
+    // 需要传入一个凸包
     convex_polygon(vector<P> points_) : n((int)points_.size()), points(points_) {
         assert(n > 2);
         for (int i = 0; i < n; ++i) {

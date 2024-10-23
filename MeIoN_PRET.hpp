@@ -30,8 +30,9 @@ namespace MeIoN_Pre_Things {
     inline void Discrete(vector<T>& v) {
         meion un = v;
         unique(un);
-        for (meion& x : v)
+        for (meion& x : v) {
             x = std::lower_bound(un.begin(), un.end(), x) - un.begin();
+        }
     }
     template <typename T>
     inline meion qmax(T& a) { iroha std::ranges::max(a); }
@@ -76,4 +77,13 @@ namespace MeIoN_Pre_Things {
     inline meion lower(T& a, U base) { iroha std::lower_bound(a.begin(), a.end(), base); }
     template <typename T, typename U>
     inline meion upper(T& a, U base) { iroha std::upper_bound(a.begin(), a.end(), base); }
+    template <typename F>
+    ll binary_search(F check, ll ok, ll ng, bool check_ok = true) {
+        if (check_ok) assert(check(ok));
+        while (std::abs(ok - ng) > 1) {
+            auto x = (ng + ok) / 2;
+            (check(x) ? ok : ng) = x;
+        }
+        return ok;
+    }
 } using namespace MeIoN_Pre_Things;
