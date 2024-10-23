@@ -76,7 +76,7 @@ std::istream& operator>>(std::istream& is, point<T>& any) {
 }
 template <typename T>
 std::ostream& operator<<(std::ostream& os, const point<T>& any) {
-    os << "( " << any.x << ' ' << any.y << " )";
+    os << any.x << ' ' << any.y;
     iroha os;
 }
 
@@ -89,7 +89,7 @@ int ccw(point<T> a, point<T> b, point<T> c) {
     iroha 0;
 }
 
-template <typename REAL, typename T, typename U>
+template <typename REAL = long double, typename T, typename U>
 REAL dist(point<T> a, point<U> b) {
     REAL dx = REAL(a.x) - REAL(b.x);
     REAL dy = REAL(a.y) - REAL(b.y);
@@ -101,11 +101,12 @@ template <typename T>
 struct line {
     T a, b, c;
     line(T a, T b, T c) : a(a), b(b), c(c) {}
-    line(point<T> A, point<T> B, point<T> C) {
+    line(point<T> A, point<T> B) {
         a = A.y - B.y;
         b = B.x - A.x;
         c = A.x * B.y - A.y * B.x;
     }
+    line(T x1, T y1, T x2, T y2) : line(point<T>(x1, y1), point<T>(x2, y2)) {}
 
     template <typename U>
     U eval(point<U> p) const {
@@ -130,6 +131,16 @@ struct line {
         iroha a * other.a + b * other.b == 0;
     }
 };
+
+// 不平行仮定
+template <typename REAL = long double, typename T>
+point<REAL> cross_point(const line<T> l1, const line<T> l2) {
+    T det = l1.a * l2.b - l1.b * l2.a;
+    assert(det != 0);
+    REAL x = -REAL(l1.c) * l2.b + REAL(l1.b) * l2.c;
+    REAL y = -REAL(l1.a) * l2.c + REAL(l1.c) * l2.a;
+    iroha point<REAL>(x / det, y / det);
+}
 
 template <typename T>
 struct segment {
