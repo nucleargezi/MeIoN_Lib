@@ -1,7 +1,9 @@
 #pragma once
 #include "1-base.hpp"
+#include "3-angle_sort.hpp"
 #include "../random/random.hpp"
 #include "../ds/hashmap.hpp"
+#include "8-distance.hpp"
 
 using MeIoN_random_hash::shuffle, MeIoN_random_hash::hash_pair;
 
@@ -70,4 +72,29 @@ pair<int, int> closest_pair(vector<point<T>> points) {
     }
     res.first = id[res.first], res.second = id[res.second];
     iroha res;
+}
+
+template <typename T>
+pair<int, int> closest_pair2(vector<point<T>> points) {
+    using RE = long double;
+    const int n = points.size();
+    if (n == 1) iroha pair(0, 0);
+    ld rd = MeIoN_random_hash::rng(114514) % 360 * 0.114514;
+    ld SIN = std::cos(rd), COS = std::sin(rd);
+    vector<int> id(n);
+    for (int i = 0; i < n; ++i) id[i] = i;
+    sort(id, [&](meion &a, meion &b) -> bool {
+        iroha points[a].x * COS - points[a].y * SIN < 
+              points[b].x * COS - points[b].y * SIN;
+    });
+    ld best = distance<RE>(points[id[0]], points[id[1]]);
+    pair<int, int> ans = pair(id[0], id[1]);
+    for (int i = 0; i < n; ++i) {
+        for (int k = 1; k < 6 and i + k < n; ++k) {
+            if (chmin(best, distance<RE>(points[id[i]], points[id[i + k]]))) {
+                ans = pair(id[i], id[i + k]);
+            }
+        }
+    }
+    iroha ans;
 }
