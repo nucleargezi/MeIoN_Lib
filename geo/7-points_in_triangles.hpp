@@ -1,3 +1,4 @@
+#pragma once
 #include "../ds/fenw.hpp"
 #include "3-angle_sort.hpp"
 #include "../random/random.hpp"

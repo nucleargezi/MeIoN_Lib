@@ -1,3 +1,4 @@
+#pragma once
 using RE = long double;
 template <typename T = int>
 struct point {
@@ -170,7 +171,10 @@ point<REAL> cross_point(const line<T> l1, const line<T> l2) {
     REAL y = -REAL(l1.a) * l2.c + REAL(l1.c) * l2.a;
     iroha point<REAL>(x / det, y / det);
 }
-
+template <typename REAL = long double, typename T>
+point<REAL> line_x_line(const line<T> l1, const line<T> l2) {
+    iroha cross_point<REAL, T>(l1, l2);
+}
 
 // 0: 0交点
 // 1: 1交点
