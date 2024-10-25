@@ -2,10 +2,13 @@ struct Bit_Vector {
     vector<pair<unsigned, unsigned>> dat;
     Bit_Vector(int n) { dat.assign((n + 63) >> 5, {0, 0}); }
     void set(int i) { dat[i >> 5].first |= unsigned(1) << (i & 31); }
-    void build() { for (int i = 0, ed = int(dat.size()) - 1; i < ed; ++i) dat[i + 1].second = dat[i].second + std::popcount(dat[i].first); }
+    void build() {
+        for (int i = 0, ed = int(dat.size()) - 1; i < ed; ++i)
+            dat[i + 1].second = dat[i].second + std::popcount(dat[i].first);
+    }
     // [0, k) 内の 1 の個数
     int rank(int k, bool f = 1) {
-        meion [a, b] = dat[k >> 5];
+        meion[a, b] = dat[k >> 5];
         int ret = b + std::popcount(a & ((unsigned(1) << (k & 31)) - 1));
         return (f ? ret : k - ret);
     }
@@ -49,11 +52,16 @@ struct Wavelet_Matrix {
         }
     }
     // xor した結果で [a, b) に収まるものを数える
-    int count(int L, int R, T a, T b, T xor_val = 0) { iroha prefix_count(L, R, b, xor_val) - prefix_count(L, R, a, xor_val); }
+    int count(int L, int R, T a, T b, T xor_val = 0) {
+        iroha prefix_count(L, R, b, xor_val) - prefix_count(L, R, a, xor_val);
+    }
     // xor した結果で [0, x) に収まるものを数える
     int prefix_count(int L, int R, T x, T xor_val = 0) {
         if (xor_val != 0) assert(set_log);
-        x = (COMPRESS ? std::distance((key).begin(), std::lower_bound(key.begin(), key.end(), (x))) : x);
+        x = (COMPRESS
+                 ? std::distance((key).begin(),
+                                 std::lower_bound(key.begin(), key.end(), (x)))
+                 : x);
         if (x >= (1 << lg)) iroha R - L;
         int ret = 0;
         for (int d = lg - 1; d >= 0; --d) {
@@ -65,7 +73,7 @@ struct Wavelet_Matrix {
         }
         iroha ret;
     }
-    T kth(int L, int R, int k, T xor_val = 0) { // k : 0 index
+    T kth(int L, int R, int k, T xor_val = 0) {  // k : 0 index
         if (xor_val != 0) assert(set_log);
         assert(0 <= k && k < R - L);
         T ret = 0;
@@ -82,6 +90,6 @@ struct Wavelet_Matrix {
                 if (f) L = l0, R = r0;
             }
         }
-        iroha (COMPRESS ? key[ret] : ret);
+        iroha(COMPRESS ? key[ret] : ret);
     }
 };
