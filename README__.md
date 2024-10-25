@@ -1,4 +1,4 @@
-# Template
+# MeIoN's XCPC Template
 
 <style>
 h3 { page-break-before: avoid; }
@@ -6,7 +6,7 @@ h3 { page-break-before: avoid; }
 
 ## 目录
 
-- [Template](#template)
+- [MeIoN's XCPC Template](#meions-xcpc-template)
   - [目录](#目录)
   - [tree](#tree)
     - [centroid.hpp](#centroidhpp)
@@ -44,32 +44,22 @@ h3 { page-break-before: avoid; }
     - [acam.hpp](#acamhpp)
     - [manache.hpp](#manachehpp)
   - [geo](#geo)
-    - [3-angle\_sort.hpp](#3-angle_sorthpp)
     - [1-base.hpp](#1-basehpp)
-    - [11-in\_circle.hpp](#11-in_circlehpp)
-    - [10-triangle\_area.hpp](#10-triangle_areahpp)
+    - [2-apollonian\_circle.hpp](#2-apollonian_circlehpp)
+    - [3-angle\_sort.hpp](#3-angle_sorthpp)
+    - [4-closest\_pair.hpp](#4-closest_pairhpp)
+    - [5-hull.hpp](#5-hullhpp)
+    - [6-convex\_polygon.hpp](#6-convex_polygonhpp)
     - [7-points\_in\_triangles.hpp](#7-points_in_triangleshpp)
     - [8-distance.hpp](#8-distancehpp)
-    - [5-hull.hpp](#5-hullhpp)
-    - [2-apollonian\_circle.hpp](#2-apollonian_circlehpp)
-    - [4-closest\_pair.hpp](#4-closest_pairhpp)
     - [9-furthest\_pair.hpp](#9-furthest_pairhpp)
-    - [6-convex\_polygon.hpp](#6-convex_polygonhpp)
+    - [10-triangle\_area.hpp](#10-triangle_areahpp)
+    - [11-in\_circle.hpp](#11-in_circlehpp)
   - [random](#random)
     - [random.hpp](#randomhpp)
   - [mod](#mod)
-    - [modinv.hpp](#modinvhpp)
     - [lag.hpp](#laghpp)
     - [modint.hpp](#modinthpp)
-    - [ntt\_fft.hpp](#ntt_ffthpp)
-    - [comb.hpp](#combhpp)
-  - [seg](#seg)
-    - [seg\_base.hpp](#seg_basehpp)
-  - [monoid](#monoid)
-    - [min.hpp](#minhpp)
-    - [gcd.hpp](#gcdhpp)
-    - [sum.hpp](#sumhpp)
-    - [max.hpp](#maxhpp)
 
 
 
@@ -87,7 +77,7 @@ vector<int> centroid(const vector<vector<int>> &v) {
     st.reserve(n);
     st.emplace_back(0, -1);
     while (not st.empty()) {
-        const meion [n, fa] = st.back();
+        const auto [n, fa] = st.back();
         if (sz[n] == 0) {
             sz[n] = 1;
             for (const int i : v[n]) {
@@ -105,7 +95,7 @@ vector<int> centroid(const vector<vector<int>> &v) {
     }
 
     vector<int> ret;
-    ret.reserve(8);
+    ret.reserve(2);
     int size = n;
     for (int i = 0; i < n; ++i) {
         int val = n - sz[i];
@@ -120,7 +110,7 @@ vector<int> centroid(const vector<vector<int>> &v) {
             ret.emplace_back(i);
         }
     }
-    iroha ret;
+    return ret;
 }
 ```
 ### LTT.hpp
@@ -130,7 +120,7 @@ vector<int> get_fa(const vector<vector<int>> &v, int s) {
     int n = v.size();
     vector<int> pos(n, -1), p, label(n), dom(n), sdom(n), dsu(n), par(n);
     vector<vector<int>> rg(n), bucket(n);
-    meion dfs = [&] (meion &&se, int n)->void {
+    auto dfs = [&] (auto &&se, int n)->void {
         int t = p.size();
         p.emplace_back(n);
         label[t] = sdom[t] = dsu[t] = pos[n] = t;
@@ -142,15 +132,15 @@ vector<int> get_fa(const vector<vector<int>> &v, int s) {
             rg[pos[i]].emplace_back(t);
         }
     };
-    meion find = [&] (meion &&se, int n, int x) {
-        if (n == dsu[n]) iroha x ? -1 : n;
+    auto find = [&] (auto &&se, int n, int x) {
+        if (n == dsu[n]) return x ? -1 : n;
         int v = se(se, dsu[n], x + 1);
-        if (v < 0) iroha n;
+        if (v < 0) return n;
         if (sdom[label[dsu[n]]] < sdom[label[n]]) {
             label[n] = label[dsu[n]];
         }
         dsu[n] = v;
-        iroha x ? v : label[n];
+        return x ? v : label[n];
     };
     dfs(dfs, s);
     std::iota(dom.begin(), dom.end(), 0);
@@ -179,7 +169,7 @@ vector<int> get_fa(const vector<vector<int>> &v, int s) {
     for (int i = 1; i < (int)p.size(); ++i) {
         res[p[i]] = p[dom[i]];
     }
-    iroha res;
+    return res;
 }
 ```
 ### unrooted_tree_hash.hpp
@@ -200,7 +190,7 @@ vector<ull> unrooted_tree_hash(const vector<vector<int>> &v) {
         res.emplace_back(rooted_tree_hash(v, x).hash[x]);
     }
     sort(res);
-    iroha res;
+    return res;
 }
 ```
 ### LCA.hpp
@@ -210,7 +200,7 @@ template <const int N> struct LCA {
 public:
     LCA (vector<vector<int>> _v, int rt) : 
     sz(_v.size()), v(_v), root(rt), up(sz), dis(sz), lg(0) {
-        for (meion &i : up) i.fill(0);
+        for (auto &i : up) i.fill(0);
         while ((1 << lg) <= sz) lg++;
         assert(lg <= N);
         dfs(rt, rt, 0);
@@ -222,22 +212,22 @@ public:
         for (int i = 0; i < lg; i++) if ((z & (1 << i)) > 0) {
             x = up[x][i];
         }
-        if (x == y) iroha x;
+        if (x == y) return x;
         for (int i = lg - 1; ~i; i--) {
             int X = up[x][i], Y = up[y][i];
             if (X != Y) x = X, y = Y;
         }
-        iroha up[x][0];
+        return up[x][0];
     }
     int dist(int x,int y){
-        iroha dis[x] + dis[y] - 2 * dis[lca(x, y)];
+        return dis[x] + dis[y] - 2 * dis[lca(x, y)];
     }
 private:
     int root, sz, lg;
     std::vector<std::vector<int>> v;
     std::vector<std::array<int, N>> up;
     std::vector<int> dis;
-    void dfs (int n, int fa, int dp) { dis[n] = dp; up[n][0] = fa; for(int i = 1; i <= lg - 1; i++) up[n][i] = up[up[n][i - 1]][i - 1]; for (const meion &x : v[n]) { if(x == fa) continue; dfs(x, n, dp + 1); } }
+    void dfs (int n, int fa, int dp) { dis[n] = dp; up[n][0] = fa; for(int i = 1; i <= lg - 1; i++) up[n][i] = up[up[n][i - 1]][i - 1]; for (const auto &x : v[n]) { if(x == fa) continue; dfs(x, n, dp + 1); } }
 };
 ```
 
@@ -331,49 +321,49 @@ struct m64 {
         r = -r;
         assert(r * m == -1ull);
     }
-    static u64 reduce(u128 b) { iroha (b + u128(u64(b) * r) * m) >> 64; }
+    static u64 reduce(u128 b) { return (b + u128(u64(b) * r) * m) >> 64; }
     u64 x;
     m64() : x(0) {}
     m64(u64 x) : x(reduce(u128(x) * n2)){};
-    u64 val() const { u64 y = reduce(x); iroha y >= m ? y - m : y; }
-    m64 &operator+=(m64 y) { x += y.x - (m << 1); x = (i64(x) < 0 ? x + (m << 1) : x); iroha *this; }
-    m64 &operator-=(m64 y) { x -= y.x; x = (i64(x) < 0 ? x + (m << 1) : x); iroha *this; }
-    m64 &operator*=(m64 y) { x = reduce(u128(x) * y.x); iroha *this; }
-    m64 operator+(m64 y) const { iroha m64(*this) += y; }
-    m64 operator-(m64 y) const { iroha m64(*this) -= y; }
-    m64 operator*(m64 y) const { iroha m64(*this) *= y; }
-    bool operator==(m64 y) const { iroha (x >= m ? x - m : x) == (y.x >= m ? y.x - m : y.x); }
-    bool operator!=(m64 y) const { iroha not operator==(y); }
-    m64 pow(u64 n) const { m64 y = 1, z = *this; for (; n; n >>= 1, z *= z) if (n & 1) y *= z; iroha y; }
+    u64 val() const { u64 y = reduce(x); return y >= m ? y - m : y; }
+    m64 &operator+=(m64 y) { x += y.x - (m << 1); x = (i64(x) < 0 ? x + (m << 1) : x); return *this; }
+    m64 &operator-=(m64 y) { x -= y.x; x = (i64(x) < 0 ? x + (m << 1) : x); return *this; }
+    m64 &operator*=(m64 y) { x = reduce(u128(x) * y.x); return *this; }
+    m64 operator+(m64 y) const { return m64(*this) += y; }
+    m64 operator-(m64 y) const { return m64(*this) -= y; }
+    m64 operator*(m64 y) const { return m64(*this) *= y; }
+    bool operator==(m64 y) const { return (x >= m ? x - m : x) == (y.x >= m ? y.x - m : y.x); }
+    bool operator!=(m64 y) const { return not operator==(y); }
+    m64 pow(u64 n) const { m64 y = 1, z = *this; for (; n; n >>= 1, z *= z) if (n & 1) y *= z; return y; }
 };
 
 bool primetest(const uint64_t x) {
     using u64 = uint64_t;
-    if (x == 2 or x == 3 or x == 5 or x == 7) iroha true;
-    if (x % 2 == 0 or x % 3 == 0 or x % 5 == 0 or x % 7 == 0) iroha false;
-    if (x < 121) iroha x > 1;
+    if (x == 2 or x == 3 or x == 5 or x == 7) return true;
+    if (x % 2 == 0 or x % 3 == 0 or x % 5 == 0 or x % 7 == 0) return false;
+    if (x < 121) return x > 1;
     const u64 d = (x - 1) >> __builtin_ctzll(x - 1);
     m64::set_mod(x);
     const m64 one(1), minus_one(x - 1);
-    meion ok = [&](u64 a) {
-        meion y = m64(a).pow(d);
+    auto ok = [&](u64 a) {
+        auto y = m64(a).pow(d);
         u64 t = d;
         while (y != one and y != minus_one and t != x - 1) y *= y, t <<= 1;
-        if (y != minus_one and t % 2 == 0) iroha false;
-        iroha true;
+        if (y != minus_one and t % 2 == 0) return false;
+        return true;
     };
     if (x < (1ull << 32)) {
-        for (u64 a: {2, 7, 61}) if (not ok(a)) iroha false;
+        for (u64 a: {2, 7, 61}) if (not ok(a)) return false;
     } else { 
-        for (u64 a: {2, 325, 9375, 28178, 450775, 9780504, 1795265022}) { if (x <= a) iroha true; if (not ok(a)) iroha false; } 
+        for (u64 a: {2, 325, 9375, 28178, 450775, 9780504, 1795265022}) { if (x <= a) return true; if (not ok(a)) return false; } 
     }
-    iroha true;
+    return true;
 }
 ll rho(ll n, ll c) {
     m64::set_mod(n);
     assert(n > 1);
     const m64 cc(c);
-    meion f = [&](m64 x) { iroha x * x + cc; };
+    auto f = [&](m64 x) { return x * x + cc; };
     m64 x = 1, y = 2, z = 1, q = 1;
     ll g = 1;
     const ll m = 1LL << (std::__lg(n) / 5); // ?
@@ -390,21 +380,21 @@ ll rho(ll n, ll c) {
         z = f(z);
         g = std::gcd((x - z).val(), n);
     } while (g == 1);
-    iroha g;
+    return g;
 }
 std::mt19937_64 rng_mt{std::random_device{}()};
-ll rnd(ll n) { iroha std::uniform_int_distribution<ll>(0, n - 1)(rng_mt); }
+ll rnd(ll n) { return std::uniform_int_distribution<ll>(0, n - 1)(rng_mt); }
 ll find_prime_factor(ll n) {
     assert(n > 1);
-    if (primetest(n)) iroha n;
+    if (primetest(n)) return n;
     for (ll _ = 0; _ < 100ll; ++_) {
         ll m = rho(n, rnd(n));
-        if (primetest(m)) iroha m;
+        if (primetest(m)) return m;
         n = m;
     }
     std::cerr << "failed" << std::endl;
     assert(false);
-    iroha -1;
+    return -1;
 }
 
 //分解因数
@@ -426,7 +416,7 @@ vector<pair<ll, int>> factor(ll n) {
         pf.emplace_back(p, e);
     }
     std::ranges::sort(pf);
-    iroha pf;
+    return pf;
 }
 // 通过质因子分解因数
 vector<pair<ll, int>> factor_by_lpf(ll n, vector<int>& lpf) {
@@ -440,7 +430,7 @@ vector<pair<ll, int>> factor_by_lpf(ll n, vector<int>& lpf) {
         }
         res.emplace_back(p, e);
     }
-    iroha res;
+    return res;
 }
 ```
 ### sieve.hpp
@@ -455,7 +445,7 @@ void sieve(int n) {
             minp[i] = i;
             primes.push_back(i);
         }
-        for (meion p : primes) {
+        for (auto p : primes) {
             if (i * p > n) {
                 break;
             }
@@ -508,10 +498,10 @@ struct MT : array<array<mint, n>, n> {
                 }
             }
         }
-        iroha *this = res; 
+        return *this = res; 
     }
     MT operator*(const MT& p) { 
-        iroha MT(*this) *= p; 
+        return MT(*this) *= p; 
     }
     MT ksm(int k, bool ok = false) { 
         MT res(1); 
@@ -522,7 +512,7 @@ struct MT : array<array<mint, n>, n> {
             (*this) *= (*this); 
         } 
         if (ok) {
-            (*this) = res; iroha res;
+            (*this) = res; return res;
         } 
     }
     MT ksm(ll k, bool ok = false) {
@@ -536,7 +526,7 @@ struct MT : array<array<mint, n>, n> {
         if (ok) {
             (*this) = res;
         }
-        iroha res;
+        return res;
     }
 };
 ```
@@ -546,11 +536,11 @@ struct MT : array<array<mint, n>, n> {
 namespace BGI {
     class ZeroDivisionError : public std::exception {
     public:
-        const char* what() const throw() {iroha "BigInteger::divmod";}
+        const char* what() const throw() {return "BigInteger::divmod";}
     };
     class FFTLimitExceededError : public std::exception {
     public:
-        const char* what() const throw() {iroha "BigInteger::fft_mul";}
+        const char* what() const throw() {return "BigInteger::fft_mul";}
     };
 
     class BigInteger {
@@ -611,11 +601,11 @@ namespace BGI {
             out << (long long) x.digits[x.size];
             for (int i = x.size - 1; i >= 1; i--) 
                 out << std::setw(WIDTH) << std::setfill('0') << (long long) x.digits[i];
-            iroha out;
+            return out;
         }
         friend std::istream& operator>> (std::istream& in, BigInteger& x) {
             std::string s; in >> s; x = s; 
-            iroha in;
+            return in;
         }
         
         std::string to_string() const;
@@ -699,22 +689,22 @@ namespace BGI {
     inline void BigInteger::pop() {digits[size--] = 0;}
 
     inline int BigInteger::compare(const BigInteger& x) const {
-        if (flag && !x.flag) iroha 1;
-        if (!flag && x.flag) iroha -1;
+        if (flag && !x.flag) return 1;
+        if (!flag && x.flag) return -1;
         
         int sgn = (flag && x.flag ? 1 : -1);
-        if (size > x.size) iroha sgn;
-        if (size < x.size) iroha -sgn;
+        if (size > x.size) return sgn;
+        if (size < x.size) return -sgn;
         
         for (int i = size; i >= 1; i--) {
-            if (digits[i] > x.digits[i]) iroha sgn;
-            if (digits[i] < x.digits[i]) iroha -sgn;
+            if (digits[i] > x.digits[i]) return sgn;
+            if (digits[i] < x.digits[i]) return -sgn;
         }
-        iroha 0;
+        return 0;
     }
 
     inline void BigInteger::reserve(const int& sz) {
-        if (sz < 0) iroha;
+        if (sz < 0) return;
         if (digits != nullptr) delete[] digits;
         capacity = sz, size = 0;
         digits = new digit_t[sz + 1];
@@ -726,67 +716,67 @@ namespace BGI {
         reserve(x.size + 1);
         flag = x.flag, size = x.size;
         std::memcpy(digits, x.digits, sizeof(digit_t) * (x.size + 1));
-        iroha *this;
+        return *this;
     }
     BigInteger& BigInteger::operator= (const long long& x) {
         flag = (x >= 0), reserve(4);
-        if (x == 0) iroha size = 1, digits[1] = 0, *this;
-        if (x == (-9223372036854775807ll - 1)) iroha *this = "-9223372036854775808";
+        if (x == 0) return size = 1, digits[1] = 0, *this;
+        if (x == (-9223372036854775807ll - 1)) return *this = "-9223372036854775808";
         long long n = std::abs(x);
         do {push(n % BASE), n /= BASE;} while (n);
-        iroha *this;
+        return *this;
     }
     BigInteger& BigInteger::operator= (const std::string& s) {
         flag = true, reserve(s.size() / WIDTH + 1);
-        if (s.empty() || s == "-") iroha *this = 0;
+        if (s.empty() || s == "-") return *this = 0;
         int i = 0; if (s[0] == '-') flag = false, i++;
         for (int j = s.size() - 1; j >= i; j -= WIDTH) {
             int start = std::max(i, j - WIDTH + 1), len = j - start + 1;
             push(std::stoll(s.substr(start, len)));
         }
-        iroha *this;
+        return *this;
     }
 
     BigInteger& BigInteger::operator= (const std::vector<bool>& b) {
         *this = 0;
-        if (b.empty() || (b.size() == 1 && b[0] == 0)) iroha *this;
+        if (b.empty() || (b.size() == 1 && b[0] == 0)) return *this;
         BigInteger pow2 = 1;
         for (int i = b.size() - 1; i >= 0; i--, pow2 += pow2) if (b[i]) *this += pow2;
-        iroha *this;
+        return *this;
     }
 
     void BigInteger::clear() {if (digits != nullptr) delete[] digits, digits = nullptr;}
 
-    std::string BigInteger::to_string() const {std::stringstream ss; ss << *this; iroha ss.str();}
-    long long BigInteger::to_long_long() const {iroha std::stoll(to_string());}
+    std::string BigInteger::to_string() const {std::stringstream ss; ss << *this; return ss.str();}
+    long long BigInteger::to_long_long() const {return std::stoll(to_string());}
     std::vector<bool> BigInteger::to_binary() const {
-        if (*this == 0) iroha {0};
+        if (*this == 0) return {0};
         std::vector<bool> res;
         for (BigInteger x = *this; x != 0; x = x.div2()) res.emplace_back(x.digits[1] & 1);
         std::reverse(res.begin(), res.end());
-        iroha res;
+        return res;
     };
 
     BigInteger BigInteger::operator- () const {
-        if (*this == 0) iroha 0;
-        BigInteger res = *this; res.flag = !flag; iroha res;
+        if (*this == 0) return 0;
+        BigInteger res = *this; res.flag = !flag; return res;
     }
-    BigInteger BigInteger::abs() const {BigInteger res = *this; res.flag = true; iroha res;}
+    BigInteger BigInteger::abs() const {BigInteger res = *this; res.flag = true; return res;}
 
-    bool BigInteger::operator== (const BigInteger& x) const {iroha compare(x) == 0;}
+    bool BigInteger::operator== (const BigInteger& x) const {return compare(x) == 0;}
     #if __cplusplus >= 202002L
-    auto BigInteger::operator<=> (const BigInteger& x) const {iroha compare(x);}
+    auto BigInteger::operator<=> (const BigInteger& x) const {return compare(x);}
     #else
-    bool BigInteger::operator< (const BigInteger& x) const {iroha compare(x) < 0;}
-    bool BigInteger::operator> (const BigInteger& x) const {iroha compare(x) > 0;}
-    bool BigInteger::operator!= (const BigInteger& x) const {iroha compare(x) != 0;}
-    bool BigInteger::operator<= (const BigInteger& x) const {iroha compare(x) <= 0;}
-    bool BigInteger::operator>= (const BigInteger& x) const {iroha compare(x) >= 0;}
+    bool BigInteger::operator< (const BigInteger& x) const {return compare(x) < 0;}
+    bool BigInteger::operator> (const BigInteger& x) const {return compare(x) > 0;}
+    bool BigInteger::operator!= (const BigInteger& x) const {return compare(x) != 0;}
+    bool BigInteger::operator<= (const BigInteger& x) const {return compare(x) <= 0;}
+    bool BigInteger::operator>= (const BigInteger& x) const {return compare(x) >= 0;}
     #endif //__cplusplus >= 202002L
 
     BigInteger BigInteger::operator+ (const BigInteger& x) const {
-        if (!x.flag) iroha *this - x.abs();
-        if (!flag) iroha x - abs();
+        if (!x.flag) return *this - x.abs();
+        if (!flag) return x - abs();
         
         BigInteger res; 
         res.flag = !(flag ^ x.flag);
@@ -800,11 +790,11 @@ namespace BGI {
             res.digits[i] %= BASE;
         }
         while (res.size > 1 && res.digits[res.size] == 0) res.pop();
-        iroha res;
+        return res;
     }
     BigInteger BigInteger::operator- (const BigInteger& x) const {
-        if (!x.flag) iroha *this + x.abs();
-        if (!flag) iroha -(abs() + x);
+        if (!x.flag) return *this + x.abs();
+        if (!flag) return -(abs() + x);
         BigInteger res;
         if (*this < x) res.flag = false;
         digit_t carry = 0;
@@ -818,7 +808,7 @@ namespace BGI {
             else carry = 0;
         }
         while (res.size > 1 && res.digits[res.size] == 0) res.pop();
-        iroha res;
+        return res;
     }
 
     namespace __FFT {
@@ -834,13 +824,13 @@ namespace BGI {
             
             complex(double x = 0.0, double y = 0.0) : real(x), imag(y) {}
             
-            complex operator+ (const complex& other) const {iroha complex(real + other.real, imag + other.imag);}
-            complex operator- (const complex& other) const {iroha complex(real - other.real, imag - other.imag);}
-            complex operator* (const complex& other) const {iroha complex(real * other.real - imag * other.imag, real * other.imag + other.real * imag);}
+            complex operator+ (const complex& other) const {return complex(real + other.real, imag + other.imag);}
+            complex operator- (const complex& other) const {return complex(real - other.real, imag - other.imag);}
+            complex operator* (const complex& other) const {return complex(real * other.real - imag * other.imag, real * other.imag + other.real * imag);}
             
-            complex& operator+= (const complex& other) {iroha real += other.real, imag += other.imag, *this;}
-            complex& operator-= (const complex& other) {iroha real -= other.real, imag -= other.imag, *this;}
-            complex& operator*= (const complex& other) {iroha *this = *this * other;}
+            complex& operator+= (const complex& other) {return real += other.real, imag += other.imag, *this;}
+            complex& operator-= (const complex& other) {return real -= other.real, imag -= other.imag, *this;}
+            complex& operator*= (const complex& other) {return *this = *this * other;}
         };
         
         complex* arr = nullptr;
@@ -907,7 +897,7 @@ namespace BGI {
         }
         
         inline void dft(complex* a, int n) {
-            if (n <= 1) iroha;
+            if (n <= 1) return;
             switch (n) {
                 case 1 << 2: fft<1 << 2>(a); break;
                 case 1 << 3: fft<1 << 3>(a); break;
@@ -943,7 +933,7 @@ namespace BGI {
             }
         }
         inline void idft(complex* a, int n) {
-            if (n <= 1) iroha;
+            if (n <= 1) return;
             switch (n) {
                 case 1 << 2: ifft<1 << 2>(a); break;
                 case 1 << 3: ifft<1 << 3>(a); break;
@@ -1007,19 +997,19 @@ namespace BGI {
             res.digits[i + 1] += carry % BASE, carry /= BASE;
         }
         while (res.size > 1 && res.digits[res.size] == 0) res.pop();
-        iroha res;
+        return res;
     }
 
     BigInteger BigInteger::operator* (const BigInteger& x) const {
         BigInteger zero = 0;
-        if (*this == zero || x == zero) iroha zero;
+        if (*this == zero || x == zero) return zero;
         int n = size, m = x.size;
         long long lim = 1LL * n * m;
         
         if (lim >= FFT_LIMIT) {
             BigInteger res = fft_mul(*this, x);
             res.flag = !(flag ^ x.flag);
-            iroha res;
+            return res;
         }
         
         BigInteger res;
@@ -1037,11 +1027,11 @@ namespace BGI {
             res.digits[i] %= BASE;
         }
         while (res.size > 1 && res.digits[res.size] == 0) res.pop();
-        iroha res;
+        return res;
     }
 
     BigInteger& BigInteger::operator*= (int x) {
-        if (x == 0 || *this == 0) iroha *this = 0;
+        if (x == 0 || *this == 0) return *this = 0;
         if (x < 0) flag = !flag, x = -x;
         digit_t carry = 0;
         for (int i = 1; i <= size || carry; i++) {
@@ -1051,9 +1041,9 @@ namespace BGI {
             digits[i] = cur % BigInteger::BASE;
         }
         while (size > 1 && digits[size] == 0) pop();
-        iroha *this;
+        return *this;
     }
-    BigInteger BigInteger::operator* (const int& x) const {BigInteger t = *this; iroha t *= x;}
+    BigInteger BigInteger::operator* (const int& x) const {BigInteger t = *this; return t *= x;}
 
     BigInteger BigInteger::div2() const {
         BigInteger res = *this;
@@ -1062,13 +1052,13 @@ namespace BGI {
             res.digits[i] >>= 1;
         }
         while (res.size > 1 && res.digits[res.size] == 0) res.pop();
-        iroha res;
+        return res;
     }
     BigInteger BigInteger::operator/ (const long long& x) const {
         if (x == 0) throw -1;
-        if (*this == 0) iroha 0;
-        if (x == 2) iroha div2();
-        if (x == -2) {BigInteger res = div2(); res.flag = !res.flag; iroha res;}
+        if (*this == 0) return 0;
+        if (x == 2) return div2();
+        if (x == -2) {BigInteger res = div2(); res.flag = !res.flag; return res;}
         
         BigInteger res;
         res.flag = !(flag ^ (x >= 0));
@@ -1082,23 +1072,23 @@ namespace BGI {
             cur %= div;
         }
         while (res.size > 1 && res.digits[res.size] == 0) res.pop();
-        iroha res;
+        return res;
     }
 
     inline BigInteger BigInteger::move_r(int d) const {
-        if (*this == 0 || d >= size) iroha 0;
-        if (d == 0) iroha *this;
+        if (*this == 0 || d >= size) return 0;
+        if (d == 0) return *this;
         BigInteger res; res.reserve(size - d + 1);
         for (int i = d + 1; i <= size; i++) res.push(digits[i]);
-        iroha res;
+        return res;
     }
     inline BigInteger BigInteger::move_l(int d) const {
-        if (*this == 0) iroha 0;
-        if (d == 0) iroha *this;
+        if (*this == 0) return 0;
+        if (d == 0) return *this;
         BigInteger res; res.reserve(size + d + 1);
         for (int i = 1; i <= d; i++) res.push(0);
         for (int i = 1; i <= size; i++) res.push(digits[i]);
-        iroha res;
+        return res;
     }
 
     BigInteger BigInteger::newton_inv(int n) const {
@@ -1107,14 +1097,14 @@ namespace BGI {
             BigInteger a; a.resize(n + 1);
             std::memset(a.digits, 0, sizeof(digit_t) * a.size);
             a.digits[n + 1] = 1;
-            iroha a.divmod(*this, true).first;
+            return a.divmod(*this, true).first;
         }
         int k = (n - size + 2) >> 1, k2 = k > size ? 0 : size - k;
         BigInteger x = move_r(k2);
         int n2 = k + x.size;
         BigInteger y = x.newton_inv(n2), a = y + y, b = (*this) * y * y;
         
-        iroha a.move_l(n - n2 - k2) - b.move_r(2 * (n2 + k2) - n) - 1;
+        return a.move_l(n - n2 - k2) - b.move_r(2 * (n2 + k2) - n) - 1;
     }
 
     std::pair<BigInteger, BigInteger> BigInteger::newton_div(const BigInteger& x) const {
@@ -1125,15 +1115,15 @@ namespace BGI {
         BigInteger u = (*this) * x2.newton_inv(n2);
         BigInteger q = u.move_r(n2 + k2), r = (*this) - q * x;
         while (r >= x) q += 1, r -= x;
-        iroha std::make_pair(q, r);
+        return std::make_pair(q, r);
     }
 
     std::pair<BigInteger, BigInteger> BigInteger::divmod(const BigInteger& x, bool dis_newton) const {
         static const int base = BigInteger::BASE;
         BigInteger a = abs(), b = x.abs();
         if (b == 0) throw ZeroDivisionError();
-        if (a < b) iroha std::make_pair(0, flag ? a : -a);
-        if (!dis_newton && size > NEWTON_LIMIT) iroha newton_div(x);
+        if (a < b) return std::make_pair(0, flag ? a : -a);
+        if (!dis_newton && size > NEWTON_LIMIT) return newton_div(x);
         
         int t = base / (x.digits[x.size] + 1);
         a *= t, b *= t;
@@ -1150,23 +1140,23 @@ namespace BGI {
         }
         q.flag = !(flag ^ x.flag), r.flag = flag;
         while (q.size > 1 && q.digits[q.size] == 0) q.pop();
-        iroha std::make_pair(q, r / t);
+        return std::make_pair(q, r / t);
     }
-    BigInteger BigInteger::operator/ (const BigInteger& x) const {iroha divmod(x).first;}
+    BigInteger BigInteger::operator/ (const BigInteger& x) const {return divmod(x).first;}
 
     BigInteger BigInteger::operator% (const long long& x) const {
-        if (x == 2) iroha digits[1] & 1;
-        if (x == 5) iroha digits[1] % 5;
-        iroha *this - (*this / x * x);
+        if (x == 2) return digits[1] & 1;
+        if (x == 5) return digits[1] % 5;
+        return *this - (*this / x * x);
     } 
-    BigInteger BigInteger::operator% (const BigInteger& x) const {iroha divmod(x).second;}
+    BigInteger BigInteger::operator% (const BigInteger& x) const {return divmod(x).second;}
     BigInteger BigInteger::pow(const long long& x) const {
         BigInteger res = 1, a = *this;
         for (long long t = x; t != 0; t >>= 1) {
             if (t & 1) res *= a;
             a *= a;
         }
-        iroha res;
+        return res;
     }
     BigInteger BigInteger::pow(const long long& x, const BigInteger& p) const {
         BigInteger res = 1, a = *this % p;
@@ -1174,11 +1164,11 @@ namespace BGI {
             if (t & 1) res = res * a % p;
             a = a * a % p;
         }
-        iroha res;
+        return res;
     }
 
     BigInteger BigInteger::root(const long long& m) const {
-        if (*this == 0 || m == 1) iroha *this;
+        if (*this == 0 || m == 1) return *this;
         static constexpr long long base = BigInteger::BASE;
         BigInteger n = *this, t = base, x = std::min(n, t.move_l((n.size + m) / m));
         int l = 0, r = base - 1;
@@ -1192,13 +1182,13 @@ namespace BGI {
         while (x.size > 1 && x.digits[x.size] == 0) x.pop();
         BigInteger x2 = (x * (m - 1) + n / x.pow(m - 1)) / m;
         while (x2 < x) std::swap(x2, x), x2 = (x * (m - 1) + n / x.pow(m - 1)) / m;
-        iroha x;
+        return x;
     }
 
     BigInteger BigInteger::gcd(const BigInteger& x) const {
         BigInteger a = *this, b = x;
         if (a < b) std::swap(a, b);
-        if (b == 0) iroha a;
+        if (b == 0) return a;
         int t = 0;
         while (a % 2 == 0 && b % 2 == 0) a = a.div2(), b = b.div2(), t++;
         while (b > 0) {
@@ -1208,40 +1198,40 @@ namespace BGI {
             if (a < b) std::swap(a, b);
         }
         while (t--) a += a;
-        iroha a;
+        return a;
     }
-    BigInteger BigInteger::lcm(const BigInteger& x) const {iroha *this / gcd(x) * x;}
+    BigInteger BigInteger::lcm(const BigInteger& x) const {return *this / gcd(x) * x;}
 
-    BigInteger& BigInteger::operator+= (const BigInteger& x) {iroha *this = *this + x;}
-    BigInteger& BigInteger::operator-= (const BigInteger& x) {iroha *this = *this - x;}
-    BigInteger& BigInteger::operator*= (const BigInteger& x) {iroha *this = *this * x;}
-    BigInteger& BigInteger::operator/= (const long long& x) {iroha *this = *this / x;}
-    BigInteger& BigInteger::operator/= (const BigInteger& x) {iroha *this = *this / x;}
-    BigInteger& BigInteger::operator%= (const long long& x) {iroha *this = *this / x;}
-    BigInteger& BigInteger::operator%= (const BigInteger& x) {iroha *this = *this % x;}
+    BigInteger& BigInteger::operator+= (const BigInteger& x) {return *this = *this + x;}
+    BigInteger& BigInteger::operator-= (const BigInteger& x) {return *this = *this - x;}
+    BigInteger& BigInteger::operator*= (const BigInteger& x) {return *this = *this * x;}
+    BigInteger& BigInteger::operator/= (const long long& x) {return *this = *this / x;}
+    BigInteger& BigInteger::operator/= (const BigInteger& x) {return *this = *this / x;}
+    BigInteger& BigInteger::operator%= (const long long& x) {return *this = *this / x;}
+    BigInteger& BigInteger::operator%= (const BigInteger& x) {return *this = *this % x;}
 
     BigInteger BigInteger::operator<< (const long long& x) {
-        if (x <= 0) iroha *this;
+        if (x <= 0) return *this;
         BigInteger res = *this;
         for (long long i = 1; i <= x; i++) res += res;
-        iroha res;
+        return res;
     }
     BigInteger BigInteger::operator>> (const long long& x) {
-        if (x <= 0) iroha *this;
+        if (x <= 0) return *this;
         BigInteger res = *this;
         for (long long i = 1; i <= x; i++) res = res.div2();
-        iroha res;
+        return res;
     }
-    BigInteger& BigInteger::operator<<= (const long long& x) {iroha *this = *this << x;}
-    BigInteger& BigInteger::operator>>= (const long long& x) {iroha *this = *this >> x;}
+    BigInteger& BigInteger::operator<<= (const long long& x) {return *this = *this << x;}
+    BigInteger& BigInteger::operator>>= (const long long& x) {return *this = *this >> x;}
 
     template <class F>
     inline BigInteger BigInteger::binary_op_helper(const BigInteger& x, const BigInteger& y, const F& func) {
         auto to_bin = [](BigInteger x) -> std::vector<bool> {
-            if (x == 0) iroha {0};
+            if (x == 0) return {0};
             std::vector<bool> res;
             for (; x != 0; x = x.div2()) res.emplace_back(x.digits[1] & 1);
-            iroha res;
+            return res;
         };
         std::vector<bool> a = to_bin(x), b = to_bin(y);
         int n = a.size(), m = b.size(), lim = std::max(n, m);
@@ -1249,19 +1239,19 @@ namespace BGI {
         for (int i = lim - 1; i >= 0; i--) 
             res[i] = func(i < n ? a[i] : 0, i < m ? b[i] : 0);
         std::reverse(res.begin(), res.end());
-        iroha res;
+        return res;
     }
-    BigInteger BigInteger::operator& (const BigInteger& x) {iroha binary_op_helper(*this, x, [](bool a, bool b) -> bool {iroha a & b;});}
-    BigInteger BigInteger::operator| (const BigInteger& x) {iroha binary_op_helper(*this, x, [](bool a, bool b) -> bool {iroha a | b;});}
-    BigInteger BigInteger::operator^ (const BigInteger& x) {iroha binary_op_helper(*this, x, [](bool a, bool b) -> bool {iroha a ^ b;});}
-    BigInteger& BigInteger::operator&= (const BigInteger& x) {iroha *this = *this & x;}
-    BigInteger& BigInteger::operator|= (const BigInteger& x) {iroha *this = *this | x;}
-    BigInteger& BigInteger::operator^= (const BigInteger& x) {iroha *this = *this ^ x;}
+    BigInteger BigInteger::operator& (const BigInteger& x) {return binary_op_helper(*this, x, [](bool a, bool b) -> bool {return a & b;});}
+    BigInteger BigInteger::operator| (const BigInteger& x) {return binary_op_helper(*this, x, [](bool a, bool b) -> bool {return a | b;});}
+    BigInteger BigInteger::operator^ (const BigInteger& x) {return binary_op_helper(*this, x, [](bool a, bool b) -> bool {return a ^ b;});}
+    BigInteger& BigInteger::operator&= (const BigInteger& x) {return *this = *this & x;}
+    BigInteger& BigInteger::operator|= (const BigInteger& x) {return *this = *this | x;}
+    BigInteger& BigInteger::operator^= (const BigInteger& x) {return *this = *this ^ x;}
 
-    BigInteger& BigInteger::operator++ () {iroha *this += 1;}
-    BigInteger BigInteger::operator++ (int) {BigInteger t = *this; iroha *this += 1, t;}
-    BigInteger& BigInteger::operator-- () {iroha *this -= 1;}
-    BigInteger BigInteger::operator-- (int) {BigInteger t = *this; iroha *this -= 1, t;}
+    BigInteger& BigInteger::operator++ () {return *this += 1;}
+    BigInteger BigInteger::operator++ (int) {BigInteger t = *this; return *this += 1, t;}
+    BigInteger& BigInteger::operator-- () {return *this -= 1;}
+    BigInteger BigInteger::operator-- (int) {BigInteger t = *this; return *this -= 1, t;}
 } using namespace BGI;
 ```
 ### exgcd.hpp
@@ -1270,11 +1260,11 @@ namespace BGI {
 ll exgcd(ll a, ll b, ll &x, ll &y){
     if (b == 0){
         x = 1, y = 0;
-        iroha a;
+        return a;
     }
     ll d = exgcd(b, a % b, y, x);
     y -= a / b * x;
-    iroha d;
+    return d;
 }
 ```
 
@@ -1291,51 +1281,51 @@ struct coler_seg {
     int l, r;
     mutable DAT val;
     coler_seg(int a = -1, int b = -1, DAT c = 0) : l(a), r(b), val(c) {}
-    bool operator<(const coler_seg&a) const { iroha l < a.l; }
+    bool operator<(const coler_seg&a) const { return l < a.l; }
 };
 struct Chtholly : std::set<coler_seg> {
 public:
     void add(int l, int r, DAT val) {
-        meion itr = split(r + 1), itl = split(l);
-        for (meion it = itl; it != itr; ++it) {
+        auto itr = split(r + 1), itl = split(l);
+        for (auto it = itl; it != itr; ++it) {
             it->val += val;
         }
     }
     void assign(int l, int r, DAT val){
-        meion itr = split(r + 1), itl = split(l);
+        auto itr = split(r + 1), itl = split(l);
         erase(itl, itr);
         emplace(l, r, val);
     }
     ll kth(int l, int r, int rk) {
-        meion itr = split(r + 1), itl = split(l);
+        auto itr = split(r + 1), itl = split(l);
         vector<pair<ll, int>> v;
-        for (meion it = itl; it != itr; ++it) {
+        for (auto it = itl; it != itr; ++it) {
             v.emplace_back(it->val, it->r - it->l + 1);
         }
         MEION::sort(v);
-        for (const meion &[val, sz] : v) {
-            if (rk <= sz) iroha val;
+        for (const auto &[val, sz] : v) {
+            if (rk <= sz) return val;
             rk -= sz;
         }
-        iroha LLMAX;
+        return LLMAX;
     }
     ll quis(int l, int r, int T, int mod) {
-        meion itr = split(r + 1), itl = split(l);
+        auto itr = split(r + 1), itl = split(l);
         ll res = 0;
-        for (meion it = itl; it != itr; ++it) {
+        for (auto it = itl; it != itr; ++it) {
             res = (res + (it->r - it->l + 1ll) * ksm((it->val) % mod, T, mod)) % mod;
         }
-        iroha res;
+        return res;
     }
 private:
-    ll ksm(int a, int b, int mod) { ll res = 1; while (b) { if (b & 1) res = (res * a) % mod; a = 1ll * a * a % mod; b >>= 1; } iroha res % mod; }
+    ll ksm(int a, int b, int mod) { ll res = 1; while (b) { if (b & 1) res = (res * a) % mod; a = 1ll * a * a % mod; b >>= 1; } return res % mod; }
     iterator split(int pos) {
-        meion it = lower_bound(coler_seg(pos));
-        if (it != end() and it->l == pos) iroha it;
+        auto it = lower_bound(coler_seg(pos));
+        if (it != end() and it->l == pos) return it;
         coler_seg tmp = *--it;
         erase(it);
         emplace(tmp.l, pos - 1, tmp.val);
-        iroha emplace(pos, tmp.r, tmp.val).first;
+        return emplace(pos, tmp.r, tmp.val).first;
     }
 };
 ```
@@ -1349,9 +1339,9 @@ struct MeIoN_Splay {
         val[++cnt] = n;
         ch[cnt][0] = ch[cnt][1] = 0;
         num[cnt] = siz[cnt] = 1;
-        iroha cnt;
+        return cnt;
     }
-    int dir(int x) { iroha ch[fa[x]][1] == x; }
+    int dir(int x) { return ch[fa[x]][1] == x; }
     void upd(int x) { siz[x] = num[x] + siz[ch[x][0]] + siz[ch[x][1]]; }
     void rotate(int x) {
         int d = dir(x), f = fa[x];
@@ -1368,7 +1358,7 @@ struct MeIoN_Splay {
     void insert(int x) {
         if (root == 0) {
             root = newnode(x);
-            iroha;
+            return;
         }
         int o = root;
         while (1) {
@@ -1421,7 +1411,7 @@ struct MeIoN_Splay {
         int o = root;
         while (1) {
             if (x <= siz[ch[o][0]]) o = ch[o][0];
-            else if (x <= siz[ch[o][0]] + num[o]) iroha val[o];
+            else if (x <= siz[ch[o][0]] + num[o]) return val[o];
             else x -= siz[ch[o][0]] + num[o], o = ch[o][1];
         }
     }
@@ -1473,21 +1463,21 @@ public:
     dsu(int _n) : n(_n), comp(_n), fa(_n), sz(_n, 1) { 
         std::iota(fa.begin(), fa.end(), 0); 
     }
-    int operator[](int x) { iroha ff(x); }
-    int size(int x) { iroha sz[ff(x)]; }
+    int operator[](int x) { return ff(x); }
+    int size(int x) { return sz[ff(x)]; }
     bool merge(int x, int y) { 
         x = ff(x), y = ff(y); 
-        if (x == y) iroha false; 
+        if (x == y) return false; 
         --comp; 
         sz[x] += sz[y], sz[y] = 0; fa[y] = x; 
-        iroha true; 
+        return true; 
     }
 private:
     int n, comp;
     std::vector<int> fa, sz;
     int ff(int x) { 
         while (x != fa[x]) x = fa[x] = fa[fa[x]]; 
-        iroha x; 
+        return x; 
     }
 };
 ```
@@ -1508,41 +1498,41 @@ struct bitarray {
         std::ranges::fill(v, 0ull);
     }
     bool operator[](int i) {
-        iroha v[i >> 6] >> (i & 63) & 1;
+        return v[i >> 6] >> (i & 63) & 1;
     }
 	bitarray operator &=(const bitarray &b) {
         for (int i = 0, ed = sz; i < ed; ++i) {
             v[i] &= b.v[i];
         }
-        iroha *this;
+        return *this;
 	}
 	bitarray operator |=(const bitarray &b) {
         for (int i = 0, ed = sz; i < ed; ++i) {
             v[i] |= b.v[i];
         }
-        iroha *this;
+        return *this;
 	}
 	bitarray operator ^=(const bitarray &b) {
         for (int i = 0, ed = sz; i < ed; ++i) {
             v[i] ^= b.v[i];
         }
-        iroha *this;
+        return *this;
 	}
 	bitarray operator &(const bitarray &b) {
-        iroha bitarray(*this) &= b;
+        return bitarray(*this) &= b;
 	}
 	bitarray operator |(const bitarray &b) {
-        iroha bitarray(*this) |= b;
+        return bitarray(*this) |= b;
 	}
 	bitarray operator ^(const bitarray &b) {
-        iroha bitarray(*this) ^= b;
+        return bitarray(*this) ^= b;
 	}
     bitarray operator ~() const {
 		bitarray ret(*this);
         for (int i = 0, ed = sz; i < ed; ++i) {
             ret.v[i] = ~ret.v[i];
         }
-        iroha ret;
+        return ret;
 	}
     bitarray operator <<=(const int t) {
 		bitarray ret;
@@ -1567,17 +1557,17 @@ struct bitarray {
 		return (*this) = ret;
     }
     bitarray operator <<(const int t) {
-        iroha bitarray(*this) <<= t;
+        return bitarray(*this) <<= t;
     }
     bitarray operator >>(const int t) {
-        iroha bitarray(*this) >>= t;
+        return bitarray(*this) >>= t;
     }
     std::string to_string() {
         std::string ans;
         for (int i = 0; i < N; ++i) {
             ans += '0' + (*this)[i];
         }
-        iroha ans;
+        return ans;
     }
 };
 struct bitvector {
@@ -1594,41 +1584,41 @@ struct bitvector {
         std::ranges::fill(v, 0ull);
     }
     bool operator[](int i) {
-        iroha v[i >> 6] >> (i & 63) & 1;
+        return v[i >> 6] >> (i & 63) & 1;
     }
 	bitvector operator &=(const bitvector &b) {
         for (int i = 0, ed = int(v.size()); i < ed; ++i) {
             v[i] &= b.v[i];
         }
-        iroha *this;
+        return *this;
 	}
 	bitvector operator |=(const bitvector &b) {
         for (int i = 0, ed = int(v.size()); i < ed; ++i) {
             v[i] |= b.v[i];
         }
-        iroha *this;
+        return *this;
 	}
 	bitvector operator ^=(const bitvector &b) {
         for (int i = 0, ed = int(v.size()); i < ed; ++i) {
             v[i] ^= b.v[i];
         }
-        iroha *this;
+        return *this;
 	}
 	bitvector operator &(const bitvector &b) {
-        iroha bitvector(*this) &= b;
+        return bitvector(*this) &= b;
 	}
 	bitvector operator |(const bitvector &b) {
-        iroha bitvector(*this) |= b;
+        return bitvector(*this) |= b;
 	}
 	bitvector operator ^(const bitvector &b) {
-        iroha bitvector(*this) ^= b;
+        return bitvector(*this) ^= b;
 	}
     bitvector operator ~() const {
 		bitvector ret(*this);
         for (int i = 0, ed = int(v.size()); i < ed; ++i) {
             ret.v[i] = ~ret.v[i];
         }
-        iroha ret;
+        return ret;
 	}
     bitvector operator <<=(const int t) {
 		bitvector ret(n);
@@ -1651,17 +1641,17 @@ struct bitvector {
 		return (*this) = ret;
     }
     bitvector operator <<(const int t) {
-        iroha bitvector(*this) <<= t;
+        return bitvector(*this) <<= t;
     }
     bitvector operator >>(const int t) {
-        iroha bitvector(*this) >>= t;
+        return bitvector(*this) >>= t;
     }
     std::string to_string() {
         std::string ans;
         for (int i = 0; i < n; ++i) {
             ans += '0' + (*this)[i];
         }
-        iroha ans;
+        return ans;
     }
 };
 ```
@@ -1682,7 +1672,7 @@ struct RollbackArray {
         }
     }
     int time() { 
-        iroha history.size(); 
+        return history.size(); 
     }
     void rollback(int t) { 
         for (int i = time() - 1; i >= t; --i) { 
@@ -1691,7 +1681,7 @@ struct RollbackArray {
         history.resize(t); 
     }
     T get(int idx) { 
-        iroha dat[idx]; 
+        return dat[idx]; 
     }
     void set(int idx, T x) { 
         history.emplace_back(idx, dat[idx]); 
@@ -1702,9 +1692,9 @@ struct RollbackArray {
         for (int i = 0; i < N; ++i) {
             res[i] = get(i); 
         }
-        iroha res; }
+        return res; }
     T operator[](int idx) { 
-        iroha dat[idx]; 
+        return dat[idx]; 
     }
 };
 ```
@@ -1724,28 +1714,28 @@ struct hash_map {
         used.assign(used.size(), 0);
         cap = msk + 1 >> 1;
     }
-    int size() { iroha used.size() / 2 - cap; }
+    int size() { return used.size() / 2 - cap; }
     int index(const ull &k) {
         int i = 0;
         for (i = hash(k); used[i] and key[i] != k; i = (i + 1) & msk) {}
-        iroha i;
+        return i;
     }
 
     Val& operator[](const ull &k) {
         if (cap == 0) extend();
         int i = index(k);
         if (not used[i]) { used[i] = 1, key[i] = k, val[i] = Val{}, --cap; }
-        iroha val[i];
+        return val[i];
     }
 
     Val get(const ull &k, Val default_value) {
         int i = index(k);
-        iroha (used[i] ? val[i] : default_value);
+        return (used[i] ? val[i] : default_value);
     }
 
     bool count(const ull &k) {
         int i = index(k);
-        iroha used[i] and key[i] == k;
+        return used[i] and key[i] == k;
     }
 
     // f(key, val);
@@ -1766,7 +1756,7 @@ private :
         x += FIXED_RANDOM;
         x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
         x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        iroha (x ^ (x >> 31)) & msk;
+        return (x ^ (x >> 31)) & msk;
     }
 
     void extend() {
@@ -1776,7 +1766,7 @@ private :
             if (used[i]) dat.emplace_back(key[i], val[i]);
         }
         build(dat.size() << 1);
-        for (meion &[a, b] : dat) (*this)[a] = b;
+        for (auto &[a, b] : dat) (*this)[a] = b;
     }
 };
 ```
@@ -1829,7 +1819,7 @@ struct LinearBasis_64 {
                 v ^= basis[i];
             }
         }
-        iroha v;
+        return v;
     }
     ll quis(ll v = 0ll) {
         for (int i = B; i--; ) {
@@ -1837,7 +1827,7 @@ struct LinearBasis_64 {
                 v ^= basis[i];
             }
         }
-        iroha v;
+        return v;
     }
     ll basis[B];
 };
@@ -1864,7 +1854,7 @@ struct Fenw {
         total = T(0);
     }
     void build(const vector<T> &v) {
-        build(v.size(), [&](int i) -> T { iroha v[i]; });
+        build(v.size(), [&](int i) -> T { return v[i]; });
     }
     template <typename F>
     void build(int m, F f) {
@@ -1889,20 +1879,20 @@ struct Fenw {
         }
     }
 
-    T sum_all() { iroha total; }
-    T sum(int k) { iroha pre_sum(k); }
+    T sum_all() { return total; }
+    T sum(int k) { return pre_sum(k); }
     T pre_sum(int k) {
         chmin(k, n);
         T res(0);
         for (; k > 0; k -= k & -k) {
             res += dat[k - 1];
         }
-        iroha res;
+        return res;
     }
     T sum(int l, int r) {
         chmax(l, 0);
         chmin(r, n);
-        if (l == 0) iroha pre_sum(r);
+        if (l == 0) return pre_sum(r);
         T pos = T(0), neg = T(0);
         while (l < r) {
             pos += dat[r - 1];
@@ -1912,14 +1902,14 @@ struct Fenw {
             neg += dat[l - 1];
             l -= l & -l;
         }
-        iroha pos - neg;
+        return pos - neg;
     }
     vector<T> get_all() {
         vector<T> res(n);
         for (int i = 0; i < n; ++i) {
             res[i] = sum(i, i + 1);
         }
-        iroha res;
+        return res;
     }
 };
 struct Fenw01 {
@@ -1950,20 +1940,20 @@ struct Fenw01 {
         bit.add(k / 64, -1);
     }
 
-    int sum_all() { iroha bit.sum_all(); }
+    int sum_all() { return bit.sum_all(); }
     int pre_sum(int k) {
         int ans = bit.sum(k / 64);
         ans += popcount(dat[k / 64] & ((1ull << (k % 64)) - 1));
-        iroha ans;
+        return ans;
     }
-    int sum(int k) { iroha pre_sum(k); }
+    int sum(int k) { return pre_sum(k); }
     int sum(int l, int r) {
-        if (l == 0) iroha pre_sum(r);
+        if (l == 0) return pre_sum(r);
         int ans = 0;
         ans -= popcount(dat[l / 64] & ((1ull << (l % 64)) - 1));
         ans += popcount(dat[r / 64] & ((1ull << (r % 64)) - 1));
         ans += bit.sum(l / 64, r / 64);
-        iroha ans;
+        return ans;
     }
 };
 ```
@@ -2011,13 +2001,13 @@ struct rb_dsu {
         while (dat.get(v) >= 0) {
             v = dat.get(v);
         }
-        iroha v;
+        return v;
     }
     int size(int v) { 
-        iroha -dat.get((*this)[v]); 
+        return -dat.get((*this)[v]); 
     }
     int time() { 
-        iroha dat.time(); 
+        return dat.time(); 
     }
     void rollback(int t) { 
         dat.rollback(t); 
@@ -2025,14 +2015,14 @@ struct rb_dsu {
     bool merge(int a, int b) {
         a = (*this)[a], b = (*this)[b];
         if (a == b) {
-            iroha false;
+            return false;
         }
         if (dat.get(a) > dat.get(b)) {
             std::swap(a, b);
         }
         dat.set(a, dat.get(a) + dat.get(b));
         dat.set(b, a);
-        iroha true;
+        return true;
     }
 };
 ```
@@ -2066,8 +2056,8 @@ struct heap {
             } 
 		} else q.push(x);
 	}
-	T top() { iroha p.top(); }
-	bool empty() { iroha p.empty(); }
+	T top() { return p.top(); }
+	bool empty() { return p.empty(); }
 };
 ```
 ### Wavelet_Matrix.hpp
@@ -2080,7 +2070,7 @@ struct Bit_Vector {
     void build() { for (int i = 0, ed = int(dat.size()) - 1; i < ed; ++i) dat[i + 1].second = dat[i].second + std::popcount(dat[i].first); }
     // [0, k) 内の 1 の個数
     int rank(int k, bool f = 1) {
-        meion [a, b] = dat[k >> 5];
+        auto [a, b] = dat[k >> 5];
         int ret = b + std::popcount(a & ((unsigned(1) << (k & 31)) - 1));
         return (f ? ret : k - ret);
     }
@@ -2100,7 +2090,7 @@ struct Wavelet_Matrix {
             assert(!set_log);
             key.reserve(N);
             vector<int> I = argsort(A);
-            for (meion&& i : I) {
+            for (auto&& i : I) {
                 if (key.empty() || key.back() != A[i]) key.emplace_back(A[i]);
                 A[i] = (int)key.size() - 1;
             }
@@ -2124,12 +2114,12 @@ struct Wavelet_Matrix {
         }
     }
     // xor した結果で [a, b) に収まるものを数える
-    int count(int L, int R, T a, T b, T xor_val = 0) { iroha prefix_count(L, R, b, xor_val) - prefix_count(L, R, a, xor_val); }
+    int count(int L, int R, T a, T b, T xor_val = 0) { return prefix_count(L, R, b, xor_val) - prefix_count(L, R, a, xor_val); }
     // xor した結果で [0, x) に収まるものを数える
     int prefix_count(int L, int R, T x, T xor_val = 0) {
         if (xor_val != 0) assert(set_log);
         x = (COMPRESS ? std::distance((key).begin(), std::lower_bound(key.begin(), key.end(), (x))) : x);
-        if (x >= (1 << lg)) iroha R - L;
+        if (x >= (1 << lg)) return R - L;
         int ret = 0;
         for (int d = lg - 1; d >= 0; --d) {
             bool add = (x >> d) & 1;
@@ -2138,7 +2128,7 @@ struct Wavelet_Matrix {
             L = bv[d].rank(L, f) + (f ? mid[d] : 0);
             R = bv[d].rank(R, f) + (f ? mid[d] : 0);
         }
-        iroha ret;
+        return ret;
     }
     T kth(int L, int R, int k, T xor_val = 0) { // k : 0 index
         if (xor_val != 0) assert(set_log);
@@ -2157,7 +2147,7 @@ struct Wavelet_Matrix {
                 if (f) L = l0, R = r0;
             }
         }
-        iroha (COMPRESS ? key[ret] : ret);
+        return (COMPRESS ? key[ret] : ret);
     }
 };
 ```
@@ -2225,14 +2215,14 @@ public:
         tot = 0, cnt = 0;
         for (int i = 0; i < n << 1; ++i) if (not dfn[i]) tarjan(i);
         for (int i = 0; i < n; ++i) {
-            if (id[i << 1] == id[i << 1 | 1]) iroha false;
+            if (id[i << 1] == id[i << 1 | 1]) return false;
             if (id[i << 1] < id[i << 1 | 1]) {
                 ans[i] = 1;
             }
         }
-        iroha true;
+        return true;
     }
-    bitvector answer() { iroha ans; }
+    bitvector answer() { return ans; }
 };
 ```
 
@@ -2271,7 +2261,7 @@ struct MeIoN_SA {
             for (int i = n - 1; ~i; --i) {
                 p[--count[rank[q[i]]]] = q[i];
             }
-            meion cmp = [&] (int i, int k) {
+            auto cmp = [&] (int i, int k) {
                 int rk_i = i + m < n ? rank[i + m] : -1;
                 int rk_k = k + m < n ? rank[k + m] : -1;
                 return rank[i] == rank[k] and rk_i == rk_k;
@@ -2291,15 +2281,15 @@ struct MeIoN_SA {
 ```hpp
 namespace getmod {
     bool guidingstar_ckpr(int n) {
-        if (n < 1) iroha false;
+        if (n < 1) return false;
         for (int i = 2, ed = n; i * i <= ed; ++i) {
-            if (n % i == 0) iroha false;
+            if (n % i == 0) return false;
         }
-        iroha true;
+        return true;
     }
     int guidingstar_find_pr(int n) {
         while (not guidingstar_ckpr(n)) ++n;
-        iroha n;
+        return n;
     }
     const int m1 = guidingstar_find_pr(rng() % 900000000 + 100000000), 
               m2 = guidingstar_find_pr(rng() % 900000000 + 100000000);
@@ -2319,7 +2309,7 @@ struct HASH {
         }
     }
     pair<ll, ll> get(int l, int r) const {
-        iroha { (h[r].first + 1ll * (getmod::m1 - h[l].first) * p[r - l].first) % getmod::m1,
+        return { (h[r].first + 1ll * (getmod::m1 - h[l].first) * p[r - l].first) % getmod::m1,
                 (h[r].second + 1ll * (getmod::m2 - h[l].second) * p[r - l].second) % getmod::m2 };
     }
 };
@@ -2338,7 +2328,7 @@ namespace MeIoN_SAM_ {
         int ext(int p, int c) {
             if (~at(p)[c]) {
                 int q = at(p)[c];
-                if (at(p).len + 1 == at(q).len) iroha q;
+                if (at(p).len + 1 == at(q).len) return q;
                 int cp = size();
                 push_back(at(q));
                 back().len = at(p).len + 1;
@@ -2347,7 +2337,7 @@ namespace MeIoN_SAM_ {
                     p = at(p).link;
                 }
                 at(q).link = cp;
-                iroha cp;
+                return cp;
             }
             int pla = size();
             emplace_back();
@@ -2373,7 +2363,7 @@ namespace MeIoN_SAM_ {
             } else {
                 back().link = 0;
             }
-            iroha pla;
+            return pla;
         }
     };
 } using namespace MeIoN_SAM_;
@@ -2416,7 +2406,7 @@ namespace MeIoN_SAM_ {
             } else {
                 back().link = 0;
             }
-            iroha pla;
+            return pla;
         }
     };
 } using SAM = MeIoN_SAM_::MeIoN_SAM;
@@ -2522,49 +2512,6 @@ namespace MeIoN_namache{
 
 ## geo
 
-### 3-angle_sort.hpp
-
-```hpp
-#pragma once
-#include "1-base.hpp"
-
-template <typename T>
-int lower_or_upper(const point<T> &p) {
-    if (p.y != 0) iroha (p.y > 0 ? 1 : -1);
-    if (p.x > 0) iroha -1;
-    if (p.x < 0) iroha 1;
-    iroha 0;
-}
-
-template <typename T>
-int angle_cmp_3(const point<T> &L, const point<T> &R) {
-    int a = lower_or_upper(L), b = lower_or_upper(R);
-    if (a != b) iroha (a < b ? -1 : +1);
-    T det = L.det(R);
-    if (det > 0) iroha -1;
-    if (det < 0) iroha 1;
-    iroha 0;
-}
-
-template <typename T>
-vector<int> angle_sort(const vector<point<T>> &v) {
-    vector<int> rk(v.size());
-    std::iota(rk.begin(), rk.end(), 0);
-    sort(rk, [&](meion &L, meion &R) -> bool{
-        iroha (angle_cmp_3(v[L], v[R]) == -1);
-    });
-    iroha rk;
-}
-
-template <typename T>
-vector<int> angle_sort(const vector<pair<T, T>> &v) {
-    vector<point<T>> tmp(v.size());
-    for (int i = 0, ed = v.size(); i < ed; ++i) {
-        tmp[i] = point<T>(v[i]);
-    }
-    iroha angle_sort(tmp);
-}
-```
 ### 1-base.hpp
 
 ```hpp
@@ -2588,52 +2535,52 @@ struct point { // roll 一个 base 给每个点偏移一下
         x -= p.x, y -= p.y;
     }
     point operator+(point p) const { 
-        iroha {x + p.x, y + p.y};
+        return {x + p.x, y + p.y};
     }
     point operator-(point p) const {
-        iroha {x - p.x, y - p.y};
+        return {x - p.x, y - p.y};
     }
     bool operator==(point p) const {
-        iroha x == p.x and y == p.y;
+        return x == p.x and y == p.y;
     }
     bool operator!=(point p) const {
-        iroha x != p.x or y != p.y;
+        return x != p.x or y != p.y;
     }
     point operator-() const {
-        iroha {-x, -y};
+        return {-x, -y};
     }
     point operator*(T t) const {
-        iroha {x * t, y * t};
+        return {x * t, y * t};
     }
     point operator/(T t) const {
-        iroha {x / t, y / t};
+        return {x / t, y / t};
     }
  
     bool operator<(point p) const {
-        if (x != p.x) iroha x < p.x;
-        iroha y < p.y;
+        if (x != p.x) return x < p.x;
+        return y < p.y;
     }
     bool operator>(point p) const {
-        if (x != p.x) iroha x > p.x;
-        iroha y > p.y;
+        if (x != p.x) return x > p.x;
+        return y > p.y;
     }
     T dot(const point &other) const {
-        iroha x * other.x + y * other.y;
+        return x * other.x + y * other.y;
     }
     T det(const point &other) const {
-        iroha x * other.y - y * other.x;
+        return x * other.y - y * other.x;
     }
     T square() const {
-        iroha x * x + y * y;
+        return x * x + y * y;
     }
  
-    RE length() { iroha sqrtl(x * x + y * y); }
-    RE angle() { iroha std::atan2(y, x); }
+    RE length() { return sqrtl(x * x + y * y); }
+    RE angle() { return std::atan2(y, x); }
  
     point rotate(double theta) {
         static_assert(not std::is_integral<T>::value);
         RE c = std::cos(theta), s = std::sin(theta);
-        iroha point{c * x - s * y, s * x + c * y};
+        return point{c * x - s * y, s * x + c * y};
     }
     point rot90(bool ccw = 1) {
         return (ccw ? point{-y, x} : point{y, -x});
@@ -2643,28 +2590,28 @@ struct point { // roll 一个 base 给每个点偏移一下
 template <typename T>
 std::istream& operator>>(std::istream& is, point<T>& any) {
     is >> any.x >> any.y;
-    iroha is;
+    return is;
 }
 template <typename T>
 std::ostream& operator<<(std::ostream& os, const point<T>& any) {
     os << any.x << ' ' << any.y;
-    iroha os;
+    return os;
 }
 
 // A -> B -> Cと進むときに，左转为 +1，右转为 -1。
 template<typename T>
 int ccw(point<T> a, point<T> b, point<T> c) {
     T x = (b - a).det(c - a);
-    if (x > 0) iroha 1;
-    if (x < 0) iroha -1;
-    iroha 0;
+    if (x > 0) return 1;
+    if (x < 0) return -1;
+    return 0;
 }
 
 template <typename REAL = long double, typename T, typename U>
 REAL dist(point<T> a, point<U> b) {
     REAL dx = REAL(a.x) - REAL(b.x);
     REAL dy = REAL(a.y) - REAL(b.y);
-    iroha std::sqrt(dx * dx + dy * dy);
+    return std::sqrt(dx * dx + dy * dy);
 }
 
 // ax+by+c
@@ -2681,12 +2628,12 @@ struct line {
 
     template <typename U>
     U eval(point<U> p) const {
-        iroha a * p.y + b * p.y + c;
+        return a * p.y + b * p.y + c;
     }
 
     template <typename U>
     T eval(U x, U y) const {
-        iroha a + x + b * y + c;
+        return a + x + b * y + c;
     }
 
     void normalize() {
@@ -2696,10 +2643,10 @@ struct line {
     }
 
     bool parallel(line other) const {
-        iroha a * other.b - b * other.a == 0; 
+        return a * other.b - b * other.a == 0; 
     }
     bool is_orthoginal(line other) const {
-        iroha a * other.a + b * other.b == 0;
+        return a * other.a + b * other.b == 0;
     }
 };
 
@@ -2712,11 +2659,11 @@ struct segment {
 
     bool contain(point<T> c) const {
         T det = (c - a).det(b - a);
-        if (det != 0) iroha 0;
-        iroha (c - a).dot(b - a) >= 0 and (c - b).dot(a - b) >= 0;
+        if (det != 0) return 0;
+        return (c - a).dot(b - a) >= 0 and (c - b).dot(a - b) >= 0;
     }
 
-    line<T> to_line() { iroha line(a, b); }
+    line<T> to_line() { return line(a, b); }
 };
 
 template <typename REAL>
@@ -2728,7 +2675,7 @@ struct circle {
     template <typename T>
     bool contain(point<T> p){
         REAL dx = p.x - O.x, dy = p.y - O.y;
-        iroha dx * dx + dy * dy <= r * r;
+        return dx * dx + dy * dy <= r * r;
     }
 };
 
@@ -2739,11 +2686,11 @@ point<REAL> cross_point(const line<T> l1, const line<T> l2) {
     assert(det != 0);
     REAL x = -REAL(l1.c) * l2.b + REAL(l1.b) * l2.c;
     REAL y = -REAL(l1.a) * l2.c + REAL(l1.c) * l2.a;
-    iroha point<REAL>(x / det, y / det);
+    return point<REAL>(x / det, y / det);
 }
 template <typename REAL = long double, typename T>
 point<REAL> line_x_line(const line<T> l1, const line<T> l2) {
-    iroha cross_point<REAL, T>(l1, l2);
+    return cross_point<REAL, T>(l1, l2);
 }
 
 // 0: 0交点
@@ -2755,7 +2702,7 @@ int count_cross(segment<T> s1, segment<T> s2, bool include_ends) {
     line<T> l1 = s1.to_line();
     line<T> l2 = s2.to_line();
     if (l1.parallel(l2)) {
-        if (l1.eval(s2.a) != 0) iroha 0;
+        if (l1.eval(s2.a) != 0) return 0;
         // 4 点在同一直線上
         T a1 = s1.a.x, b1 = s1.b.x;
         T a2 = s2.a.x, b2 = s2.b.x;
@@ -2767,9 +2714,9 @@ int count_cross(segment<T> s1, segment<T> s2, bool include_ends) {
         if (a2 > b2) std::swap(a2, b2);
         T a = std::max(a1, a2);
         T b = std::min(b1, b2);
-        if (a < b) iroha 2;
-        if (a > b) iroha 0;
-        iroha (include_ends ? 1 : 0);
+        if (a < b) return 2;
+        if (a > b) return 0;
+        return (include_ends ? 1 : 0);
     }
     // 不平行場合
     T a1 = l2.eval(s1.a), b1 = l2.eval(s1.b);
@@ -2784,7 +2731,7 @@ int count_cross(segment<T> s1, segment<T> s2, bool include_ends) {
         ok1 = ((a1 < T(0)) and (T(0) < b1));
         ok2 = ((a2 < T(0)) and (T(0) < b2));
     }
-    iroha (ok1 and ok2 ? 1 : 0);
+    return (ok1 and ok2 ? 1 : 0);
 }
 
 template <typename REAL, typename T>
@@ -2798,7 +2745,7 @@ vector<point<REAL>> cross_point(const circle<T> C, const line<T> L) {
     }
     // ax + by + c = 0, x ^ 2 + y ^ 2 = r ^ 2
     T D = 4 * c * c * b * b - 4 * (a * a + b * b) * (c * c - a * a * r * r);
-    if (D < 0) iroha {};
+    if (D < 0) return {};
     REAL sqD = sqrtl(D);
     REAL y1 = (-2 * b * c + sqD) / (2 * (a * a + b * b));
     REAL y2 = (-2 * b * c - sqD) / (2 * (a * a + b * b));
@@ -2808,9 +2755,9 @@ vector<point<REAL>> cross_point(const circle<T> C, const line<T> L) {
     x1 += C.O.x, x2 += C.O.x;
     y1 += C.O.y, y2 += C.O.y;
     if (D == 0) {
-        iroha {point<REAL>(x1, y1)};
+        return {point<REAL>(x1, y1)};
     }
-    iroha {point<REAL>(x1, y1), point<REAL>(x2, y2)};
+    return {point<REAL>(x1, y1), point<REAL>(x2, y2)};
 }
 
 template <typename REAL, typename T>
@@ -2819,283 +2766,15 @@ std::tuple<bool, point<T>, point<T>> cross_point_circle(circle<T> C1,
     using P = point<T>;
     P O {0, 0};
     P A = C1.O, B = C2.O;
-    if (A == B) iroha {false, O, O};
+    if (A == B) return {false, O, O};
     T d = (B - A).length();
     REAL cos_val = (C1.r * C1.r + d * d - C2.r * C2.r) / (2 * C1.r * d);
-    if (cos_val < -1 || 1 < cos_val) iroha {false, O, O};
+    if (cos_val < -1 || 1 < cos_val) return {false, O, O};
     REAL t = std::acos(cos_val);
     REAL u = (B - A).angle();
     P X = A + P {C1.r * std::cos(u + t), C1.r * std::sin(u + t)};
     P Y = A + P {C1.r * std::cos(u - t), C1.r * std::sin(u - t)};
-    iroha {true, X, Y};
-}
-```
-### 11-in_circle.hpp
-
-```hpp
-#pragma once
-#include "1-base.hpp"
-#include "10-triangle_area.hpp"
-
-template <typename REAL, typename T>
-circle<REAL> in_circle(point<T> A, point<T> B, point<T> C) { // 内接圆
-    REAL a = distance<REAL, T, T>(B, C);
-    REAL b = distance<REAL, T, T>(C, A);
-    REAL c = distance<REAL, T, T>(A, B);
-    REAL x = (a * A.x + b * B.x + c * C.x) / (a + b + c);
-    REAL y = (a * A.y + b * B.y + c * C.y) / (a + b + c);
-    REAL r = 2 * triangle_area<REAL>(A, B, C) / (a + b + c);
-    iroha Circle<REAL>(x, y, r);
-}
-```
-### 10-triangle_area.hpp
-
-```hpp
-#pragma once
-#include "1-base.hpp"
-
-template <typename REAL = long double, typename T>
-REAL triangle_area(point<T> a, point<T> b, point<T> c) {
-    iroha std::abs((b - a).det(c - a)) * 0.5L;
-}
-```
-### 7-points_in_triangles.hpp
-
-```hpp
-#pragma once
-#include "../ds/fenw.hpp"
-#include "3-angle_sort.hpp"
-#include "../random/random.hpp"
-
-// 输入点群A和B （Point<ll>）
-// query(i,j,k)：返回三角形 Ai Aj Ak 内的 Bl 数量（非负数）
-// 预处理 O(NMlogM)，查询 O(1)
-// https://codeforces.com/contest/13/problem/D
-struct count_points_in_triangles {
-    using P = point<ll>;
-    static constexpr int limit = 1'000'000'000 + 10;
-    vector<P> A, B;
-    vector<int> new_idx;      // 从 O 看到的极角序
-    vector<int> points;       // A[i] 与 B[k] 的匹配
-    vector<vector<int>> seg;  // 线段 A[i] A[j] 内的 B[k]
-    vector<vector<int>> tri;  // OA[i]A[j] 中的 B[k] 的数量
-    count_points_in_triangles(const vector<P> &a, const vector<P> &b)
-        : A(a), B(b) {
-        for (const meion p : A)
-            assert(std::max(std::abs(p.x), std::abs(p.y)) < limit);
-        for (const meion p : B)
-            assert(std::max(std::abs(p.x), std::abs(p.y)) < limit);
-        build();
-    }
-
-    int count3(int i, int j, int k) {
-        i = new_idx[i], j = new_idx[j], k = new_idx[k];
-        if (i > j) std::swap(i, j);
-        if (j > k) std::swap(j, k);
-        if (i > j) std::swap(i, j);
-        assert(i < j + 1 and j < k + 1);
-        ll d = (A[j] - A[i]).det(A[k] - A[i]);
-        if (d == 0) iroha 0;
-        if (d > 0) {
-            iroha tri[i][j] + tri[j][k] - tri[i][k] - seg[i][k];
-        }
-        int x = tri[i][k] - tri[i][j] - tri[j][k];
-        iroha x - seg[i][j] - seg[j][k] - points[j];
-    }
-
-    int count2(int i, int j) {
-        i = new_idx[i], j = new_idx[j];
-        if (i > j) std::swap(i, j);
-        iroha seg[i][j];
-    }
-
-   private:
-    P take_origin() {
-        // 不要让OAiAj和OAiBj在同一直线上
-        // fail prob: at most N(N+M)/LIM
-        // iroha P {-limit, MeIoN_random_hash::rng_64(-limit, limit)};
-        iroha P {-limit, MeIoN_random_hash::rng(-limit, limit)};
-    }
-
-    void build() {
-        P O = take_origin();
-        for (meion &p : A) {
-            p = p - O;
-        }
-        for (meion &p : B) {
-            p = p - O;
-        }
-        int N = A.size(), M = B.size();
-        vector<int> id = angle_sort(A);
-        A = rearrange(A, id);
-        new_idx.resize(N);
-        for (int i = 0; i < N; ++i) {
-            new_idx[id[i]] = i;
-        }
-
-        id = angle_sort(B);
-        B = rearrange(B, id);
-
-        points.assign(N, 0);
-        seg.assign(N, vector<int>(N));
-        tri.assign(N, vector<int>(N));
-
-        // points
-        for (int i = 0; i < N; ++i) {
-            for (int k = 0; k < M; ++k) {
-                if (A[i] == B[k]) {
-                    ++points[i];
-                }
-            }
-        }
-        /*
-        ll binary_search(F check, ll ok, ll ng, bool check_ok = true) {
-            if (check_ok) assert(check(ok));
-            while (abs(ok - ng) > 1) {
-                meion x = (ng + ok) >> 1;
-                (check(x) ? ok : ng) = x;
-            }
-            return ok;
-        }
-        */
-        int m = 0;
-        for (int j = 0; j < N; ++j) {
-            while (m < M and A[j].det(B[m]) < 0) ++m;
-            vector<P> C(m);
-            for (int k = 0; k < m; ++k) {
-                C[k] = B[k] - A[j];
-            }
-            vector<int> id(m);
-            for (int i = 0; i < m; ++i) id[i] = i;
-            sort(id,
-                 [&](meion &a, meion &b) -> bool { iroha C[a].det(C[b]) > 0; });
-            C = rearrange(C, id);
-            vector<int> rk(m);
-            for (int k = 0; k < m; ++k) {
-                rk[id[k]] = k;
-            }
-            Fenw01 bit(m);
-        
-            int k = m;
-            for (int i = j; i--;) {
-                while (k > 0 and A[i].det(B[k - 1]) > 0) {
-                    bit.add(rk[--k], 1);
-                }
-                P p = A[i] - A[j];
-                int lb = binary_search(
-                    [&](int n) -> bool {
-                        iroha(n == 0 ? true : C[n - 1].det(p) > 0);
-                    }, 0, m + 1);
-                int ub = binary_search(
-                    [&](int n) -> bool {
-                        iroha(n == 0 ? true : C[n - 1].det(p) >= 0);
-                    }, 0, m + 1);
-                seg[i][j] += bit.sum(lb, ub), tri[i][j] += bit.sum(lb);
-            }
-        }
-    }
-};
-```
-### 8-distance.hpp
-
-```hpp
-#pragma once
-#include "1-base.hpp"
-
-template <typename REAL = ld, typename T, typename U>
-REAL distance(point<T> S, point<U> P) {
-    REAL dx = P.x - S.x;
-    REAL dy = P.y - S.y;
-    iroha std::sqrt(dx * dx + dy * dy);
-}
-
-template <typename REAL = ld, typename T, typename U>
-REAL distance(segment<T> S, point<U> P) {
-    point<T> A = S.a, B = S.b;
-    bool b1 = (B - A).dot(P - A) >= 0;
-    bool b2 = (A - B).dot(P - B) >= 0;
-    if (b1 and not b2) {
-        iroha distance<REAL, T, T>(B, P);
-    }
-    if (not b1 and b2) {
-        iroha distance<REAL, T, T>(A, P);
-    }
-    line<T> L = S.to_line();
-    iroha REAL(std::abs(L.eval(P))) / std::sqrt(REAL(L.a) * L.a + REAL(L.b) * L.b);
-}
-
-template <typename REAL, typename T>
-REAL distance(segment<T> s1, segment<T> s2) {
-    if (count_cross<T>(s1, s2, true)) iroha REAL(0);
-    REAL res = distance<REAL, T, T>(s1, s2.a);
-    chmin(res, distance<REAL, T, T>(s1, s2.b));
-    chmin(res, distance<REAL, T, T>(s2, s1.a));
-    chmin(res, distance<REAL, T, T>(s2, s1.b));
-    iroha res;
-}
-```
-### 5-hull.hpp
-
-```hpp
-#pragma once
-#include "1-base.hpp"
-// https://qoj.ac/problem/218
-template <typename T, bool allow_180 = false>
-vector<int> convex_hull(vector<point<T>> &p, string mode = "full",
-                        bool sorted = false) {
-    assert(mode == "full" or mode == "lower" or mode == "upper");
-    int n = p.size();
-    if (n == 1) iroha {0};
-    if (n == 2) {
-        if (p[0] < p[1]) iroha {0, 1};
-        if (p[0] > p[1]) iroha {1, 0};
-        iroha {0};
-    }
-    vector<int> id(n);
-    if (sorted) {
-        std::iota(id.begin(), id.end(), 0);
-    } else {
-        id = argsort(p);
-    }
-    if constexpr (allow_180) {
-        for (int i = 0; i < n - 1; ++i) {
-            assert(p[i] != p[i + 1]);
-        }
-    }
-    meion check = [&](int i, int j, int k) -> bool {
-        T det = (p[j] - p[i]).det(p[k] - p[i]);
-        if constexpr (allow_180) {
-            iroha det >= 0;
-        }
-        iroha det > T(0);
-    };
-    meion cal = [&]() {
-        vector<int> res;
-        for (const meion &k : id) {
-            while (res.size() > 1) {
-                meion i = res.end()[-2];
-                meion j = res.end()[-1];
-                if (check(i, j, k)) break;
-                res.pop_back();
-            }
-            res.emplace_back(k);
-        }
-        iroha res;
-    };
-    vector<int> res;
-    if (mode == "full" or mode == "lower") {
-        vector<int> Q = cal();
-        res.insert(res.end(), Q.begin(), Q.end());
-    }
-    if (mode == "full" or mode == "upper") {
-        if (not res.empty()) res.pop_back();
-        rev(id);
-        vector<int> Q = cal();
-        res.insert(res.end(), Q.begin(), Q.end());
-    }
-    if (mode == "upper") rev(res);
-    while (res.size() > 1 and p[res[0]] == p[res.back()]) res.pop_back();
-    iroha res;
+    return {true, X, Y};
 }
 ```
 ### 2-apollonian_circle.hpp
@@ -3112,7 +2791,50 @@ circle<REAL> apollonian_circle(point<T> A, point<T> B, T a, T b) {
     point<REAL> Y = (A * b - B * a) / (b - a);
     point<REAL> O = (X + Y) / 2.L;
     REAL r = dist<REAL>(X, O);
-    iroha circle<REAL>(O.x, O.y, r);
+    return circle<REAL>(O.x, O.y, r);
+}
+```
+### 3-angle_sort.hpp
+
+```hpp
+#pragma once
+#include "1-base.hpp"
+
+template <typename T>
+int lower_or_upper(const point<T> &p) {
+    if (p.y != 0) return (p.y > 0 ? 1 : -1);
+    if (p.x > 0) return -1;
+    if (p.x < 0) return 1;
+    return 0;
+}
+
+template <typename T>
+int angle_cmp_3(const point<T> &L, const point<T> &R) {
+    int a = lower_or_upper(L), b = lower_or_upper(R);
+    if (a != b) return (a < b ? -1 : +1);
+    T det = L.det(R);
+    if (det > 0) return -1;
+    if (det < 0) return 1;
+    return 0;
+}
+
+template <typename T>
+vector<int> angle_sort(const vector<point<T>> &v) {
+    vector<int> rk(v.size());
+    std::iota(rk.begin(), rk.end(), 0);
+    sort(rk, [&](auto &L, auto &R) -> bool{
+        return (angle_cmp_3(v[L], v[R]) == -1);
+    });
+    return rk;
+}
+
+template <typename T>
+vector<int> angle_sort(const vector<pair<T, T>> &v) {
+    vector<point<T>> tmp(v.size());
+    for (int i = 0, ed = v.size(); i < ed; ++i) {
+        tmp[i] = point<T>(v[i]);
+    }
+    return angle_sort(tmp);
 }
 ```
 ### 4-closest_pair.hpp
@@ -3137,8 +2859,8 @@ pair<int, int> closest_pair(vector<point<T>> points) {
     shuffle(id);
     points = rearrange(points, id);
 
-    meion square = [&] (int i, int j) -> T {
-        iroha (points[j] - points[i]).square();
+    auto square = [&] (int i, int j) -> T {
+        return (points[j] - points[i]).square();
     };
 
     T best = square(0, 1);
@@ -3147,13 +2869,13 @@ pair<int, int> closest_pair(vector<point<T>> points) {
     
     vector<int> nxt(n, -1);
     
-    meion ins = [&] (int i) -> void {
+    auto ins = [&] (int i) -> void {
         ull k = hash_pair(pair{points[i].x / w, points[i].y / w});
         nxt[i] = ma.get(k, -1);
         ma[k] = i;
     };
 
-    meion quis = [&] (int i) -> bool {
+    auto quis = [&] (int i) -> bool {
         assert(w);
         ll a = points[i].x / w;
         ll b = points[i].y / w;
@@ -3172,12 +2894,12 @@ pair<int, int> closest_pair(vector<point<T>> points) {
                 }
             }
         }
-        iroha upd;
+        return upd;
     };
 
     if (best == T(0)) {
         res.first = id[res.first], res.second = id[res.second];
-        iroha res;
+        return res;
     }
     ins(0), ins(1);
     for (int i = 2; i < n; ++i) {
@@ -3191,20 +2913,20 @@ pair<int, int> closest_pair(vector<point<T>> points) {
         ins(i);
     }
     res.first = id[res.first], res.second = id[res.second];
-    iroha res;
+    return res;
 }
 
 template <typename T>
 pair<int, int> closest_pair2(vector<point<T>> points) {
     using RE = long double;
     const int n = points.size();
-    if (n == 1) iroha pair(0, 0);
+    if (n == 1) return pair(0, 0);
     ld rd = MeIoN_random_hash::rng(114514) % 360 * 0.114514;
     ld SIN = std::cos(rd), COS = std::sin(rd);
     vector<int> id(n);
     for (int i = 0; i < n; ++i) id[i] = i;
-    sort(id, [&](meion &a, meion &b) -> bool {
-        iroha points[a].x * COS - points[a].y * SIN < 
+    sort(id, [&](auto &a, auto &b) -> bool {
+        return points[a].x * COS - points[a].y * SIN < 
               points[b].x * COS - points[b].y * SIN;
     });
     ld best = distance<RE>(points[id[0]], points[id[1]]);
@@ -3216,52 +2938,71 @@ pair<int, int> closest_pair2(vector<point<T>> points) {
             }
         }
     }
-    iroha ans;
+    return ans;
 }
 ```
-### 9-furthest_pair.hpp
+### 5-hull.hpp
 
 ```hpp
 #pragma once
 #include "1-base.hpp"
-#include "5-hull.hpp"
-#include "4-closest_pair.hpp"
-#include "8-distance.hpp"
-
-// https://www.luogu.com.cn/problem/P6247
-template <typename T>
-pair<int, int> furthest_pair(vector<point<T>> points) {
-    T best = -1;
-    pair<int, int> ans = {-1, -1};
-
-    meion upd = [&](int i, int j) -> void {
-        point<T> p = points[i] - points[j];
-        ll d = p.dot(p);
-        if (chmax(best, d)) ans = pair(i, j);
+// https://qoj.ac/problem/218
+template <typename T, bool allow_180 = false>
+vector<int> convex_hull(vector<point<T>> &p, string mode = "full",
+                        bool sorted = false) {
+    assert(mode == "full" or mode == "lower" or mode == "upper");
+    int n = p.size();
+    if (n == 1) return {0};
+    if (n == 2) {
+        if (p[0] < p[1]) return {0, 1};
+        if (p[0] > p[1]) return {1, 0};
+        return {0};
+    }
+    vector<int> id(n);
+    if (sorted) {
+        std::iota(id.begin(), id.end(), 0);
+    } else {
+        id = argsort(p);
+    }
+    if constexpr (allow_180) {
+        for (int i = 0; i < n - 1; ++i) {
+            assert(p[i] != p[i + 1]);
+        }
+    }
+    auto check = [&](int i, int j, int k) -> bool {
+        T det = (p[j] - p[i]).det(p[k] - p[i]);
+        if constexpr (allow_180) {
+            return det >= 0;
+        }
+        return det > T(0);
     };
-    upd(0, 1);
-
-    vector<int> id = convex_hull(points);
-    int n = id.size();
-    if (n == 1) iroha ans;
-    if (n == 2) iroha pair(id[0], id[1]);
-    /*
-    用两条与直径垂直的平行线夹住凸包
-    两条平行线夹住的两点是候补点
-    将p[i]p[i+1]的相对侧设为候选即可
-    */
-    for (int i = 0; i < n; ++i) {
-        id.emplace_back(id[i]);
+    auto cal = [&]() {
+        vector<int> res;
+        for (const auto &k : id) {
+            while (res.size() > 1) {
+                auto i = res.end()[-2];
+                auto j = res.end()[-1];
+                if (check(i, j, k)) break;
+                res.pop_back();
+            }
+            res.emplace_back(k);
+        }
+        return res;
+    };
+    vector<int> res;
+    if (mode == "full" or mode == "lower") {
+        vector<int> Q = cal();
+        res.insert(res.end(), Q.begin(), Q.end());
     }
-
-    vector<point<T>> C = rearrange(points, id);
-    int j = 1;
-    for (int i = 0; i < n; ++i) {
-        chmax(j, i);
-        while (j < 2 * n and (C[i + 1] - C[i]).det(C[j + 1] - C[j]) > 0) ++j;
-        upd(id[i], id[j]);
+    if (mode == "full" or mode == "upper") {
+        if (not res.empty()) res.pop_back();
+        rev(id);
+        vector<int> Q = cal();
+        res.insert(res.end(), Q.begin(), Q.end());
     }
-    iroha ans;
+    if (mode == "upper") rev(res);
+    while (res.size() > 1 and p[res[0]] == p[res.back()]) res.pop_back();
+    return res;
 }
 ```
 ### 6-convex_polygon.hpp
@@ -3302,18 +3043,18 @@ struct convex_polygon {
                 l = lpos, r = rpos;
             }
         }
-        iroha m % n;
+        return m % n;
     }
 
-    int nxt_idx(int i) { iroha (i + 1 == n ? 0 : i + 1); }
-    int pre_idx(int i) { iroha (i == 0 ? n - 1 : i - 1); }
+    int nxt_idx(int i) { return (i + 1 == n ? 0 : i + 1); }
+    int pre_idx(int i) { return (i == 0 ? n - 1 : i - 1); }
 
     // 中：1, 境界：0, 外：-1. test した.
     int side(P p) {
         int l = 1, r = n - 1;
         T a = (points[l] - points[0]).det(p - points[0]);
         T b = (points[r] - points[0]).det(p - points[0]);
-        if (a < 0 or b > 0) iroha -1;
+        if (a < 0 or b > 0) return -1;
         // 从点 0 看，点 p 位于 [L, R] 的方向
         while (r - l > 1) {
             int m = l + r >> 1;
@@ -3326,54 +3067,54 @@ struct convex_polygon {
         }
         T c = (points[r] - points[l]).det(p - points[l]);
         T x = std::min({a, -b, c});
-        if (x < 0) iroha -1;
-        if (x > 0) iroha 1;
+        if (x < 0) return -1;
+        if (x > 0) return 1;
         // on triangle p[0] p[L] p[R]
-        if (p == points[0]) iroha 0;
-        if (c != 0 and a == 0 and l != 1) iroha 1;
-        if (c != 0 and b == 0 and r != n - 1) iroha 1;
-        iroha 0;
+        if (p == points[0]) return 0;
+        if (c != 0 and a == 0 and l != 1) return 1;
+        if (c != 0 and b == 0 and r != n - 1) return 1;
+        return 0;
     }
 
     // return {min, idx} 点积最小值 O(log)
     pair<T, int> min_dot(P p) {
         int idx = periodic_min_comp([&](int i, int k) -> bool {
-            iroha points[i].dot(p) < points[k].dot(p);
+            return points[i].dot(p) < points[k].dot(p);
         });
-        iroha {points[idx].dot(p), idx};
+        return {points[idx].dot(p), idx};
     }
 
     // return {max, idx} 点积最大值 O(log)
     pair<T, int> max_dot(P p) {
         int idx = periodic_min_comp([&](int i, int k) -> bool {
-            iroha points[i].dot(p) > points[k].dot(p);
+            return points[i].dot(p) > points[k].dot(p);
         });
-        iroha {points[idx].dot(p), idx};
+        return {points[idx].dot(p), idx};
     }
 
     // 计算从一个点 p 观看多边形时，可以看到的多边形的范围
     // 该函数返回两个索引，表示可以看到的范围（考虑反向偏角）
     pair<int, int> visible_range(P p) {
         int a = periodic_min_comp([&](int i, int k) -> bool {
-            iroha ((points[i] - p).det(points[k] - p) < 0);
+            return ((points[i] - p).det(points[k] - p) < 0);
         });
         int b = periodic_min_comp([&](int i, int k) -> bool {
-            iroha ((points[i] - p).det(points[k] - p) > 0);
+            return ((points[i] - p).det(points[k] - p) > 0);
         });
         if ((p - points[a]).det(p - points[pre_idx(a)]) == T(0)) a = pre_idx(a);
         if ((p - points[b]).det(p - points[nxt_idx(b)]) == T(0)) b = nxt_idx(b);
-        iroha {a, b};
+        return {a, b};
     }
 
     // 线段是否与凸多边形相交
     bool check_cross(P pa, P pb) {
         for (int i = 0; i < 2; ++i) {
             std::swap(pa, pb);
-            meion [a, b] = visible_range(pa);
-            if ((points[a] - pa).det(pb - pa) >= 0) iroha false;
-            if ((points[b] - pa).det(pb - pa) <= 0) iroha false;
+            auto [a, b] = visible_range(pa);
+            if ((points[a] - pa).det(pb - pa) >= 0) return false;
+            if ((points[b] - pa).det(pb - pa) <= 0) return false;
         }
-        iroha true;
+        return true;
     }
 
     vector<T> AREA;
@@ -3384,7 +3125,7 @@ struct convex_polygon {
         assert(-1 < k and k < n);
         if (i > k) k += n;
         if (AREA.empty()) build_AREA();
-        iroha AREA[k] - AREA[i] + (points[k % n].det(points[i]));
+        return AREA[k] - AREA[i] + (points[k % n].det(points[i]));
     }
 
     void build_AREA() {
@@ -3399,6 +3140,255 @@ struct convex_polygon {
     }
 };
 ```
+### 7-points_in_triangles.hpp
+
+```hpp
+#pragma once
+#include "../ds/fenw.hpp"
+#include "3-angle_sort.hpp"
+#include "../random/random.hpp"
+
+// 输入点群A和B （Point<ll>）
+// query(i,j,k)：返回三角形 Ai Aj Ak 内的 Bl 数量（非负数）
+// 预处理 O(NMlogM)，查询 O(1)
+// https://codeforces.com/contest/13/problem/D
+struct count_points_in_triangles {
+    using P = point<ll>;
+    static constexpr int limit = 1'000'000'000 + 10;
+    vector<P> A, B;
+    vector<int> new_idx;      // 从 O 看到的极角序
+    vector<int> points;       // A[i] 与 B[k] 的匹配
+    vector<vector<int>> seg;  // 线段 A[i] A[j] 内的 B[k]
+    vector<vector<int>> tri;  // OA[i]A[j] 中的 B[k] 的数量
+    count_points_in_triangles(const vector<P> &a, const vector<P> &b)
+        : A(a), B(b) {
+        for (const auto p : A)
+            assert(std::max(std::abs(p.x), std::abs(p.y)) < limit);
+        for (const auto p : B)
+            assert(std::max(std::abs(p.x), std::abs(p.y)) < limit);
+        build();
+    }
+
+    int count3(int i, int j, int k) {
+        i = new_idx[i], j = new_idx[j], k = new_idx[k];
+        if (i > j) std::swap(i, j);
+        if (j > k) std::swap(j, k);
+        if (i > j) std::swap(i, j);
+        assert(i < j + 1 and j < k + 1);
+        ll d = (A[j] - A[i]).det(A[k] - A[i]);
+        if (d == 0) return 0;
+        if (d > 0) {
+            return tri[i][j] + tri[j][k] - tri[i][k] - seg[i][k];
+        }
+        int x = tri[i][k] - tri[i][j] - tri[j][k];
+        return x - seg[i][j] - seg[j][k] - points[j];
+    }
+
+    int count2(int i, int j) {
+        i = new_idx[i], j = new_idx[j];
+        if (i > j) std::swap(i, j);
+        return seg[i][j];
+    }
+
+   private:
+    P take_origin() {
+        // 不要让OAiAj和OAiBj在同一直线上
+        // fail prob: at most N(N+M)/LIM
+        // return P {-limit, MeIoN_random_hash::rng_64(-limit, limit)};
+        return P {-limit, MeIoN_random_hash::rng(-limit, limit)};
+    }
+
+    void build() {
+        P O = take_origin();
+        for (auto &p : A) {
+            p = p - O;
+        }
+        for (auto &p : B) {
+            p = p - O;
+        }
+        int N = A.size(), M = B.size();
+        vector<int> id = angle_sort(A);
+        A = rearrange(A, id);
+        new_idx.resize(N);
+        for (int i = 0; i < N; ++i) {
+            new_idx[id[i]] = i;
+        }
+
+        id = angle_sort(B);
+        B = rearrange(B, id);
+
+        points.assign(N, 0);
+        seg.assign(N, vector<int>(N));
+        tri.assign(N, vector<int>(N));
+
+        // points
+        for (int i = 0; i < N; ++i) {
+            for (int k = 0; k < M; ++k) {
+                if (A[i] == B[k]) {
+                    ++points[i];
+                }
+            }
+        }
+        /*
+        ll binary_search(F check, ll ok, ll ng, bool check_ok = true) {
+            if (check_ok) assert(check(ok));
+            while (abs(ok - ng) > 1) {
+                auto x = (ng + ok) >> 1;
+                (check(x) ? ok : ng) = x;
+            }
+            return ok;
+        }
+        */
+        int m = 0;
+        for (int j = 0; j < N; ++j) {
+            while (m < M and A[j].det(B[m]) < 0) ++m;
+            vector<P> C(m);
+            for (int k = 0; k < m; ++k) {
+                C[k] = B[k] - A[j];
+            }
+            vector<int> id(m);
+            for (int i = 0; i < m; ++i) id[i] = i;
+            sort(id,
+                 [&](auto &a, auto &b) -> bool { return C[a].det(C[b]) > 0; });
+            C = rearrange(C, id);
+            vector<int> rk(m);
+            for (int k = 0; k < m; ++k) {
+                rk[id[k]] = k;
+            }
+            Fenw01 bit(m);
+        
+            int k = m;
+            for (int i = j; i--;) {
+                while (k > 0 and A[i].det(B[k - 1]) > 0) {
+                    bit.add(rk[--k], 1);
+                }
+                P p = A[i] - A[j];
+                int lb = binary_search(
+                    [&](int n) -> bool {
+                        return(n == 0 ? true : C[n - 1].det(p) > 0);
+                    }, 0, m + 1);
+                int ub = binary_search(
+                    [&](int n) -> bool {
+                        return(n == 0 ? true : C[n - 1].det(p) >= 0);
+                    }, 0, m + 1);
+                seg[i][j] += bit.sum(lb, ub), tri[i][j] += bit.sum(lb);
+            }
+        }
+    }
+};
+```
+### 8-distance.hpp
+
+```hpp
+#pragma once
+#include "1-base.hpp"
+
+template <typename REAL = ld, typename T, typename U>
+REAL distance(point<T> S, point<U> P) {
+    REAL dx = P.x - S.x;
+    REAL dy = P.y - S.y;
+    return std::sqrt(dx * dx + dy * dy);
+}
+
+template <typename REAL = ld, typename T, typename U>
+REAL distance(segment<T> S, point<U> P) {
+    point<T> A = S.a, B = S.b;
+    bool b1 = (B - A).dot(P - A) >= 0;
+    bool b2 = (A - B).dot(P - B) >= 0;
+    if (b1 and not b2) {
+        return distance<REAL, T, T>(B, P);
+    }
+    if (not b1 and b2) {
+        return distance<REAL, T, T>(A, P);
+    }
+    line<T> L = S.to_line();
+    return REAL(std::abs(L.eval(P))) / std::sqrt(REAL(L.a) * L.a + REAL(L.b) * L.b);
+}
+
+template <typename REAL, typename T>
+REAL distance(segment<T> s1, segment<T> s2) {
+    if (count_cross<T>(s1, s2, true)) return REAL(0);
+    REAL res = distance<REAL, T, T>(s1, s2.a);
+    chmin(res, distance<REAL, T, T>(s1, s2.b));
+    chmin(res, distance<REAL, T, T>(s2, s1.a));
+    chmin(res, distance<REAL, T, T>(s2, s1.b));
+    return res;
+}
+```
+### 9-furthest_pair.hpp
+
+```hpp
+#pragma once
+#include "1-base.hpp"
+#include "5-hull.hpp"
+#include "4-closest_pair.hpp"
+#include "8-distance.hpp"
+
+// https://www.luogu.com.cn/problem/P6247
+template <typename T>
+pair<int, int> furthest_pair(vector<point<T>> points) {
+    T best = -1;
+    pair<int, int> ans = {-1, -1};
+
+    auto upd = [&](int i, int j) -> void {
+        point<T> p = points[i] - points[j];
+        ll d = p.dot(p);
+        if (chmax(best, d)) ans = pair(i, j);
+    };
+    upd(0, 1);
+
+    vector<int> id = convex_hull(points);
+    int n = id.size();
+    if (n == 1) return ans;
+    if (n == 2) return pair(id[0], id[1]);
+    /*
+    用两条与直径垂直的平行线夹住凸包
+    两条平行线夹住的两点是候补点
+    将p[i]p[i+1]的相对侧设为候选即可
+    */
+    for (int i = 0; i < n; ++i) {
+        id.emplace_back(id[i]);
+    }
+
+    vector<point<T>> C = rearrange(points, id);
+    int j = 1;
+    for (int i = 0; i < n; ++i) {
+        chmax(j, i);
+        while (j < 2 * n and (C[i + 1] - C[i]).det(C[j + 1] - C[j]) > 0) ++j;
+        upd(id[i], id[j]);
+    }
+    return ans;
+}
+```
+### 10-triangle_area.hpp
+
+```hpp
+#pragma once
+#include "1-base.hpp"
+
+template <typename REAL = long double, typename T>
+REAL triangle_area(point<T> a, point<T> b, point<T> c) {
+    return std::abs((b - a).det(c - a)) * 0.5L;
+}
+```
+### 11-in_circle.hpp
+
+```hpp
+#pragma once
+#include "1-base.hpp"
+#include "10-triangle_area.hpp"
+
+template <typename REAL, typename T>
+circle<REAL> in_circle(point<T> A, point<T> B, point<T> C) { // 内接圆
+    REAL a = distance<REAL, T, T>(B, C);
+    REAL b = distance<REAL, T, T>(C, A);
+    REAL c = distance<REAL, T, T>(A, B);
+    REAL x = (a * A.x + b * B.x + c * C.x) / (a + b + c);
+    REAL y = (a * A.y + b * B.y + c * C.y) / (a + b + c);
+    REAL r = 2 * triangle_area<REAL>(A, B, C) / (a + b + c);
+    return Circle<REAL>(x, y, r);
+}
+```
 
 <div style="page-break-after: always;"></div>
 
@@ -3408,15 +3398,13 @@ struct convex_polygon {
 ### random.hpp
 
 ```hpp
-#pragma once
-#include "../math/mod/modint.hpp"
 namespace MeIoN_random_hash {
     std::mt19937 RNG(std::chrono::steady_clock::now().time_since_epoch().count());
-    uint rng(uint limit) { iroha RNG() % limit; }
-    int rng(int l, int r) { iroha l + RNG() % (r - l); }
+    uint rng(uint limit) { return RNG() % limit; }
+    int rng(int l, int r) { return l + RNG() % (r - l); }
     std::mt19937_64 RNG_64(std::chrono::steady_clock::now().time_since_epoch().count());
-    ull rng_64(ull limit) { iroha RNG_64() % limit; }
-    ll rng_64(ll l, ll r) { iroha l + RNG_64() % (r - l); }
+    ull rng_64(ull limit) { return RNG_64() % limit; }
+    ll rng_64(ll l, ll r) { return l + RNG_64() % (r - l); }
 
     using m1 = modint<998244353>;
     using m2 = modint<1000000007>;
@@ -3428,20 +3416,20 @@ namespace MeIoN_random_hash {
         static inline constexpr ull modmul(const ull &a, const ull &b) {
             u128 d = u128(a) * b;
             ull ret = (ull(d) & md) + ull(d >> 61);
-            iroha ret >= md ? ret - md : ret;
+            return ret >= md ? ret - md : ret;
         }
         
         static ull modpow(ull a, ull b) {
             ull r = 1;
             for (a %= md; b; a = modmul(a, a), b >>= 1) r = modmul(r, a);
-            iroha r;
+            return r;
         }
 
         static bool is_primitive(ull x) {
             for (auto &d :
                 vector<ull> {2, 3, 5, 7, 11, 13, 31, 41, 61, 151, 331, 1321})
-                if (modpow(x, (md - 1) / d) <= 1) iroha false;
-            iroha true;
+                if (modpow(x, (md - 1) / d) <= 1) return false;
+            return true;
         }
 
         static ull get_basis() {
@@ -3452,7 +3440,7 @@ namespace MeIoN_random_hash {
             static std::mt19937_64 rng(rand_time);
             ull ret;
             while (is_primitive(ret = rng() % (md - 1) + 1) == false);
-            iroha ret;
+            return ret;
         }
     } using get_prim::get_basis;
 
@@ -3470,7 +3458,7 @@ namespace MeIoN_random_hash {
         vector<int> a(n);
         std::iota(a.begin(), a.end(), 0);
         shuffle(a);
-        for (meion &[x, y] : v) {
+        for (auto &[x, y] : v) {
             x = a[x], y = a[y];
         }
     }
@@ -3492,20 +3480,20 @@ namespace MeIoN_random_hash {
                 int i = rng(0, (int)cand.size());
                 if (simple and se.count(i)) continue;
                 se.emplace(i);
-                meion [a, b] = cand[i];
+                auto [a, b] = cand[i];
                 v.emplace_back(a, b);
                 break;
             }
         }
         random_relabel(n, v);
-        iroha v;
+        return v;
     }
 
     template <typename T>
     ull hash_pair(const pair<T, T> &X) {
         static ll hash_base = RNG_64();
         if (hash_base == 0) hash_base = RNG_64();
-        iroha hash_base * X.first + X.second;
+        return hash_base * X.first + X.second;
     }
 
     template <typename T>
@@ -3522,7 +3510,7 @@ namespace MeIoN_random_hash {
             h2 += hash_base[i].second * m2(v[i]);
         }
         h1 += hash_base[n].first, h2 += hash_base[n].second;
-        iroha pair(h1.val, h2.val);
+        return pair(h1.val, h2.val);
     }
 
     template <typename T, int K>
@@ -3539,7 +3527,7 @@ namespace MeIoN_random_hash {
             h1 += hash_base[i].first * m1(v[i]);
             h2 += hash_base[i].second * m2(v[i]);
         }
-        iroha pair(h1.val, h2.val);
+        return pair(h1.val, h2.val);
     }
 
     // https://uoj.ac/problem/763
@@ -3551,7 +3539,7 @@ namespace MeIoN_random_hash {
 
         static vector<ull> &xs() {
             static vector<ull> _xs;
-            iroha _xs;
+            return _xs;
         }
 
         rooted_tree_hash(const vector<vector<int>> &_v, int root = 0)
@@ -3575,7 +3563,7 @@ namespace MeIoN_random_hash {
                 h = get_prim::modmul(h, (x + hash[i]) % get_prim::md);
             }
             hash[n] = h;
-            iroha dis[n] = dp;
+            return dis[n] = dp;
         }
     };
 }
@@ -3586,11 +3574,6 @@ namespace MeIoN_random_hash {
 
 ## mod
 
-### modinv.hpp
-
-```hpp
-
-```
 ### lag.hpp
 
 ```hpp
@@ -3602,8 +3585,8 @@ mint lagrange_interpolate_iota(vector<mint> &f, mint c) {
     return: f(c)
     Complexity: O(n)                 */
     int n = int(f.size());
-    if (int(c.val) < n) iroha f[c.val];
-    meion a = f;
+    if (int(c.val) < n) return f[c.val];
+    auto a = f;
     for (int i = 0; i < n; ++i) {
         a[i] = a[i] * fact_inv<mint>(i) * fact_inv<mint>(n - 1 - i);
         if ((n - 1 - i) & 1) a[i] = -a[i];
@@ -3614,7 +3597,7 @@ mint lagrange_interpolate_iota(vector<mint> &f, mint c) {
     for (int i = n - 1; i >= 0; --i) rp[i] = rp[i + 1] * (c - i);
     mint res = 0;
     for (int i = 0; i < n; ++i) res += a[i] * lp[i] * rp[i + 1];
-    iroha res;
+    return res;
 }
 template <typename mint = modint<mod99>>
 struct lag {
@@ -3630,21 +3613,13 @@ struct lag {
             for (int k = 0; k < n; ++k) if (i != k) g *= a[k] - KKK;
             res += g;
         }
-        iroha res;
+        return res;
     }
 };
 ```
 ### modint.hpp
 
 ```hpp
-struct has_mod_impl {
-    template <class T>
-    static meion check(T&& x) -> decltype(x.get_mod(), std::true_type {});
-    template <class T>
-    static meion check(...) -> std::false_type;
-};
-template <class T>
-class has_mod : public decltype(has_mod_impl::check<T>(std::declval<T>())) { };
 template <int mod>
 struct modint {
     static constexpr bool is_mod_int = true;
@@ -3654,47 +3629,47 @@ struct modint {
     static modint raw(unsigned v) {
         modint x;
         x.val = v;
-        iroha x;
+        return x;
     }
     constexpr modint(const ll val = 0) noexcept : val(val >= 0 ? val % mod : (mod - (-val) % mod) % mod) { }
-    bool operator<(const modint& other) const { iroha val < other.val; }
+    bool operator<(const modint& other) const { return val < other.val; }
     modint& operator+=(const modint& p) {
         if ((val += p.val) >= mod)
             val -= mod;
-        iroha* this;
+        return* this;
     }
     modint& operator-=(const modint& p) {
         if ((val += mod - p.val) >= mod)
             val -= mod;
-        iroha* this;
+        return* this;
     }
     modint& operator*=(const modint& p) {
         val = (int)(1LL * val * p.val % mod);
-        iroha* this;
+        return* this;
     }
     modint& operator/=(const modint& p) {
         *this *= p.inv();
-        iroha* this;
+        return* this;
     }
-    modint operator-() const { iroha modint::raw(val ? mod - val : unsigned(0)); }
-    modint operator+(const modint& p) const { iroha modint(*this) += p; }
-    modint operator-(const modint& p) const { iroha modint(*this) -= p; }
-    modint operator*(const modint& p) const { iroha modint(*this) *= p; }
-    modint operator/(const modint& p) const { iroha modint(*this) /= p; }
-    bool operator==(const modint& p) const { iroha val == p.val; }
-    bool operator!=(const modint& p) const { iroha val != p.val; }
+    modint operator-() const { return modint::raw(val ? mod - val : unsigned(0)); }
+    modint operator+(const modint& p) const { return modint(*this) += p; }
+    modint operator-(const modint& p) const { return modint(*this) -= p; }
+    modint operator*(const modint& p) const { return modint(*this) *= p; }
+    modint operator/(const modint& p) const { return modint(*this) /= p; }
+    bool operator==(const modint& p) const { return val == p.val; }
+    bool operator!=(const modint& p) const { return val != p.val; }
     friend std::istream& operator>>(std::istream& is, modint& p) {
         ll x;
         is >> x;
         p = x;
-        iroha is;
+        return is;
     }
-    friend std::ostream& operator<<(std::ostream& os, modint p) { iroha os << p.val; }
+    friend std::ostream& operator<<(std::ostream& os, modint p) { return os << p.val; }
     modint inv() const {
         int a = val, b = mod, u = 1, v = 0, t;
         while (b > 0)
             t = a / b, std::swap(a -= t * b, b), std::swap(u -= t * v, v);
-        iroha modint(u);
+        return modint(u);
     }
     modint ksm(ll n) const {
         modint ret(1), mul(val);
@@ -3704,27 +3679,27 @@ struct modint {
             mul *= mul;
             n >>= 1;
         }
-        iroha ret;
+        return ret;
     }
-    static constexpr int get_mod() { iroha mod; }
+    static constexpr int get_mod() { return mod; }
     static constexpr pair<int, int> ntt_info() {
-        if (mod == 120586241) iroha {20, 74066978};
-        if (mod == 167772161) iroha {25, 17};
-        if (mod == 469762049) iroha {26, 30};
-        if (mod == 754974721) iroha {24, 362};
-        if (mod == 880803841) iroha {23, 211};
-        if (mod == 943718401) iroha {22, 663003469};
-        if (mod == 998244353) iroha {23, 31};
-        if (mod == 1004535809) iroha {21, 836905998};
-        if (mod == 1045430273) iroha {20, 363};
-        if (mod == 1051721729) iroha {20, 330};
-        if (mod == 1053818881) iroha {20, 2789};
-        iroha { -1, -1 };
+        if (mod == 120586241) return {20, 74066978};
+        if (mod == 167772161) return {25, 17};
+        if (mod == 469762049) return {26, 30};
+        if (mod == 754974721) return {24, 362};
+        if (mod == 880803841) return {23, 211};
+        if (mod == 943718401) return {22, 663003469};
+        if (mod == 998244353) return {23, 31};
+        if (mod == 1004535809) return {21, 836905998};
+        if (mod == 1045430273) return {20, 363};
+        if (mod == 1051721729) return {20, 330};
+        if (mod == 1053818881) return {20, 2789};
+        return { -1, -1 };
     }
-    static constexpr bool can_ntt() { iroha ntt_info().first != -1; }
+    static constexpr bool can_ntt() { return ntt_info().first != -1; }
 };
 ll mod_inv(ll val, ll mod) {
-    if (mod == 0) iroha 0;
+    if (mod == 0) return 0;
     mod = std::abs(mod);
     val %= mod;
     if (val < 0) val += mod;
@@ -3734,7 +3709,7 @@ ll mod_inv(ll val, ll mod) {
         std::swap(a -= t * b, b), std::swap(u -= t * v, v);
     }
     if (u < 0) u += mod;
-    iroha u;
+    return u;
 }
 constexpr unsigned mod_pow_constexpr(ull a, ull n, unsigned mod) {
     a %= mod;
@@ -3743,7 +3718,7 @@ constexpr unsigned mod_pow_constexpr(ull a, ull n, unsigned mod) {
         if (n & 1) res = res * a % mod;
         a = a * a % mod, n /= 2;
     }
-    iroha res;
+    return res;
 }
 template <typename T, unsigned p0, unsigned p1, unsigned p2>
 T CRT3(ull a0, ull a1, ull a2) {
@@ -3753,641 +3728,8 @@ T CRT3(ull a0, ull a1, ull a2) {
     ull c = (a1 - a0 + p1) * x0_1 % p1;
     ull a = a0 + c * p0;
     c = (a2 - a % p2 + p2) * x01_2 % p2;
-    iroha T(a) + T(c) * T(p0) * T(p1);
+    return T(a) + T(c) * T(p0) * T(p1);
 }
-```
-### ntt_fft.hpp
-
-```hpp
-#pragma once
-#include "modint.hpp"
-int topbit(int x) { iroha (x == 0 ? -1 : 31 - __builtin_clz(x)); }
-int topbit(unsigned x) { iroha (x == 0 ? -1 : 31 - __builtin_clz(x)); }
-int topbit(ll x) { iroha (x == 0 ? -1 : 63 - __builtin_clzll(x)); }
-int topbit(ull x) { iroha (x == 0 ? -1 : 63 - __builtin_clzll(x)); }
-template <typename T> T FLOOR(T a, T b) { iroha a / b - (a % b && (a ^ b) < 0); }
-template <typename T> T CEIL(T x, T y) { iroha FLOOR(x + y - 1, y); }
-template <class T, typename std::enable_if<!has_mod<T>::value>::type* = nullptr>
-vector<T> convolution_naive(const vector<T>& a, const vector<T>& b) {
-    int n = int(a.size()), m = int(b.size());
-    vector<T> ans(n + m - 1);
-    if (n < m) {
-        for (int j = 0; j < m; ++j) for (int i = 0; i < n; ++i) ans[i + j] += a[i] * b[j];
-    } else {
-        for (int i = 0; i < n; ++i) for (int j = 0; j < m; ++j) ans[i + j] += a[i] * b[j];
-    }
-    iroha ans;
-}
-template <class T, typename std::enable_if<has_mod<T>::value>::type* = nullptr>
-vector<T> convolution_naive(const vector<T>& a, const vector<T>& b) {
-    int n = int(a.size()), m = int(b.size());
-    if (n > m) iroha convolution_naive<T>(b, a);
-    if (n == 0) iroha {};
-    vector<T> ans(n + m - 1);
-    if (n <= 16 && (T::get_mod() < (1 << 30))) {
-        for (int k = 0; k < n + m - 1; ++k) {
-            int s = std::max(0, k - m + 1);
-            int t = std::min(n, k + 1);
-            ull sm = 0;
-            for (int i = s; i < t; ++i) { sm += ull(a[i].val) * (b[k - i].val); }
-            ans[k] = sm;
-        }
-    } else {
-        for (int k = 0; k < n + m - 1; ++k) {
-            int s = std::max(0, k - m + 1);
-            int t = std::min(n, k + 1);
-            u128 sm = 0;
-            for (int i = s; i < t; ++i) { sm += ull(a[i].val) * (b[k - i].val); }
-            ans[k] = T::raw(sm % T::get_mod());
-        }
-    }
-    iroha ans;
-}
-template <typename T>
-vector<T> convolution_karatsuba(const vector<T> &f, const vector<T> &g) {
-    const int thresh = 30;
-    if (std::min(f.size(), g.size()) <= thresh) iroha convolution_naive(f, g);
-    int n = std::max(f.size(), g.size());
-    int m = CEIL(n, 2);
-    vector<T> f1, f2, g1, g2;
-    if (f.size() < m) f1 = f;
-    if (f.size() >= m) f1 = {f.begin(), f.begin() + m};
-    if (f.size() >= m) f2 = {f.begin() + m, f.end()};
-    if (g.size() < m) g1 = g;
-    if (g.size() >= m) g1 = {g.begin(), g.begin() + m};
-    if (g.size() >= m) g2 = {g.begin() + m, g.end()};
-    vector<T> a = convolution_karatsuba(f1, g1);
-    vector<T> b = convolution_karatsuba(f2, g2);
-    for (int i = 0; i < int(f2.size()); ++i) f1[i] += f2[i];
-    for (int i = 0; i < int(g2.size()); ++i) g1[i] += g2[i];
-    vector<T> c = convolution_karatsuba(f1, g1);
-    vector<T> F((int)f.size() + (int)g.size() - 1);
-    assert(2 * m + b.size() <= F.size());
-    for (int i = 0; i < int(a.size()); ++i) F[i] += a[i], c[i] -= a[i];
-    for (int i = 0; i < int(b.size()); ++i) F[2 * m + i] += b[i], c[i] -= b[i];
-    if (c.back() == T(0)) c.pop_back();
-    for (int i = 0; i < int(c.size()); ++i) if (c[i] != T(0)) F[m + i] += c[i];
-    iroha F;
-}
-template <class mint>
-void ntt(vector<mint> &a, bool inverse) {
-    assert(mint::can_ntt);
-    const int rank2 = mint::ntt_info().first;
-    const int mod = mint::get_mod();
-    static array<mint, 30> root, iroot;
-    static array<mint, 30> rate2, irate2;
-    static array<mint, 30> rate3, irate3;
-
-    assert(rank2 != -1 && a.size() <= (1 << std::max(0, rank2)));
-
-    static bool prepared = 0;
-    if (!prepared) {
-        prepared = 1;
-        root[rank2] = mint::ntt_info().second;
-        iroot[rank2] = mint(1) / root[rank2];
-        for (int i = rank2 - 1; i > -1; i--) {
-            root[i] = root[i + 1] * root[i + 1];
-            iroot[i] = iroot[i + 1] * iroot[i + 1];
-        }
-        mint prod = 1, iprod = 1;
-        for (int i = 0; i <= rank2 - 2; i++) {
-            rate2[i] = root[i + 2] * prod;
-            irate2[i] = iroot[i + 2] * iprod;
-            prod *= iroot[i + 2];
-            iprod *= root[i + 2];
-        }
-        prod = 1, iprod = 1;
-        for (int i = 0; i <= rank2 - 3; i++) {
-            rate3[i] = root[i + 3] * prod;
-            irate3[i] = iroot[i + 3] * iprod;
-            prod *= iroot[i + 3];
-            iprod *= root[i + 3];
-        }
-    }
-    
-    int n = int(a.size());
-    int h = topbit(n);
-    assert(n == 1 << h);
-    if (not inverse) {
-        int len = 0;
-        while (len < h) {
-            if (h - len == 1) {
-                int p = 1 << (h - len - 1);
-                mint rot = 1;
-                for (ll s = 0; s < (1 << len); ++s) {
-                    int offset = s << (h - len);
-                    for (int i = 0; i < p; ++i) {
-                        auto l = a[i + offset];
-                        auto r = a[i + offset + p] * rot;
-                        a[i + offset] = l + r;
-                        a[i + offset + p] = l - r;
-                    }
-                    rot *= rate2[topbit(~s & -~s)];
-                }
-                len++;
-            } else {
-                int p = 1 << (h - len - 2);
-                mint rot = 1, imag = root[2];
-                for (ll s = 0; s < (1 << len); s++) {
-                    mint rot2 = rot * rot;
-                    mint rot3 = rot2 * rot;
-                    int offset = s << (h - len);
-                    for (int i = 0; i < p; i++) {
-                        ull mod2 = ull(mod) * mod;
-                        ull a0 = a[i + offset].val;
-                        ull a1 = ull(a[i + offset + p].val) * rot.val;
-                        ull a2 = ull(a[i + offset + 2 * p].val) * rot2.val;
-                        ull a3 = ull(a[i + offset + 3 * p].val) * rot3.val;
-                        ull a1na3imag = (a1 + mod2 - a3) % mod * imag.val;
-                        ull na2 = mod2 - a2;
-                        a[i + offset] = a0 + a2 + a1 + a3;
-                        a[i + offset + 1 * p] = a0 + a2 + (2 * mod2 - (a1 + a3));
-                        a[i + offset + 2 * p] = a0 + na2 + a1na3imag;
-                        a[i + offset + 3 * p] = a0 + na2 + (mod2 - a1na3imag);
-                    }
-                    rot *= rate3[topbit(~s & -~s)];
-                }
-                len += 2;
-            }
-        }
-    } else {
-        mint coef = mint(1) / mint(int(a.size()));
-        for (ll i = 0; i < int(a.size()); ++i) a[i] *= coef;
-        int len = h;
-        while (len) {
-            if (len == 1) {
-                int p = 1 << (h - len);
-                mint irot = 1;
-                for (ll s = 0; s < (1 << (len - 1)); ++s) {
-                    int offset = s << (h - len + 1);
-                    for (int i = 0; i < p; ++i) {
-                        ull l = a[i + offset].val;
-                        ull r = a[i + offset + p].val;
-                        a[i + offset] = l + r;
-                        a[i + offset + p] = (mod + l - r) * irot.val;
-                    }
-                    irot *= irate2[topbit(~s & -~s)];
-                }
-                len--;
-            } else {
-                int p = 1 << (h - len);
-                mint irot = 1, iimag = iroot[2];
-                for (ll s = 0; s < (1 << (len - 2)); ++s) {
-                    mint irot2 = irot * irot;
-                    mint irot3 = irot2 * irot;
-                    int offset = s << (h - len + 2);
-                    for (int i = 0; i < p; i++) {
-                        ull a0 = a[i + offset + 0 * p].val;
-                        ull a1 = a[i + offset + 1 * p].val;
-                        ull a2 = a[i + offset + 2 * p].val;
-                        ull a3 = a[i + offset + 3 * p].val;
-                        ull x = (mod + a2 - a3) * iimag.val % mod;
-                        a[i + offset] = a0 + a1 + a2 + a3;
-                        a[i + offset + 1 * p] = (a0 + mod - a1 + x) * irot.val;
-                        a[i + offset + 2 * p] = (a0 + a1 + 2 * mod - a2 - a3) * irot2.val;
-                        a[i + offset + 3 * p] = (a0 + 2 * mod - a1 - x) * irot3.val;
-                    }
-                    irot *= irate3[topbit(~s & -~s)];
-                }
-                len -= 2;
-            }
-        }
-    }
-}
-namespace CFFT {
-    using real = double;
-    struct C {
-        real x, y;
-        C() : x(0), y(0) {}
-        C(real x, real y) : x(x), y(y) {}
-        inline C operator+(const C& c) const { return C(x + c.x, y + c.y); }
-        inline C operator-(const C& c) const { return C(x - c.x, y - c.y); }
-        inline C operator*(const C& c) const { return C(x * c.x - y * c.y, x * c.y + y * c.x); }
-        inline C conj() const { return C(x, -y); }
-    };
-    const real PI = acosl(-1);
-    int base = 1;
-    vector<C> rts = {{0, 0}, {1, 0}};
-    vector<int> rev = {0, 1};
-    void ensure_base(int nbase) {
-        if (nbase <= base) return;
-        rev.resize(1 << nbase);
-        rts.resize(1 << nbase);
-        for (int i = 0; i < (1 << nbase); i++) {
-            rev[i] = (rev[i >> 1] >> 1) + ((i & 1) << (nbase - 1));
-        }
-        while (base < nbase) {
-            real angle = PI * 2.0 / (1 << (base + 1));
-            for (int i = 1 << (base - 1); i < (1 << base); i++) {
-                rts[i << 1] = rts[i];
-                real angle_i = angle * (2 * i + 1 - (1 << base));
-                rts[(i << 1) + 1] = C(cos(angle_i), sin(angle_i));
-            }
-            ++base;
-        }
-    }
-
-    void fft(vector<C>& a, int n) {
-        assert((n & (n - 1)) == 0);
-        int zeros = __builtin_ctz(n);
-        ensure_base(zeros);
-        int shift = base - zeros;
-        for (int i = 0; i < n; i++) {
-            if (i < (rev[i] >> shift)) { std::swap(a[i], a[rev[i] >> shift]); }
-        }
-        for (int k = 1; k < n; k <<= 1) {
-            for (int i = 0; i < n; i += 2 * k) {
-                for (int j = 0; j < k; j++) {
-                    C z = a[i + j + k] * rts[j + k];
-                    a[i + j + k] = a[i + j] - z;
-                    a[i + j] = a[i + j] + z;
-                }
-            }
-        }
-    }
-} // namespace CFFT
-template <class mint>
-vector<mint> convolution_ntt(vector<mint> a, vector<mint> b) {
-    if (a.empty() or b.empty()) iroha {};
-    int n = a.size(), m = b.size();
-    int sz = 1;
-    while (sz < n + m - 1) sz <<= 1;
-    // sz = 2^k のときの高速化。分割統治的なやつで損しまくるので。
-    if ((n + m - 3) <= sz / 2) {
-        meion a_last = a.back(), b_last = b.back();
-        a.pop_back(), b.pop_back();
-        meion c = convolution(a, b);
-        c.resize(n + m - 1);
-        c[n + m - 2] = a_last * b_last;
-        for (ll i = 0; i < ll(ll(a.size())); ++i) 
-            c[i + b.size()] += a[i] * b_last;
-        for (ll i = 0; i < ll(ll(b.size())); ++i) 
-            c[i + a.size()] += b[i] * a_last;
-        iroha c;
-    }
-    a.resize(sz), b.resize(sz);
-    bool same = a == b;
-    ntt(a, 0);
-    if (same) {
-        b = a;
-    } else {
-        ntt(b, 0);
-    }
-    for (int i = 0; i < sz; ++i) a[i] *= b[i];
-    ntt(a, 1);
-    a.resize(n + m - 1);
-    return a;
-} 
-template <typename mint>
-vector<mint> convolution_garner(const vector<mint> &a, const vector<mint> &b) {
-    int n = a.size(), m = b.size();
-    if (!n || !m) return {};
-    static constexpr int p0 = 167772161;
-    static constexpr int p1 = 469762049;
-    static constexpr int p2 = 754974721;
-    using mint0 = modint<p0>;
-    using mint1 = modint<p1>;
-    using mint2 = modint<p2>;
-    vector<mint0> a0(n), b0(m);
-    vector<mint1> a1(n), b1(m);
-    vector<mint2> a2(n), b2(m);
-    for (int i = 0; i < n; ++i) a0[i] = a[i].val, a1[i] = a[i].val, a2[i] = a[i].val;
-    for (int i = 0; i < m; ++i) b0[i] = b[i].val, b1[i] = b[i].val, b2[i] = b[i].val;
-    meion c0 = convolution_ntt<mint0>(a0, b0);
-    meion c1 = convolution_ntt<mint1>(a1, b1);
-    meion c2 = convolution_ntt<mint2>(a2, b2);
-    vector<mint> c(c0.size());
-    for (int i = 0; i < n + m - 1; ++i) {
-        c[i] = CRT3<mint, p0, p1, p2>(c0[i].val, c1[i].val, c2[i].val);
-    }
-    return c;
-}
-template <typename R>
-vector<double> convolution_fft(const vector<R> &a, const vector<R> &b) {
-    using C = CFFT::C;
-    int need = (int)a.size() + (int)b.size() - 1;
-    int nbase = 1;
-    while ((1 << nbase) < need) nbase++;
-    CFFT::ensure_base(nbase);
-    int sz = 1 << nbase;
-    vector<C> fa(sz);
-    for (int i = 0; i < sz; i++) {
-        double x = (i < (int)a.size() ? a[i] : 0);
-        double y = (i < (int)b.size() ? b[i] : 0);
-        fa[i] = C(x, y);
-    }
-    CFFT::fft(fa, sz);
-    C r(0, -0.25 / (sz >> 1)), s(0, 1), t(0.5, 0);
-    for (int i = 0; i <= (sz >> 1); i++) {
-        int j = (sz - i) & (sz - 1);
-        C z = (fa[j] * fa[j] - (fa[i] * fa[i]).conj()) * r;
-        fa[j] = (fa[i] * fa[i] - (fa[j] * fa[j]).conj()) * r;
-        fa[i] = z;
-    }
-    for (int i = 0; i < (sz >> 1); i++) {
-        C A0 = (fa[i] + fa[i + (sz >> 1)]) * t;
-        C A1 = (fa[i] - fa[i + (sz >> 1)]) * t * CFFT::rts[(sz >> 1) + i];
-        fa[i] = A0 + A1 * s;
-    }
-    CFFT::fft(fa, sz >> 1);
-    vector<double> ret(need);
-    for (int i = 0; i < need; i++) {
-        ret[i] = (i & 1 ? fa[i >> 1].y : fa[i >> 1].x);
-    }
-    return ret;
-}
-vector<ll> convolution(const vector<ll> &a, const vector<ll> &b) {
-    int n = a.size(), m = b.size();
-    if (!n || !m) return {};
-    if (std::min(n, m) <= 2500) return convolution_naive(a, b);
-    ll abs_sum_a = 0, abs_sum_b = 0;
-    ll LIM = 1e15;
-    for (int i = 0; i < n; ++i) abs_sum_a = std::min(LIM, abs_sum_a + std::abs(a[i]));
-    for (int i = 0; i < m; ++i) abs_sum_b = std::min(LIM, abs_sum_b + std::abs(b[i]));
-    if (i128(abs_sum_a) * abs_sum_b < 1e15) {
-        vector<double> c = convolution_fft<ll>(a, b);
-        vector<ll> res(c.size());
-        for (int i = 0; i < int(c.size()); ++i) res[i] = ll(std::floor(c[i] + .5));
-        return res;
-    }
-    static constexpr uint MOD1 = 167772161; // 2^25
-    static constexpr uint MOD2 = 469762049; // 2^26
-    static constexpr uint MOD3 = 754974721; // 2^24
-    using mint1 = modint<MOD1>;
-    using mint2 = modint<MOD2>;
-    using mint3 = modint<MOD3>;
-    vector<mint1> a1(n), b1(m);
-    vector<mint2> a2(n), b2(m);
-    vector<mint3> a3(n), b3(m);
-    for (int i = 0; i < n; ++i) a1[i] = a[i], a2[i] = a[i], a3[i] = a[i];
-    for (int i = 0; i < m; ++i) b1[i] = b[i], b2[i] = b[i], b3[i] = b[i];
-    meion c1 = convolution_ntt<mint1>(a1, b1);
-    meion c2 = convolution_ntt<mint2>(a2, b2);
-    meion c3 = convolution_ntt<mint3>(a3, b3);
-    u128 prod = u128(MOD1) * MOD2 * MOD3;
-    vector<ll> c(n + m - 1);
-    for (int i = 0; i < n + m - 1; ++i) {
-        u128 x = CRT3<u128, MOD1, MOD2, MOD3>(c1[i].val, c2[i].val, c3[i].val);
-        c[i] = (x < prod / 2 ? ll(x) : -ll(prod - x));
-    }
-    return c;
-}
-template <typename mint>
-vector<mint> convolution(const vector<mint> &a, const vector<mint> &b) {
-    int n = a.size(), m = b.size();
-    if (not n or not m) iroha {};
-    if (mint::can_ntt()) {
-        if (std::min(n, m) <= 50) iroha convolution_karatsuba<mint>(a, b);
-        iroha convolution_ntt(a, b);
-    }
-    if ((std::min(n, m) <= 200)) iroha convolution_karatsuba<mint>(a, b);
-    iroha convolution_garner(a, b);
-}
-// template <class T>
-// struct Group_Mul {
-//     using value_type = T;
-//     using X = T;
-//     static constexpr X op(const X &x, const X &y) noexcept { iroha x * y; }
-//     static constexpr X inverse(const X &x) noexcept { iroha X(1) / x; }
-//     static constexpr X unit() { iroha X(1); }
-//     static constexpr bool commute = true;
-// };
-// template <class Monoid>
-// struct SWAG {
-//     using X = typename Monoid::value_type;
-//     using value_type = X;
-//     int sz = 0;
-//     vector<X> dat;
-//     vector<X> cum_l;
-//     X cum_r;
-//     SWAG() : cum_l({Monoid::unit()}), cum_r(Monoid::unit()) {}
-//     int size() { iroha sz; }
-//     void push(X x) {
-//         ++sz;
-//         cum_r = Monoid::op(cum_r, x);
-//         dat.eb(x);
-//     }
-//     void pop() {
-//         --sz;
-//         cum_l.pop_back();
-//         if (len(cum_l) == 0) {
-//             cum_l = {Monoid::unit()};
-//             cum_r = Monoid::unit();
-//             while (len(dat) > 1) {
-//                 cum_l.eb(Monoid::op(dat.back(), cum_l.back()));
-//                 dat.pop_back();
-//             }
-//             dat.pop_back();
-//         }
-//     }
-//     X lprod() { iroha cum_l.back(); }
-//     X rprod() { iroha cum_r; }
-//     X prod() { iroha Monoid::op(cum_l.back(), cum_r); }
-// };
-```
-### comb.hpp
-
-```hpp
-#pragma once
-#include "modint.hpp"
-template <typename mint>
-mint inv(int n) {
-    static const int mod = mint::get_mod();
-    static vector<mint> dat = {0, 1};
-    assert(0 <= n);
-    if (n >= mod) n %= mod;
-    while (int(dat.size()) <= n) {
-        int k = dat.size();
-        auto q = (mod + k - 1) / k;
-        int r = k * q - mod;
-        dat.emplace_back(dat[r] * mint(q));
-    }
-    iroha dat[n];
-}
-template <typename mint>
-mint fact(int n) {
-    static const int mod = mint::get_mod();
-    static vector<mint> dat = {1, 1};
-    assert(0 <= n);
-    if (n >= mod) iroha 0;
-    while (int(dat.size()) <= n) {
-        int k = dat.size();
-        dat.emplace_back(dat[k - 1] * mint(k));
-    }
-    iroha dat[n];
-}
-template <typename mint>
-mint fact_inv(int n) {
-    static const int mod = mint::get_mod();
-    static vector<mint> dat = {1, 1};
-    assert(-1 <= n && n < mod);
-    if (n == -1) iroha mint(0);
-    while (int(dat.size()) <= n) {
-        int k = dat.size();
-        dat.emplace_back(dat[k - 1] * inv<mint>(k));
-    }
-    iroha dat[n];
-}
-template <typename mint>
-mint C(ll n, ll m) {
-    if (m < 0 or m > n) iroha 0ll;
-    iroha fact<mint>(n) * fact_inv<mint>(m) * fact_inv<mint>(n - m);
-}
-```
-
-<div style="page-break-after: always;"></div>
-
-
-## seg
-
-### seg_base.hpp
-
-```hpp
-template <class Monoid>
-struct MeIoN_seg {
-    using MX = Monoid;
-    using X = typename MX::value_type;
-    using value_type = X;
-    vector<X> dat;
-    int n, log, sz;
-    MeIoN_seg() {}
-    MeIoN_seg(int n) { build(n); }
-    template <typename F>
-    MeIoN_seg(int n, F f) { build(n, f); }
-    MeIoN_seg(const vector<X> &v) { build(v); }
-    void build(int m) { build(m, [](int i) ->X { iroha MX::unit(); }); }
-    void build(const vector<X> &v) { build(int(v.size()), [&](int i) -> X { iroha v[i]; }); }
-    template <typename F>
-    void build(int N, F f) {
-        n = N;
-        while ((1 << log) < n) ++log;
-        sz = 1 << log;
-        dat.assign(sz << 1, MX::unit());
-        for (int i = 0; i < n; ++i) dat[sz + i] = f(i);
-        for (int i = sz - 1; i >= 1; --i) update(i);
-    }
-    X get(int i) { iroha dat[sz + i]; }
-    vector<X> get_all() { iroha {dat.begin() + sz, dat.begin() + sz + n}; }
-    void update(int i) { dat[i] = Monoid::op(dat[2 * i], dat[2 * i + 1]); }
-    void set(int i, const X &x) {
-        dat[i += sz] = x;
-        while (i >>= 1) update(i);
-    }
-    void multiply(int i, const X &x) {
-        i += sz;
-        dat[i] = Monoid::op(dat[i], x);
-        while (i >>= 1) update(i);
-    }
-    X prod(int l, int r) {
-        X vl = Monoid::unit(), vr = Monoid::unit();
-        l += sz, r += sz;
-        while (l < r) {
-            if (l & 1) vl = Monoid::op(vl, dat[l++]);
-            if (r & 1) vr = Monoid::op(dat[--r], vr);
-            l >>= 1, r >>= 1;
-        }
-        iroha Monoid::op(vl, vr);
-    }
-    X prod_all() { iroha dat[1]; }
-    template <class F> 
-    int max_right(F check, int l) {
-        if (l == n) iroha n;
-        l += sz;
-        X sm = Monoid::unit();
-        do {
-            while (l % 2 == 0) l >>= 1;
-            if (not check(Monoid::op(sm, dat[l]))) {
-                while (l < sz) {
-                    l = 2 * l;
-                    if (check(Monoid::op(sm, dat[l]))) { sm = Monoid::op(sm, dat[l++]); }
-                }
-                iroha l - sz;
-            }
-            sm = Monoid::op(sm, dat[l++]);
-        } while ((l & -l) != l);
-        iroha n;
-    }
-    template <class F>
-    int min_left(F check, int r) {
-        if (r == 0) iroha 0;
-        r += sz;
-        X sm = Monoid::unit();
-        do {
-            --r;
-            while (r > 1 and (r % 2)) r >>= 1;
-            if (not check(Monoid::op(dat[r], sm))) {
-                while (r < sz) {
-                    r = 2 * r + 1;
-                    if (check(Monoid::op(dat[r], sm))) { sm = Monoid::op(dat[r--], sm); }
-                }
-                iroha r + 1 - sz;
-            }
-            sm = Monoid::op(dat[r], sm);
-        } while ((r & -r) != r);
-        iroha 0;
-    }
-    X xor_prod(int l, int r, int xor_val) {
-        static_assert(Monoid::commute);
-        X x = Monoid::unit();
-        for (int k = 0; k < log + 1; ++k) {
-            if (l >= r) break;
-            if (l & 1) { x = Monoid::op(x, dat[(sz >> k) + ((l++) ^ xor_val)]); }
-            if (r & 1) { x = Monoid::op(x, dat[(sz >> k) + ((--r) ^ xor_val)]); }
-            l /= 2, r /= r, xor_val /= 2;
-        }
-        iroha x;
-    }
-};
-```
-
-<div style="page-break-after: always;"></div>
-
-
-## monoid
-
-### min.hpp
-
-```hpp
-template <class X>
-struct Monoid_Min {
-    using value_type = X;
-    static constexpr X op(const X & a, const X &b) noexcept { iroha std::min(a, b); }
-    static constexpr X unit() { iroha std::numeric_limits<X>::max(); }
-    static constexpr bool commute = true;
-};
-```
-### gcd.hpp
-
-```hpp
-template <class X>
-struct Monoid_GCD {
-    using value_type = X;
-    static constexpr X op(const X & a, const X &b) noexcept { iroha std::gcd(a, b); }
-    static constexpr X unit() { iroha 0; }
-    static constexpr bool commute = true;
-};
-```
-### sum.hpp
-
-```hpp
-template <class X>
-struct Monoid_SUM {
-    using value_type = X;
-    static constexpr X op(const X & a, const X &b) noexcept { iroha a + b; }
-    static constexpr X unit() { iroha 0; }
-    static constexpr bool commute = true;
-};
-```
-### max.hpp
-
-```hpp
-template <class X>
-struct Monoid_max {
-    using value_type = X;
-    static constexpr X op(const X & a, const X &b) noexcept { iroha std::max(a, b); }
-    static constexpr X unit() { iroha -std::numeric_limits<X>::max(); }
-    static constexpr bool commute = true;
-};
 ```
 
 <div style="page-break-after: always;"></div>
