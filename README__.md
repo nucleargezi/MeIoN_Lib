@@ -1,3 +1,7 @@
+![img](https://img2023.cnblogs.com/blog/3444785/202410/3444785-20241025190703975-1276591202.png)
+
+<div style="page-break-after: always;"></div>
+
 # MeIoN's XCPC Template
 
 <style>
