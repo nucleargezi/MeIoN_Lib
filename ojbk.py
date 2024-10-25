@@ -4,7 +4,7 @@ newpage = "<div style=\"page-break-after: always;\"></div>"
 
 def generate_markdown():
     # 创建并打开 README.md 文件
-    with open("README.md", "w", encoding="utf-8") as md_file:
+    with open("README__.md", "w", encoding="utf-8") as md_file:
         # 写入一级标题
         md_file.write("# Template\n\n")
         
