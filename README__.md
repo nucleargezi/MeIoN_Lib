@@ -13,29 +13,33 @@ h3 { page-break-before: avoid; }
     - [LTT.hpp](#ltthpp)
     - [unrooted\_tree\_hash.hpp](#unrooted_tree_hashhpp)
     - [LCA.hpp](#lcahpp)
+    - [最小斯坦纳树](#最小斯坦纳树)
   - [flow](#flow)
     - [max\_flow.hpp](#max_flowhpp)
   - [math](#math)
     - [prims\_set.hpp](#prims_sethpp)
     - [sieve.hpp](#sievehpp)
     - [mat.hpp](#mathpp)
-    - [Big\_int.hpp](#big_inthpp)
     - [exgcd.hpp](#exgcdhpp)
   - [ds](#ds)
+    - [Mo](#mo)
+    - [rollback mo](#rollback-mo)
     - [chothlly.hpp](#chothllyhpp)
     - [splay.hpp](#splayhpp)
     - [dsu.hpp](#dsuhpp)
     - [bit\_vec.hpp](#bit_vechpp)
-    - [rollback\_array.hpp](#rollback_arrayhpp)
     - [hashmap.hpp](#hashmaphpp)
     - [LinearBasis.hpp](#linearbasishpp)
     - [fenw.hpp](#fenwhpp)
     - [st\_table.hpp](#st_tablehpp)
+    - [rollback\_array.hpp](#rollback_arrayhpp)
     - [rollback\_dsu.hpp](#rollback_dsuhpp)
     - [heap.hpp](#heaphpp)
     - [Wavelet\_Matrix.hpp](#wavelet_matrixhpp)
   - [graph](#graph)
     - [2\_sat.hpp](#2_sathpp)
+    - [三元环计数](#三元环计数)
+    - [最大团](#最大团)
   - [string](#string)
     - [SA.hpp](#sahpp)
     - [hash.hpp](#hashhpp)
@@ -44,6 +48,7 @@ h3 { page-break-before: avoid; }
     - [acam.hpp](#acamhpp)
     - [manache.hpp](#manachehpp)
   - [geo](#geo)
+    - [EUL](#eul)
     - [1-base.hpp](#1-basehpp)
     - [2-apollonian\_circle.hpp](#2-apollonian_circlehpp)
     - [3-angle\_sort.hpp](#3-angle_sorthpp)
@@ -60,6 +65,9 @@ h3 { page-break-before: avoid; }
   - [mod](#mod)
     - [lag.hpp](#laghpp)
     - [modint.hpp](#modinthpp)
+  - [other](#other)
+    - [快速取模 998244353](#快速取模-998244353)
+    - [date\_time](#date_time)
 
 
 
@@ -68,7 +76,7 @@ h3 { page-break-before: avoid; }
 
 ### centroid.hpp
 
-```hpp
+```cpp
 vector<int> centroid(const vector<vector<int>> &v) {
     const int n = (int)v.size();
     vector<pair<int, int>> st;
@@ -115,7 +123,7 @@ vector<int> centroid(const vector<vector<int>> &v) {
 ```
 ### LTT.hpp
 
-```hpp
+```cpp
 vector<int> get_fa(const vector<vector<int>> &v, int s) {
     int n = v.size();
     vector<int> pos(n, -1), p, label(n), dom(n), sdom(n), dsu(n), par(n);
@@ -174,7 +182,7 @@ vector<int> get_fa(const vector<vector<int>> &v, int s) {
 ```
 ### unrooted_tree_hash.hpp
 
-```hpp
+```cpp
 #pragma once
 
 #include "centroid.hpp"
@@ -195,7 +203,7 @@ vector<ull> unrooted_tree_hash(const vector<vector<int>> &v) {
 ```
 ### LCA.hpp
 
-```hpp
+```cpp
 template <const int N> struct LCA {
 public:
     LCA (vector<vector<int>> _v, int rt) : 
@@ -231,6 +239,53 @@ private:
 };
 ```
 
+### 最小斯坦纳树
+```cpp
+std::cin >> n >> m >> k;
+vector<vector<pair<int, int>>> v(n + 1);
+for (int i = 0, l, r, w; i < m; ++i) {
+    std::cin >> l >> r >> w;
+    v[l].emplace_back(r, w);
+    v[r].emplace_back(l, w);
+}
+array<array<int, 101>, 1 << 11> dp;
+for (meion &v : dp) v.fill(INT_MAX);
+vector<int> S(k);
+for (int c = 0; meion & i : S) {
+    std::cin >> i;
+    dp[1 << c++][i] = 0;
+}
+r_pir_que<pair<int, int>> q;
+meion dij = [&](int BE) {
+    while (not q.empty()) {
+        int n = q.top().second;
+        q.pop();
+        for (const meion & [ i, w ] : v[n]) {
+            if (dp[BE][i] > dp[BE][n] + w) {
+                dp[BE][i] = dp[BE][n] + w;
+                q.emplace(dp[BE][i], i);
+            }
+        }
+        while (not q.empty() and q.top().first != dp[BE][q.top().second])
+            q.pop();
+    }
+};
+for (int i = 1; i < 1 << k; ++i) {
+    for (int k = 1; k <= n; ++k) {
+        for (int j = i & (i - 1); j; j = i & (j - 1)) {
+            dp[i][k] = std::min(dp[i][k], dp[j][k] + dp[i ^ j][k]);
+        }
+        if (dp[i][k] < INT_MAX) q.emplace(dp[i][k], k);
+    }
+    dij(i);
+}
+int ans = INT_MAX;
+for (int i = 1; i <= n; ++i) {
+    ans = std::min(ans, dp[(1 << k) - 1][i]);
+}
+std::cout << ans << '\n';
+```
+
 <div style="page-break-after: always;"></div>
 
 
@@ -238,7 +293,7 @@ private:
 
 ### max_flow.hpp
 
-```hpp
+```cpp
 namespace FL {
     using flowt = long long;
     constexpr int inf = 0x20202020;
@@ -306,7 +361,7 @@ namespace FL {
 
 ### prims_set.hpp
 
-```hpp
+```cpp
 struct m64 {
     using i64 = long long;
     using u64 = unsigned long long;
@@ -435,7 +490,7 @@ vector<pair<ll, int>> factor_by_lpf(ll n, vector<int>& lpf) {
 ```
 ### sieve.hpp
 
-```hpp
+```cpp
 vector<int> minp, primes;
 void sieve(int n) {
     minp.assign(n + 1, 0);
@@ -459,7 +514,7 @@ void sieve(int n) {
 ```
 ### mat.hpp
 
-```hpp
+```cpp
 template <class mint, ull n>
 struct MT : array<array<mint, n>, n> {
     MT(int x = 0, int y = 0) { 
@@ -530,733 +585,9 @@ struct MT : array<array<mint, n>, n> {
     }
 };
 ```
-### Big_int.hpp
-
-```hpp
-namespace BGI {
-    class ZeroDivisionError : public std::exception {
-    public:
-        const char* what() const throw() {return "BigInteger::divmod";}
-    };
-    class FFTLimitExceededError : public std::exception {
-    public:
-        const char* what() const throw() {return "BigInteger::fft_mul";}
-    };
-
-    class BigInteger {
-    protected:
-        using digit_t = long long;
-        
-        static constexpr int WIDTH = 8;
-        static constexpr digit_t BASE = 1e8;
-        static constexpr long long FFT_LIMIT = 512;
-        static constexpr long long NEWTON_LIMIT = 512;
-        static constexpr long long NEWTON_MIN_LEVEL = 16;
-        
-        digit_t* digits;
-        int capacity, size;
-        bool flag;
-        
-        inline void push(const digit_t&);
-        inline void pop();
-        
-        inline int compare(const BigInteger&) const;	
-        
-        static inline BigInteger fft_mul(const BigInteger&, const BigInteger&);
-        
-        inline BigInteger move_l(int) const;
-        inline BigInteger move_r(int) const;
-        BigInteger newton_inv(int) const;
-        inline std::pair<BigInteger, BigInteger> newton_div(const BigInteger&) const;
-        
-        template <class F>
-        inline static BigInteger binary_op_helper(const BigInteger&, const BigInteger&, const F&);
-        
-    public:
-        inline void reserve(const int&);
-    protected:
-        inline void resize(const int&);
-        
-    public:
-        BigInteger() : digits(nullptr), flag(true) {*this = 0;}
-        
-        BigInteger(const BigInteger& x) : digits(nullptr) {*this = x;}
-        BigInteger(const long long& x) : digits(nullptr) {*this = x;}
-        BigInteger(const std::string& s) : digits(nullptr) {*this = s;}
-        BigInteger(const std::vector<bool>& b) : digits(nullptr) {*this = b;}
-        template <class BoolIt>
-        BigInteger(const BoolIt& begin, const BoolIt& end) : digits(nullptr) 
-        {*this = std::vector<bool>(begin, end);}
-        
-        BigInteger& operator= (const BigInteger&);
-        BigInteger& operator= (const long long&);
-        BigInteger& operator= (const std::string&);
-        BigInteger& operator= (const std::vector<bool>&);
-        
-        void clear();
-        ~BigInteger() {clear();}
-        
-        friend std::ostream& operator<< (std::ostream& out, const BigInteger& x) {
-            if (!x.flag) out << '-';
-            out << (long long) x.digits[x.size];
-            for (int i = x.size - 1; i >= 1; i--) 
-                out << std::setw(WIDTH) << std::setfill('0') << (long long) x.digits[i];
-            return out;
-        }
-        friend std::istream& operator>> (std::istream& in, BigInteger& x) {
-            std::string s; in >> s; x = s; 
-            return in;
-        }
-        
-        std::string to_string() const;
-        long long to_long_long() const;
-        std::vector<bool> to_binary() const;
-        
-        BigInteger operator- () const;
-        BigInteger abs() const;
-        
-        bool operator== (const BigInteger&) const; 
-    #if __cplusplus >= 202002L
-        auto operator<=> (const BigInteger&) const;
-    #else
-        bool operator< (const BigInteger&) const;
-        bool operator> (const BigInteger&) const; 
-        bool operator!= (const BigInteger&) const;
-        bool operator<= (const BigInteger&) const;
-        bool operator>= (const BigInteger&) const;
-    #endif //__cplusplus >= 202002L
-        
-        BigInteger div2() const;
-        std::pair<BigInteger, BigInteger> divmod(const BigInteger&, bool = false) const;
-        
-        BigInteger operator+ (const BigInteger&) const;
-        BigInteger operator- (const BigInteger&) const;
-        BigInteger operator* (const int&) const;
-        BigInteger operator* (const BigInteger&) const;
-        BigInteger operator/ (const long long&) const;
-        BigInteger operator/ (const BigInteger&) const;
-        BigInteger operator% (const long long&) const;
-        BigInteger operator% (const BigInteger&) const;
-        
-        BigInteger pow(const long long&) const;
-        BigInteger pow(const long long&, const BigInteger&) const;
-        
-        BigInteger root(const long long& = 2) const;
-        
-        BigInteger gcd(const BigInteger&) const;
-        BigInteger lcm(const BigInteger&) const;
-        
-        BigInteger& operator+= (const BigInteger&);
-        BigInteger& operator-= (const BigInteger&);
-        BigInteger& operator*= (int);
-        BigInteger& operator*= (const BigInteger&);
-        BigInteger& operator/= (const long long&);
-        BigInteger& operator/= (const BigInteger&);
-        BigInteger& operator%= (const long long&);
-        BigInteger& operator%= (const BigInteger&);
-        
-        BigInteger operator<< (const long long&);
-        BigInteger operator>> (const long long&);
-        BigInteger& operator<<= (const long long&);
-        BigInteger& operator>>= (const long long&);
-        
-        BigInteger operator& (const BigInteger&);
-        BigInteger operator| (const BigInteger&);
-        BigInteger operator^ (const BigInteger&);
-        BigInteger& operator&= (const BigInteger&);
-        BigInteger& operator|= (const BigInteger&);
-        BigInteger& operator^= (const BigInteger&);
-        
-        BigInteger& operator++ ();
-        BigInteger operator++ (int);
-        BigInteger& operator-- ();
-        BigInteger operator-- (int);
-    };
-
-    inline void BigInteger::push(const digit_t& val) {
-        if (size == capacity) {
-            int new_capacity = 0;
-            if (capacity < 1000) new_capacity = capacity << 1;
-            else new_capacity = (capacity >> 1) * 3;
-            if (new_capacity < 0) new_capacity = __INT_MAX__;
-            digit_t* new_digits = new digit_t[new_capacity + 1];
-            std::memcpy(new_digits, digits, sizeof(long long) * (capacity + 1));
-            delete[] digits;
-            digits = new_digits, capacity = new_capacity;
-        }
-        digits[++size] = val;
-    }
-    inline void BigInteger::pop() {digits[size--] = 0;}
-
-    inline int BigInteger::compare(const BigInteger& x) const {
-        if (flag && !x.flag) return 1;
-        if (!flag && x.flag) return -1;
-        
-        int sgn = (flag && x.flag ? 1 : -1);
-        if (size > x.size) return sgn;
-        if (size < x.size) return -sgn;
-        
-        for (int i = size; i >= 1; i--) {
-            if (digits[i] > x.digits[i]) return sgn;
-            if (digits[i] < x.digits[i]) return -sgn;
-        }
-        return 0;
-    }
-
-    inline void BigInteger::reserve(const int& sz) {
-        if (sz < 0) return;
-        if (digits != nullptr) delete[] digits;
-        capacity = sz, size = 0;
-        digits = new digit_t[sz + 1];
-        std::memset(digits, 0, sizeof(digit_t) * (sz + 1));
-    }
-    inline void BigInteger::resize(const int& sz) {reserve(sz), size = sz;}
-
-    BigInteger& BigInteger::operator= (const BigInteger& x) {
-        reserve(x.size + 1);
-        flag = x.flag, size = x.size;
-        std::memcpy(digits, x.digits, sizeof(digit_t) * (x.size + 1));
-        return *this;
-    }
-    BigInteger& BigInteger::operator= (const long long& x) {
-        flag = (x >= 0), reserve(4);
-        if (x == 0) return size = 1, digits[1] = 0, *this;
-        if (x == (-9223372036854775807ll - 1)) return *this = "-9223372036854775808";
-        long long n = std::abs(x);
-        do {push(n % BASE), n /= BASE;} while (n);
-        return *this;
-    }
-    BigInteger& BigInteger::operator= (const std::string& s) {
-        flag = true, reserve(s.size() / WIDTH + 1);
-        if (s.empty() || s == "-") return *this = 0;
-        int i = 0; if (s[0] == '-') flag = false, i++;
-        for (int j = s.size() - 1; j >= i; j -= WIDTH) {
-            int start = std::max(i, j - WIDTH + 1), len = j - start + 1;
-            push(std::stoll(s.substr(start, len)));
-        }
-        return *this;
-    }
-
-    BigInteger& BigInteger::operator= (const std::vector<bool>& b) {
-        *this = 0;
-        if (b.empty() || (b.size() == 1 && b[0] == 0)) return *this;
-        BigInteger pow2 = 1;
-        for (int i = b.size() - 1; i >= 0; i--, pow2 += pow2) if (b[i]) *this += pow2;
-        return *this;
-    }
-
-    void BigInteger::clear() {if (digits != nullptr) delete[] digits, digits = nullptr;}
-
-    std::string BigInteger::to_string() const {std::stringstream ss; ss << *this; return ss.str();}
-    long long BigInteger::to_long_long() const {return std::stoll(to_string());}
-    std::vector<bool> BigInteger::to_binary() const {
-        if (*this == 0) return {0};
-        std::vector<bool> res;
-        for (BigInteger x = *this; x != 0; x = x.div2()) res.emplace_back(x.digits[1] & 1);
-        std::reverse(res.begin(), res.end());
-        return res;
-    };
-
-    BigInteger BigInteger::operator- () const {
-        if (*this == 0) return 0;
-        BigInteger res = *this; res.flag = !flag; return res;
-    }
-    BigInteger BigInteger::abs() const {BigInteger res = *this; res.flag = true; return res;}
-
-    bool BigInteger::operator== (const BigInteger& x) const {return compare(x) == 0;}
-    #if __cplusplus >= 202002L
-    auto BigInteger::operator<=> (const BigInteger& x) const {return compare(x);}
-    #else
-    bool BigInteger::operator< (const BigInteger& x) const {return compare(x) < 0;}
-    bool BigInteger::operator> (const BigInteger& x) const {return compare(x) > 0;}
-    bool BigInteger::operator!= (const BigInteger& x) const {return compare(x) != 0;}
-    bool BigInteger::operator<= (const BigInteger& x) const {return compare(x) <= 0;}
-    bool BigInteger::operator>= (const BigInteger& x) const {return compare(x) >= 0;}
-    #endif //__cplusplus >= 202002L
-
-    BigInteger BigInteger::operator+ (const BigInteger& x) const {
-        if (!x.flag) return *this - x.abs();
-        if (!flag) return x - abs();
-        
-        BigInteger res; 
-        res.flag = !(flag ^ x.flag);
-        int n = std::max(size, x.size) + 1;
-        res.reserve(n);
-        digit_t carry = 0;
-        for (int i = 1; i <= n; i++) {
-            digit_t d1 = i <= size ? digits[i] : 0, d2 = i <= x.size ? x.digits[i] : 0;
-            res.push(d1 + d2 + carry);
-            carry = res.digits[i] / BASE;
-            res.digits[i] %= BASE;
-        }
-        while (res.size > 1 && res.digits[res.size] == 0) res.pop();
-        return res;
-    }
-    BigInteger BigInteger::operator- (const BigInteger& x) const {
-        if (!x.flag) return *this + x.abs();
-        if (!flag) return -(abs() + x);
-        BigInteger res;
-        if (*this < x) res.flag = false;
-        digit_t carry = 0;
-        int n = std::max(size, x.size);
-        res.reserve(n);
-        for (int i = 1; i <= n; i++) {
-            digit_t d1 = i <= size ? digits[i] : 0, d2 = i <= x.size ? x.digits[i] : 0;
-            if (res.flag) res.push(d1 - d2 - carry);
-            else res.push(d2 - d1 - carry);
-            if (res.digits[i] < 0) res.digits[i] += BASE, carry = 1;
-            else carry = 0;
-        }
-        while (res.size > 1 && res.digits[res.size] == 0) res.pop();
-        return res;
-    }
-
-    namespace __FFT {
-        constexpr long long FFT_BASE = 1e4;
-        constexpr double PI2 = 6.283185307179586231995927;
-        constexpr double PI6 = 18.84955592153875869598778;
-        
-        constexpr int RECALC_WIDTH = 10;
-        constexpr int RECALC_BASE = (1 << RECALC_WIDTH) - 1;
-        
-        struct complex {
-            double real, imag;
-            
-            complex(double x = 0.0, double y = 0.0) : real(x), imag(y) {}
-            
-            complex operator+ (const complex& other) const {return complex(real + other.real, imag + other.imag);}
-            complex operator- (const complex& other) const {return complex(real - other.real, imag - other.imag);}
-            complex operator* (const complex& other) const {return complex(real * other.real - imag * other.imag, real * other.imag + other.real * imag);}
-            
-            complex& operator+= (const complex& other) {return real += other.real, imag += other.imag, *this;}
-            complex& operator-= (const complex& other) {return real -= other.real, imag -= other.imag, *this;}
-            complex& operator*= (const complex& other) {return *this = *this * other;}
-        };
-        
-        complex* arr = nullptr;
-        
-        inline void init(int n) {
-            if (arr != nullptr) delete[] arr, arr = nullptr;
-            arr = new complex[n + 1];
-        }
-        
-        template <const int n> 
-        inline void fft(complex* a) {
-            const int n2 = n >> 1, n4 = n >> 2;
-            complex w(1.0, 0.0), w3(1.0, 0.0);
-            const complex wn(std::cos(PI2 / n), std::sin(PI2 / n)), wn3(std::cos(PI6 / n), std::sin(PI6 / n));
-            for (int i = 0; i < n4; i++, w *= wn, w3 *= wn3) {
-                if (!(i & RECALC_BASE)) w = complex(std::cos(PI2 * i / n), std::sin(PI2 * i / n)), w3 = w * w * w;
-                complex x = a[i] - a[i + n2], y = a[i + n4] - a[i + n2 + n4];
-                y = complex(y.imag, -y.real);
-                a[i] += a[i + n2], a[i + n4] += a[i + n2 + n4];
-                a[i + n2] = (x - y) * w, a[i + n2 + n4] = (x + y) * w3;
-            }
-            fft<n2>(a), fft<n4>(a + n2), fft<n4>(a + n2 + n4);
-        }
-        template <> inline void fft<1>(complex* a) {}
-        template <> inline void fft<0>(complex* a) {}
-        template <> inline void fft<2>(complex* a) {
-            complex x = a[0], y = a[1];
-            a[0] += y, a[1] = x - y;
-        }
-        template <> inline void fft<4>(complex* a) {
-            complex a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3];
-            complex x = a0 - a2, y = a1 - a3;
-            y = complex(y.imag, -y.real);
-            a[0] += a2, a[1] += a3, a[2] = x - y, a[3] = x + y;
-            fft<2>(a);
-        }
-        
-        template <const int n> 
-        inline void ifft(complex* a) {
-            const int n2 = n >> 1, n4 = n >> 2;
-            ifft<n2>(a), ifft<n4>(a + n2), ifft<n4>(a + n2 + n4);
-            complex w(1.0, 0.0), w3(1.0, 0.0);
-            const complex wn(std::cos(PI2 / n), -std::sin(PI2 / n)), wn3(std::cos(PI6 / n), -std::sin(PI6 / n));
-            for (int i = 0; i < n4; i++, w *= wn, w3 *= wn3) {
-                if (!(i & RECALC_BASE)) w = complex(std::cos(PI2 * i / n), -std::sin(PI2 * i / n)), w3 = w * w * w;
-                complex p = w * a[i + n2], q = w3 * a[i + n2 + n4];
-                complex x = a[i], y = p + q, x1 = a[i + n4], y1 = p - q;
-                y1 = complex(y1.imag, -y1.real);
-                a[i] += y, a[i + n4] += y1, a[i + n2] = x - y, a[i + n2 + n4] = x1 - y1;
-            }
-        }
-        template <> inline void ifft<1>(complex* a) {}
-        template <> inline void ifft<0>(complex* a) {}
-        template <> inline void ifft<2>(complex* a) {
-            complex x = a[0], y = a[1];
-            a[0] += y, a[1] = x - y;
-        }
-        template <> inline void ifft<4>(complex* a) {
-            ifft<2>(a);
-            complex p = a[2], q = a[3];
-            complex x = a[0], y = p + q, x1 = a[1], y1 = p - q;
-            y1 = complex(y1.imag, -y1.real);
-            a[0] += y, a[1] += y1, a[2] = x - y, a[3] = x1 - y1;
-        }
-        
-        inline void dft(complex* a, int n) {
-            if (n <= 1) return;
-            switch (n) {
-                case 1 << 2: fft<1 << 2>(a); break;
-                case 1 << 3: fft<1 << 3>(a); break;
-                case 1 << 4: fft<1 << 4>(a); break;
-                case 1 << 5: fft<1 << 5>(a); break;
-                case 1 << 6: fft<1 << 6>(a); break;
-                case 1 << 7: fft<1 << 7>(a); break;
-                case 1 << 8: fft<1 << 8>(a); break;
-                case 1 << 9: fft<1 << 9>(a); break;
-                case 1 << 10: fft<1 << 10>(a); break;
-                case 1 << 11: fft<1 << 11>(a); break;
-                case 1 << 12: fft<1 << 12>(a); break;
-                case 1 << 13: fft<1 << 13>(a); break;
-                case 1 << 14: fft<1 << 14>(a); break;
-                case 1 << 15: fft<1 << 15>(a); break;
-                case 1 << 16: fft<1 << 16>(a); break;
-                case 1 << 17: fft<1 << 17>(a); break;
-                case 1 << 18: fft<1 << 18>(a); break;
-                case 1 << 19: fft<1 << 19>(a); break;
-                case 1 << 20: fft<1 << 20>(a); break;
-                case 1 << 21: fft<1 << 21>(a); break;
-                case 1 << 22: fft<1 << 22>(a); break;
-                case 1 << 23: fft<1 << 23>(a); break;
-                case 1 << 24: fft<1 << 24>(a); break;
-                case 1 << 25: fft<1 << 25>(a); break;
-                case 1 << 26: fft<1 << 26>(a); break;
-                case 1 << 27: fft<1 << 27>(a); break;
-                case 1 << 28: fft<1 << 28>(a); break;
-                case 1 << 29: fft<1 << 29>(a); break;
-                case 1 << 30: fft<1 << 30>(a); break;
-                case 1 << 31: fft<1 << 31>(a); break;
-                throw FFTLimitExceededError();
-            }
-        }
-        inline void idft(complex* a, int n) {
-            if (n <= 1) return;
-            switch (n) {
-                case 1 << 2: ifft<1 << 2>(a); break;
-                case 1 << 3: ifft<1 << 3>(a); break;
-                case 1 << 4: ifft<1 << 4>(a); break;
-                case 1 << 5: ifft<1 << 5>(a); break;
-                case 1 << 6: ifft<1 << 6>(a); break;
-                case 1 << 7: ifft<1 << 7>(a); break;
-                case 1 << 8: ifft<1 << 8>(a); break;
-                case 1 << 9: ifft<1 << 9>(a); break;
-                case 1 << 10: ifft<1 << 10>(a); break;
-                case 1 << 11: ifft<1 << 11>(a); break;
-                case 1 << 12: ifft<1 << 12>(a); break;
-                case 1 << 13: ifft<1 << 13>(a); break;
-                case 1 << 14: ifft<1 << 14>(a); break;
-                case 1 << 15: ifft<1 << 15>(a); break;
-                case 1 << 16: ifft<1 << 16>(a); break;
-                case 1 << 17: ifft<1 << 17>(a); break;
-                case 1 << 18: ifft<1 << 18>(a); break;
-                case 1 << 19: ifft<1 << 19>(a); break;
-                case 1 << 20: ifft<1 << 20>(a); break;
-                case 1 << 21: ifft<1 << 21>(a); break;
-                case 1 << 22: ifft<1 << 22>(a); break;
-                case 1 << 23: ifft<1 << 23>(a); break;
-                case 1 << 24: ifft<1 << 24>(a); break;
-                case 1 << 25: ifft<1 << 25>(a); break;
-                case 1 << 26: ifft<1 << 26>(a); break;
-                case 1 << 27: ifft<1 << 27>(a); break;
-                case 1 << 28: ifft<1 << 28>(a); break;
-                case 1 << 29: ifft<1 << 29>(a); break;
-                case 1 << 30: ifft<1 << 30>(a); break;
-                case 1 << 31: ifft<1 << 31>(a); break;
-                throw FFTLimitExceededError();
-            }
-        }
-    }
-
-    BigInteger BigInteger::fft_mul(const BigInteger& a, const BigInteger& b) {
-        static_assert(__FFT::FFT_BASE * __FFT::FFT_BASE == BASE);
-        int least = (a.size + b.size) << 1, lim = 1 << std::__lg(least);
-        if (lim < least) lim <<= 1;
-        __FFT::init(lim);
-        using __FFT::arr;
-        for (int i = 0; i < a.size; i++) {
-            arr[i << 1].real = a.digits[i + 1] % 10000;
-            arr[i << 1 | 1].real = a.digits[i + 1] / 10000 % 10000;
-        }
-        for (int i = 0; i < b.size; i++) {
-            arr[i << 1].imag = b.digits[i + 1] % 10000;
-            arr[i << 1 | 1].imag = b.digits[i + 1] / 10000 % 10000;
-        }
-        __FFT::dft(arr, lim);
-        for (int i = 0; i < lim; i++) arr[i] *= arr[i];
-        __FFT::idft(arr, lim);
-        BigInteger res;
-        res.resize(a.size + b.size + 1);
-        digit_t carry = 0;
-        double inv = 0.5 / lim;
-        for (int i = 0; i <= a.size + b.size; i++) {
-            carry += (digit_t)(arr[i << 1].imag * inv + 0.5);
-            carry += (digit_t)(arr[i << 1 | 1].imag * inv + 0.5) * 10000LL;
-            res.digits[i + 1] += carry % BASE, carry /= BASE;
-        }
-        while (res.size > 1 && res.digits[res.size] == 0) res.pop();
-        return res;
-    }
-
-    BigInteger BigInteger::operator* (const BigInteger& x) const {
-        BigInteger zero = 0;
-        if (*this == zero || x == zero) return zero;
-        int n = size, m = x.size;
-        long long lim = 1LL * n * m;
-        
-        if (lim >= FFT_LIMIT) {
-            BigInteger res = fft_mul(*this, x);
-            res.flag = !(flag ^ x.flag);
-            return res;
-        }
-        
-        BigInteger res;
-        res.flag = !(flag ^ x.flag);
-        res.resize(n + m + 2);
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= m; j++) {
-                res.digits[i + j - 1] += digits[i] * x.digits[j];
-                res.digits[i + j] += res.digits[i + j - 1] / BASE;
-                res.digits[i + j - 1] %= BASE;
-            }
-        }
-        for (int i = 1; i <= n + m + 1; i++) {
-            res.digits[i + 1] += res.digits[i] / BASE;
-            res.digits[i] %= BASE;
-        }
-        while (res.size > 1 && res.digits[res.size] == 0) res.pop();
-        return res;
-    }
-
-    BigInteger& BigInteger::operator*= (int x) {
-        if (x == 0 || *this == 0) return *this = 0;
-        if (x < 0) flag = !flag, x = -x;
-        digit_t carry = 0;
-        for (int i = 1; i <= size || carry; i++) {
-            if (i > size) push(0);
-            digit_t cur = digits[i] * x + carry;
-            carry = cur / BigInteger::BASE;
-            digits[i] = cur % BigInteger::BASE;
-        }
-        while (size > 1 && digits[size] == 0) pop();
-        return *this;
-    }
-    BigInteger BigInteger::operator* (const int& x) const {BigInteger t = *this; return t *= x;}
-
-    BigInteger BigInteger::div2() const {
-        BigInteger res = *this;
-        for (int i = size; i >= 1; i--) {
-            if ((res.digits[i] & 1) && (i > 1)) res.digits[i - 1] += BASE;
-            res.digits[i] >>= 1;
-        }
-        while (res.size > 1 && res.digits[res.size] == 0) res.pop();
-        return res;
-    }
-    BigInteger BigInteger::operator/ (const long long& x) const {
-        if (x == 0) throw -1;
-        if (*this == 0) return 0;
-        if (x == 2) return div2();
-        if (x == -2) {BigInteger res = div2(); res.flag = !res.flag; return res;}
-        
-        BigInteger res;
-        res.flag = !(flag ^ (x >= 0));
-        
-        digit_t cur = 0, div = std::abs(x);
-        res.resize(size);
-        
-        for (int i = size; i >= 1; i--) {
-            cur = cur * BASE + digits[i];
-            res.digits[i] = res.flag ? (cur / div) : (-cur / -div);
-            cur %= div;
-        }
-        while (res.size > 1 && res.digits[res.size] == 0) res.pop();
-        return res;
-    }
-
-    inline BigInteger BigInteger::move_r(int d) const {
-        if (*this == 0 || d >= size) return 0;
-        if (d == 0) return *this;
-        BigInteger res; res.reserve(size - d + 1);
-        for (int i = d + 1; i <= size; i++) res.push(digits[i]);
-        return res;
-    }
-    inline BigInteger BigInteger::move_l(int d) const {
-        if (*this == 0) return 0;
-        if (d == 0) return *this;
-        BigInteger res; res.reserve(size + d + 1);
-        for (int i = 1; i <= d; i++) res.push(0);
-        for (int i = 1; i <= size; i++) res.push(digits[i]);
-        return res;
-    }
-
-    BigInteger BigInteger::newton_inv(int n) const {
-        if (*this == 0) throw ZeroDivisionError();
-        if (std::min(size, n - size) <= NEWTON_MIN_LEVEL) {
-            BigInteger a; a.resize(n + 1);
-            std::memset(a.digits, 0, sizeof(digit_t) * a.size);
-            a.digits[n + 1] = 1;
-            return a.divmod(*this, true).first;
-        }
-        int k = (n - size + 2) >> 1, k2 = k > size ? 0 : size - k;
-        BigInteger x = move_r(k2);
-        int n2 = k + x.size;
-        BigInteger y = x.newton_inv(n2), a = y + y, b = (*this) * y * y;
-        
-        return a.move_l(n - n2 - k2) - b.move_r(2 * (n2 + k2) - n) - 1;
-    }
-
-    std::pair<BigInteger, BigInteger> BigInteger::newton_div(const BigInteger& x) const {
-        int k = size - x.size + 2, k2 = k > x.size ? 0 : x.size - k;
-        BigInteger x2 = x.move_r(k2);
-        if (k2 != 0) x2 += 1;
-        int n2 = k + x2.size;
-        BigInteger u = (*this) * x2.newton_inv(n2);
-        BigInteger q = u.move_r(n2 + k2), r = (*this) - q * x;
-        while (r >= x) q += 1, r -= x;
-        return std::make_pair(q, r);
-    }
-
-    std::pair<BigInteger, BigInteger> BigInteger::divmod(const BigInteger& x, bool dis_newton) const {
-        static const int base = BigInteger::BASE;
-        BigInteger a = abs(), b = x.abs();
-        if (b == 0) throw ZeroDivisionError();
-        if (a < b) return std::make_pair(0, flag ? a : -a);
-        if (!dis_newton && size > NEWTON_LIMIT) return newton_div(x);
-        
-        int t = base / (x.digits[x.size] + 1);
-        a *= t, b *= t;
-        int n = a.size, m = b.size;
-        BigInteger q = 0, r = 0;
-        q.resize(n);
-        for (int i = n; i >= 1; i--) {
-            r *= base, r += a.digits[i];
-            digit_t d1 = m < r.size ? r.digits[m + 1] : 0, d2 = m - 1 < r.size ? r.digits[m] : 0;
-            int d = (d1 * base + d2) / b.digits[m];
-            r -= b * d;
-            while (!r.flag) r += b, d--;
-            q.digits[i] = d;
-        }
-        q.flag = !(flag ^ x.flag), r.flag = flag;
-        while (q.size > 1 && q.digits[q.size] == 0) q.pop();
-        return std::make_pair(q, r / t);
-    }
-    BigInteger BigInteger::operator/ (const BigInteger& x) const {return divmod(x).first;}
-
-    BigInteger BigInteger::operator% (const long long& x) const {
-        if (x == 2) return digits[1] & 1;
-        if (x == 5) return digits[1] % 5;
-        return *this - (*this / x * x);
-    } 
-    BigInteger BigInteger::operator% (const BigInteger& x) const {return divmod(x).second;}
-    BigInteger BigInteger::pow(const long long& x) const {
-        BigInteger res = 1, a = *this;
-        for (long long t = x; t != 0; t >>= 1) {
-            if (t & 1) res *= a;
-            a *= a;
-        }
-        return res;
-    }
-    BigInteger BigInteger::pow(const long long& x, const BigInteger& p) const {
-        BigInteger res = 1, a = *this % p;
-        for (long long t = x; t != 0; t >>= 1) {
-            if (t & 1) res = res * a % p;
-            a = a * a % p;
-        }
-        return res;
-    }
-
-    BigInteger BigInteger::root(const long long& m) const {
-        if (*this == 0 || m == 1) return *this;
-        static constexpr long long base = BigInteger::BASE;
-        BigInteger n = *this, t = base, x = std::min(n, t.move_l((n.size + m) / m));
-        int l = 0, r = base - 1;
-        while (l < r) {
-            int mid = (l + r) >> 1;
-            x.digits[x.size] = mid;
-            if (x.pow(m) <= n) l = mid + 1;
-            else r = mid;
-        }
-        x.digits[x.size] = l;
-        while (x.size > 1 && x.digits[x.size] == 0) x.pop();
-        BigInteger x2 = (x * (m - 1) + n / x.pow(m - 1)) / m;
-        while (x2 < x) std::swap(x2, x), x2 = (x * (m - 1) + n / x.pow(m - 1)) / m;
-        return x;
-    }
-
-    BigInteger BigInteger::gcd(const BigInteger& x) const {
-        BigInteger a = *this, b = x;
-        if (a < b) std::swap(a, b);
-        if (b == 0) return a;
-        int t = 0;
-        while (a % 2 == 0 && b % 2 == 0) a = a.div2(), b = b.div2(), t++;
-        while (b > 0) {
-            if (a % 2 == 0) a = a.div2();
-            else if (b % 2 == 0) b = b.div2();
-            else a -= b;
-            if (a < b) std::swap(a, b);
-        }
-        while (t--) a += a;
-        return a;
-    }
-    BigInteger BigInteger::lcm(const BigInteger& x) const {return *this / gcd(x) * x;}
-
-    BigInteger& BigInteger::operator+= (const BigInteger& x) {return *this = *this + x;}
-    BigInteger& BigInteger::operator-= (const BigInteger& x) {return *this = *this - x;}
-    BigInteger& BigInteger::operator*= (const BigInteger& x) {return *this = *this * x;}
-    BigInteger& BigInteger::operator/= (const long long& x) {return *this = *this / x;}
-    BigInteger& BigInteger::operator/= (const BigInteger& x) {return *this = *this / x;}
-    BigInteger& BigInteger::operator%= (const long long& x) {return *this = *this / x;}
-    BigInteger& BigInteger::operator%= (const BigInteger& x) {return *this = *this % x;}
-
-    BigInteger BigInteger::operator<< (const long long& x) {
-        if (x <= 0) return *this;
-        BigInteger res = *this;
-        for (long long i = 1; i <= x; i++) res += res;
-        return res;
-    }
-    BigInteger BigInteger::operator>> (const long long& x) {
-        if (x <= 0) return *this;
-        BigInteger res = *this;
-        for (long long i = 1; i <= x; i++) res = res.div2();
-        return res;
-    }
-    BigInteger& BigInteger::operator<<= (const long long& x) {return *this = *this << x;}
-    BigInteger& BigInteger::operator>>= (const long long& x) {return *this = *this >> x;}
-
-    template <class F>
-    inline BigInteger BigInteger::binary_op_helper(const BigInteger& x, const BigInteger& y, const F& func) {
-        auto to_bin = [](BigInteger x) -> std::vector<bool> {
-            if (x == 0) return {0};
-            std::vector<bool> res;
-            for (; x != 0; x = x.div2()) res.emplace_back(x.digits[1] & 1);
-            return res;
-        };
-        std::vector<bool> a = to_bin(x), b = to_bin(y);
-        int n = a.size(), m = b.size(), lim = std::max(n, m);
-        std::vector<bool> res(lim, 0);
-        for (int i = lim - 1; i >= 0; i--) 
-            res[i] = func(i < n ? a[i] : 0, i < m ? b[i] : 0);
-        std::reverse(res.begin(), res.end());
-        return res;
-    }
-    BigInteger BigInteger::operator& (const BigInteger& x) {return binary_op_helper(*this, x, [](bool a, bool b) -> bool {return a & b;});}
-    BigInteger BigInteger::operator| (const BigInteger& x) {return binary_op_helper(*this, x, [](bool a, bool b) -> bool {return a | b;});}
-    BigInteger BigInteger::operator^ (const BigInteger& x) {return binary_op_helper(*this, x, [](bool a, bool b) -> bool {return a ^ b;});}
-    BigInteger& BigInteger::operator&= (const BigInteger& x) {return *this = *this & x;}
-    BigInteger& BigInteger::operator|= (const BigInteger& x) {return *this = *this | x;}
-    BigInteger& BigInteger::operator^= (const BigInteger& x) {return *this = *this ^ x;}
-
-    BigInteger& BigInteger::operator++ () {return *this += 1;}
-    BigInteger BigInteger::operator++ (int) {BigInteger t = *this; return *this += 1, t;}
-    BigInteger& BigInteger::operator-- () {return *this -= 1;}
-    BigInteger BigInteger::operator-- (int) {BigInteger t = *this; return *this -= 1, t;}
-} using namespace BGI;
-```
 ### exgcd.hpp
 
-```hpp
+```cpp
 ll exgcd(ll a, ll b, ll &x, ll &y){
     if (b == 0){
         x = 1, y = 0;
@@ -1273,9 +604,98 @@ ll exgcd(ll a, ll b, ll &x, ll &y){
 
 ## ds
 
+### Mo
+
+```cpp
+std::ranges::sort(q, cmp);
+auto add = [&](int x) {
+    
+};
+auto del = [&](int x) {
+    
+};
+int l(0), r(-1);
+for (auto & [ L, R, id ] : q){
+    for (; l < L; ++l) del(l);
+    for (; l > L; --l) add(l - 1);
+    for (; r < R; ++r) add(r + 1);
+    for (; r > R; --r) del(r);
+    res[id] = ans;
+}
+```
+### rollback mo
+```cpp
+int n;
+std::cin >> n;
+vector<int> a(n);
+std::cin >> a;
+meion b = a;
+unique(b);
+for (meion &x : a) 
+    x = lower_bound(b, x) - b.begin();
+const int sz = b.size();
+std::cin >> m;
+const int B = std::ceil(std::sqrt(n));
+using aa = array<int, 3>;
+vector<aa> q(m);
+vector<vector<aa>> Q(B);
+for (int i = 0; meion &[l, r, id] : q) {
+    std::cin >> l >> r, --l, --r, id = i++;
+}
+sort(q, [&](const aa &a, const aa &b){
+    if (a[0] / B == b[0] / B) iroha a[1] < b[1]; iroha a[0] < b[0];
+});
+vector<int> pl(sz), pr(sz);
+meion quis = [&] (int l, int r) { // 暴力
+    int ret = 0;
+    for (int i = l; i <= r; ++i) {
+        if (~pl[a[i]]) MAX(ret, i - pl[a[i]]);
+        else pl[a[i]] = i;
+    }
+    for (int i = l; i <= r; ++i) pl[a[i]] = -1;
+    iroha ret;
+};
+vector<int> res(m);
+vector<int> del;
+del.reserve(n << 2);
+int pla(-1);
+for (int i = 0, ie = (n - 1) / B + 1; i <= ie; ++i) {
+    int maxr = std::min(i * B + B - 1, n - 1), nr = maxr - 1, ret = 0;
+    fill(pl, -1), fill(pr, -1);
+    while (pla + 1 < m and q[pla + 1][0] / B == i) {
+        ++pla;
+        const meion &[L, R, id] = q[pla];
+        if (R / B == i) {
+            res[id] = quis(L, R);
+            continue;
+        }
+        while (nr < R) {
+            ++nr;
+            pr[a[nr]] = nr;
+            if (~pl[a[nr]]) MAX(ret, pr[a[nr]] - pl[a[nr]]);
+            else pl[a[nr]] = nr;
+        }
+        int nl = maxr, ans = ret;
+        while (nl > L) {
+            --nl;
+            if (~pr[a[nl]]) {
+                MAX(ans, pr[a[nl]] - nl);
+            } else {
+                pr[a[nl]] = nl;
+                del.emplace_back(a[nl]);
+            }
+        }
+        res[id] = ans;
+        while (del.size()) {
+            pr[del.back()] = -1; del.pop_back();
+        }
+    }
+}
+for (const int i : res) std::cout << i << '\n';
+```
 ### chothlly.hpp
 
-```hpp
+```cpp
 using DAT = int;
 struct coler_seg {
     int l, r;
@@ -1331,7 +751,7 @@ private:
 ```
 ### splay.hpp
 
-```hpp
+```cpp
 constexpr int N = 1'000'000 + 10 << 2;
 struct MeIoN_Splay {
     int fa[N], ch[N][2], num[N], siz[N], val[N], cnt, root;
@@ -1457,7 +877,7 @@ struct MeIoN_Splay {
 ```
 ### dsu.hpp
 
-```hpp
+```cpp
 struct dsu{     //MeIoNのdsu
 public:
     dsu(int _n) : n(_n), comp(_n), fa(_n), sz(_n, 1) { 
@@ -1483,7 +903,7 @@ private:
 ```
 ### bit_vec.hpp
 
-```hpp
+```cpp
 template <const int N>
 struct bitarray {
     static constexpr int sz = ((N + 127) >> 6);
@@ -1655,52 +1075,9 @@ struct bitvector {
     }
 };
 ```
-### rollback_array.hpp
-
-```hpp
-template <typename T>
-struct RollbackArray {
-    int N;
-    std::vector<T> dat;
-    std::vector<std::pair<int, T>> history;
-    RollbackArray(std::vector<T> x) : N(x.size()), dat(x) {}
-    template <typename F> 
-    RollbackArray(int N, F f) : N(N) { 
-        dat.reserve(N); 
-        for (int i = 0; i < N; ++i) {
-            dat.emplace_back(f(i)); 
-        }
-    }
-    int time() { 
-        return history.size(); 
-    }
-    void rollback(int t) { 
-        for (int i = time() - 1; i >= t; --i) { 
-            auto& [idx, v] = history[i]; dat[idx] = v; 
-        } 
-        history.resize(t); 
-    }
-    T get(int idx) { 
-        return dat[idx]; 
-    }
-    void set(int idx, T x) { 
-        history.emplace_back(idx, dat[idx]); 
-        dat[idx] = x; 
-    }
-    std::vector<T> get_all() { 
-        std::vector<T> res(N); 
-        for (int i = 0; i < N; ++i) {
-            res[i] = get(i); 
-        }
-        return res; }
-    T operator[](int idx) { 
-        return dat[idx]; 
-    }
-};
-```
 ### hashmap.hpp
 
-```hpp
+```cpp
 template <typename Val>
 struct hash_map {
     hash_map(uint n = 0) { build(n); }
@@ -1772,7 +1149,7 @@ private :
 ```
 ### LinearBasis.hpp
 
-```hpp
+```cpp
 struct LinearBasis {
     static const int B = 30;
     LinearBasis() { memset(basis, -1, sizeof(basis)); }
@@ -1834,7 +1211,7 @@ struct LinearBasis_64 {
 ```
 ### fenw.hpp
 
-```hpp
+```cpp
 template <class T = ll>
 struct Fenw {
     int n;
@@ -1959,7 +1336,7 @@ struct Fenw01 {
 ```
 ### st_table.hpp
 
-```hpp
+```cpp
 namespace RMQ {
     vector<int> lg(2);
     template <typename T> struct maxtable {
@@ -1991,9 +1368,52 @@ namespace RMQ {
     };
 } using RMQ::maxtable;
 ```
+### rollback_array.hpp
+
+```cpp
+template <typename T>
+struct RollbackArray {
+    int N;
+    std::vector<T> dat;
+    std::vector<std::pair<int, T>> history;
+    RollbackArray(std::vector<T> x) : N(x.size()), dat(x) {}
+    template <typename F> 
+    RollbackArray(int N, F f) : N(N) { 
+        dat.reserve(N); 
+        for (int i = 0; i < N; ++i) {
+            dat.emplace_back(f(i)); 
+        }
+    }
+    int time() { 
+        return history.size(); 
+    }
+    void rollback(int t) { 
+        for (int i = time() - 1; i >= t; --i) { 
+            auto& [idx, v] = history[i]; dat[idx] = v; 
+        } 
+        history.resize(t); 
+    }
+    T get(int idx) { 
+        return dat[idx]; 
+    }
+    void set(int idx, T x) { 
+        history.emplace_back(idx, dat[idx]); 
+        dat[idx] = x; 
+    }
+    std::vector<T> get_all() { 
+        std::vector<T> res(N); 
+        for (int i = 0; i < N; ++i) {
+            res[i] = get(i); 
+        }
+        return res; }
+    T operator[](int idx) { 
+        return dat[idx]; 
+    }
+};
+```
 ### rollback_dsu.hpp
 
-```hpp
+```cpp
 struct rb_dsu {
     RollbackArray<int> dat; // parent or size
     rb_dsu(int n) : dat(std::vector<int>(n, -1)) {}
@@ -2028,7 +1448,7 @@ struct rb_dsu {
 ```
 ### heap.hpp
 
-```hpp
+```cpp
 template<typename T> 
 struct heap {
 	priority_queue<T> p, q;
@@ -2062,7 +1482,7 @@ struct heap {
 ```
 ### Wavelet_Matrix.hpp
 
-```hpp
+```cpp
 struct Bit_Vector {
     vector<pair<unsigned, unsigned>> dat;
     Bit_Vector(int n) { dat.assign((n + 63) >> 5, {0, 0}); }
@@ -2159,7 +1579,7 @@ struct Wavelet_Matrix {
 
 ### 2_sat.hpp
 
-```hpp
+```cpp
 struct TwoSat {  // MeIoNの2-sat
 private: 
     int n, tot, cnt;
@@ -2226,6 +1646,108 @@ public:
 };
 ```
 
+### 三元环计数
+```cpp
+int n, m;
+std::cin >> n >> m;
+vector<vector<int>> v(n);
+vector<int> d(n);
+vector<pair<int, int>> e;
+for (int i = 0, l, r; i < m; ++i) {
+    std::cin >> l >> r, --l, --r;
+    ++d[l], ++d[r];
+    e.emplace_back(l, r);
+}
+for (const auto &[l, r] : e) {
+    if (d[l] < d[r]) {
+        v[l].emplace_back(r);
+    } else if (d[l] > d[r]) {
+        v[r].emplace_back(l);
+    } else {
+        v[std::min(l, r)].emplace_back(std::max(l, r));
+    }
+}
+ll ans = 0;
+vector<bool> tag(n);
+for (int i = 0; i < n; ++i) {
+    for (auto k : v[i]) {
+        tag[k] = true;
+    }
+    for (auto k : v[i]) {
+        for (auto j : v[k]) {
+            if (tag[j]) {
+                ++ans;
+            }
+        }
+    }
+    for (auto k : v[i]) {
+        tag[k] = false;
+    }
+}
+std::cout << ans << '\n';
+```
+
+### 最大团
+```cpp
+ll n, ans, anss;
+
+namespace max_t_t{
+    vector<vector<int>> v;
+    vector<int> cnt, vis, res;
+    int dfs(int x,int now){
+        for (int i = x + 1, iE = n; i <= iE; ++i) {
+            if (cnt[i] + now <= ans) return 0;
+            if (not v[x][i]) continue;
+            int k;
+            for (k = 1; k < now;k++){
+                if (not v[i][vis[k]]) break;
+            }
+            if (k == now){
+                vis[now] = i;
+                if (dfs(i, now + 1))
+                    return 1;
+            }
+        }
+        if (now > ans + 1){
+            ans = now - 1;
+            for (int i = 1; i < ans; ++i) {
+                res[i] = vis[i];
+            }
+            return 1;
+        }
+        return 0;
+    }
+    void work(){
+        ans = -1;
+        for (int i = n; i; i--){
+            vis[1] = i;
+            dfs(i, 2);
+            cnt[i] = ans;
+        }
+    }
+    void build(int n){
+        v.assign(n + 1, vector<int>(n + 1, 0));
+        cnt = vector<int>(n + 1, 0);
+        vis = res = cnt;
+        for (int i = 1, iE = n - 1; i <= iE; ++i) {
+            int x, y;
+            std::cin >> x >> y;
+            v[x][y] = v[y][x] = 1;
+        }
+    }
+}using namespace max_t_t;
+int main(){
+    int n;
+    build(n);
+    work();
+    std::cout << ans << '\n';
+    for (int i = 1; i < ans; ++i) {
+        std::cout << res[i] << " ";
+    }
+    return 0;
+}
+```
+
 <div style="page-break-after: always;"></div>
 
 
@@ -2233,7 +1755,7 @@ public:
 
 ### SA.hpp
 
-```hpp
+```cpp
 struct MeIoN_SA {
     std::vector<int> p, rank;
     MeIoN_SA(const std::vector<int> &s) : p(s.size()), rank(s.size()) {
@@ -2278,7 +1800,7 @@ struct MeIoN_SA {
 ```
 ### hash.hpp
 
-```hpp
+```cpp
 namespace getmod {
     bool guidingstar_ckpr(int n) {
         if (n < 1) return false;
@@ -2316,7 +1838,7 @@ struct HASH {
 ```
 ### SAM_EX.hpp
 
-```hpp
+```cpp
 namespace MeIoN_SAM_ {
     static constexpr int ALPHABET = 26;
     struct Node : std::array<int, ALPHABET> {
@@ -2371,7 +1893,7 @@ using SAM = MeIoN_SAM_::MeIoN_SAM;
 ```
 ### SAM.hpp
 
-```hpp
+```cpp
 namespace MeIoN_SAM_ {
     static constexpr int ALPHABET = 26;
     struct Node : std::array<int, ALPHABET> {
@@ -2413,7 +1935,7 @@ namespace MeIoN_SAM_ {
 ```
 ### acam.hpp
 
-```hpp
+```cpp
 struct MeIoN_ACAM {
     static constexpr int ALPHABET = 26;
     struct Node {
@@ -2472,7 +1994,7 @@ using AC = MeIoN_ACAM;
 ```
 ### manache.hpp
 
-```hpp
+```cpp
 namespace MeIoN_namache{
     ll n;
     constexpr int working_sz = 1145141;
@@ -2512,10 +2034,49 @@ namespace MeIoN_namache{
 
 ## geo
 
+### EUL
+
+```cpp
+    // 两圆面积覆盖
+    point<ll> p1, p2;
+    ll r, rr;
+    void sol() {
+        ld dis = length(p1 - p2);
+        ld al = 2.0l * std::acos((r * r + dis * dis - rr * rr) / (2.0l * r * dis));
+        ld R2 = 0.5l * al * r * r - 0.5l * r * r * sin(al);
+        ld beta =
+            2.0l * std::acos((rr * rr + dis * dis - r * r) / (2.0l * rr * dis));
+        ld R1 = 0.5l * beta * rr * rr - 0.5l * rr * rr * sin(beta);
+        ld R = R1 + R2;
+        std::cout << R;
+    }
+
+    // 正n角形面积
+    ll n;   //角数
+    ll r;   //外接圆面积
+    ld S(ll n, ll r) {  // 菱形小块S
+        ld S;
+        S = (r * r * std::sin(pi / n) * std::sin(pi / (2 * n))) /
+            (2 * std::sin(pi - pi * 3 / 2 / n));
+        return S;
+    }
+    ld SS(ll n, ll r) {  // n角形面积
+        ld res = S(n, r) * n * 2;
+        return res;
+    }
+
+    // 正n锥体体积
+    ld V(ll n, ll a) {
+        ld res(0);
+        res = a * a * a * n / (12 * std::tan(pi / n)) *
+            std::sqrt(1 - 1 / (4 * std::sin(pi / n) * std::sin(pi / n)));
+        return res;
+    }
+```
+
 ### 1-base.hpp
 
-```hpp
-#pragma once
+```cpp
 using RE = long double;
 template <typename T = int>
 struct point { // roll 一个 base 给每个点偏移一下
@@ -2779,7 +2340,7 @@ std::tuple<bool, point<T>, point<T>> cross_point_circle(circle<T> C1,
 ```
 ### 2-apollonian_circle.hpp
 
-```hpp
+```cpp
 #pragma once
 #include "1-base.hpp"
 
@@ -2796,7 +2357,7 @@ circle<REAL> apollonian_circle(point<T> A, point<T> B, T a, T b) {
 ```
 ### 3-angle_sort.hpp
 
-```hpp
+```cpp
 #pragma once
 #include "1-base.hpp"
 
@@ -2839,7 +2400,7 @@ vector<int> angle_sort(const vector<pair<T, T>> &v) {
 ```
 ### 4-closest_pair.hpp
 
-```hpp
+```cpp
 #pragma once
 #include "1-base.hpp"
 #include "3-angle_sort.hpp"
@@ -2943,7 +2504,7 @@ pair<int, int> closest_pair2(vector<point<T>> points) {
 ```
 ### 5-hull.hpp
 
-```hpp
+```cpp
 #pragma once
 #include "1-base.hpp"
 // https://qoj.ac/problem/218
@@ -3007,7 +2568,7 @@ vector<int> convex_hull(vector<point<T>> &p, string mode = "full",
 ```
 ### 6-convex_polygon.hpp
 
-```hpp
+```cpp
 #pragma once
 #include "5-hull.hpp"
 
@@ -3142,7 +2703,7 @@ struct convex_polygon {
 ```
 ### 7-points_in_triangles.hpp
 
-```hpp
+```cpp
 #pragma once
 #include "../ds/fenw.hpp"
 #include "3-angle_sort.hpp"
@@ -3279,7 +2840,7 @@ struct count_points_in_triangles {
 ```
 ### 8-distance.hpp
 
-```hpp
+```cpp
 #pragma once
 #include "1-base.hpp"
 
@@ -3317,7 +2878,7 @@ REAL distance(segment<T> s1, segment<T> s2) {
 ```
 ### 9-furthest_pair.hpp
 
-```hpp
+```cpp
 #pragma once
 #include "1-base.hpp"
 #include "5-hull.hpp"
@@ -3362,7 +2923,7 @@ pair<int, int> furthest_pair(vector<point<T>> points) {
 ```
 ### 10-triangle_area.hpp
 
-```hpp
+```cpp
 #pragma once
 #include "1-base.hpp"
 
@@ -3373,7 +2934,7 @@ REAL triangle_area(point<T> a, point<T> b, point<T> c) {
 ```
 ### 11-in_circle.hpp
 
-```hpp
+```cpp
 #pragma once
 #include "1-base.hpp"
 #include "10-triangle_area.hpp"
@@ -3397,7 +2958,7 @@ circle<REAL> in_circle(point<T> A, point<T> B, point<T> C) { // 内接圆
 
 ### random.hpp
 
-```hpp
+```cpp
 namespace MeIoN_random_hash {
     std::mt19937 RNG(std::chrono::steady_clock::now().time_since_epoch().count());
     uint rng(uint limit) { return RNG() % limit; }
@@ -3576,7 +3137,7 @@ namespace MeIoN_random_hash {
 
 ### lag.hpp
 
-```hpp
+```cpp
 #pragma once
 #include "modint.hpp"
 template <typename mint>
@@ -3619,7 +3180,7 @@ struct lag {
 ```
 ### modint.hpp
 
-```hpp
+```cpp
 template <int mod>
 struct modint {
     static constexpr bool is_mod_int = true;
@@ -3730,6 +3291,120 @@ T CRT3(ull a0, ull a1, ull a2) {
     c = (a2 - a % p2 + p2) * x01_2 % p2;
     return T(a) + T(c) * T(p0) * T(p1);
 }
+```
+
+<div style="page-break-after: always;"></div>
+
+## other
+
+### 快速取模 998244353
+```cpp
+inline unsigned long long calc(const unsigned long long &x) {
+    return x - (__uint128_t(x) * 9920937979283557439ull >> 93) * 998244353;
+}
+```
+
+### date_time
+```cpp
+struct DateTime {
+    static constexpr int month_days[13]
+        = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    int year, month, day;
+    DateTime(int y, int m, int d) : year(y), month(m), day(d) {}
+
+  // 1年1月1日が 0 となるように変換
+    int to_int() {
+        int y = (month <= 2 ? year - 1 : year);
+        int m = (month <= 2 ? month + 12 : month);
+        int d = day;
+        return 365 * y + y / 4 - y / 100 + y / 400 + 306 * (m + 1) / 10 + d - 429;
+    }
+
+  // to_int() の逆関数
+    static DateTime from_int(int x) {
+        int y = x * 400 / 146097 + 1;
+        int d = x - DateTime(y, 1, 1).to_int();
+        int m = 1;
+        while (d >= 28) {
+            int k = month_days[m] + (m == 2 && is_leap_year(y) ? 1 : 0);
+            if (d < k) break;
+            ++m;
+            d -= k;
+        }
+        if (m == 13) {
+            ++y;
+            m = 1;
+        }
+        ++d;
+        return DateTime(y, m, d);
+    }
+
+  // 日曜日が 0 として、曜日を [0, 7) で返す
+    int weekday() { return (to_int() + 1) % 7; }
+
+    DateTime& operator++() {
+        ++day;
+        int lim = month_days[month];
+        if (is_leap_year(year) && month == 2) lim = 29;
+        if (day <= lim) return (*this);
+        day = 1;
+        ++month;
+        if (month == 13) {
+            ++year;
+            month = 1;
+        }
+        return (*this);
+    }
+    DateTime operator++(int) {
+        DateTime tmp = *this;
+        ++*this;
+        return tmp;
+    }
+
+    bool operator==(DateTime const& rhs) const {
+        return to_tuple() == rhs.to_tuple();
+    }
+    bool operator!=(DateTime const& rhs) const {
+        return to_tuple() != rhs.to_tuple();
+    }
+    bool operator<(DateTime const& rhs) const {
+        return to_tuple() < rhs.to_tuple();
+    }
+    bool operator<=(DateTime const& rhs) const {
+        return to_tuple() <= rhs.to_tuple();
+    }
+    bool operator>(DateTime const& rhs) const {
+        return to_tuple() > rhs.to_tuple();
+    }
+    bool operator>=(DateTime const& rhs) const {
+        return to_tuple() >= rhs.to_tuple();
+    }
+
+  // yyyy[sep]mm[sep]dd
+    string to_string(string sep = "-") {
+        string y = std::to_string(year);
+        string m = std::to_string(month);
+        string d = std::to_string(day);
+        while (len(y) < 4) y = "0" + y;
+        while (len(m) < 2) m = "0" + m;
+        while (len(d) < 2) d = "0" + d;
+        return y + sep + m + sep + d;
+    }
+
+    tuple<int, int, int> to_tuple() const { return {year, month, day}; }
+
+    static bool is_leap_year(int y) {
+        if (y % 400 == 0) return true;
+        return (y % 4 == 0 && y % 100 != 0);
+    }
+
+    static bool is_valid_date(int y, int m, int d) {
+        if (!(1 <= m && m <= 12)) return 0;
+        int mx = month_days[m];
+        if (m == 2 && is_leap_year(y)) ++mx;
+        return (1 <= d && d <= mx);
+    }
+};
 ```
 
 <div style="page-break-after: always;"></div>
