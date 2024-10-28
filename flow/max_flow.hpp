@@ -4,6 +4,7 @@ namespace FL {
     constexpr int M = 3000000, N = 40000 + 10;
     int y[M], nxt[M], 
         gap[N], fst[N], c[N], pre[N], q[N], dis[N];
+    pair<int, int> e[M];
     flowt f[M];
     int S, T, tot, Tn;
     void III(int s, int t, int tn) {
@@ -14,7 +15,9 @@ namespace FL {
     }
     void add(int u, int v, flowt c1, flowt c2 = 0) {
         tot++, y[tot] = v, f[tot] = c1, nxt[tot] = fst[u], fst[u] = tot;
+        e[tot] = {u, v};
         tot++, y[tot] = u, f[tot] = c2, nxt[tot] = fst[v], fst[v] = tot;
+        e[tot] = {v, u};
     }
     flowt sap() {
         int u = S, t = 1;
