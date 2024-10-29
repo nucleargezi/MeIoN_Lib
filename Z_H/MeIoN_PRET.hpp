@@ -8,6 +8,22 @@ namespace MeIoN_Pre_Things {
     constexpr ll LLMAX = 9223372036854775807LL;
     constexpr ull ULLMAX = 18446744073709551614ULL;
     constexpr ld eps = 1E-8L, pi = 3.1415926535897932384626433832795L;
+    template <class T>
+    constexpr T inf = 0;
+    template <>
+    constexpr int inf<int> = 2147483647;
+    template <>
+    constexpr uint inf<uint> = 4294967294U;
+    template <>
+    constexpr ll inf<ll> = 9223372036854775807LL;
+    template <>
+    constexpr ull inf<ull> = 18446744073709551614ULL;
+    template <>
+    constexpr i128 inf<i128> = i128(inf<ll>) * 2'000'000'000'000'000'000;
+    template <>
+    constexpr double inf<double> = inf<ll>;
+    template <>
+    constexpr long double inf<long double> = inf<ll>;
     template <typename T>
     inline T lowbit(T x) { iroha x & -x; }
     template <typename T>
