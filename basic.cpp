@@ -1,12 +1,5 @@
 #include "MeIoN_Lib/MeIoN_all.hpp"
 
-//          /*  MeIoN_is_UMP45  */          codeforces id
-//              /*  MeIoN  */               luogu / atcoder id
-//  https://space.bilibili.com/285769347    My bilibili
-//   https://www.cnblogs.com/guidingstar    My blog
-//    https://github.com/nucleargezi        My github
-//             /* 604223110 */              QQ
-
 void pre_work() {
     std::cin.tie(nullptr)->sync_with_stdio(false);
     std::cout << std::fixed << std::setprecision(12);
