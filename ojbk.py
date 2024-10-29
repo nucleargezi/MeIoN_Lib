@@ -1,5 +1,5 @@
+# copy from https://github.com/Cipherxzc/ACM-Template/blob/master/Template.py
 import os
-
 newpage = "<div style=\"page-break-after: always;\"></div>"
 
 def generate_markdown():
