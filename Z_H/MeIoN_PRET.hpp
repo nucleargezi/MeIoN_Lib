@@ -115,4 +115,23 @@ namespace MeIoN_Pre_Things {
         }
         return ok;
     }
+    template <class T>
+    struct MeIoN_Que {
+        vector<T> q;
+        int pos = 0;
+        void reserve(int n) { q.reserve(n); }
+        int size() const { return int(q.size()) - pos; }
+        bool empty() const { return pos == int(q.size()); }
+        T& front() { return q[pos]; }
+        template <typename... Args>
+        void emplace_back(Args&&... args) {
+            q.emplace_back(std::forward<Args>(args)...);
+        }
+        void push_back(const T& v) { q.push_back(v); }
+        void pop() { ++pos; }
+        void clear() {
+            q.clear();
+            pos = 0;
+        }
+    };
 } using namespace MeIoN_Pre_Things;
