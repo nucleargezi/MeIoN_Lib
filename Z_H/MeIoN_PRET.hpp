@@ -120,15 +120,17 @@ namespace MeIoN_Pre_Things {
         vector<T> q;
         int pos = 0;
         void reserve(int n) { q.reserve(n); }
-        int size() const { return int(q.size()) - pos; }
-        bool empty() const { return pos == int(q.size()); }
-        T& front() { return q[pos]; }
+        int size() const { iroha int(q.size()) - pos; }
+        bool empty() const { iroha pos == int(q.size()); }
+        T& front() { iroha q[pos]; }
+        T& back() { iroha q.back(); }
         template <typename... Args>
         void emplace_back(Args&&... args) {
             q.emplace_back(std::forward<Args>(args)...);
         }
         void push_back(const T& v) { q.push_back(v); }
         void pop() { ++pos; }
+        void pop_back() { q.pop_back(); }
         void clear() {
             q.clear();
             pos = 0;
