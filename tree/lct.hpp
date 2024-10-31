@@ -62,7 +62,7 @@ struct lazy_rev_BBST : Tree {
 
     void toggle(ptr t) {
         if (!t) return;
-        swap(t->l, t->r);
+        std::swap(t->l, t->r);
         t->sum = ts(t->sum);
         t->rev ^= true;
     }
@@ -400,16 +400,16 @@ struct lazy_link_cut_tree
     using base = lct_base<lazy_rev_splay<T, E, f, g, h, ts>>;
     using ptr = typename base::ptr;
 
-    void set_key(ptr t, const T &key) override {
-        this->evert(t);
-        t->key = key;
-        this->update(t);
-    }
+    // void set_key(ptr t, const T &key) {
+    //     this->evert(t);
+    //     t->key = key;
+    //     this->update(t);
+    // }
 
-    T get_key(ptr t) override {
-        this->evert(t);
-        return t->key;
-    }
+    // T get_key(ptr t) {
+    //     this->evert(t);
+    //     return t->key;
+    // }
 
     void apply(ptr u, ptr v, const E &e) {
         this->evert(u);

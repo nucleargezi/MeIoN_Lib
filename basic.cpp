@@ -69,10 +69,10 @@ int main() {
     meion start = std::chrono::high_resolution_clock::now();
 #endif
 #ifdef MeIoN_File_I
-    freopen(".in","r",stdin);
+    freopen("in","r",stdin);
 #endif
 #ifdef MeIoN_File_O
-    freopen("z_res.out","w",stdout);
+    freopen("outt","w",stdout);
 #endif
     pre_work();
 #ifdef tests
