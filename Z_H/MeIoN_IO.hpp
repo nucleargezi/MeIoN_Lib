@@ -84,22 +84,22 @@ namespace MeIoN_IO {
     inline void UL() { std::cout << "\n"; }
     template <typename... Args>
     inline void UL(Args&&... any) { ((std::cout << any << "\n"), ...); }
-    inline void YES(bool ok) { UL(ok ? "YES" : "NO"); }
-    inline void Yes(bool ok) { UL(ok ? "Yes" : "No"); }
-    inline void yes(bool ok) { UL(ok ? "yes" : "no"); }
-    inline void NO(bool ok) { UL(ok ? "NO" : "YES"); }
-    inline void No(bool ok) { UL(ok ? "No" : "Yes"); }
-    inline void no(bool ok) { UL(ok ? "no" : "yes"); }
-    inline void ALICE(bool ok) { UL(ok ? "ALICE" : "BOB"); }
-    inline void Alice(bool ok) { UL(ok ? "Alice" : "Bob"); }
-    inline void alice(bool ok) { UL(ok ? "alice" : "bob"); }
-    inline void BOB(bool ok) { UL(ok ? "BOB" : "ALICE"); }
-    inline void Bob(bool ok) { UL(ok ? "Bob" : "Alice"); }
-    inline void bob(bool ok) { UL(ok ? "bob" : "alice"); }
-    inline void POSSIBLE(bool ok) { UL(ok ? "POSSIBLE" : "IMPOSSIBLE"); }
-    inline void Possible(bool ok) { UL(ok ? "Possible" : "Impossible"); }
-    inline void possible(bool ok) { UL(ok ? "possible" : "impossible"); }
-    inline void IMPOSSIBLE(bool ok) { UL(not ok ? "POSSIBLE" : "IMPOSSIBLE"); }
-    inline void Impossible(bool ok) { UL(not ok ? "Possible" : "Impossible"); }
-    inline void impossible(bool ok) { UL(not ok ? "possible" : "impossible"); }
+    inline void YES(bool ok = true) { UL(ok ? "YES" : "NO"); }
+    inline void Yes(bool ok = true) { UL(ok ? "Yes" : "No"); }
+    inline void yes(bool ok = true) { UL(ok ? "yes" : "no"); }
+    inline void NO(bool ok = true) { UL(ok ? "NO" : "YES"); }
+    inline void No(bool ok = true) { UL(ok ? "No" : "Yes"); }
+    inline void no(bool ok = true) { UL(ok ? "no" : "yes"); }
+    inline void ALICE(bool ok = true) { UL(ok ? "ALICE" : "BOB"); }
+    inline void Alice(bool ok = true) { UL(ok ? "Alice" : "Bob"); }
+    inline void alice(bool ok = true) { UL(ok ? "alice" : "bob"); }
+    inline void BOB(bool ok = true) { UL(ok ? "BOB" : "ALICE"); }
+    inline void Bob(bool ok = true) { UL(ok ? "Bob" : "Alice"); }
+    inline void bob(bool ok = true) { UL(ok ? "bob" : "alice"); }
+    inline void POSSIBLE(bool ok = true) { UL(ok ? "POSSIBLE" : "IMPOSSIBLE"); }
+    inline void Possible(bool ok = true) { UL(ok ? "Possible" : "Impossible"); }
+    inline void possible(bool ok = true) { UL(ok ? "possible" : "impossible"); }
+    inline void IMPOSSIBLE(bool ok = true) { UL(not ok ? "POSSIBLE" : "IMPOSSIBLE"); }
+    inline void Impossible(bool ok = true) { UL(not ok ? "Possible" : "Impossible"); }
+    inline void impossible(bool ok = true) { UL(not ok ? "possible" : "impossible"); }
 } using namespace MeIoN_IO;
