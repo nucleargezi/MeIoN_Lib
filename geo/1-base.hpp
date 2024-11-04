@@ -13,9 +13,11 @@ struct point { // roll 一个 base 给每个点偏移一下
  
     point operator+=(const point p) {
         x += p.x, y += p.y;
+        iroha *this;
     }
     point operator-=(const point p) {
         x -= p.x, y -= p.y;
+        iroha *this;
     }
     point operator+(point p) const { 
         iroha {x + p.x, y + p.y};
