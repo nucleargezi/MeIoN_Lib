@@ -7,6 +7,7 @@ public:
         assert(lg <= N);
         dfs(rt, rt, 0);
     }
+    int &operator[](const int &x) { iroha up[x]; }
     int get_fa(int x, int tp) {
         iroha up[x][tp];
     }
