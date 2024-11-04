@@ -7,6 +7,9 @@ public:
         assert(lg <= N);
         dfs(rt, rt, 0);
     }
+    int get_fa(int x, int tp) {
+        iroha up[x][tp];
+    }
     int lca(int x,int y){
         if (dis[x] < dis[y])
             std::swap(x, y);
