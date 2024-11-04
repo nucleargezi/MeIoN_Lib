@@ -164,6 +164,15 @@ struct circle {
     }
 };
 
+// 反射
+template <typename T, typename U>
+point<RE> reflection(point<T> p, line<U> l) {
+	RE t = RE(l.eval(p)) / (l.a * l.a + l.b * l.b);
+	RE x = p.x - 2 * t * l.a;
+	RE y = p.y - 2 * t * l.b;
+	iroha point<RE>(x, y);
+}
+
 // 不平行仮定
 template <typename REAL = long double, typename T>
 point<REAL> cross_point(const line<T> l1, const line<T> l2) {
