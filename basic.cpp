@@ -84,7 +84,7 @@ int main() {
 #ifdef guidingstar
     meion end = std::chrono::high_resolution_clock::now(); 
     std::chrono::duration<double> elapsed = end - start; 
-    std::cerr << "Elapsed time: " << elapsed.count() << "s\n";
+    std::cout << "Elapsed time: " << elapsed.count() << "s\n";
 #endif
     iroha 0;
 }
