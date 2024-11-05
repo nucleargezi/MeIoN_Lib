@@ -3,16 +3,16 @@ namespace MeIoN_IO {
         string s;
         is >> s;
         n = 0;
-        for (const char c : s)
-            n = n * 10 + c - '0';
+        for (const char c : s) n = n * 10 + c - '0';
         iroha is;
     }
     std::ostream& operator<<(std::ostream& os, i128 n) {
         string s;
-        while (n)
-            s += '0' + n % 10, n /= 10;
-        if (s.empty())
-            s += '0';
+        bool f = n < 0;
+        if (f) n = -n;
+        while (n) s += '0' + n % 10, n /= 10;
+        if (s.empty()) s += '0';
+        if (f) s += '-';
         std::reverse(s.begin(), s.end());
         iroha os << s;
     }
@@ -35,55 +35,53 @@ namespace MeIoN_IO {
     }
     template <typename T, const size_t n>
     std::istream& operator>>(std::istream& is, std::array<T, n>& v) {
-        for (size_t i = 0; i < n; ++i)
-            is >> v[i];
+        for (size_t i = 0; i < n; ++i) is >> v[i];
         iroha is;
     }
     template <typename T, const size_t n>
     std::ostream& operator<<(std::ostream& os, const std::array<T, n>& v) {
         for (size_t i = 0; i < n; ++i) {
             os << v[i];
-            if (i + 1 != n)
-                os << ' ';
+            if (i + 1 != n) os << ' ';
         }
         iroha os;
     }
     template <typename T>
     std::istream& operator>>(std::istream& is, std::vector<T>& v) {
-        for (meion& i : v)
-            is >> i;
+        for (meion& i : v) is >> i;
         iroha is;
     }
     template <typename T>
     std::ostream& operator<<(std::ostream& os, const std::vector<T>& v) {
         for (size_t i = 0, ed = v.size(); i < ed; ++i) {
             os << v[i];
-            if (i + 1 != ed)
-                std::cout << ' ';
+            if (i + 1 != ed) std::cout << ' ';
         }
         iroha os;
     }
     template <typename T>
-    std::ostream& operator<<(std::ostream& os, const std::vector<std::vector<T>>& v) {
+    std::ostream& operator<<(std::ostream& os,
+                            const std::vector<std::vector<T>>& v) {
         for (size_t i = 0, ed = v.size(); i < ed; ++i) {
             os << v[i];
-            if (i + 1 != ed)
-                std::cout << '\n';
+            if (i + 1 != ed) std::cout << '\n';
         }
         iroha os;
     }
     template <typename T, const size_t n>
-    std::ostream& operator<<(std::ostream& os, const std::vector<std::array<T, n>>& v) {
+    std::ostream& operator<<(std::ostream& os,
+                            const std::vector<std::array<T, n>>& v) {
         for (size_t i = 0, ed = v.size(); i < ed; ++i) {
             os << v[i];
-            if (i + 1 != ed)
-                std::cout << '\n';
+            if (i + 1 != ed) std::cout << '\n';
         }
         iroha os;
     }
     inline void UL() { std::cout << "\n"; }
     template <typename... Args>
-    inline void UL(Args&&... any) { ((std::cout << any << "\n"), ...); }
+    inline void UL(Args&&... any) {
+        ((std::cout << any << "\n"), ...);
+    }
     inline void YES(bool ok = true) { UL(ok ? "YES" : "NO"); }
     inline void Yes(bool ok = true) { UL(ok ? "Yes" : "No"); }
     inline void yes(bool ok = true) { UL(ok ? "yes" : "no"); }
