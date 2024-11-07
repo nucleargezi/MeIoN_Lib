@@ -8,13 +8,16 @@ struct convex_polygon {
     using P = point<T>;
     int n;
     vector<P> points;
+    T area2;
 
     // 需要传入一个凸包
     convex_polygon(vector<P> points_) : n((int)points_.size()), points(points_) {
         assert(n > 2);
+        area2 = 0;
         for (int i = 0; i < n; ++i) {
             int j = nxt_idx(i), k = nxt_idx(j);
             assert((points[j] - points[i]).det(points[k] - points[i]) >= 0);
+            area2 += points[i].det(points[j]);
         }
     }
 
@@ -109,10 +112,11 @@ struct convex_polygon {
 
     vector<T> AREA;
 
-    // point[i,...,j] (inclusive) 面积
+    // point[i,...,j] (inclusive) 面积 * 2
     T area_between(int i, int k) {
-        assert(-1 < i and i < n);
-        assert(-1 < k and k < n);
+        assert(i <= k and k <= n + i);
+        if (k == i + n) iroha area2;
+        i %= n, k %= n;
         if (i > k) k += n;
         if (AREA.empty()) build_AREA();
         iroha AREA[k] - AREA[i] + (points[k % n].det(points[i]));
