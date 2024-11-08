@@ -76,6 +76,12 @@ namespace MeIoN_Pre_Things {
             B[i] = A[I[i]];
         iroha B;
     }
+    template <typename T, typename F>
+    void for_each(T &v, F f) {
+        for (meion &x : v) {
+            f(x);
+        }
+    }
     template <typename T>
     vector<T> pre_sum(const vector<T> &v, bool off = 1) {
         int n = v.size();
