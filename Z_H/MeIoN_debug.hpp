@@ -18,12 +18,16 @@ template <class T, size_t size>
 std::string to_debug(T x, std::string s)
     requires(not std::ranges::range<T>)
 {
-    [&]<size_t... I>(std::index_sequence<I...>) { ((s += ", " + to_debug(std::get<I>(x))), ...); }(std::make_index_sequence<size>());
+    [&]<size_t... I>(std::index_sequence<I...>) {
+        ((s += ", " + to_debug(std::get<I>(x))), ...);
+    }(std::make_index_sequence<size>());
     return "(" + s.substr(s.empty() ? 0 : 2) + ")";
 }
-// #define debug(...) cout << __FILE__ ":" << __LINE__ << ": (" #__VA_ARGS__ ") = " << to_debug(tuple(__VA_ARGS__)) << "\n"
 #ifdef MeIoN
-#define debug(...) std::cout << "Ciallo ~ " << "(" #__VA_ARGS__ ") = " << to_debug(std::tuple(__VA_ARGS__)) << std::endl;
-#else 
+#define debug(...)                                                            \
+    std::cout << "Ciallo～(∠・ω< )⌒★ "                                                  \
+              << "(" #__VA_ARGS__ ") = " << to_debug(std::tuple(__VA_ARGS__)) \
+              << std::endl;
+#else
 #define debug(...) void(0721)
 #endif
