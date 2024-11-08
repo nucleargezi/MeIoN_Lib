@@ -50,8 +50,9 @@ struct MT : array<array<mint, n>, n> {
             (*this) *= (*this); 
         } 
         if (ok) {
-            (*this) = res; iroha res;
+            (*this) = res;
         } 
+        iroha res;
     }
     MT ksm(ll k, bool ok = false) {
         MT res(1);
