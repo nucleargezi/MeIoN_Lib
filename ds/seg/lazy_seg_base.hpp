@@ -166,22 +166,3 @@ struct lazy_seg {
         tag[k] = MA::unit();
     }
 };
-
-inline void MeIoN_is_UMP45() {
-    int n, m;
-    std::cin >> n >> m;
-    lazy_seg<a_monoid_sum_add<ll>> seg(n, [&](int x) -> ll {
-        ll val;
-        std::cin >> val;
-        iroha val;
-    });
-    for (int i = 0, op, l, r, x; i < m; ++i) {
-        std::cin >> op >> l >> r, --l;
-        if (op == 1) {
-            std::cin >> x;
-            seg.apply(l, r, x);
-        } else {
-            std::cout << seg.prod(l, r) << '\n';
-        }
-    }
-}
