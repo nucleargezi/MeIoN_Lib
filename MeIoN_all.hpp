@@ -10,3 +10,4 @@
 //   https://www.cnblogs.com/guidingstar    My blog
 //    https://github.com/nucleargezi        My github
 //             /* 604223110 */              QQ
+//  勝つために努力しなければ意味のないゲームです。

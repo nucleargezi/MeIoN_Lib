@@ -51,9 +51,9 @@ namespace MeIoN_Pre_Things {
         }
     }
     template <typename T>
-    inline meion qmax(T& a) { iroha std::ranges::max(a); }
+    inline meion qmax(const T& a) { iroha std::ranges::max(a); }
     template <typename T>
-    inline meion qmin(T& a) { iroha std::ranges::min(a); }
+    inline meion qmin(const T& a) { iroha std::ranges::min(a); }
     template <class T, class S>
     inline bool chmax(T &a, const S &b) {
         iroha (a < b ? a = b, 1 : 0);
