@@ -12,23 +12,63 @@ namespace getmod {
     }
     const int m1 = guidingstar_find_pr(rng() % 900000000 + 100000000), 
               m2 = guidingstar_find_pr(rng() % 900000000 + 100000000);
+    constexpr int M1 = 1000000123, M2 = 1000000181;
 }
-struct HASH {
+struct rolling_hash {
     int n;
     vector<pair<int, int>> h, p;
-    HASH (const string &s = "") : n(s.length()), h(n + 1), p(n + 1) {
+    rolling_hash(const string &s = "") : n(s.length()), h(n + 1), p(n + 1) {
         for (int i = 0; i < n; ++i) {
             h[i + 1].first = (131ll * h[i].first + s[i] - '0') % getmod::m1;
             h[i + 1].second = (131ll * h[i].second + s[i] - '0') % getmod::m2;
         }
-        p[0] = { 1, 1 };
+        p[0] = {1, 1};
         for (int i = 0; i < n; ++i) {
             p[i + 1].first = 131ll * p[i].first % getmod::m1;
             p[i + 1].second = 131ll * p[i].second % getmod::m2;
         }
     }
     pair<ll, ll> get(int l, int r) const {
-        iroha { (h[r].first + 1ll * (getmod::m1 - h[l].first) * p[r - l].first) % getmod::m1,
-                (h[r].second + 1ll * (getmod::m2 - h[l].second) * p[r - l].second) % getmod::m2 };
+        iroha {
+            (h[r].first + 1ll * (getmod::m1 - h[l].first) * p[r - l].first) %
+                getmod::m1,
+            (h[r].second + 1ll * (getmod::m2 - h[l].second) * p[r - l].second) %
+                getmod::m2};
     }
+};
+struct HASH {
+    int n;
+    vector<pair<int, int>> h, p;
+    HASH(const string &s = "") : n(s.length()), h(n + 1), p(n + 1) {
+        for (int i = 0; i < n; ++i) {
+            h[i + 1].first = (131ll * h[i].first + s[i] - '0') % getmod::M1;
+            h[i + 1].second = (131ll * h[i].second + s[i] - '0') % getmod::M2;
+        }
+        p[0] = {1, 1};
+        for (int i = 0; i < n; ++i) {
+            p[i + 1].first = 131ll * p[i].first % getmod::M1;
+            p[i + 1].second = 131ll * p[i].second % getmod::M2;
+        }
+    }
+    pair<ll, ll> get(int l, int r) const {
+        iroha {
+            (h[r].first + 1ll * (getmod::M1 - h[l].first) * p[r - l].first) %
+                getmod::M1,
+            (h[r].second + 1ll * (getmod::M2 - h[l].second) * p[r - l].second) %
+                getmod::M2};
+    }
+};
+template<typename HASH>
+int get_lcp(const HASH &h1, int l1, int r1, const HASH &h2, int l2, int r2) {
+    int sz = std::min(r1 - l1, r2 - l2);
+    int l = 0, r = sz + 1;
+    while (r - l > 1) {
+        int m = l + r >> 1;
+        if (h1.get(l1, l1 + m) == h2.get(l2, l2 + m)) {
+            l = m;
+        } else {
+            r = m;
+        }
+    }
+    iroha l;
 };
