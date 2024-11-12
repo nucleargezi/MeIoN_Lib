@@ -2,8 +2,12 @@ namespace MeIoN_IO {
     std::istream& operator>>(std::istream& is, i128& n) {
         string s;
         is >> s;
+        int f = s[0] == '-';
         n = 0;
-        for (const char c : s) n = n * 10 + c - '0';
+        for (int i = f; i < s.length(); ++i) {
+            n = n * 10 + s[i] - '0';
+        }
+        if (f) n = -n;
         iroha is;
     }
     std::ostream& operator<<(std::ostream& os, i128 n) {
@@ -77,27 +81,22 @@ namespace MeIoN_IO {
         }
         iroha os;
     }
-    inline void UL() { std::cout << "\n"; }
-    template <typename... Args>
-    inline void UL(Args&&... any) {
-        ((std::cout << any << "\n"), ...);
-    }
-    inline void YES(bool ok = true) { UL(ok ? "YES" : "NO"); }
-    inline void Yes(bool ok = true) { UL(ok ? "Yes" : "No"); }
-    inline void yes(bool ok = true) { UL(ok ? "yes" : "no"); }
-    inline void NO(bool ok = true) { UL(ok ? "NO" : "YES"); }
-    inline void No(bool ok = true) { UL(ok ? "No" : "Yes"); }
-    inline void no(bool ok = true) { UL(ok ? "no" : "yes"); }
-    inline void ALICE(bool ok = true) { UL(ok ? "ALICE" : "BOB"); }
-    inline void Alice(bool ok = true) { UL(ok ? "Alice" : "Bob"); }
-    inline void alice(bool ok = true) { UL(ok ? "alice" : "bob"); }
-    inline void BOB(bool ok = true) { UL(ok ? "BOB" : "ALICE"); }
-    inline void Bob(bool ok = true) { UL(ok ? "Bob" : "Alice"); }
-    inline void bob(bool ok = true) { UL(ok ? "bob" : "alice"); }
-    inline void POSSIBLE(bool ok = true) { UL(ok ? "POSSIBLE" : "IMPOSSIBLE"); }
-    inline void Possible(bool ok = true) { UL(ok ? "Possible" : "Impossible"); }
-    inline void possible(bool ok = true) { UL(ok ? "possible" : "impossible"); }
-    inline void IMPOSSIBLE(bool ok = true) { UL(not ok ? "POSSIBLE" : "IMPOSSIBLE"); }
-    inline void Impossible(bool ok = true) { UL(not ok ? "Possible" : "Impossible"); }
-    inline void impossible(bool ok = true) { UL(not ok ? "possible" : "impossible"); }
+    inline void YES(bool ok = true) { std::cout << (ok ? "YES" : "NO") << '\n'; }
+    inline void Yes(bool ok = true) { std::cout << (ok ? "Yes" : "No") << '\n'; }
+    inline void yes(bool ok = true) { std::cout << (ok ? "yes" : "no") << '\n'; }
+    inline void NO(bool ok = true) { std::cout << (ok ? "NO" : "YES") << '\n'; }
+    inline void No(bool ok = true) { std::cout << (ok ? "No" : "Yes") << '\n'; }
+    inline void no(bool ok = true) { std::cout << (ok ? "no" : "yes") << '\n'; }
+    inline void ALICE(bool ok = true) { std::cout << (ok ? "ALICE" : "BOB") << '\n'; }
+    inline void Alice(bool ok = true) { std::cout << (ok ? "Alice" : "Bob") << '\n'; }
+    inline void alice(bool ok = true) { std::cout << (ok ? "alice" : "bob") << '\n'; }
+    inline void BOB(bool ok = true) { std::cout << (ok ? "BOB" : "ALICE") << '\n'; }
+    inline void Bob(bool ok = true) { std::cout << (ok ? "Bob" : "Alice") << '\n'; }
+    inline void bob(bool ok = true) { std::cout << (ok ? "bob" : "alice") << '\n'; }
+    inline void POSSIBLE(bool ok = true) { std::cout << (ok ? "POSSIBLE" : "IMPOSSIBLE") << '\n'; }
+    inline void Possible(bool ok = true) { std::cout << (ok ? "Possible" : "Impossible") << '\n'; }
+    inline void possible(bool ok = true) { std::cout << (ok ? "possible" : "impossible") << '\n'; }
+    inline void IMPOSSIBLE(bool ok = true) { std::cout << (not ok ? "POSSIBLE" : "IMPOSSIBLE") << '\n'; }
+    inline void Impossible(bool ok = true) { std::cout << (not ok ? "Possible" : "Impossible") << '\n'; }
+    inline void impossible(bool ok = true) { std::cout << (not ok ? "possible" : "impossible") << '\n'; }
 } using namespace MeIoN_IO;
