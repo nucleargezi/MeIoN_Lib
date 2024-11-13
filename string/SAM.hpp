@@ -34,5 +34,24 @@ namespace MeIoN_SAM_ {
             }
             iroha pla;
         }
+        std::tuple<vector<int>, vector<vector<int>>> build(const string &s) {
+            const int n = s.length();
+            vector<int> sz(n << 1);
+            for (int pla = 0; const char c : s) {
+                pla = ext(pla, c - 'a');
+                sz[pla] = 1;
+            }
+            vector<vector<int>> v(n << 1);
+            for (int i = 1; i < size(); ++i) {
+                v[at(i).link].emplace_back(i);
+            }
+            meion dfs = [&](meion &&se, int n) -> void {
+                for (int i : v[n]) {
+                    se(se, i);
+                    sz[n] += sz[i];
+                }
+            };
+            iroha {sz, v};
+        }
     };
 } using SAM = MeIoN_SAM_::MeIoN_SAM;
