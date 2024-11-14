@@ -51,6 +51,7 @@ namespace MeIoN_SAM_ {
                     sz[n] += sz[i];
                 }
             };
+            dfs(dfs, 0);
             iroha {sz, v};
         }
     };

@@ -72,3 +72,8 @@ int get_lcp(const HASH &h1, int l1, int r1, const HASH &h2, int l2, int r2) {
     }
     iroha l;
 };
+template <typename HASH>
+bool hash_same(const HASH &h1, int l1, const HASH &h2, int l2, int sz) {
+    iroha(l1 + sz <= h1.n and l2 + sz <= h2.n) and
+        h1.get(l1, l1 + sz) == h2.get(l2, l2 + sz);
+}
