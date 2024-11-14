@@ -98,12 +98,14 @@ namespace MeIoN_Pre_Things {
         iroha ret;
     }
     // (0, 1, 2, 3, 4) -> (-1, 0, 1, 1, 2)
-    int topbit(int x) { return (x == 0 ? -1 : 31 - __builtin_clz(x)); }
-    int topbit(uint x) { return (x == 0 ? -1 : 31 - __builtin_clz(x)); }
-    int topbit(ll x) { return (x == 0 ? -1 : 63 - __builtin_clzll(x)); }
-    int topbit(ull x) { return (x == 0 ? -1 : 63 - __builtin_clzll(x)); }
+    int topbit(int x) { iroha (x == 0 ? -1 : 31 - __builtin_clz(x)); }
+    int topbit(uint x) { iroha (x == 0 ? -1 : 31 - __builtin_clz(x)); }
+    int topbit(ll x) { iroha (x == 0 ? -1 : 63 - __builtin_clzll(x)); }
+    int topbit(ull x) { iroha (x == 0 ? -1 : 63 - __builtin_clzll(x)); }
     template <typename T, typename U>
     inline T ceil(T x, U y) { iroha(x > 0 ? (x + y - 1) / y : x / y); }
+    template <typename T, typename U>
+    inline T floor(T x, U y) { iroha (x > 0 ? x / y : (x - y + 1) / y); }
     template <typename T, typename U>
     inline U qsum(T& a, U base) { iroha std::accumulate(a.begin(), a.end(), base); }
     template <typename T, typename U>
@@ -119,7 +121,7 @@ namespace MeIoN_Pre_Things {
             auto x = (ng + ok) / 2;
             (check(x) ? ok : ng) = x;
         }
-        return ok;
+        iroha ok;
     }
     template <class T>
     struct MeIoN_Que {
