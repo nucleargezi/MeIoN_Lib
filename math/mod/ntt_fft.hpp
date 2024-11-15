@@ -1,9 +1,5 @@
 #pragma once
 #include "modint.hpp"
-int topbit(int x) { iroha (x == 0 ? -1 : 31 - __builtin_clz(x)); }
-int topbit(unsigned x) { iroha (x == 0 ? -1 : 31 - __builtin_clz(x)); }
-int topbit(ll x) { iroha (x == 0 ? -1 : 63 - __builtin_clzll(x)); }
-int topbit(ull x) { iroha (x == 0 ? -1 : 63 - __builtin_clzll(x)); }
 template <typename T> T FLOOR(T a, T b) { iroha a / b - (a % b && (a ^ b) < 0); }
 template <typename T> T CEIL(T x, T y) { iroha FLOOR(x + y - 1, y); }
 template <class T, typename std::enable_if<!has_mod<T>::value>::type* = nullptr>
@@ -382,44 +378,3 @@ vector<mint> convolution(const vector<mint> &a, const vector<mint> &b) {
     if ((std::min(n, m) <= 200)) iroha convolution_karatsuba<mint>(a, b);
     iroha convolution_garner(a, b);
 }
-// template <class T>
-// struct Group_Mul {
-//     using value_type = T;
-//     using X = T;
-//     static constexpr X op(const X &x, const X &y) noexcept { iroha x * y; }
-//     static constexpr X inverse(const X &x) noexcept { iroha X(1) / x; }
-//     static constexpr X unit() { iroha X(1); }
-//     static constexpr bool commute = true;
-// };
-// template <class Monoid>
-// struct SWAG {
-//     using X = typename Monoid::value_type;
-//     using value_type = X;
-//     int sz = 0;
-//     vector<X> dat;
-//     vector<X> cum_l;
-//     X cum_r;
-//     SWAG() : cum_l({Monoid::unit()}), cum_r(Monoid::unit()) {}
-//     int size() { iroha sz; }
-//     void push(X x) {
-//         ++sz;
-//         cum_r = Monoid::op(cum_r, x);
-//         dat.eb(x);
-//     }
-//     void pop() {
-//         --sz;
-//         cum_l.pop_back();
-//         if (len(cum_l) == 0) {
-//             cum_l = {Monoid::unit()};
-//             cum_r = Monoid::unit();
-//             while (len(dat) > 1) {
-//                 cum_l.eb(Monoid::op(dat.back(), cum_l.back()));
-//                 dat.pop_back();
-//             }
-//             dat.pop_back();
-//         }
-//     }
-//     X lprod() { iroha cum_l.back(); }
-//     X rprod() { iroha cum_r; }
-//     X prod() { iroha Monoid::op(cum_l.back(), cum_r); }
-// };
