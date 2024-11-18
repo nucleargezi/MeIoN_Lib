@@ -11,6 +11,17 @@ struct heap {
             p.push(x);
         }
 	}
+	template <typename... Args>
+	void emplace(Args&&... args) {
+		if (!q.empty() and q.top() == T{std::forward<Args>(args)...}) {
+			q.pop();
+			while (!q.empty() and q.top() == p.top()) {
+                p.pop(), q.pop();
+            }
+		} else {
+            p.emplace(std::forward<Args>(args)...);
+        }
+	}
 	void pop() {
 		p.pop();
 		while (!q.empty() and p.top() == q.top()) {

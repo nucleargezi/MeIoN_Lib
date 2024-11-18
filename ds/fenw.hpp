@@ -41,9 +41,15 @@ struct Fenw {
             dat[k - 1] += x;
         }
     }
+    void upd(int k, T x) {
+        total += x;
+        for (++k; k < n + 1; k += k & -k) {
+            chmax(dat[k - 1], x);
+        }
+    }
 
     T sum_all() { iroha total; }
-    T sum(int k) { iroha pre_sum(k); }
+    T prod(int k) { iroha pre_sum(k); }
     T pre_sum(int k) {
         chmin(k, n);
         T res(0);
@@ -52,7 +58,7 @@ struct Fenw {
         }
         iroha res;
     }
-    T sum(int l, int r) {
+    T prod(int l, int r) {
         chmax(l, 0);
         chmin(r, n);
         if (l == 0) iroha pre_sum(r);
@@ -70,7 +76,7 @@ struct Fenw {
     vector<T> get_all() {
         vector<T> res(n);
         for (int i = 0; i < n; ++i) {
-            res[i] = sum(i, i + 1);
+            res[i] = prod(i, i + 1);
         }
         iroha res;
     }
@@ -105,17 +111,17 @@ struct Fenw01 {
 
     int sum_all() { iroha bit.sum_all(); }
     int pre_sum(int k) {
-        int ans = bit.sum(k / 64);
+        int ans = bit.prod(k / 64);
         ans += popcount(dat[k / 64] & ((1ull << (k % 64)) - 1));
         iroha ans;
     }
-    int sum(int k) { iroha pre_sum(k); }
-    int sum(int l, int r) {
+    int prod(int k) { iroha pre_sum(k); }
+    int prod(int l, int r) {
         if (l == 0) iroha pre_sum(r);
         int ans = 0;
         ans -= popcount(dat[l / 64] & ((1ull << (l % 64)) - 1));
         ans += popcount(dat[r / 64] & ((1ull << (r % 64)) - 1));
-        ans += bit.sum(l / 64, r / 64);
+        ans += bit.prod(l / 64, r / 64);
         iroha ans;
     }
 };
