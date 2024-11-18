@@ -14,10 +14,10 @@ namespace getmod {
               m2 = guidingstar_find_pr(rng() % 900000000 + 100000000);
     constexpr int M1 = 1000000123, M2 = 1000000181;
 }
-struct rolling_hash {
+struct rolling_HASH {
     int n;
     vector<pair<int, int>> h, p;
-    rolling_hash(const string &s = "") : n(s.length()), h(n + 1), p(n + 1) {
+    rolling_HASH(const string &s = "") : n(s.length()), h(n + 1), p(n + 1) {
         for (int i = 0; i < n; ++i) {
             h[i + 1].first = (131ll * h[i].first + s[i] - '0') % getmod::m1;
             h[i + 1].second = (131ll * h[i].second + s[i] - '0') % getmod::m2;
