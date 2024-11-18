@@ -1,4 +1,4 @@
-g++ -std=c++20 -DMeIoN D_Rain_Flows_into_Dams.cpp -o flip_test
+g++ -std=c++20 -DMeIoN test.cpp -o flip_test
 g++ -std=c++20 -DMeIoN tt.cpp -o flip_std
 g++ -std=c++20 -DMeIoN gen.cpp -o flip_gen
 
