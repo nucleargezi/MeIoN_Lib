@@ -1,6 +1,6 @@
 template <const int N> struct LCA {
 public:
-    LCA (vector<vector<int>> v, int rt) : 
+    LCA (const vector<vector<int>> &v, int rt) : 
     sz(v.size()), root(rt), up(sz), dis(sz), lg(0) {
         for (meion &i : up) i.fill(0);
         while ((1 << lg) <= sz) lg++;
