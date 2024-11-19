@@ -1,4 +1,5 @@
 import re
+import os
 
 def remove_comments(code):
     """去除所有C++注释"""
@@ -65,8 +66,23 @@ def process_cpp_file(input_file, output_file):
         for line in result:
             f.write(line + '\n')
 
+
+current_directory = os.getcwd()
+
+# # 获取当前目录下的所有文件
+files = [f for f in os.listdir(current_directory) if os.path.isfile(os.path.join(current_directory, f))]
+
+# 如果目录下没有文件
+if not files:
+    print("当前目录下没有文件")
+else:
+    # 按照文件的创建时间排序（从新到旧）
+    latest_file = max(files, key=lambda f: os.path.getctime(os.path.join(current_directory, f)))
+    
+    # 打印最新文件名
+    print("latest: :", latest_file)
 # 使用示例
-input_cpp = 'F_Polynomial_Constructioncmpx.cpp'  # 输入的 C++ 文件路径
+input_cpp = latest_file  # 输入的 C++ 文件路径
 output_cpp = 'zip.cpp'  # 输出的 C++ 文件路径
 process_cpp_file(input_cpp, output_cpp)
 print("down")
