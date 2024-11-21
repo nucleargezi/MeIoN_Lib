@@ -1,12 +1,12 @@
-namespace MeIoN_SAM_ {
+namespace MeIoN_SAM {
     static constexpr int ALPHABET = 26;
     struct Node : std::array<int, ALPHABET> {
         int link, len;
         Node() : link(-1), len(0) { fill(-1); }
     };
-    struct MeIoN_SAM : std::vector<Node> {
-        MeIoN_SAM() : std::vector<Node> (1) {};
-        MeIoN_SAM(const int n) : std::vector<Node> (1) { reserve(n); };
+    struct SAM : std::vector<Node> {
+        SAM() : std::vector<Node> (1) {};
+        SAM(const int n) : std::vector<Node> (1) { reserve(n); };
         int ext(int p, int c) {
             int pla = size();
             emplace_back();
@@ -55,4 +55,4 @@ namespace MeIoN_SAM_ {
             iroha {sz, v};
         }
     };
-} using SAM = MeIoN_SAM_::MeIoN_SAM;
+} using MeIoN_SAM::SAM;
