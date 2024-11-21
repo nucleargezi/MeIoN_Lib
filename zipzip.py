@@ -1,6 +1,5 @@
 import re
 import os
-
 def remove_comments(code):
     """去除所有C++注释"""
     # 去除单行注释
@@ -80,9 +79,11 @@ else:
     latest_file = max(files, key=lambda f: os.path.getctime(os.path.join(current_directory, f)))
     
     # 打印最新文件名
-    print("latest: :", latest_file)
+    print('latest: ', latest_file)
 # 使用示例
-input_cpp = latest_file  # 输入的 C++ 文件路径
+cpp_merge = 'cpp-merge --output zip_pre.cpp ' + latest_file  # 输入的 C++ 文件路径
+os.system(cpp_merge)
 output_cpp = 'zip.cpp'  # 输出的 C++ 文件路径
-process_cpp_file(input_cpp, output_cpp)
+process_cpp_file("zip_pre.cpp", output_cpp)
+os.system('xclip -sel clip < zip.cpp')
 print("down")
