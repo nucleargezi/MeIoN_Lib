@@ -83,4 +83,5 @@ os.system(cpp_merge)
 output_cpp = 'zip.cpp'  # 输出的 C++ 文件路径
 process_cpp_file("zip_pre.cpp", output_cpp)
 os.system('xclip -sel clip < zip.cpp')
+os.system('rm zip_pre.cpp zip.cpp')
 print("down")

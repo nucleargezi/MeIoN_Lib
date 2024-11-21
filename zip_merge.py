@@ -81,4 +81,5 @@ else:
 cpp_merge = 'cpp-merge --output zip_pre.cpp ' + latest_file 
 os.system(cpp_merge)
 os.system('xclip -sel clip < zip_pre.cpp')
+os.system('rm zip_pre.cpp')
 print("down")
