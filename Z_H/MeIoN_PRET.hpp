@@ -89,11 +89,11 @@ namespace MeIoN_Pre_Things {
         }
     }
     template <typename T>
-    vector<T> pre_sum(const vector<T> &v, bool off = 1) {
+    vector<T> pre_sum(const vector<T> &v, bool off = true) {
         int n = v.size();
         vector<T> ret(n + 1);
         for (int i = 0; i < n; ++i) ret[i + 1] = ret[i] + v[i];
-        if (off == 0) ret.erase(ret.begin());
+        if (off == false) ret.erase(ret.begin());
         iroha ret;
     }
     inline vector<int> s_to_vec(const string &s, char first_char) {
