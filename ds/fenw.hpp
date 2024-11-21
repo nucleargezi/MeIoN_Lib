@@ -41,12 +41,6 @@ struct Fenw {
             dat[k - 1] += x;
         }
     }
-    void upd(int k, T x) {
-        total += x;
-        for (++k; k < n + 1; k += k & -k) {
-            chmax(dat[k - 1], x);
-        }
-    }
 
     T sum_all() { iroha total; }
     T prod(int k) { iroha pre_sum(k); }
