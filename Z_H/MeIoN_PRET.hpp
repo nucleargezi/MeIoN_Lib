@@ -82,6 +82,12 @@ namespace MeIoN_Pre_Things {
             f(x);
         }
     }
+    template <typename T, typename F>
+    void for_each(T l, T r, F f) {
+        for (T i = l; i != r; ++i) {
+            f(i);
+        }
+    }
     template <typename T>
     vector<T> pre_sum(const vector<T> &v, bool off = 1) {
         int n = v.size();
