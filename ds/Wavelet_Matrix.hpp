@@ -21,7 +21,7 @@ struct Wavelet_Matrix {
     vector<int> mid;
     vector<Bit_Vector> bv;
     vector<T> key;
-    const bool set_log;
+    bool set_log;
     Wavelet_Matrix(vector<T> A, int log = -1)
         : N(A.size()), lg(log), set_log(log != -1) {
         if (COMPRESS) {
