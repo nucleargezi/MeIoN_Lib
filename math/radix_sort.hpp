@@ -10,7 +10,6 @@ void radix_sort(int n, int a[]) {
         for (int j = 0; j != (1 << 8); ++j) cnt[j] = 0;
         for (int j = 0; j != n; ++j) ++cnt[x[j] >> i & mask];
         for (int sum = 0, j = 0; j != (1 << 8); ++j) {
-            // 等价于 std::exclusive_scan(cnt, cnt + (1 << 8), cnt, 0);
             sum += cnt[j], cnt[j] = sum - cnt[j];
         }
         for (int j = 0; j != n; ++j) y[cnt[x[j] >> i & mask]++] = x[j];
