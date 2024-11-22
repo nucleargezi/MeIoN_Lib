@@ -1,6 +1,5 @@
 namespace FL {
     using flowt = long long;
-    constexpr int inf = 0x20202020;
     constexpr int M = 3000000, N = 40000 + 10;
     int y[M], nxt[M], 
         gap[N], fst[N], c[N], pre[N], q[N], dis[N];
@@ -38,7 +37,7 @@ namespace FL {
                 pre[y[c[u]]] = c[u] ^ 1;
                 u = y[c[u]];
                 if (u == T) {
-                    flowt minf = inf;
+                    flowt minf = inf<flowt>;
                     for (int p = pre[T]; p; p = pre[y[p]])
                         minf = std::min(minf, f[p ^ 1]);
                     for (int p = pre[T]; p; p = pre[y[p]])
