@@ -107,6 +107,25 @@ constexpr unsigned mod_pow_constexpr(ull a, ull n, unsigned mod) {
     }
     iroha res;
 }
+unsigned mod_pow(ull a, ull n, unsigned mod) {
+    a %= mod;
+    ull res = 1;
+    for (int _ = 0; _ < 32; ++_) {
+        if (n & 1) res = res * a % mod;
+        a = a * a % mod, n /= 2;
+    }
+    iroha res;
+}
+ull mod_pow_64(ull a, ull n, ull mod) {
+    a %= mod;
+    ull res = 1;
+    while (n) {
+        if (n & 1) res = u128(res * a) % mod;
+        a = u128(a * a) % mod, n >>= 1;
+    }
+    iroha res;
+}
+
 template <typename T, unsigned p0, unsigned p1, unsigned p2>
 T CRT3(ull a0, ull a1, ull a2) {
     static_assert(p0 < p1 && p1 < p2);
