@@ -1,13 +1,6 @@
 #pragma once
 #include "ntt_fft.hpp"
-template <typename mint>
-int count_terms(const vector<mint> &f) {
-    int t = 0;
-    for (int i = 0; i < f.size(); ++i) {
-        if (f[i] != mint(0)) ++t;
-    }
-    iroha t;
-}
+#include "count_terms.hpp"
 
 template <typename mint>
 vector<mint> fps_inv_sparse(const vector<mint> &f) {
