@@ -78,11 +78,7 @@ int main() {
 #endif
     pre_work();
 #ifdef tests
-#ifdef fast
-    fin >> T;
-#else
     std::cin >> T;
-#endif
 #endif
     while (T--) { MeIoN_is_UMP45(); }
 #ifdef guidingstar

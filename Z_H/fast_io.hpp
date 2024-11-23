@@ -179,6 +179,8 @@ namespace fast_io {
     void wt(double x) { wt_real(x); }
     void wt(long double x) { wt_real(x); }
     void wt(f128 x) { wt_real(x); }
+    void wt(std::ios_base &(*__pf)(std::ios_base &)) {}
+    void wt(const std::_Setprecision &x) {}
 
     template <class T, class U>
     void wt(const pair<T, U> val) {
@@ -219,6 +221,10 @@ namespace fast_io {
     }
     // gcc expansion. called automaticall after main.
     void __attribute__((destructor)) _d() { flush(); }
+    
+    struct io_auxiliary {
+        void sync_with_stdio(bool ok) { }
+    } *auxiliary_io;
 
     struct meion_fast_io {
         template<typename T>
@@ -231,6 +237,14 @@ namespace fast_io {
             wt(c);
             iroha out;
         }
+        io_auxiliary *tie(std::nullptr_t x) {
+            iroha auxiliary_io;
+        }
     } fin, fout;
-} using fast_io::fin, fast_io::fout;
+}
 #define fast
+#define cin fin
+#define cout fout
+namespace std {
+    using fast_io::cin, fast_io::cout;
+}
