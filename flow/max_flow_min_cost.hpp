@@ -70,6 +70,7 @@ public:
     std::pair<Cap, Cost> flow(int s, int t, Cap flow_limit) {
         return slope(s, t, flow_limit).back();
     }
+    // 返回流量和费用之间的关系曲线
     std::vector<std::pair<Cap, Cost>> slope(int s, int t) {
         return slope(s, t, std::numeric_limits<Cap>::max());
     }
