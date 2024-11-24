@@ -4,7 +4,7 @@ struct LinearBasis {
     void add(int v) {
         v = ask(v);
         if (v) {
-            int pivot = 30 - MeIoN_clz(v);
+            int pivot = 30 - clz(v);
             for (int i = 0; i < B; ++i) {
                 if (~basis[i] && (basis[i] >> pivot & 1)) {
                     basis[i] ^= v;
@@ -22,14 +22,14 @@ struct LinearBasis {
         return v;
     }
     int basis[B];
-}
+};
 struct LinearBasis_64 {
     static const int B = 63;
     LinearBasis_64() { memset(basis, -1, sizeof(basis)); }
     void add(ll v) {
         v = ask(v);
         if (v) {
-            int pivot = 62 - MeIoN_clz(v);
+            int pivot = 62 - clz(v);
             for (int i = 0; i < B; ++i) {
                 if (~basis[i] && (basis[i] >> pivot & 1)) {
                     basis[i] ^= v;
