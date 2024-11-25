@@ -19,7 +19,7 @@ struct lazy_seg {
     lazy_seg(const vector<X> &v) { build(v); }
 
     void build(int m) {
-        build(m, []() -> X { iroha MX::unit(); });
+        build(m, [](int i) -> X { iroha MX::unit(); });
     }
     void build(const vector<X> &v) {
         build(v.size(), [&](int i) -> X { iroha v[i]; });
