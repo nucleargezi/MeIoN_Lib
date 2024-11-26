@@ -1,5 +1,7 @@
+#pragma once
+#include "rollback_array.hpp"
 struct rb_dsu {
-    RollbackArray<int> dat; // parent or size
+    RollbackArray<int> dat;
     rb_dsu(int n) : dat(std::vector<int>(n, -1)) {}
     int operator[](int v) {
         while (dat.get(v) >= 0) {

@@ -1,3 +1,4 @@
+#pragma once
 template <typename T>
 struct RollbackArray {
     int N;
