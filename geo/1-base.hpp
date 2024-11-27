@@ -1,7 +1,7 @@
 #pragma once
 using RE = long double;
 template <typename T = int>
-struct point { // roll 一个 base 给每个点偏移一下
+struct point {
     T x, y;
     point() : x(0), y(0) {}
     
