@@ -35,7 +35,7 @@ python3 MeIoN_Lib/zipzip.py
     将文件夹内的所有.hpp后缀的文件内容都按文件夹分块写入一个markdown文档内
     Write the content of all .hpp files within a folder into a markdown document, organized by folder structure.
 
-#### My_Lib.md / MeIoN's XCPC Library - ICPC2024 - Kunming - guiding-star - 博客园.pdf
+#### My_Lib.md / MeIoN's XCPC Library - ICPC2024.pdf
     个人XCPC赛时使用的模板
     Template used during personal XCPC competition
 
