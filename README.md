@@ -26,7 +26,8 @@ python3 MeIoN_Lib/zip_merge.py
     删除生成的多余文件(用于在有提交行数限制的oj提交)
     Query the most recently saved file, merge this file, generate a merged file,  
     remove all comments from the file, compress the sections excluding the header files and the main function into a single line,  
-    copy the content of the file to the clipboard (which can be directly pasted into the online judge),  and delete the unnecessary generated file (for submission to online judges with line count limits).
+    copy the content of the file to the clipboard (which can be directly pasted into the online judge),  
+    and delete the unnecessary generated file (for submission to online judges with line count limits).
 ```bash
 python3 MeIoN_Lib/zipzip.py
 ```
