@@ -13,13 +13,20 @@ g++ -std=c++2a -DMeIoN Ciallo.cpp -o Ciallo
 ./Ciallo
 ```
 #### my persional usage
-    查询最近一个保存的文件并merge这个文件, 生成一个merge后的文件, 将文件内容放入剪切板(可以直接粘贴到oj), 删除生成的多余文件
-    Query the most recently saved file, merge this file, generate a merged file, copy the content of the file to the clipboard (which can be directly pasted into the online judge), and delete the unnecessary generated file.
+    查询最近一个保存的文件并merge这个文件, 生成一个merge后的文件,  
+    将文件内容放入剪切板(可以直接粘贴到oj), 删除生成的多余文件
+    Query the most recently saved file, merge this file, generate a merged file, 
+    copy the content of the file to the clipboard (which can be directly pasted into the online judge),  
+    and delete the unnecessary generated file.
 ```bash
 python3 MeIoN_Lib/zip_merge.py
 ```
-    查询最近一个保存的文件并merge这个文件, 生成一个merge后的文件, 删除文件内的所有注释, 将头文件和main函数以外的部分压缩成一行, 将文件内容放入剪切板(可以直接粘贴到oj), 删除生成的多余文件(用于在有提交行数限制的oj提交)
-    Query the most recently saved file, merge this file, generate a merged file, remove all comments from the file, compress the sections excluding the header files and the main function into a single line, copy the content of the file to the clipboard (which can be directly pasted into the online judge), and delete the unnecessary generated file (for submission to online judges with line count limits).
+    查询最近一个保存的文件并merge这个文件, 生成一个merge后的文件,  删除文件内的所有注释,  
+    将头文件和main函数以外的部分压缩成一行, 将文件内容放入剪切板(可以直接粘贴到oj),  
+    删除生成的多余文件(用于在有提交行数限制的oj提交)
+    Query the most recently saved file, merge this file, generate a merged file,  
+    remove all comments from the file, compress the sections excluding the header files and the main function into a single line,  
+    copy the content of the file to the clipboard (which can be directly pasted into the online judge),  and delete the unnecessary generated file (for submission to online judges with line count limits).
 ```bash
 python3 MeIoN_Lib/zipzip.py
 ```
