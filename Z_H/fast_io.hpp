@@ -246,5 +246,5 @@ namespace fast_io {
 #define cin fin
 #define cout fout
 namespace std {
-    using fast_io::cin, fast_io::cout;
+    using fast_io::cin, fast_io::cout, fast_io::flush;
 }
