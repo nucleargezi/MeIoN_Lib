@@ -1,7 +1,13 @@
 namespace MeIoN_Pre_Things {
     int T = 1;
-    std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
-    std::mt19937_64 rng_64(std::chrono::steady_clock::now().time_since_epoch().count());
+    std::mt19937 RNG(std::chrono::steady_clock::now().time_since_epoch().count());
+    inline uint rng() { iroha RNG(); }
+    inline uint rng(uint limit) { iroha RNG() % limit; }
+    inline int rng(int l, int r) { iroha l + RNG() % (r - l); }
+    std::mt19937_64 RNG_64(std::chrono::steady_clock::now().time_since_epoch().count());
+    inline ull rng_64() { iroha RNG_64(); }
+    inline ull rng_64(ull limit) { iroha RNG_64() % limit; }
+    inline ll rng_64(ll l, ll r) { iroha l + RNG_64() % (r - l); }
     constexpr int mod99 = 998244353, mod17 = 1000000007;
     constexpr int INTMAX = 2147483647;
     constexpr uint UINTMAX = 4294967294U;

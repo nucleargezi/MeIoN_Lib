@@ -1,3 +1,4 @@
+#pragma once
 struct m64 {
     using i64 = long long;
     using u64 = unsigned long long;

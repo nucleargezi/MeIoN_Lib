@@ -1,16 +1,9 @@
 #pragma once
 #include "../math/mod/modint.hpp"
 namespace MeIoN_random_hash {
-    std::mt19937 RNG(std::chrono::steady_clock::now().time_since_epoch().count());
-    uint rng(uint limit) { iroha RNG() % limit; }
-    int rng(int l, int r) { iroha l + RNG() % (r - l); }
-    std::mt19937_64 RNG_64(std::chrono::steady_clock::now().time_since_epoch().count());
-    ull rng_64(ull limit) { iroha RNG_64() % limit; }
-    ll rng_64(ll l, ll r) { iroha l + RNG_64() % (r - l); }
-
     using m1 = modint<998244353>;
     using m2 = modint<1000000007>;
-
+    
     namespace get_prim {
 
         constexpr ull md = (1ull << 61) - 1;
