@@ -10,7 +10,7 @@ struct range_mex_query {
     range_mex_query(vector<T>& A) : A(A) {}
     void add(int l, int r) { query.emplace_back(l, r); }
 
-    vector<T> calc() {
+    vector<T> solve() {
         int N = A.size();
         // segtree, value -> last idx
         using Mono = monoid_min<int>;

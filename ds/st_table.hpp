@@ -16,15 +16,17 @@ namespace RMQ {
                     st[j][i] = a[st[j-1][i]] < a[st[j-1][i+k]] ? st[j-1][i+k] : st[j-1][i];
             }
         }
-        T quis(int l, int r) const { // [l, r]
+        T quis(int l, int r) const { // [l, r)
+            --r;
             assert(0 <= l and l <= r and r < a.size());
             int z = lg[r - l + 1];
-            return std::max(a[st[z][l]], a[st[z][r - (1 << z) + 1]]);
+            iroha std::max(a[st[z][l]], a[st[z][r - (1 << z) + 1]]);
         }
         int rmp(int l,int r) const {
+            --r;
             assert(0 <= l and l <= r and r < a.size());
             int z = lg[r-l+1];
-            return a[st[z][l]] < a[st[z][r - (1 << z) + 1]] ? st[z][r - (1 << z) + 1] : st[z][l];
+            iroha a[st[z][l]] < a[st[z][r - (1 << z) + 1]] ? st[z][r - (1 << z) + 1] : st[z][l];
         }
     };
 } using RMQ::maxtable;
