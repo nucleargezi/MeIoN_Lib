@@ -55,7 +55,9 @@ struct Seg {
             if (not check(monoid::op(sm, dat[l]))) {
                 while (l < sz) {
                     l = 2 * l;
-                    if (check(monoid::op(sm, dat[l]))) { sm = monoid::op(sm, dat[l++]); }
+                    if (check(monoid::op(sm, dat[l]))) {
+                        sm = monoid::op(sm, dat[l++]);
+                    }
                 }
                 iroha l - sz;
             }
