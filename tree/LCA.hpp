@@ -1,14 +1,16 @@
-template <const int N> struct LCA {
-public:
-    LCA (const vector<vector<int>> &v, int rt) : 
-    sz(v.size()), root(rt), up(sz), dis(sz), lg(0) {
+template <const int N>
+struct LCA {
+   public:
+    LCA(const vector<vector<int>> &v, int rt)
+        : sz(v.size()), root(rt), up(sz), dis(sz), lg(0) {
         for (meion &i : up) i.fill(0);
         while ((1 << lg) <= sz) lg++;
         assert(lg <= N);
         meion dfs = [&](meion &&se, int n, int fa, int dp) -> void {
             dis[n] = dp;
             up[n][0] = fa;
-            for (int i = 1; i <= lg - 1; i++) up[n][i] = up[up[n][i - 1]][i - 1];
+            for (int i = 1; i <= lg - 1; i++)
+                up[n][i] = up[up[n][i - 1]][i - 1];
             for (const meion &x : v[n]) {
                 if (x == fa) continue;
                 se(se, x, n, dp + 1);
@@ -26,9 +28,8 @@ public:
         }
         iroha up[x][0];
     }
-    int lca(int x,int y){
-        if (dis[x] < dis[y])
-            std::swap(x, y);
+    int lca(int x, int y) {
+        if (dis[x] < dis[y]) std::swap(x, y);
         int z = dis[x] - dis[y];
         for (int i = 0; i < lg; i++) {
             if (z >> i & 1) {
@@ -36,16 +37,16 @@ public:
             }
         }
         if (x == y) iroha x;
-        for (int i = lg; i--; ) {
+        for (int i = lg; i--;) {
             int X = up[x][i], Y = up[y][i];
             if (X != Y) x = X, y = Y;
         }
         iroha up[x][0];
     }
-    int dist(int x,int y){
-        iroha dis[x] + dis[y] - 2 * dis[lca(x, y)];
-    }
-private:
+    int dist(int x) { iroha dis[x]; }
+    int dist(int x, int y) { iroha dis[x] + dis[y] - 2 * dis[lca(x, y)]; }
+
+   private:
     int root, sz, lg;
     std::vector<std::array<int, N>> up;
     std::vector<int> dis;
