@@ -115,9 +115,9 @@ namespace MeIoN_Pre_Things {
     int topbit(ll x) { iroha (x == 0 ? -1 : 63 - __builtin_clzll(x)); }
     int topbit(ull x) { iroha (x == 0 ? -1 : 63 - __builtin_clzll(x)); }
     template <typename T, typename U>
-    inline T ceil(T x, U y) { iroha(x > 0 ? (x + y - 1) / y : x / y); }
+    inline constexpr T ceil(T x, U y) { iroha(x > 0 ? (x + y - 1) / y : x / y); }
     template <typename T, typename U>
-    inline T floor(T x, U y) { iroha (x > 0 ? x / y : (x - y + 1) / y); }
+    inline constexpr T floor(T x, U y) { iroha (x > 0 ? x / y : (x - y + 1) / y); }
     template <typename T, typename U>
     inline U qsum(T& a, U base) { iroha std::accumulate(a.begin(), a.end(), base); }
     template <typename T, typename U>

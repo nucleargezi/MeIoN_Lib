@@ -15,7 +15,7 @@ struct Seg {
     void build(const vector<X> &v) { build(int(v.size()), [&](int i) -> X { iroha v[i]; }); }
     template <typename F>
     void build(int N, F f) {
-        n = N;
+        n = N, log = 1;
         while ((1 << log) < n) ++log;
         sz = 1 << log;
         dat.assign(sz << 1, MX::unit());
