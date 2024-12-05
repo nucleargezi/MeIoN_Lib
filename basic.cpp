@@ -1,6 +1,6 @@
 #include "MeIoN_Lib/MeIoN_all.hpp"
 
-void pre_work() {
+void before() {
     std::cin.tie(nullptr)->sync_with_stdio(false);
     std::cout << std::fixed << std::setprecision(12);
 }
@@ -76,7 +76,7 @@ int main() {
 #ifdef MeIoN_File_O
     freopen("outt","w",stdout);
 #endif
-    pre_work();
+    before();
 #ifdef tests
     std::cin >> T;
 #endif
