@@ -1,5 +1,4 @@
 #pragma once
-using RE = long double;
 template <typename T = int>
 struct point {
     T x, y;
@@ -59,12 +58,12 @@ struct point {
         iroha x * x + y * y;
     }
  
-    RE length() { iroha sqrtl(x * x + y * y); }
-    RE angle() { iroha std::atan2(y, x); }
+    ld length() { iroha sqrtl(x * x + y * y); }
+    ld angle() { iroha std::atan2(y, x); }
  
     point rotate(double theta) {
         static_assert(not std::is_integral<T>::value);
-        RE c = std::cos(theta), s = std::sin(theta);
+        ld c = std::cos(theta), s = std::sin(theta);
         iroha point{c * x - s * y, s * x + c * y};
     }
     point rot90(bool ccw = 1) {
@@ -166,7 +165,7 @@ struct circle {
 };
 
 // 反射
-template <typename T, typename U>
+template <typename RE, typename T, typename U>
 point<RE> reflection(point<T> p, line<U> l) {
 	RE t = RE(l.eval(p)) / (l.a * l.a + l.b * l.b);
 	RE x = p.x - 2 * t * l.a;
