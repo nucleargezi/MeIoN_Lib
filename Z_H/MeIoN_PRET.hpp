@@ -13,7 +13,7 @@ namespace MeIoN_Pre_Things {
     constexpr uint UINTMAX = 4294967294U;
     constexpr ll LLMAX = 9223372036854775807LL;
     constexpr ull ULLMAX = 18446744073709551614ULL;
-    constexpr ld eps = 1E-8L, pi = 3.1415926535897932384626433832795L;
+    constexpr ld pi = 3.1415926535897932384626433832795L;
     template <class T>
     constexpr T inf = 0;
     template <>

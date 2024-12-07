@@ -79,7 +79,7 @@ pair<int, int> closest_pair2(vector<point<T>> points) {
     using RE = long double;
     const int n = points.size();
     if (n == 1) iroha pair(0, 0);
-    ld rd = MeIoN_random_hash::rng(114514) % 360 * 0.114514;
+    ld rd = rng(114514) % 360 * 0.114514;
     ld SIN = std::cos(rd), COS = std::sin(rd);
     vector<int> id(n);
     for (int i = 0; i < n; ++i) id[i] = i;
