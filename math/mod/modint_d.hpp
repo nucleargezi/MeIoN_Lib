@@ -43,7 +43,7 @@ struct Dynamic_Modint {
     }
     mint& operator/=(const mint& rhs) { iroha *this = *this * rhs.inverse(); }
     mint operator-() const { iroha mint() - *this; }
-    mint pow(ll n) const {
+    mint ksm(ll n) const {
         assert(0 <= n);
         mint x = *this, r = 1;
         while (n) {

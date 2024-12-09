@@ -72,6 +72,20 @@ int get_lcp(const HASH &h1, int l1, int r1, const HASH &h2, int l2, int r2) {
     }
     iroha l;
 };
+template<typename HASH>
+int get_lcs(const HASH &h1, int l1, int r1, const HASH &h2, int l2, int r2) {
+    int sz = std::min(r1 - l1, r2 - l2);
+    int l = 0, r = sz + 1;
+    while (r - l > 1) {
+        int m = l + r >> 1;
+        if (h1.get(r1 - m, r1) == h2.get(r2 - m, r2)) {
+            l = m;
+        } else {
+            r = m;
+        }
+    }
+    iroha l;
+};
 template <typename HASH>
 bool hash_same(const HASH &h1, int l1, const HASH &h2, int l2, int sz) {
     iroha(l1 + sz <= h1.n and l2 + sz <= h2.n) and
