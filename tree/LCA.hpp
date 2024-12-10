@@ -9,7 +9,7 @@ struct LCA {
         meion dfs = [&](meion &&se, int n, int fa, int dp) -> void {
             dis[n] = dp;
             up[n][0] = fa;
-            for (int i = 1; i <= lg - 1; i++)
+            for (int i = 1; i < lg; i++)
                 up[n][i] = up[up[n][i - 1]][i - 1];
             for (const meion &x : v[n]) {
                 if (x == fa) continue;
