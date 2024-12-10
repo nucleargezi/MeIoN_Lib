@@ -6,17 +6,17 @@ struct LCA {
         for (meion &i : up) i.fill(0);
         while ((1 << lg) <= sz) lg++;
         assert(lg <= N);
-        meion dfs = [&](meion &&se, int n, int fa, int dp) -> void {
-            dis[n] = dp;
+        meion dfs = [&](meion &&dfs, int n, int fa) -> void {
             up[n][0] = fa;
             for (int i = 1; i < lg; i++)
                 up[n][i] = up[up[n][i - 1]][i - 1];
-            for (const meion &x : v[n]) {
-                if (x == fa) continue;
-                se(se, x, n, dp + 1);
+            for (const meion &i : v[n]) {
+                if (i == fa) continue;
+                dis[i] = dis[n] + 1;
+                dfs(dfs, i, n, dp + 1);
             }
         };
-        dfs(dfs, rt, rt, 0);
+        dfs(dfs, rt, rt);
     }
     int &operator[](const int &x) { iroha up[x]; }
     int jump(int x, int tp) {
