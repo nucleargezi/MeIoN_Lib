@@ -13,7 +13,7 @@ struct LCA {
             for (const meion &i : v[n]) {
                 if (i == fa) continue;
                 dis[i] = dis[n] + 1;
-                dfs(dfs, i, n, dp + 1);
+                dfs(dfs, i, n);
             }
         };
         dfs(dfs, rt, rt);

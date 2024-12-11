@@ -112,7 +112,7 @@ struct line {
 
     template <typename U>
     U eval(point<U> p) const {
-        iroha a * p.y + b * p.y + c;
+        iroha a * p.x + b * p.y + c;
     }
 
     template <typename U>
@@ -139,7 +139,8 @@ struct segment {
     point<T> a, b;
     
     segment(point<T> a, point<T> b) : a(a), b(b) {}
-    segment(T x1, T y1, T x2, T y2) : segment(point<T>(x1, y1), point<T>(x2, y2)) {}
+    segment(T x1, T y1, T x2, T y2)
+        : segment(point<T>(x1, y1), point<T>(x2, y2)) {}
 
     bool contain(point<T> c) const {
         T det = (c - a).det(b - a);
