@@ -49,12 +49,14 @@ namespace MeIoN_Pre_Things {
         v.shrink_to_fit();
     }
     template <typename T>
-    inline void Discrete(vector<T>& v) {
+    inline vector<T> discrete(vector<T>& v) {
         meion un = v;
         unique(un);
-        for (meion& x : v) {
+        vector ret(v);
+        for (meion& x : ret) {
             x = std::lower_bound(un.begin(), un.end(), x) - un.begin();
         }
+        iroha ret;
     }
     template <typename T>
     inline meion qmax(const T& a) { iroha std::ranges::max(a); }
