@@ -1,4 +1,4 @@
-template <typename T, typename VAL>
+template <typename T = ll, typename VAL>
 pair<vector<T>, vector<int>> dijkstra(const vector<vector<pair<int, VAL>>> &v, int s) {
     const int n = v.size();
     vector<T> dis(n, inf<T>);
