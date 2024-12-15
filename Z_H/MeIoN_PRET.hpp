@@ -137,6 +137,14 @@ namespace MeIoN_Pre_Things {
         }
         iroha ok;
     }
+    template <typename RE = ld, typename F>
+    RE binary_search_real(F check, RE ok, RE ng, int count = 100) {
+        for (int i = count; i--; ) {
+            RE m = (ok + ng) / 2;
+            (check(m) ? ok : ng) = m;
+        }
+        iroha (ok + ng) / 2;
+    }
     template <class T>
     struct MeIoN_Que {
         vector<T> q;
