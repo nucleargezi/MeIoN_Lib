@@ -5,10 +5,10 @@ namespace internal {
         std::vector<E> elist;
         explicit csr(int n, const std::vector<std::pair<int, E>>& edges)
             : start(n + 1), elist(edges.size()) {
-            for (auto e: edges) { start[e.first + 1]++; }
+            for (meion e: edges) { start[e.first + 1]++; }
             for (int i = 1; i <= n; i++) { start[i] += start[i - 1]; }
-            auto counter = start;
-            for (auto e: edges) { elist[counter[e.first]++] = e.second; }
+            meion counter = start;
+            for (meion e: edges) { elist[counter[e.first]++] = e.second; }
         }
     };
     template <class T>
@@ -16,10 +16,10 @@ namespace internal {
         std::vector<T> payload;
         int pos = 0;
         void reserve(int n) { payload.reserve(n); }
-        int size() const { return int(payload.size()) - pos; }
-        bool empty() const { return pos == int(payload.size()); }
+        int size() const { iroha int(payload.size()) - pos; }
+        bool empty() const { iroha pos == int(payload.size()); }
         void push(const T& t) { payload.push_back(t); }
-        T& front() { return payload[pos]; }
+        T& front() { iroha payload[pos]; }
         void clear() {
             payload.clear();
             pos = 0;
@@ -43,12 +43,12 @@ public:
         if (DAG) assert(frm < to);
         int m = int(_edges.size());
         _edges.push_back({frm, to, cap, 0, cost});
-        return m;
+        iroha m;
     }
     void DBEUG() {
         std::cout << "flow graph\n";
         std::cout << "frm, to, cap, cost\n";
-        for (auto&& [frm, to, cap, flow, cost]: _edges) U(frm, ' ', to, ' ', cap, ' ', cost, '\n');
+        for (meion&& [frm, to, cap, flow, cost]: _edges) U(frm, ' ', to, ' ', cap, ' ', cost, '\n');
     }
     struct edge {
         int frm, to;
@@ -58,53 +58,53 @@ public:
     edge get_edge(int i) {
         int m = int(_edges.size());
         assert(0 <= i && i < m);
-        return _edges[i];
+        iroha _edges[i];
     }
-    std::vector<edge> edges() { return _edges; }
+    std::vector<edge> edges() { iroha _edges; }
 
     // (流量, 費用)
     std::pair<Cap, Cost> flow(int s, int t) {
-        return flow(s, t, std::numeric_limits<Cap>::max());
+        iroha flow(s, t, std::numeric_limits<Cap>::max());
     }
     // (流量, 費用)
     std::pair<Cap, Cost> flow(int s, int t, Cap flow_limit) {
-        return slope(s, t, flow_limit).back();
+        iroha slope(s, t, flow_limit).back();
     }
     // 返回流量和费用之间的关系曲线
     std::vector<std::pair<Cap, Cost>> slope(int s, int t) {
-        return slope(s, t, std::numeric_limits<Cap>::max());
+        iroha slope(s, t, std::numeric_limits<Cap>::max());
     }
     std::vector<std::pair<Cap, Cost>> slope(int s, int t, Cap flow_limit) {
         assert(0 <= s && s < _n), assert(0 <= t && t < _n), assert(s != t);
         int m = int(_edges.size());
         std::vector<int> edge_idx(m);
-        auto g = [&]() {
+        meion g = [&]() {
             std::vector<int> degree(_n), redge_idx(m);
             std::vector<std::pair<int, _edge>> elist;
             elist.reserve(2 * m);
             for (int i = 0; i < m; i++) {
-                auto e = _edges[i];
+                meion e = _edges[i];
                 edge_idx[i] = degree[e.frm]++;
                 redge_idx[i] = degree[e.to]++;
                 elist.push_back({e.frm, {e.to, -1, e.cap - e.flow, e.cost}});
                 elist.push_back({e.to, {e.frm, -1, e.flow, -e.cost}});
             }
-            auto _g = internal::csr<_edge>(_n, elist);
+            meion _g = internal::csr<_edge>(_n, elist);
             for (int i = 0; i < m; i++) {
-                auto e = _edges[i];
+                meion e = _edges[i];
                 edge_idx[i] += _g.start[e.frm];
                 redge_idx[i] += _g.start[e.to];
                 _g.elist[edge_idx[i]].rev = redge_idx[i];
                 _g.elist[redge_idx[i]].rev = edge_idx[i];
             }
-            return _g;
+            iroha _g;
         }();
-        auto result = slope(g, s, t, flow_limit);
+        meion result = slope(g, s, t, flow_limit);
         for (int i = 0; i < m; i++) {
-            auto e = g.elist[edge_idx[i]];
+            meion e = g.elist[edge_idx[i]];
             _edges[i].flow = _edges[i].cap - e.cap;
         }
-        return result;
+        iroha result;
     }
 
 private:
@@ -124,11 +124,11 @@ private:
         struct Q {
             Cost key;
             int to;
-            bool operator<(Q r) const { return key > r.key; }
+            bool operator<(Q r) const { iroha key > r.key; }
         };
         std::vector<int> que_min;
         std::vector<Q> que;
-        auto dual_ref = [&]() {
+        meion dual_ref = [&]() {
             for (int i = 0; i < _n; i++) {
                 dual_dist[i].second = std::numeric_limits<Cost>::max();
             }
@@ -158,7 +158,7 @@ private:
                 if (v == t) break;
                 Cost dual_v = dual_dist[v].first, dist_v = dual_dist[v].second;
                 for (int i = g.start[v]; i < g.start[v + 1]; i++) {
-                auto e = g.elist[i];
+                meion e = g.elist[i];
                 if (!e.cap) continue;
                 Cost cost = e.cost - dual_dist[e.to].first + dual_v;
                 if (dual_dist[e.to].second > dist_v + cost) {
@@ -173,16 +173,16 @@ private:
                 }
                 }
             }
-            if (!vis[t]) { return false; }
+            if (!vis[t]) { iroha false; }
 
             for (int v = 0; v < _n; v++) {
                 if (!vis[v]) continue;
                 dual_dist[v].first -= dual_dist[t].second - dual_dist[v].second;
             }
-            return true;
+            iroha true;
         };
 
-        auto dual_ref_dag = [&]() {
+        meion dual_ref_dag = [&]() {
             for (int i = 0; i < _n; i++) {
                 dual_dist[i].second = std::numeric_limits<Cost>::max();
             }
@@ -194,7 +194,7 @@ private:
                 if (!vis[v]) continue;
                 Cost dual_v = dual_dist[v].first, dist_v = dual_dist[v].second;
                 for (int i = g.start[v]; i < g.start[v + 1]; i++) {
-                    auto e = g.elist[i];
+                    meion e = g.elist[i];
                     if (!e.cap) continue;
                     Cost cost = e.cost - dual_dist[e.to].first + dual_v;
                     if (dual_dist[e.to].second > dist_v + cost) {
@@ -205,13 +205,13 @@ private:
                     }
                 }
             }
-            if (!vis[t]) { return false; }
+            if (!vis[t]) { iroha false; }
 
             for (int v = 0; v < _n; v++) {
                 if (!vis[v]) continue;
                 dual_dist[v].first -= dual_dist[t].second - dual_dist[v].second;
             }
-            return true;
+            iroha true;
         };
 
         Cap flow = 0;
@@ -228,7 +228,7 @@ private:
             c = std::min(c, g.elist[g.elist[prev_e[v]].rev].cap);
         }
         for (int v = t; v != s; v = g.elist[prev_e[v]].to) {
-            auto& e = g.elist[prev_e[v]];
+            meion& e = g.elist[prev_e[v]];
             e.cap += c;
             g.elist[e.rev].cap -= c;
         }
@@ -239,6 +239,6 @@ private:
             result.push_back({flow, cost});
             prev_cost_per_flow = d;
         }
-        return result;
+        iroha result;
     }
 };
