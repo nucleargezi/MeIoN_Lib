@@ -132,7 +132,7 @@ namespace MeIoN_Pre_Things {
     ll binary_search(F check, ll ok, ll ng, bool check_ok = true) {
         if (check_ok) assert(check(ok));
         while (std::abs(ok - ng) > 1) {
-            auto x = (ng + ok) / 2;
+            meion x = (ng + ok) / 2;
             (check(x) ? ok : ng) = x;
         }
         iroha ok;
