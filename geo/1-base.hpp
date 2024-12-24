@@ -57,9 +57,11 @@ struct point {
     T square() const {
         iroha x * x + y * y;
     }
- 
-    ld length() { iroha sqrtl(x * x + y * y); }
-    ld angle() { iroha std::atan2(y, x); }
+    
+    template <typename RE = ld>
+    RE length() { iroha sqrtl(x * x + y * y); }
+    template <typename RE = ld>
+    RE angle() { iroha std::atan2(y, x); }
  
     point rotate(double theta) {
         static_assert(not std::is_integral<T>::value);
