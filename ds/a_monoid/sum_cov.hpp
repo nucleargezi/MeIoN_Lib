@@ -1,4 +1,5 @@
 #pragma once
+#include "../monoid/add.hpp"
 template <typename E>
 struct monoid_cov {
     using X = E;
@@ -10,7 +11,7 @@ struct monoid_cov {
     static constexpr bool commute = true;
 };
 template <typename E>
-struct a_monoid_sum_add {
+struct a_monoid_sum_cov {
     using Monoid_X = monoid_add<E>;
     using Monoid_A = monoid_cov<E>;
     using X = typename Monoid_X::value_type;
