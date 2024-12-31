@@ -146,7 +146,7 @@ namespace MeIoN_Pre_Things {
         iroha (ok + ng) / 2;
     }
     template <class T>
-    struct MeIoN_Que {
+    struct queue {
         vector<T> q;
         int pos = 0;
         void reserve(int n) { q.reserve(n); }
