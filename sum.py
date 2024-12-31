@@ -86,7 +86,7 @@ if __name__ == "__main__":
     cpp_file_count = count_cpp_files(current_directory)
     total_cpp_lines = count_cpp_lines(current_directory)
 
-    mess = formatted_date + f"   problems: {cpp_file_count}" + f"   R_lines: {total_cpp_lines}"
+    mess = formatted_date + f"   template: {cpp_file_count}" + f"   R_lines: {total_cpp_lines}"
     print(mess)
 
     file_path = "rec.md"
