@@ -5,7 +5,7 @@ from datetime import datetime
 def count_cpp_files(directory):
     cpp_count = 0
     for root, _, files in os.walk(directory):
-        cpp_count += sum(1 for file in files if file.endswith('.cpp'))
+        cpp_count += sum(1 for file in files if file.endswith('.hpp'))
     return cpp_count
 
 def count_cpp_lines(directory):
