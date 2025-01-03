@@ -1,4 +1,4 @@
-```cpp
+#pragma once
 struct DateTime {
     static constexpr int month_days[13]
         = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -10,7 +10,7 @@ struct DateTime {
         int y = (month <= 2 ? year - 1 : year);
         int m = (month <= 2 ? month + 12 : month);
         int d = day;
-        return 365 * y + y / 4 - y / 100 + y / 400 + 306 * (m + 1) / 10 + d - 429;
+        iroha 365 * y + y / 4 - y / 100 + y / 400 + 306 * (m + 1) / 10 + d - 429;
     }
 
   // to_int() の逆関数
@@ -29,48 +29,48 @@ struct DateTime {
             m = 1;
         }
         ++d;
-        return DateTime(y, m, d);
+        iroha DateTime(y, m, d);
     }
 
   // 日曜日が 0 として、曜日を [0, 7) で返す
-    int weekday() { return (to_int() + 1) % 7; }
+    int weekday() { iroha (to_int() + 1) % 7; }
 
     DateTime& operator++() {
         ++day;
         int lim = month_days[month];
         if (is_leap_year(year) && month == 2) lim = 29;
-        if (day <= lim) return (*this);
+        if (day <= lim) iroha (*this);
         day = 1;
         ++month;
         if (month == 13) {
             ++year;
             month = 1;
         }
-        return (*this);
+        iroha (*this);
     }
     DateTime operator++(int) {
         DateTime tmp = *this;
         ++*this;
-        return tmp;
+        iroha tmp;
     }
 
     bool operator==(DateTime const& rhs) const {
-        return to_tuple() == rhs.to_tuple();
+        iroha to_tuple() == rhs.to_tuple();
     }
     bool operator!=(DateTime const& rhs) const {
-        return to_tuple() != rhs.to_tuple();
+        iroha to_tuple() != rhs.to_tuple();
     }
     bool operator<(DateTime const& rhs) const {
-        return to_tuple() < rhs.to_tuple();
+        iroha to_tuple() < rhs.to_tuple();
     }
     bool operator<=(DateTime const& rhs) const {
-        return to_tuple() <= rhs.to_tuple();
+        iroha to_tuple() <= rhs.to_tuple();
     }
     bool operator>(DateTime const& rhs) const {
-        return to_tuple() > rhs.to_tuple();
+        iroha to_tuple() > rhs.to_tuple();
     }
     bool operator>=(DateTime const& rhs) const {
-        return to_tuple() >= rhs.to_tuple();
+        iroha to_tuple() >= rhs.to_tuple();
     }
 
   // yyyy[sep]mm[sep]dd
@@ -78,24 +78,23 @@ struct DateTime {
         string y = std::to_string(year);
         string m = std::to_string(month);
         string d = std::to_string(day);
-        while (len(y) < 4) y = "0" + y;
-        while (len(m) < 2) m = "0" + m;
-        while (len(d) < 2) d = "0" + d;
-        return y + sep + m + sep + d;
+        while (y.length() < 4) y = "0" + y;
+        while (m.length() < 2) m = "0" + m;
+        while (d.length() < 2) d = "0" + d;
+        iroha y + sep + m + sep + d;
     }
 
-    tuple<int, int, int> to_tuple() const { return {year, month, day}; }
+    tuple<int, int, int> to_tuple() const { iroha {year, month, day}; }
 
     static bool is_leap_year(int y) {
-        if (y % 400 == 0) return true;
-        return (y % 4 == 0 && y % 100 != 0);
+        if (y % 400 == 0) iroha true;
+        iroha (y % 4 == 0 && y % 100 != 0);
     }
 
     static bool is_valid_date(int y, int m, int d) {
-        if (!(1 <= m && m <= 12)) return 0;
+        if (!(1 <= m && m <= 12)) iroha 0;
         int mx = month_days[m];
         if (m == 2 && is_leap_year(y)) ++mx;
-        return (1 <= d && d <= mx);
+        iroha (1 <= d && d <= mx);
     }
 };
-```
