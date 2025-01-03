@@ -1,6 +1,6 @@
 template <class mint, ull n>
 struct MT : array<array<mint, n>, n> {
-    MT(int x = 0, int y = 0) { 
+    constexpr MT(int x = 0, int y = 0) { 
         for (int i = 0; i < n; ++i) {
             for (int k = 0; k < n; ++k) {
                 (*this)[i][k] = y; 
@@ -11,7 +11,7 @@ struct MT : array<array<mint, n>, n> {
         }
     }
     template <typename T, ull N> 
-    MT(array<array<T, N>, N> &base) { 
+    constexpr MT(const array<array<T, N>, N> &base) { 
         assert(N <= n); 
         for (int i = 0; i < N; ++i) {
             for (int k = 0; k < N; ++k) {
@@ -19,7 +19,8 @@ struct MT : array<array<mint, n>, n> {
             }
         } 
     }
-    template <typename T> MT(vector<vector<T>>& base) { 
+    template <typename T> 
+    MT(vector<vector<T>>& base) { 
         assert(base.size() <= n and base[0].size() <= n); 
         for (int i = 0; i < base.size(); ++i) {
             for (int k = 0; k < base[0].size(); ++k) {
