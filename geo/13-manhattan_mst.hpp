@@ -11,11 +11,11 @@ vector<vector<pair<int, T>>> manhattan_mst(vector<point<T>> &points) {
     std::iota(rk.begin(), rk.end(), 0);
 
     for (int a = 0; a < 2; ++a) {
-        for (meion && [ x, y ] : points) {
+        for (meion &&[x, y] : points) {
             x = -x;
         }
         for (int b = 0; b < 2; ++b) {
-            for (meion && [ x, y ] : points) {
+            for (meion &&[x, y] : points) {
                 std::swap(x, y);
             }
             sort(rk, [&](const int &i, const int &j) -> bool {
@@ -25,7 +25,7 @@ vector<vector<pair<int, T>>> manhattan_mst(vector<point<T>> &points) {
 
             map<T, int> mp;
             for (const int i : rk) {
-                meion & [ x, y ] = points[i];
+                meion &[x, y] = points[i];
                 for (meion it = mp.lower_bound(-y); it != mp.end();
                      it = mp.erase(it)) {
 					const int j = it->second;
