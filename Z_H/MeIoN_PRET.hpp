@@ -27,7 +27,7 @@ namespace MeIoN_Pre_Things {
     template <>
     constexpr i128 inf<i128> = i128(inf<ll>) * 2'000'000'000'000'000'000;
     template <>
-    constexpr double inf<double> = inf<ll>;
+    constexpr double inf<double> = 9223372036854775807.;
     template <>
     constexpr long double inf<long double> = inf<ll>;
     template <typename T>
