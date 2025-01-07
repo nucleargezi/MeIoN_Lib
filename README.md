@@ -1,4 +1,4 @@
-![alt text](sd_kuk_c01_05.png)
+![alt text](Z_some_tools/sd_kuk_c01_05.png)
 ### guiding star's XCPC_Library
 #### qq : 60422310
 #### Codeforces : MeIoN_is_UMP45, white_unicorn

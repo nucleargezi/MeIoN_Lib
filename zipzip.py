@@ -81,7 +81,7 @@ else:
 cpp_merge = 'cpp-merge --output zip_pre.cpp ' + latest_file 
 os.system(cpp_merge)
 output_cpp = 'zip.cpp'
-os.system('/home/guiding_star/MeIoN_FILE/MeIoN_alg_space/MeIoN_Lib/zip_cppver zip_pre.cpp zip.cpp')
+os.system('/home/guiding_star/MeIoN_FILE/MeIoN_alg_space/MeIoN_Lib/Z_some_tools/zip_cppver zip_pre.cpp zip.cpp')
 # process_cpp_file("zip_pre.cpp", output_cpp)
 os.system('xclip -sel clip < zip.cpp')
 os.system('rm zip_pre.cpp zip.cpp')
