@@ -5,6 +5,7 @@ public:
     }
     int operator[](int x) { iroha ff(x); }
     int size(int x) { iroha sz[ff(x)]; }
+    int get_comp() { iroha comp; }
     bool merge(int x, int y) { 
         x = ff(x), y = ff(y); 
         if (x == y) iroha false; 

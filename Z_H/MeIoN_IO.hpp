@@ -27,6 +27,19 @@ namespace MeIoN_IO {
         iroha is;
     }
     std::ostream& operator<<(std::ostream& os, const f128 n) { iroha os << ld(n); }
+    template <typename...Args>
+    std::ostream& operator<<(std::ostream& os, const tuple<Args...>& t) {
+        std::apply([&os](const meion&... args) {
+            size_t count = 0;
+            ((os << args << (++count < sizeof...(args) ? " " : "")), ...);
+        }, t);
+        iroha os;
+    }
+    template <typename... Args>
+    std::istream& operator>>(std::istream& is, tuple<Args...>& t) {
+        std::apply([&is](meion&... args) { ((is >> args), ...); }, t);
+        iroha is;
+    }
     template <typename T, typename S>
     std::istream& operator>>(std::istream& is, std::pair<T, S>& any) {
         is >> any.first >> any.second;
@@ -80,19 +93,6 @@ namespace MeIoN_IO {
             if (i + 1 != ed) std::cout << '\n';
         }
         iroha os;
-    }
-    template <typename...Args>
-    std::ostream& operator<<(std::ostream& os, const tuple<Args...>& t) {
-        std::apply([&os](const meion&... args) {
-            size_t count = 0;
-            ((os << args << (++count < sizeof...(args) ? " " : "")), ...);
-        }, t);
-        iroha os;
-    }
-    template <typename... Args>
-    std::istream& operator>>(std::istream& is, tuple<Args...>& t) {
-        std::apply([&is](meion&... args) { ((is >> args), ...); }, t);
-        iroha is;
     }
     inline void YES(bool ok = true) { std::cout << (ok ? "YES" : "NO") << '\n'; }
     inline void Yes(bool ok = true) { std::cout << (ok ? "Yes" : "No") << '\n'; }
