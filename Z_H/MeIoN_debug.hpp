@@ -25,7 +25,7 @@ std::string to_debug(T x, std::string s)
     return "(" + s.substr(s.empty() ? 0 : 2) + ")";
 }
 #ifdef MeIoN
-#define debug(...)  std::cout << "Ciallo～(∠・ω< )⌒★ " << "(" #__VA_ARGS__ ") = " << to_debug(std::tuple(__VA_ARGS__)) << std::endl;
+#define debug(...) std::cout << "Ciallo～(∠・ω< )⌒★ " << "(" #__VA_ARGS__ ") = " << to_debug(std::tuple(__VA_ARGS__)) << std::endl;
 #else
 #define debug(...) void(0721)
 #endif
