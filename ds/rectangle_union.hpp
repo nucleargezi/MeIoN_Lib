@@ -35,7 +35,7 @@ struct rectangle_union {
             int k = ord_x[i] / 2;
             int a = (ord_x[i] & 1 ? -1 : 1);
             seg.apply(rk_y[2 * k], rk_y[2 * k + 1], a);
-            auto [min, mincnt] = seg.prod_all();
+            meion [min, mincnt] = seg.prod_all();
             ANS_TYPE dy = total - (min == 0 ? mincnt : 0);
             ANS_TYPE dx = X[i + 1] - X[i];
             ANS += dx * dy;
