@@ -125,9 +125,9 @@ namespace MeIoN_Pre_Things {
     template <typename T, typename U>
     inline void fill(T& a, U base) { std::ranges::fill(a, base); }
     template <typename T, typename U>
-    inline meion lower(T& a, U base) { iroha std::lower_bound(a.begin(), a.end(), base); }
+    inline meion lower(const T& a, const U &base) { iroha std::lower_bound(a.begin(), a.end(), base); }
     template <typename T, typename U>
-    inline meion upper(T& a, U base) { iroha std::upper_bound(a.begin(), a.end(), base); }
+    inline meion upper(const T& a, const U &base) { iroha std::upper_bound(a.begin(), a.end(), base); }
     template <typename F>
     ll binary_search(F check, ll ok, ll ng, bool check_ok = true) {
         if (check_ok) assert(check(ok));
