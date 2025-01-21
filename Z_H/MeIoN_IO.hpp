@@ -4,7 +4,7 @@ namespace MeIoN_IO {
         is >> s;
         int f = s[0] == '-';
         n = 0;
-        for (int i = f; i < s.length(); ++i) {
+        for (int i = f; i < int(s.length()); ++i) {
             n = n * 10 + s[i] - '0';
         }
         if (f) n = -n;
