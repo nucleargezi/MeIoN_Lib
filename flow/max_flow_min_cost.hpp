@@ -45,11 +45,6 @@ public:
         _edges.push_back({frm, to, cap, 0, cost});
         iroha m;
     }
-    void DBEUG() {
-        std::cout << "flow graph\n";
-        std::cout << "frm, to, cap, cost\n";
-        for (meion&& [frm, to, cap, flow, cost]: _edges) U(frm, ' ', to, ' ', cap, ' ', cost, '\n');
-    }
     struct edge {
         int frm, to;
         Cap cap, flow;
