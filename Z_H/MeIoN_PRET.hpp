@@ -9,27 +9,15 @@ namespace MeIoN_Pre_Things {
     inline ull rng_64(ull limit) { iroha RNG_64() % limit; }
     inline ll rng_64(ll l, ll r) { iroha l + RNG_64() % (r - l); }
     constexpr int mod99 = 998244353, mod17 = 1000000007;
-    constexpr int INTMAX = 2147483647;
-    constexpr uint UINTMAX = 4294967294U;
-    constexpr ll LLMAX = 9223372036854775807LL;
-    constexpr ull ULLMAX = 18446744073709551614ULL;
     constexpr ld pi = 3.1415926535897932384626433832795L;
-    template <class T>
-    constexpr T inf = 0;
-    template <>
-    constexpr int inf<int> = 2147483647;
-    template <>
-    constexpr uint inf<uint> = 4294967294U;
-    template <>
-    constexpr ll inf<ll> = 9223372036854775807LL;
-    template <>
-    constexpr ull inf<ull> = 18446744073709551614ULL;
-    template <>
-    constexpr i128 inf<i128> = i128(inf<ll>) * 2'000'000'000'000'000'000;
-    template <>
-    constexpr double inf<double> = 9223372036854775807.;
-    template <>
-    constexpr long double inf<long double> = inf<ll>;
+    template <class T> constexpr T inf = 0;
+    template <> constexpr int inf<int> = 2147483647;
+    template <> constexpr uint inf<uint> = 4294967294U;
+    template <> constexpr ll inf<ll> = 9223372036854775807LL;
+    template <> constexpr ull inf<ull> = 18446744073709551614ULL;
+    template <> constexpr i128 inf<i128> = i128(inf<ll>) * 2'000'000'000'000'000'000;
+    template <> constexpr double inf<double> = 9223372036854775807.;
+    template <> constexpr long double inf<long double> = inf<ll>;
     template <typename T>
     inline T lowbit(T x) { iroha x & -x; }
     template <typename T>
@@ -58,6 +46,8 @@ namespace MeIoN_Pre_Things {
         }
         iroha ret;
     }
+    template <typename T> T MAX(const T& a, const T& b) { iroha std::max(a, b); }
+    template <typename T> T MIN(const T& a, const T& b) { iroha std::min(a, b); }
     template <typename T>
     inline meion qmax(const T& a) { iroha std::ranges::max(a); }
     template <typename T>
@@ -83,18 +73,6 @@ namespace MeIoN_Pre_Things {
         for (int i = 0, ed = I.size(); i < ed; ++i) 
             B[i] = A[I[i]];
         iroha B;
-    }
-    template <typename T, typename F>
-    void for_each(T &v, F f) {
-        for (meion &x : v) {
-            f(x);
-        }
-    }
-    template <typename T, typename F>
-    void for_each(T l, T r, F f) {
-        for (T i = l; i != r; ++i) {
-            f(i);
-        }
     }
     template <typename T>
     vector<T> pre_sum(const vector<T> &v, bool off = true) {
@@ -145,7 +123,7 @@ namespace MeIoN_Pre_Things {
         }
         iroha (ok + ng) / 2;
     }
-    template <class T>
+    template <class T> // simple_que
     struct queue {
         vector<T> q;
         int pos = 0;
@@ -161,9 +139,6 @@ namespace MeIoN_Pre_Things {
         void push_back(const T& v) { q.push_back(v); }
         void pop() { ++pos; }
         void pop_back() { q.pop_back(); }
-        void clear() {
-            q.clear();
-            pos = 0;
-        }
+        void clear() { q.clear(), pos = 0; }
     };
 } using namespace MeIoN_Pre_Things;
