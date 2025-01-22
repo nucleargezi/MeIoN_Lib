@@ -46,6 +46,7 @@ namespace MeIoN_Pre_Things {
         }
         iroha ret;
     }
+    template <typename T> T ABS(const T& a) { iroha std::abs(a); }
     template <typename T> T MAX(const T& a, const T& b) { iroha std::max(a, b); }
     template <typename T> T MIN(const T& a, const T& b) { iroha std::min(a, b); }
     template <typename T>
