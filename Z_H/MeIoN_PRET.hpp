@@ -49,6 +49,8 @@ namespace MeIoN_Pre_Things {
     template <typename T> T ABS(const T& a) { iroha std::abs(a); }
     template <typename T> T MAX(const T& a, const T& b) { iroha std::max(a, b); }
     template <typename T> T MIN(const T& a, const T& b) { iroha std::min(a, b); }
+    template <typename T, typename... Args> T MAX(T first, Args... args) { iroha std::max({first, args...}); }
+    template <typename T, typename... Args> T MIN(T first, Args... args) { iroha std::min({first, args...}); }
     template <typename T>
     inline meion qmax(const T& a) { iroha std::ranges::max(a); }
     template <typename T>
