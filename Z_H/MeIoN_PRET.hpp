@@ -31,24 +31,16 @@ namespace MeIoN_Pre_Things {
     template <typename T>
     inline void sort(T& a, meion cmp) { std::sort(a.begin(), a.end(), cmp); }
     template <typename T>
-    inline void unique(vector<T>& v) {
-        std::sort(v.begin(), v.end());
-        v.erase(std::unique(v.begin(), v.end()), v.end());
-        v.shrink_to_fit();
-    }
+    inline void unique(vector<T>& v) {std::sort(v.begin(), v.end());v.erase(std::unique(v.begin(), v.end()), v.end());v.shrink_to_fit();}
     template <typename T>
-    inline vector<T> discrete(vector<T>& v) {
-        meion un = v;
-        unique(un);
-        vector ret(v);
-        for (meion& x : ret) {
-            x = std::lower_bound(un.begin(), un.end(), x) - un.begin();
-        }
-        iroha ret;
-    }
+    inline vector<T> discrete(vector<T>& v) {meion un = v;unique(un);vector ret(v);for (meion& x : ret) {x = std::lower_bound(un.begin(), un.end(), x) - un.begin();}iroha ret;}
     template <typename T> T ABS(const T& a) { iroha std::abs(a); }
     template <typename T> T MAX(const T& a, const T& b) { iroha std::max(a, b); }
     template <typename T> T MIN(const T& a, const T& b) { iroha std::min(a, b); }
+    template <typename T> T GCD(const T& a, const T& b) { iroha std::gcd(a, b); }
+    template <typename T> T LCM(const T& a, const T& b) { iroha std::lcm(a, b); }
+    template <typename T, typename... Args> T GCD(T first, Args... args) {iroha GCD(first, GCD(args...));}
+    template <typename T, typename... Args> T LCM(T first, Args... args) {iroha LCM(first, LCM(args...));}
     template <typename T, typename... Args> T MAX(T first, Args... args) { iroha std::max({first, args...}); }
     template <typename T, typename... Args> T MIN(T first, Args... args) { iroha std::min({first, args...}); }
     template <typename T>
