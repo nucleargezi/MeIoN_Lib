@@ -19,8 +19,20 @@ struct rolling_HASH {
     vector<pair<int, int>> h, p;
     rolling_HASH(const string &s = "") : n(s.length()), h(n + 1), p(n + 1) {
         for (int i = 0; i < n; ++i) {
-            h[i + 1].first = (131ll * h[i].first + s[i] - '0') % getmod::m1;
-            h[i + 1].second = (131ll * h[i].second + s[i] - '0') % getmod::m2;
+            h[i + 1].first = (131ll * h[i].first + s[i]) % getmod::m1;
+            h[i + 1].second = (131ll * h[i].second + s[i]) % getmod::m2;
+        }
+        p[0] = {1, 1};
+        for (int i = 0; i < n; ++i) {
+            p[i + 1].first = 131ll * p[i].first % getmod::m1;
+            p[i + 1].second = 131ll * p[i].second % getmod::m2;
+        }
+    }
+    template <typename T>
+    rolling_HASH(const vector<T> &s = "") : n(s.size()), h(n + 1), p(n + 1) {
+        for (int i = 0; i < n; ++i) {
+            h[i + 1].first = (131ll * h[i].first + s[i]) % getmod::m1;
+            h[i + 1].second = (131ll * h[i].second + s[i]) % getmod::m2;
         }
         p[0] = {1, 1};
         for (int i = 0; i < n; ++i) {
@@ -41,8 +53,20 @@ struct HASH {
     vector<pair<int, int>> h, p;
     HASH(const string &s = "") : n(s.length()), h(n + 1), p(n + 1) {
         for (int i = 0; i < n; ++i) {
-            h[i + 1].first = (131ll * h[i].first + s[i] - '0') % getmod::M1;
-            h[i + 1].second = (131ll * h[i].second + s[i] - '0') % getmod::M2;
+            h[i + 1].first = (131ll * h[i].first + s[i]) % getmod::M1;
+            h[i + 1].second = (131ll * h[i].second + s[i]) % getmod::M2;
+        }
+        p[0] = {1, 1};
+        for (int i = 0; i < n; ++i) {
+            p[i + 1].first = 131ll * p[i].first % getmod::M1;
+            p[i + 1].second = 131ll * p[i].second % getmod::M2;
+        }
+    }
+    template <typename T>
+    HASH(const vector<T> &s = "") : n(s.size()), h(n + 1), p(n + 1) {
+        for (int i = 0; i < n; ++i) {
+            h[i + 1].first = (131ll * h[i].first + s[i]) % getmod::M1;
+            h[i + 1].second = (131ll * h[i].second + s[i]) % getmod::M2;
         }
         p[0] = {1, 1};
         for (int i = 0; i < n; ++i) {
