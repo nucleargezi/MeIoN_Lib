@@ -34,7 +34,7 @@ struct Seg {
         dat[i] = monoid::op(dat[i], x);
         while (i >>= 1) update(i);
     }
-    void apply(int i, cosnt X &x) {
+    void apply(int i, const X &x) {
         multiply(i, x);
     }
     X prod(int l, int r) {
