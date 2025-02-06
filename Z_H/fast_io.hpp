@@ -80,6 +80,8 @@ namespace fast_io {
         }
     }
 
+    void rd(int16_t &x) { rd_integer(x); }
+    void rd(uint16_t &x) { rd_integer(x); }
     void rd(int &x) { rd_integer(x); }
     void rd(ll &x) { rd_integer(x); }
     void rd(i128 &x) { rd_integer(x); }
