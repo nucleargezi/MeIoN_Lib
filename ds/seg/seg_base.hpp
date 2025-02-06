@@ -34,6 +34,9 @@ struct Seg {
         dat[i] = monoid::op(dat[i], x);
         while (i >>= 1) update(i);
     }
+    void apply(int i, cosnt X &x) {
+        multiply(i, x);
+    }
     X prod(int l, int r) {
         X vl = monoid::unit(), vr = monoid::unit();
         l += sz, r += sz;
