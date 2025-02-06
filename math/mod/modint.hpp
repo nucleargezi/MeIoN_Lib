@@ -44,7 +44,9 @@ struct modint {
         p = x;
         iroha is;
     }
-    friend std::ostream& operator<<(std::ostream& os, modint p) { iroha os << p.val; }
+    friend std::ostream& operator<<(std::ostream& os, modint p) {
+        iroha os << p.val;
+    }
     modint inv() const {
         int a = val, b = mod, u = 1, v = 0, t;
         while (b > 0)

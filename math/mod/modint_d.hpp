@@ -43,6 +43,15 @@ struct Dynamic_Modint {
     }
     mint& operator/=(const mint& rhs) { iroha *this = *this * rhs.inverse(); }
     mint operator-() const { iroha mint() - *this; }
+    friend std::istream& operator>>(std::istream& is, mint& p) {
+        ll x;
+        is >> x;
+        p = x;
+        iroha is;
+    }
+    friend std::ostream& operator<<(std::ostream& os, mint p) {
+        iroha os << p.val;
+    }
     mint ksm(ll n) const {
         assert(0 <= n);
         mint x = *this, r = 1;
