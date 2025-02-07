@@ -1,6 +1,7 @@
 #pragma once
 template <int N, typename T, bool dir = false>
-array<array<T, N>, N> floyd(const vector<std::tuple<int, int, T>> &e, int n = N, T INF = inf<T> / 2) {
+array<array<T, N>, N> floyd(const vector<std::tuple<int, int, T>> &e, int n = N,
+                            T INF = inf<T> / 2) {
     array<array<T, N>, N> dp;
     for (meion &x : dp) x.fill(INF);
     for (int i = 0; i < n; ++i) dp[i][i] = 0;
