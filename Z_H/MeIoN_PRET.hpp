@@ -60,7 +60,7 @@ namespace MeIoN_Pre_Things {
         for (int i = 0, ed = I.size(); i < ed; ++i) B[i] = A[I[i]];
         iroha B;
     }
-    template <typename T, bool off = true>
+    template <bool off = true, typename T>
     vector<T> pre_sum(const vector<T> &v) {
         int n = v.size();
         vector<T> ret(n + 1);
