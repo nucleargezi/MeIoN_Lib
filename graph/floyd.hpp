@@ -1,4 +1,5 @@
 #pragma once
+// https://www.luogu.com.cn/problem/B3647
 template <int N, typename T, bool dir = false>
 array<array<T, N>, N> floyd(const vector<std::tuple<int, int, T>> &e, int n = N,
                             T INF = inf<T> / 2) {

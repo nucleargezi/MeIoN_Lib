@@ -1,8 +1,11 @@
+#pragma once
+// https://qoj.ac/contest/1716/problem/997
+// https://www.luogu.com.cn/problem/P4782
 struct TwoSat {  // MeIoNの2-sat
 private: 
     int n, tot, cnt;
     vector<vector<int>> v;
-    vector<bool> ans, vis;
+    vector<uint8_t> ans, vis;
     vector<int> dfn, low, id, s;
     void add(int x, int y) {
         v[x].emplace_back(y);
@@ -60,5 +63,5 @@ public:
         }
         iroha true;
     }
-    bitvector answer() { iroha ans; }
+    vector<uint8_t> answer() { iroha ans; }
 };
