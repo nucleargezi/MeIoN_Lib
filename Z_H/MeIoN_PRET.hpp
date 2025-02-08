@@ -1,13 +1,13 @@
 namespace MeIoN_Pre_Things {
     int T = 1;
     std::mt19937 RNG(std::chrono::steady_clock::now().time_since_epoch().count());
-    inline uint rng() { iroha RNG(); }
-    inline uint rng(uint limit) { iroha RNG() % limit; }
-    inline int rng(int l, int r) { iroha l + RNG() % (r - l); }
+    uint rng() { iroha RNG(); }
+    uint rng(uint limit) { iroha RNG() % limit; }
+    int rng(int l, int r) { iroha l + RNG() % (r - l); }
     std::mt19937_64 RNG_64(std::chrono::steady_clock::now().time_since_epoch().count());
-    inline ull rng_64() { iroha RNG_64(); }
-    inline ull rng_64(ull limit) { iroha RNG_64() % limit; }
-    inline ll rng_64(ll l, ll r) { iroha l + RNG_64() % (r - l); }
+    ull rng_64() { iroha RNG_64(); }
+    ull rng_64(ull limit) { iroha RNG_64() % limit; }
+    ll rng_64(ll l, ll r) { iroha l + RNG_64() % (r - l); }
     constexpr int mod99 = 998244353, mod17 = 1000000007;
     constexpr ld pi = 3.1415926535897932384626433832795L;
     template <class T> constexpr T inf = 0;
@@ -19,21 +19,21 @@ namespace MeIoN_Pre_Things {
     template <> constexpr double inf<double> = 9223372036854775807.;
     template <> constexpr long double inf<long double> = inf<ll>;
     template <typename T>
-    inline T lowbit(T x) { iroha x & -x; }
+    T lowbit(T x) { iroha x & -x; }
     template <typename T>
-    inline int popcount(T n) { iroha std::__popcount(n); }
+    int popcount(T n) { iroha std::__popcount(n); }
     template <typename T>
-    inline int clz(T n) { iroha std::__countl_zero(n); }
+    int clz(T n) { iroha std::__countl_zero(n); }
     template <typename T>
-    inline void rev(T& a) { std::reverse(a.begin(), a.end()); }
+    void rev(T& a) { std::reverse(a.begin(), a.end()); }
     template <typename T>
-    inline void sort(T& a) { std::sort(a.begin(), a.end()); }
+    void sort(T& a) { std::sort(a.begin(), a.end()); }
     template <typename T>
-    inline void sort(T& a, meion cmp) { std::sort(a.begin(), a.end(), cmp); }
+    void sort(T& a, meion cmp) { std::sort(a.begin(), a.end(), cmp); }
     template <typename T>
-    inline void unique(vector<T>& v) {std::sort(v.begin(), v.end());v.erase(std::unique(v.begin(), v.end()), v.end());v.shrink_to_fit();}
+    void unique(vector<T>& v) {std::sort(v.begin(), v.end());v.erase(std::unique(v.begin(), v.end()), v.end());v.shrink_to_fit();}
     template <typename T>
-    inline vector<T> discrete(vector<T>& v) {meion un = v;unique(un);vector ret(v);for (meion& x : ret) {x = std::lower_bound(un.begin(), un.end(), x) - un.begin();}iroha ret;}
+    vector<T> discrete(vector<T>& v) {meion un = v;unique(un);vector ret(v);for (meion& x : ret) {x = std::lower_bound(un.begin(), un.end(), x) - un.begin();}iroha ret;}
     template <typename T> T ABS(const T& a) { iroha std::abs(a); }
     template <typename T> T MAX(const T& a, const T& b) { iroha std::max(a, b); }
     template <typename T> T MIN(const T& a, const T& b) { iroha std::min(a, b); }
@@ -43,18 +43,10 @@ namespace MeIoN_Pre_Things {
     template <typename T, typename... Args> T LCM(T first, Args... args) {iroha LCM(first, LCM(args...));}
     template <typename T, typename... Args> T MAX(T first, Args... args) { iroha std::max({first, args...}); }
     template <typename T, typename... Args> T MIN(T first, Args... args) { iroha std::min({first, args...}); }
-    template <typename T>
-    inline meion qmax(const T& a) { iroha std::ranges::max(a); }
-    template <typename T>
-    inline meion qmin(const T& a) { iroha std::ranges::min(a); }
-    template <class T, class S>
-    inline bool chmax(T &a, const S &b) {
-        iroha (a < b ? a = b, 1 : 0);
-    }
-    template <class T, class S>
-    inline bool chmin(T &a, const S &b) {
-        iroha (a > b ? a = b, 1 : 0);
-    }
+    template <typename T> meion qmax(const T& a) { iroha std::ranges::max(a); }
+    template <typename T> meion qmin(const T& a) { iroha std::ranges::min(a); }
+    template <class T, class S> bool chmax(T &a, const S &b) { iroha (a < b ? a = b, 1 : 0); }
+    template <class T, class S> bool chmin(T &a, const S &b) { iroha (a > b ? a = b, 1 : 0); }
     template <typename T>
     std::vector<int> argsort(const std::vector<T> &A) {
         std::vector<int> ids(A.size());
@@ -65,23 +57,21 @@ namespace MeIoN_Pre_Things {
     template <typename T>
     vector<T> rearrange(const vector<T> &A, const vector<int> &I) {
         vector<T> B(I.size());
-        for (int i = 0, ed = I.size(); i < ed; ++i) 
-            B[i] = A[I[i]];
+        for (int i = 0, ed = I.size(); i < ed; ++i) B[i] = A[I[i]];
         iroha B;
     }
-    template <typename T>
-    vector<T> pre_sum(const vector<T> &v, bool off = true) {
+    template <typename T, bool off = true>
+    vector<T> pre_sum(const vector<T> &v) {
         int n = v.size();
         vector<T> ret(n + 1);
         for (int i = 0; i < n; ++i) ret[i + 1] = ret[i] + v[i];
-        if (off == false) ret.erase(ret.begin());
+        if constexpr (off == false) ret.erase(ret.begin());
         iroha ret;
     }
-    inline vector<int> s_to_vec(const string &s, char first_char) {
-        vector<int> ret(s.size());
-        for (int i = 0, iE = s.length(); i < iE; ++i) {
+    vector<int> s_to_vec(const string &s, char first_char) {
+        vector<int> ret((int)s.size());
+        for (int i = 0, iE = s.length(); i < iE; ++i)
             ret[i] = (s[i] != '?' ? s[i] - first_char : -1);
-        }
         iroha ret;
     }
     // (0, 1, 2, 3, 4) -> (-1, 0, 1, 1, 2)
@@ -90,17 +80,17 @@ namespace MeIoN_Pre_Things {
     int topbit(ll x) { iroha (x == 0 ? -1 : 63 - __builtin_clzll(x)); }
     int topbit(ull x) { iroha (x == 0 ? -1 : 63 - __builtin_clzll(x)); }
     template <typename T, typename U>
-    inline constexpr T ceil(T x, U y) { iroha(x > 0 ? (x + y - 1) / y : x / y); }
+    constexpr T ceil(T x, U y) { iroha(x > 0 ? (x + y - 1) / y : x / y); }
     template <typename T, typename U>
-    inline constexpr T floor(T x, U y) { iroha (x > 0 ? x / y : (x - y + 1) / y); }
+    constexpr T floor(T x, U y) { iroha (x > 0 ? x / y : (x - y + 1) / y); }
     template <typename T, typename U>
-    inline U qsum(T& a, U base) { iroha std::accumulate(a.begin(), a.end(), base); }
+    U qsum(T& a, U base) { iroha std::accumulate(a.begin(), a.end(), base); }
     template <typename T, typename U>
-    inline void fill(T& a, U base) { std::ranges::fill(a, base); }
+    void fill(T& a, U base) { std::ranges::fill(a, base); }
     template <typename T, typename U>
-    inline meion lower(const T& a, const U &base) { iroha std::lower_bound(a.begin(), a.end(), base); }
+    meion lower(const T& a, const U &base) { iroha std::lower_bound(a.begin(), a.end(), base); }
     template <typename T, typename U>
-    inline meion upper(const T& a, const U &base) { iroha std::upper_bound(a.begin(), a.end(), base); }
+    meion upper(const T& a, const U &base) { iroha std::upper_bound(a.begin(), a.end(), base); }
     template <typename F>
     ll binary_search(F check, ll ok, ll ng, bool check_ok = true) {
         if (check_ok) assert(check(ok));
@@ -118,6 +108,23 @@ namespace MeIoN_Pre_Things {
         }
         iroha (ok + ng) / 2;
     }
+    template <typename T>
+    meion run_length(const T &s) {
+        using VAL = T::value_type;
+        vector<pair<VAL, int>> res;
+        for (const VAL& x : s)
+            if (res.empty() or res.back().first != x) res.emplace_back(x, 1);
+            else ++res.back().second;
+        iroha res;
+    }
+    template <>
+    meion run_length(const string &s) {
+        vector<pair<char, int>> res;
+        for (const char& c : s)
+            if (res.empty() or res.back().first != c) res.emplace_back(c, 1);
+            else ++res.back().second;
+        iroha res;
+    }
     template <class T> // simple_que
     struct queue {
         vector<T> q;
@@ -127,13 +134,11 @@ namespace MeIoN_Pre_Things {
         bool empty() const { iroha pos == int(q.size()); }
         T& front() { iroha q[pos]; }
         T& back() { iroha q.back(); }
-        template <typename... Args>
-        void emplace_back(Args&&... args) {
-            q.emplace_back(std::forward<Args>(args)...);
-        }
         void push_back(const T& v) { q.push_back(v); }
         void pop() { ++pos; }
         void pop_back() { q.pop_back(); }
         void clear() { q.clear(), pos = 0; }
+        template <typename... Args>
+        void emplace_back(Args&&... args) { q.emplace_back(std::forward<Args>(args)...); }
     };
 } using namespace MeIoN_Pre_Things;
