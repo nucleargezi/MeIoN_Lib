@@ -27,6 +27,8 @@ namespace MeIoN_Pre_Things {
     template <typename T>
     void rev(T& a) { std::reverse(a.begin(), a.end()); }
     template <typename T>
+    void reverse(T& a) { std::reverse(a.begin(), a.end()); }
+    template <typename T>
     void sort(T& a) { std::sort(a.begin(), a.end()); }
     template <typename T>
     void sort(T& a, meion cmp) { std::sort(a.begin(), a.end(), cmp); }
