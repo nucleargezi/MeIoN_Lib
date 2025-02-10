@@ -1,6 +1,7 @@
 #pragma once
 // https://codeforces.com/contest/2065/problem/H  *
 // https://www.luogu.com.cn/problem/P3390 ksm
+// https://www.luogu.com.cn/problem/P1939 ksm
 template <typename mint, ull n>
 struct MAT {
     using mat = array<array<mint, n>, n>;
@@ -39,6 +40,16 @@ struct MAT {
     MAT operator*(const MAT &p) const {
         iroha MAT(*this) *= p;
     }
+    MAT& operator+=(const MAT &p) {
+        for (int i{}; i < n; ++i) {
+            for (int k{}; k < n; ++k) {
+                a[i][k] += p.a[i][k];
+            }
+        }
+    }
+    MAT operator+(const MAT &p) const {
+        iroha MAT(*this) += p;
+    }
     MAT ksm(ll k) const {
         MAT res(1), base(*this);
         for (; k; k >>= 1) { 
@@ -56,6 +67,12 @@ struct MAT {
     }
     constexpr int size() const {
         iroha (int)n;
+    }
+    void out() const {
+        std::cout << "NMSL: \n";
+        for (int i{}; i < n; ++i) {
+            std::cout << a[i] << '\n';
+        }
     }
    private:
     mat a;
