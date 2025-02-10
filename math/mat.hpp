@@ -1,5 +1,6 @@
 #pragma once
 // https://codeforces.com/contest/2065/problem/H  *
+// https://www.luogu.com.cn/problem/P3390 ksm
 template <typename mint, ull n>
 struct MAT {
     using mat = array<array<mint, n>, n>;
@@ -38,7 +39,7 @@ struct MAT {
     MAT operator*(const MAT &p) const {
         iroha MAT(*this) *= p;
     }
-    MAT ksm(int k) const {
+    MAT ksm(ll k) const {
         MAT res(1), base(*this);
         for (; k; k >>= 1) { 
             if (k & 1) {
