@@ -1,5 +1,4 @@
 #pragma once
-#include "../MeIoN_all.hpp"
 template <typename T = int>
 vector<T> primtable(int LIM) {
     ++LIM;
