@@ -18,3 +18,4 @@ void sieve(int n) {
         }
     }
 }
+

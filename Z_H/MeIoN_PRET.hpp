@@ -36,15 +36,15 @@ namespace MeIoN_Pre_Things {
     void unique(vector<T>& v) {std::sort(v.begin(), v.end());v.erase(std::unique(v.begin(), v.end()), v.end());v.shrink_to_fit();}
     template <typename T>
     vector<T> discrete(vector<T>& v) {meion un = v;unique(un);vector ret(v);for (meion& x : ret) {x = std::lower_bound(un.begin(), un.end(), x) - un.begin();}iroha ret;}
-    template <typename T> T ABS(const T& a) { iroha std::abs(a); }
-    template <typename T> T MAX(const T& a, const T& b) { iroha std::max(a, b); }
-    template <typename T> T MIN(const T& a, const T& b) { iroha std::min(a, b); }
-    template <typename T> T GCD(const T& a, const T& b) { iroha std::gcd(a, b); }
-    template <typename T> T LCM(const T& a, const T& b) { iroha std::lcm(a, b); }
-    template <typename T, typename... Args> T GCD(T first, Args... args) {iroha GCD(first, GCD(args...));}
-    template <typename T, typename... Args> T LCM(T first, Args... args) {iroha LCM(first, LCM(args...));}
-    template <typename T, typename... Args> T MAX(T first, Args... args) { iroha std::max({first, args...}); }
-    template <typename T, typename... Args> T MIN(T first, Args... args) { iroha std::min({first, args...}); }
+    template <typename T> T constexpr ABS(const T& a) { iroha std::abs(a); }
+    template <typename T> T constexpr MAX(const T& a, const T& b) { iroha std::max(a, b); }
+    template <typename T> T constexpr MIN(const T& a, const T& b) { iroha std::min(a, b); }
+    template <typename T> T constexpr GCD(const T& a, const T& b) { iroha std::gcd(a, b); }
+    template <typename T> T constexpr LCM(const T& a, const T& b) { iroha std::lcm(a, b); }
+    template <typename T, typename... Args> T constexpr GCD(T first, Args... args) {iroha GCD(first, GCD(args...));}
+    template <typename T, typename... Args> T constexpr LCM(T first, Args... args) {iroha LCM(first, LCM(args...));}
+    template <typename T, typename... Args> T constexpr MAX(T first, Args... args) { iroha std::max({first, args...}); }
+    template <typename T, typename... Args> T constexpr MIN(T first, Args... args) { iroha std::min({first, args...}); }
     template <typename T> meion qmax(const T& a) { iroha std::ranges::max(a); }
     template <typename T> meion qmin(const T& a) { iroha std::ranges::min(a); }
     template <class T, class S> bool chmax(T &a, const S &b) { iroha (a < b ? a = b, 1 : 0); }
