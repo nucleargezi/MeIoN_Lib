@@ -2,6 +2,7 @@
 #include "../../MeIoN_all.hpp"
 #include "../primtable.hpp"
 
+// https://codeforces.com/contest/1194/problem/F
 // a^0, ..., a^N
 template <typename mint>
 vector<mint> power_table_1(mint a, ll n) {
