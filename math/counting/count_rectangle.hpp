@@ -1,4 +1,5 @@
 #pragma once
+// https://codeforces.com/contest/1194/problem/E
 template <int N, typename T = int>
 ll count_rectangle(const vector<tuple<T, T, T, T>> &lines) {
     vector<tuple<T, T, T>> L, R;
@@ -18,14 +19,12 @@ ll count_rectangle(const vector<tuple<T, T, T, T>> &lines) {
             if (p < d + 1 and p > u - 1 and q < r + 1 and q > l - 1) {
                 X[i][k] = 1;
             }
-            ++k;
-        }
-        ++i;
-    }
+        ++k;}
+    ++i;}
     ll ans{};
     for (int i{}; i < (int)L.size(); ++i) {
         for (int k{}; k < i; ++k) {
-            int s{(X[i] & X[k]).count()};
+            ll s{(X[i] & X[k]).count()};
             ans += (s - 1) * s >> 1;
         }
     }
