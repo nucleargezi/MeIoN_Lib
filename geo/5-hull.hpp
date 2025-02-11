@@ -50,11 +50,11 @@ vector<int> convex_hull(vector<point<T>> &p, string mode = "full",
     }
     if (mode == "full" or mode == "upper") {
         if (not res.empty()) res.pop_back();
-        rev(id);
+        reverse(id);
         vector<int> Q = cal();
         res.insert(res.end(), Q.begin(), Q.end());
     }
-    if (mode == "upper") rev(res);
+    if (mode == "upper") reverse(res);
     while (res.size() > 1 and p[res[0]] == p[res.back()]) res.pop_back();
     iroha res;
 }

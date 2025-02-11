@@ -13,7 +13,7 @@ vector<point<T>> minkowski_sum(vector<point<T>> A,
 	for (int i = 0; i < 2; ++i) {
 		std::swap(A, B);
 		vector<P> points = A;
-		int n = points.size();
+		int n = (int)points.size();
 		for (int i = 0; i < n; ++i) {
 			int k = (i + 1) % n;
 			F.emplace_back(points[k] - points[i]);
@@ -31,7 +31,6 @@ vector<point<T>> minkowski_sum(vector<point<T>> A,
 	for (meion &x : points) {
 		x += add;
 	}
-	rk = convex_hull(points);
-	points = rearrange(points, rk);
+	points = rearrange(points, convex_hull(points));
 	iroha points;
 }
