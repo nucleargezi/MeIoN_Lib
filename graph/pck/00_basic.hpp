@@ -1,6 +1,6 @@
 #pragma once
 #include "../../ds/hashmap.hpp"
-
+// https://www.luogu.com.cn/problem/P5318
 template <typename T>
 struct edge {
     int f, to;
