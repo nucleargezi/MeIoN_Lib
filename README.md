@@ -50,6 +50,7 @@
 - [ds/seg/lazy\_dynamic\_seg.hpp](#dsseglazy_dynamic_seghpp)
 - [ds/seg/lazy\_seg\_base.hpp](#dsseglazy_seg_basehpp)
 - [ds/seg/seg\_base.hpp](#dssegseg_basehpp)
+- [ds/sparse\_table/st.hpp](#dssparse_tablesthpp)
 - [ds/splay.hpp](#dssplayhpp)
 - [ds/sqrt\_tree.hpp](#dssqrt_treehpp)
 - [ds/st\_table.hpp](#dsst_tablehpp)
@@ -82,6 +83,7 @@
 - [graph/Apck/dominator\_tree.hpp](#graphapckdominator_treehpp)
 - [graph/Tree/Basic.hpp](#graphtreebasichpp)
 - [graph/Tree/dsu\_on\_tree.hpp](#graphtreedsu_on_treehpp)
+- [graph/Tree/fast\_lca.hpp](#graphtreefast_lcahpp)
 - [graph/bellman\_ford.hpp](#graphbellman_fordhpp)
 - [graph/dijkstra.hpp](#graphdijkstrahpp)
 - [graph/find\_cycle\_directed.hpp](#graphfind_cycle_directedhpp)
@@ -2713,6 +2715,85 @@ struct Seg {
             l /= 2, r /= r, xor_val /= 2;
         }
         iroha x;
+    }
+};
+```
+
+## ds/sparse_table/st.hpp
+
+```cpp
+#pragma once
+
+template <class Monoid>
+struct ST {
+    using MX = Monoid;
+    using X = typename MX::value_type;
+    int n, log;
+    vector<vector<X>> dat;
+
+    ST() {}
+    ST(int n) { build(n); }
+    template <typename F>
+    ST(int n, F f) {
+        build(n, f);
+    }
+    ST(const vector<X>& v) { build(v); }
+
+    void build(int m) {
+        build(m, [](int i) -> X { iroha MX::unit(); });
+    }
+    void build(const vector<X>& v) {
+        build(int(v.size()), [&](int i) -> X { iroha v[i]; });
+    }
+    template <typename F>
+    void build(int m, F f) {
+        n = m, log = 1;
+        while ((1 << log) < n) ++log;
+        dat.resize(log);
+        dat[0].resize(n);
+        for (int i{}; i < n; ++i) dat[0][i] = f(i);
+
+        for (int i{}; i < log - 1; ++i) {
+            dat[i + 1].resize(int(dat[i].size()) - (1 << i));
+            for (int k{}; k < int(dat[i].size()) - (1 << i); ++k) {
+                dat[i + 1][k] = MX::op(dat[i][k], dat[i][k + (1 << i)]);
+            }
+        }
+    }
+
+    X prod(int L, int R) {
+        if (L == R) iroha MX::unit();
+        if (R == L + 1) iroha dat[0][L];
+        int k = topbit(R - L - 1);
+        iroha MX::op(dat[k][L], dat[k][R - (1 << k)]);
+    }
+
+    template <class F>
+    int max_right(const F check, int L) {
+        assert(0 <= L && L <= n && check(MX::unit()));
+        if (L == n) iroha n;
+        int ok = L, ng = n + 1;
+        while (ok + 1 < ng) {
+            int k = (ok + ng) / 2;
+            bool bl = check(prod(L, k));
+            if (bl) ok = k;
+            if (!bl) ng = k;
+        }
+        iroha ok;
+    }
+
+    template <class F>
+    int min_left(const F check, int R) {
+        assert(0 <= R && R <= n && check(MX::unit()));
+        if (R == 0) iroha 0;
+        int ok = R, ng = -1;
+        while (ng + 1 < ok) {
+            int k = (ok + ng) / 2;
+            bool bl = check(prod(k, R));
+            if (bl) ok = k;
+            if (!bl) ng = k;
+        }
+        iroha ok;
     }
 };
 ```
@@ -5712,6 +5793,53 @@ void dsu_on_tree(TREE &tree, F1 &add, F2 &query, F3 &reset) {
         if (tree.head[x] == x) reset();
     }
 }
+```
+
+## graph/Tree/fast_lca.hpp
+
+```cpp
+#pragma once
+
+#include "Basic.hpp"
+#include "../../ds/monoid/min.hpp"
+#include "../../ds/sparse_table/st.hpp"
+
+template <typename TREE>
+struct fast_LCA {
+    TREE &tree;
+    ST<monoid_min<int>> seg;
+    vector<int> pos;
+    fast_LCA(TREE &tree) : tree(tree) {
+        int n = tree.n;
+        pos.resize(n);
+        vector<int> dat(n << 1);
+        for (int i{}; i < n; ++i) {
+            int x{tree.ELID(i)}, y{tree.ERID(i)};
+            pos[i] = x;
+            dat[x] = tree.L[i];
+            dat[y] = i == tree.V[0] ? -1 : tree.L[tree.fa[i]];
+        }
+        seg.build(dat);
+    }
+
+    int dist(int x, int y) {
+        int z{LCA(x, y)};
+        iroha tree.deep[x] + tree.deep[y] - 2 * tree.deep[z];
+    }
+
+    using WT = typename TREE::WT;
+    WT dist_weighted(int x, int y) {
+        int z = LCA(x, y);
+        iroha tree.deep_weighted[x] + tree.deep_weighted[y] -
+            2 * tree.deep_weighted[z];
+    }
+
+    int LCA(int x, int y) {
+        x = pos[x], y = pos[y];
+        if (x > y) std::swap(x, y);
+        iroha tree.V[seg.prod(x, y + 1)];
+    }
+};
 ```
 
 ## graph/bellman_ford.hpp
