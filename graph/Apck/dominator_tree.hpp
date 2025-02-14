@@ -1,12 +1,19 @@
-vector<int> get_fa(const vector<vector<int>> &v, int s) {
-    int n = v.size();
+#pragma once
+#include "../../MeIoN_all.hpp"
+#include "Basic.hpp"
+
+// https://codeforces.com/contest/757/problem/F
+template <typename GT>
+vector<int> get_fa(const GT &v, int s) {
+    assert(v.prepared);
+    int n = v.n;
     vector<int> pos(n, -1), p, label(n), dom(n), sdom(n), dsu(n), par(n);
     vector<vector<int>> rg(n), bucket(n);
     meion dfs = [&] (meion &&se, int n)->void {
         int t = p.size();
         p.emplace_back(n);
         label[t] = sdom[t] = dsu[t] = pos[n] = t;
-        for (const int i : v[n]) {
+        for (const meion &[f, i, cost, id] : v[n]) {
             if (pos[i] == -1) {
                 se(se, i);
                 par[pos[i]] = t;
@@ -47,7 +54,6 @@ vector<int> get_fa(const vector<vector<int>> &v, int s) {
         }
     }
     vector<int> res(n, -1);
-    // res[s] = s;
     for (int i = 1; i < (int)p.size(); ++i) {
         res[p[i]] = p[dom[i]];
     }

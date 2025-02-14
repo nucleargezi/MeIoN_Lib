@@ -1,5 +1,6 @@
 #pragma once
 #include "../../ds/hashmap.hpp"
+
 // https://www.luogu.com.cn/problem/P5318
 template <typename T>
 struct edge {
@@ -12,8 +13,6 @@ template <typename T = int, bool directed = false>
 struct graph {
     static constexpr bool is_directed = directed;
     int n, m;
-    // using cost_type = int;
-    // using edge_type = edge<int>;
     using cost_type = T;
     using edge_type = edge<T>;
     vector<edge_type> edges;
@@ -245,6 +244,15 @@ struct graph {
     ull to_eid_key(ull x, ull y) {
         if (not directed and x > y) std::swap(x, y);
         iroha x * n + y;
+    }
+
+    graph reverse_graph() const {
+        static_assert(graph::is_directed);
+        graph res(n);
+        for (const meion &[f, t, w, id] : edges) {
+            res.add(t, f, w, id);
+        }
+        iroha res;
     }
 
    private:

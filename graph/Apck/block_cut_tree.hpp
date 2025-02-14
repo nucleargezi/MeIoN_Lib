@@ -1,8 +1,10 @@
 #pragma once
-#include "00_basic.hpp"
+#include "Basic.hpp"
+
 // [n, n + b_block)
 template <typename GT>
 graph<int, false> block_cut(GT &g) {
+    assert(v.prepared);
     int n = g.n;
     vector<int> low(n), dfn(n), s;
     vector<uint8_t> vis(n);
