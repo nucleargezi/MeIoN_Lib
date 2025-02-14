@@ -10,209 +10,134 @@
 
 # 目录
 
-- [MeIoN_all.hpp](#meion-all-hpp)
-- [Z_H/MeIoN_H.hpp](#z-h-meion-h-hpp)
-- [Z_H/MeIoN_IO.hpp](#z-h-meion-io-hpp)
-- [Z_H/MeIoN_PRET.hpp](#z-h-meion-pret-hpp)
-- [Z_H/MeIoN_debug.hpp](#z-h-meion-debug-hpp)
-- [Z_H/MeIoN_sth_for_os.hpp](#z-h-meion-sth-for-os-hpp)
-- [Z_H/fast_io.hpp](#z-h-fast-io-hpp)
-- [ds/LinearBasis.hpp](#ds-linearbasis-hpp)
-- [ds/Wavelet_Matrix.hpp](#ds-wavelet-matrix-hpp)
-- [ds/a_monoid/max_add.hpp](#ds-a-monoid-max-add-hpp)
-- [ds/a_monoid/min_add.hpp](#ds-a-monoid-min-add-hpp)
-- [ds/a_monoid/minidx_add.hpp](#ds-a-monoid-minidx-add-hpp)
-- [ds/a_monoid/minmincnt_add.hpp](#ds-a-monoid-minmincnt-add-hpp)
-- [ds/a_monoid/sum_add.hpp](#ds-a-monoid-sum-add-hpp)
-- [ds/a_monoid/sum_cov.hpp](#ds-a-monoid-sum-cov-hpp)
-- [ds/a_monoid/sum_mul.hpp](#ds-a-monoid-sum-mul-hpp)
-- [ds/bit_vec.hpp](#ds-bit-vec-hpp)
-- [ds/chtholly.hpp](#ds-chtholly-hpp)
-- [ds/dsu.hpp](#ds-dsu-hpp)
-- [ds/fenw.hpp](#ds-fenw-hpp)
-- [ds/hashmap.hpp](#ds-hashmap-hpp)
-- [ds/heap.hpp](#ds-heap-hpp)
-- [ds/monoid/add.hpp](#ds-monoid-add-hpp)
-- [ds/monoid/add_array.hpp](#ds-monoid-add-array-hpp)
-- [ds/monoid/add_pair.hpp](#ds-monoid-add-pair-hpp)
-- [ds/monoid/gcd.hpp](#ds-monoid-gcd-hpp)
-- [ds/monoid/max.hpp](#ds-monoid-max-hpp)
-- [ds/monoid/max_idx.hpp](#ds-monoid-max-idx-hpp)
-- [ds/monoid/min.hpp](#ds-monoid-min-hpp)
-- [ds/monoid/min_idx.hpp](#ds-monoid-min-idx-hpp)
-- [ds/monoid/minmincnt.hpp](#ds-monoid-minmincnt-hpp)
-- [ds/monoid/mul.hpp](#ds-monoid-mul-hpp)
-- [ds/monoid/sum.hpp](#ds-monoid-sum-hpp)
-- [ds/monoid/xor.hpp](#ds-monoid-xor-hpp)
-- [ds/range_mex_query.hpp](#ds-range-mex-query-hpp)
-- [ds/rectangle_union.hpp](#ds-rectangle-union-hpp)
-- [ds/rollback_array.hpp](#ds-rollback-array-hpp)
-- [ds/rollback_dsu.hpp](#ds-rollback-dsu-hpp)
-- [ds/seg/dynamic_seg.hpp](#ds-seg-dynamic-seg-hpp)
-- [ds/seg/lazy_dynamic_seg.hpp](#ds-seg-lazy-dynamic-seg-hpp)
-- [ds/seg/lazy_seg_base.hpp](#ds-seg-lazy-seg-base-hpp)
-- [ds/seg/seg_base.hpp](#ds-seg-seg-base-hpp)
-- [ds/splay.hpp](#ds-splay-hpp)
-- [ds/sqrt_tree.hpp](#ds-sqrt-tree-hpp)
-- [ds/st_table.hpp](#ds-st-table-hpp)
-- [flow/hungarian.hpp](#flow-hungarian-hpp)
-- [flow/max_flow.hpp](#flow-max-flow-hpp)
-- [flow/max_flow_min_cost.hpp](#flow-max-flow-min-cost-hpp)
-- [flow/maxflow.hpp](#flow-maxflow-hpp)
-- [geo/1-base.hpp](#geo-1-base-hpp)
-- [geo/10-triangle_area.hpp](#geo-10-triangle-area-hpp)
-- [geo/11-in_circle.hpp](#geo-11-in-circle-hpp)
-- [geo/12-line_inside_polygon.hpp](#geo-12-line-inside-polygon-hpp)
-- [geo/13-manhattan_mst.hpp](#geo-13-manhattan-mst-hpp)
-- [geo/14-max_norm_sum.hpp](#geo-14-max-norm-sum-hpp)
-- [geo/15-minkowski_sum.hpp](#geo-15-minkowski-sum-hpp)
-- [geo/16-out_circle.hpp](#geo-16-out-circle-hpp)
-- [geo/17-minimum_enclosing_circle.hpp](#geo-17-minimum-enclosing-circle-hpp)
-- [geo/2-apollonian_circle.hpp](#geo-2-apollonian-circle-hpp)
-- [geo/3-angle_sort.hpp](#geo-3-angle-sort-hpp)
-- [geo/4-closest_pair.hpp](#geo-4-closest-pair-hpp)
-- [geo/5-hull.hpp](#geo-5-hull-hpp)
-- [geo/6-convex_polygon.hpp](#geo-6-convex-polygon-hpp)
-- [geo/7-points_in_triangles.hpp](#geo-7-points-in-triangles-hpp)
-- [geo/8-distance.hpp](#geo-8-distance-hpp)
-- [geo/9-furthest_pair.hpp](#geo-9-furthest-pair-hpp)
-- [graph/Apck/Basic.hpp](#graph-apck-basic-hpp)
-- [graph/Apck/bellman_ford.hpp](#graph-apck-bellman-ford-hpp)
-- [graph/Apck/block_cut_tree.hpp](#graph-apck-block-cut-tree-hpp)
-- [graph/Apck/dag_path_cover.hpp](#graph-apck-dag-path-cover-hpp)
-- [graph/Apck/dijkstra.hpp](#graph-apck-dijkstra-hpp)
-- [graph/Apck/dominator_tree.hpp](#graph-apck-dominator-tree-hpp)
-- [graph/Tree/Basic.hpp](#graph-tree-basic-hpp)
-- [graph/bellman_ford.hpp](#graph-bellman-ford-hpp)
-- [graph/dijkstra.hpp](#graph-dijkstra-hpp)
-- [graph/find_cycle_directed.hpp](#graph-find-cycle-directed-hpp)
-- [graph/floyd.hpp](#graph-floyd-hpp)
-- [graph/scc.hpp](#graph-scc-hpp)
-- [graph/triangle_counting.hpp](#graph-triangle-counting-hpp)
-- [graph/two_sat.hpp](#graph-two-sat-hpp)
-- [math/Big_int.hpp](#math-big-int-hpp)
-- [math/counting/count_rectangle.hpp](#math-counting-count-rectangle-hpp)
-- [math/crt.hpp](#math-crt-hpp)
-- [math/exgcd.hpp](#math-exgcd-hpp)
-- [math/line/transpose.hpp](#math-line-transpose-hpp)
-- [math/line/vector_space.hpp](#math-line-vector-space-hpp)
-- [math/mat.hpp](#math-mat-hpp)
-- [math/mod/barrett.hpp](#math-mod-barrett-hpp)
-- [math/mod/count_terms.hpp](#math-mod-count-terms-hpp)
-- [math/mod/differentiate.hpp](#math-mod-differentiate-hpp)
-- [math/mod/fps_div.hpp](#math-mod-fps-div-hpp)
-- [math/mod/fps_div_mod.hpp](#math-mod-fps-div-mod-hpp)
-- [math/mod/fps_exp.hpp](#math-mod-fps-exp-hpp)
-- [math/mod/fps_inv.hpp](#math-mod-fps-inv-hpp)
-- [math/mod/fps_log.hpp](#math-mod-fps-log-hpp)
-- [math/mod/fps_pow.hpp](#math-mod-fps-pow-hpp)
-- [math/mod/fps_sqrt.hpp](#math-mod-fps-sqrt-hpp)
-- [math/mod/integrate.hpp](#math-mod-integrate-hpp)
-- [math/mod/lag.hpp](#math-mod-lag-hpp)
-- [math/mod/mod_sqrt.hpp](#math-mod-mod-sqrt-hpp)
-- [math/mod/modint.hpp](#math-mod-modint-hpp)
-- [math/mod/modint64.hpp](#math-mod-modint64-hpp)
-- [math/mod/modint64_d.hpp](#math-mod-modint64-d-hpp)
-- [math/mod/modint_common.hpp](#math-mod-modint-common-hpp)
-- [math/mod/modint_d.hpp](#math-mod-modint-d-hpp)
-- [math/mod/modint_inv.hpp](#math-mod-modint-inv-hpp)
-- [math/mod/modint_pow.hpp](#math-mod-modint-pow-hpp)
-- [math/mod/ntt_fft.hpp](#math-mod-ntt-fft-hpp)
-- [math/mod/powertable.hpp](#math-mod-powertable-hpp)
-- [math/mod/primitive_root.hpp](#math-mod-primitive-root-hpp)
-- [math/prims_test.hpp](#math-prims-test-hpp)
-- [math/primtable.hpp](#math-primtable-hpp)
-- [math/radix_sort.hpp](#math-radix-sort-hpp)
-- [math/sieve.hpp](#math-sieve-hpp)
-- [others/date_time.hpp](#others-date-time-hpp)
-- [random/random.hpp](#random-random-hpp)
-- [string/SA.hpp](#string-sa-hpp)
-- [string/SAM.hpp](#string-sam-hpp)
-- [string/SAM_EX.hpp](#string-sam-ex-hpp)
-- [string/acam.hpp](#string-acam-hpp)
-- [string/hash.hpp](#string-hash-hpp)
-- [string/manache.hpp](#string-manache-hpp)
-- [string/trie.hpp](#string-trie-hpp)
-- [string/zfunction.hpp](#string-zfunction-hpp)
-- [tree/LCA.hpp](#tree-lca-hpp)
-- [tree/LCA_with_w.hpp](#tree-lca-with-w-hpp)
-- [tree/LCT.hpp](#tree-lct-hpp)
-- [tree/LTT.hpp](#tree-ltt-hpp)
-- [tree/centroid.hpp](#tree-centroid-hpp)
-- [tree/unrooted_tree_hash.hpp](#tree-unrooted-tree-hash-hpp)
-
-## MeIoN_all.hpp
-
-内容：
-
-```cpp
-#pragma once
-#include "Z_H/MeIoN_H.hpp"
-#include "Z_H/MeIoN_debug.hpp"
-#include "Z_H/MeIoN_IO.hpp"
-#include "Z_H/MeIoN_PRET.hpp"
-/*⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢆⠣⡀⠀⣀⣀⣤⣤⣤⣶⣶⣶⣶⣶⣶⣶⣶⣶⣦⣤⣤⣤⣄⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣷⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣦⣤⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠤⠤⣄⣀⠀⠀⠀⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⢿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⣠⠋⣸⣷⣤⡀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠛⠋⠉⠉⠛⠓⠦⡀⠈⠢⡀⠀⠀⠀⠀⠀⠀⠀⣀⠤⠐⠂⠉⠉⠉⠉⠁⠒⠂⠤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⣠⢁⣼⣿⣿⣿⣿⣦⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠛⠛⠛⠉⠉⠁⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⢄⡈⢆⠀⠀⠀⠀⠠⠊⠁⠀⠀⠀⠀⣀⣠⣤⠤⠤⠤⠤⣈⠐⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠈⠛⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠢⣧⠀⠀⡔⠁⠀⠀⠀⣠⣴⡿⠿⠭⠤⣄⡀⠀⠀⠀⠉⢺⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠛⠁⠀⠙⠻⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠑⠤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢧⡰⠀⠀⠀⣠⠞⠋⠀⠀⠀⠀⠀⠀⠙⢦⠀⠀⠀⠀⢹⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⢀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠋⠙⢄⠀⠀⠀⠀⠀⠀⠈⠳⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠐⠢⠤⢀⣰⡆⣀⣀⣀⠀⢀⡃⠀⠀⡰⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠃⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⢀⣴⣿⣿⣿⣿⡿⠙⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠛⠋⠉⢣⠀⠀⠀⠀⠀⠱⢄⠀⠀⠀⠀⠀⠀⠈⠢⡀⠀⠀⠀⠀⠀⠐⡀⠀⠀⠀⠀⠀⠀⡴⠥⣷⠎⠉⠀⠀⠀⠈⠑⢴⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⣿⣿⣿⣿⣿⡟⠁⠀⠀⢠⠃⠀⠀⠀⠀⠀⠈⣹⣿⡿⣿⣿⠿⠟⠛⠋⡟⠁⠀⠀⠀⠀⠀⠀⠱⡀⠀⠀⠀⠀⠈⠳⡀⠀⠀⠀⠀⠀⠀⠈⢢⠀⠀⠀⠀⠀⢠⠀⠀⠀⠀⠀⠀⠀⢀⠇⠀⠀⠀⠀⠀⠀⠀⠀⢣⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⠀⠀⠀⡌⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⢛⢿⣿⣿⠟⠀⠀⠀⢀⠇⠀⡞⠀⠀⠀⠀⠀⣿⠏⠀⠀⠀⠀⠀⠀⢠⠇⠀⠀⠀⠀⠀⠀⠀⠀⠙⡄⠀⠀⠀⠀⠀⠙⣦⡀⠀⠀⠀⠀⠀⠀⡑⡄⠀⠀⠀⠀⢳⠀⠀⠀⠀⢀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣄⡀⠀⠀⠀⠀⠀⠀⠀⣀⠊⠀⠀⠀⡐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⣠⠶⠋⠁⠀⠀⠀⠀⠎⠀⣸⠃⠀⠀⠀⠀⢰⡟⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣄⠀⠀⠀⠀⠀⠘⢿⣦⡀⠀⠀⠀⠀⠘⡌⢆⠀⠀⠀⠈⢏⠉⠁⠀⠀⠀⠘⡄⠀⠀⠀⠀⠀⠀⠀⢠⣏⠉⠉⠑⠒⠤⠤⠤⠤⠊⠀⠀⠀⠀⡰⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⡰⠀⢠⣿⠀⠀⠀⠀⠀⣿⠃⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⡄⠀⠀⠀⠀⠀⠀⠹⣿⣄⠀⠀⠀⠀⠱⡜⣧⡱⠀⠀⠘⡄⠀⠀⠀⠀⠀⠑⠦⣀⡀⠀⢀⣠⣴⢿⢿⣷⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⡠⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⢠⠃⠀⣾⡇⠀⠀⠀⠀⢠⣿⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⡈⢆⠀⠀⠀⠀⠀⠹⣿⣦⡀⠀⠀⠀⢱⠬⣷⣅⠀⠀⢣⠀⠀⠀⠀⠀⠀⠀⣸⡿⠋⠉⠁⡿⠈⢮⢻⡻⠿⣿⣶⣒⡒⠒⠒⠂⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⡈⠀⣸⣿⠀⠀⠀⠀⠀⢸⡏⠀⠀⠀⠀⠀⠀⠀⠀⢸⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢧⠸⡄⠀⠀⠀⠀⠀⢹⡄⠉⠇⠂⠤⣀⠃⠘⣿⡄⠀⠈⡆⠀⠀⠀⠀⢠⡾⠋⠀⠀⠀⠀⠇⠀⢸⠧⡝⢦⡀⠀⠀⠀⠉⠐⠒⠂⠀⢀⣀⠲⠖⠊⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢀⠇⠀⡿⡇⠀⠀⠀⠀⠀⡿⡇⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⡆⢱⡀⠀⠀⠀⠀⠀⢳⠀⠸⡄⠀⠀⠉⢢⣸⣿⡀⠀⢸⠀⠀⢀⠴⠋⠀⠀⠀⠀⢀⡸⠀⠀⠈⡇⠈⠲⣌⠲⢄⡀⠀⠉⠉⠭⣉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢸⠀⠀⡇⡇⠀⠀⠀⠀⠀⡇⡇⠀⠀⠀⠰⠀⠀⠀⠀⢸⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⠀⣇⠀⠀⠀⠀⠀⠈⡇⠀⠈⠑⠲⢤⣤⣽⡏⢃⠀⠈⡄⠐⠀⠀⠀⠀⠀⠀⠀⣾⠃⠀⠀⠀⢳⠀⠀⠀⠙⠢⣝⡲⢤⣀⣀⠀⠉⠀⠒⠠⠤⠄⠀⠀⢤⠔⠀⠀⠀
-⠀⠀⠀⠀⠀⡇⠀⢠⢰⢠⠀⠀⠀⠀⢠⡇⡇⠀⠀⠀⠀⡄⠀⠀⠀⠘⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⡆⠸⡄⠀⠀⢸⡀⠀⢻⠀⠀⠀⠀⠀⢫⡩⠵⣮⡆⠀⢱⠐⢄⣀⡀⣀⣀⣀⡾⠃⠀⠀⠀⠀⢸⡄⠀⠀⠀⠀⠀⠉⠛⠲⠯⣭⡭⠛⠋⠁⢀⣀⠤⠐⠁⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⡇⠀⢸⣸⡘⠀⠀⠀⠀⠀⣧⠃⠀⠀⠀⠀⣇⠀⠀⠀⠀⡟⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢧⠀⣇⠀⠀⢸⡇⠀⠈⡇⠀⣀⠄⠂⠁⠳⣄⠈⢻⠀⠈⡆⠢⢽⣄⢀⣀⡙⢦⡒⠒⠦⢔⡊⠉⠳⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⢸⡇⡇⠀⠀⠀⣀⣀⣿⣰⠀⠀⠀⠀⢸⠀⠀⠀⠀⣇⠘⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⣿⠀⠀⢸⣿⠀⣀⣷⠊⠀⠀⠀⠀⠀⠀⠉⠉⡇⡀⣧⣤⣼⠿⢇⡤⠀⠑⣇⠐⠒⢒⣡⣀⣱⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⡀⠀⢸⡇⡇⠀⢯⠭⠭⠵⢶⡞⡇⠀⠀⠀⠈⡇⠀⠀⠀⢸⠀⠈⢷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⣿⠀⠀⢸⣿⡟⠁⢸⠀⠀⠀⠀⠀⢀⣠⣶⣿⣿⣷⢻⡿⠁⠀⠛⠀⠀⠀⠈⣖⢶⣿⣿⡿⠿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⡇⠀⢸⡇⢧⠀⠀⠀⠀⣀⣤⣷⣿⠀⠀⠀⠀⣿⡀⠀⠀⠘⡆⠀⠈⢳⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⡏⠀⠀⠊⡻⢸⠀⣼⠀⠀⣠⣶⣿⣿⣿⣿⣟⢛⠉⡎⡁⠀⠀⠀⠀⠀⠀⠀⣘⠀⠀⠀⠀⠀⢰⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢃⠀⢸⢹⠸⠀⠀⢰⣿⢿⣛⣿⣽⡦⠀⠀⠀⢹⣷⠀⠀⠀⢱⠀⠀⠀⠳⡀⠀⠀⠰⡀⠀⠀⠀⠀⡼⢰⢧⡀⠀⠀⡇⠸⡎⡇⣴⣿⡿⢛⣿⣿⣿⣿⣿⠸⠀⠇⡇⠀⠀⠀⠀⠀⠀⠀⣿⡆⠀⠀⠀⠀⠘⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠸⡀⠈⢸⠀⠇⠀⠀⠰⠟⠋⠉⣧⠹⡄⠀⠀⠸⣿⢳⡒⠉⠙⡍⠉⠉⠉⠛⣆⠀⠀⠘⢦⡀⠀⢠⢧⡟⠀⢳⡀⢠⠃⢠⢣⢳⡿⠛⢶⣿⣿⣿⣿⣿⣿⠃⡏⠀⢡⠀⠀⠀⠀⢀⠇⢸⡏⣿⠀⠀⠀⠀⠀⢇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⢃⠀⡘⡀⢸⠀⠀⠀⠀⠀⠀⠸⡄⢧⠀⠀⠀⣿⠀⠱⡄⠀⠘⡄⠀⠀⠀⠈⠳⡄⠀⠈⠻⡢⣼⣿⠁⠀⠀⠑⣼⠀⢸⡎⠀⠀⠀⠀⠻⢿⣿⣿⣿⠿⠂⢣⠀⢺⠀⠀⠀⠐⠋⣠⣿⠇⢹⡆⠀⠀⠀⠀⠘⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠈⢆⡇⡇⠀⣆⠀⠀⠀⠀⠀⠀⢳⡈⢧⠀⠀⢸⠀⠀⠈⠢⡀⠙⣄⠀⠀⠒⠒⠨⠳⢄⣀⡼⠫⣙⡦⢄⣀⠀⠈⠳⢯⠁⠀⠀⠀⠀⠀⠈⠉⠁⠀⠀⠀⢸⠀⢸⠀⠀⣾⣐⡴⠟⠉⠀⠀⣧⠀⠀⠀⠀⠀⢇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠘⣇⢿⡀⢸⡄⠀⠀⠀⠀⠀⠈⢧⠘⢆⠀⠘⡇⠀⠀⠀⠈⠓⠬⣢⡀⠀⠀⠀⠀⠐⠉⠑⠲⢬⠷⣦⣞⡉⠒⠲⠿⠭⠶⠤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⡀⢸⠀⣰⣿⣿⣄⠀⠀⠀⠀⢿⠀⠀⠀⠀⠀⠘⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⢀⣸⡼⣗⢺⣿⡛⠛⠛⠛⠲⢦⢸⣧⠈⢆⠀⢱⣄⠀⠀⠀⠀⠀⠀⣉⣑⣢⣤⣤⡤⠀⠀⢠⢇⡴⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⣸⢰⣿⡏⢸⣿⣧⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⢱⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⣠⡶⠋⠑⡌⡟⣿⡿⣧⠀⠀⠀⠀⠀⠀⢻⣷⡈⢣⠈⣿⣷⣤⣴⣿⠿⠿⠛⠟⠛⠉⠀⠀⠀⠠⠟⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⣿⢿⣿⡇⣿⣿⣿⣧⠀⠀⢸⣿⠀⠀⠀⠀⠀⠀⢇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⣰⠋⠀⠀⠀⠇⢰⡇⢧⠹⣧⠀⠀⠀⠀⠀⠀⢻⣷⣄⠳⡹⣿⣸⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⡿⠘⣿⣷⣿⣿⣿⣿⣦⠀⠘⣿⡆⠠⡀⠀⠀⠀⠈⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⡀⠠⠁⠀⠀⠀⠀⠸⡘⣇⢸⠀⠘⣷⡀⠀⠀⠀⠀⠀⢻⡎⠢⡙⢿⣿⢿⠙⢧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⡇⡇⠀⣿⣿⣿⣿⣿⠿⠛⠀⠀⣿⣧⠀⠱⡀⠀⠀⠀⠘⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠠⣾⢛⣷⠶⠀⠀⠀⠀⠀⢱⠘⣼⠀⠀⣿⡷⣄⠀⠀⠀⠀⠀⠹⡄⠙⢮⡹⣇⠉⣦⣵⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠂⠀⠀⠀⠀⠀⣠⣾⣦⢁⡇⢰⣿⡟⠋⠉⠀⠀⠀⠀⠀⢸⠈⣇⠀⠘⣆⠀⠀⠀⠘⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⣿⠟⠸⠀⠀⠀⠀⠀⠀⣾⣧⢹⡄⢠⡟⣷⡘⢦⡀⠀⠀⠀⠀⠹⡄⠀⠈⠪⣷⢽⠀⠻⢦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠤⠐⠀⠀⠀⠀⠀⠀⠀⢀⠔⠁⢸⣿⢸⠀⠸⣿⡇⠀⠀⠀⠀⠀⠀⠀⠸⠀⠘⢆⠀⠈⢷⡀⠀⠀⠘⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠁⠀⠀⠀⠀⠀⠀⠀⢰⠛⣿⣇⠹⣼⠃⠹⣷⠀⠙⢦⠀⠀⠀⠀⠙⣄⠀⠀⠈⢹⠿⣦⣈⠑⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⠁⠀⠀⠈⡇⣾⠀⠀⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠈⢿⣦⡀⠀⠈⢆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⡌⠀⠸⣿⣷⡘⢦⡀⠹⡇⠀⠀⢹⣦⡀⠀⠀⠈⢢⡀⠀⢸⠀⠈⠉⠛⠦⣭⡙⠓⠶⢤⠤⣠⣤⣀⣀⣀⣀⣀⣀⣀⡀⠀⣀⠜⠁⠀⠀⠀⠀⢰⢣⣧⡀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⠙⢿⣦⡀⠀⠳⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⢀⠃⠀⣸⣿⡿⣿⠶⣝⢦⣽⣆⠀⠀⢿⣏⠲⢤⡀⠀⠙⠢⣼⡀⠀⠀⠀⠀⠀⠀⠀⠀⠘⡄⠘⣿⡄⠀⠀⢘⣿⠀⠀⠈⠁⠀⠀⠀⠀⠀⠀⠀⡼⡘⠋⠳⣄⢸⡀⠀⠀⠀⡆⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⠀⠀⠘⣎⠢⣄⠘⢦⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⡎⠀⢠⣿⡟⠀⠈⠳⣮⣹⣿⠛⢧⡄⠈⢻⡀⠀⠉⠓⠦⢤⣈⣙⡓⠦⣄⣀⣀⡀⠀⠀⠀⢧⠀⠸⡷⠀⣴⠟⢿⡀⠀⠀⠀⠀⠀⠀⠀⣀⡴⡿⣹⠃⠀⠀⠘⢧⡇⠀⠀⠀⡇⠀⠀⠀⠀⡇⠀⠀⠀⢀⣀⣀⣀⣀⣀⣈⣆⠀⠑⢤⡙⢿⣷⣦⣄⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⢰⠀⢠⣿⡟⠀⠀⠀⠀⠈⣿⡟⠀⠀⠙⣦⡀⠱⡄⠀⠀⠀⠀⠀⢻⠉⠉⠉⠉⠉⠁⠀⠀⠀⢸⠀⠀⢱⡞⠁⠀⠀⠉⠓⠶⢤⣄⣀⡠⠞⠁⣰⡿⠁⠀⠀⠀⠀⠨⡇⠀⠀⠀⡇⠀⠀⠀⠀⣿⠁⠈⠉⠁⠀⠀⠀⠀⠀⠀⠉⠳⢄⠀⠈⠲⣿⣿⣿⣿⣶⣤⣀⠀
-⠀⠀⠀⠀⠀⠀⢠⢃⠔⣻⡿⠀⠀⠀⠀⠀⢰⣿⠀⡇⠀⢠⣿⣿⠦⣘⢦⡀⠀⠀⠀⠸⡦⠴⠶⠶⠶⠶⠶⠶⠶⠞⠒⠺⣏⠀⠀⠀⠀⠀⠀⢰⡟⠉⠀⠑⣶⣼⠟⠀⠀⠀⠀⠀⠀⢠⡇⠀⠀⢠⠁⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠣⡀⠀⠀⠙⠿⣿⣿⡧⠈⠓
-⠀⠀⠀⠀⠀⠀⡞⠀⣰⣿⠁⠀⠀⠀⠀⠀⢸⡏⠀⡇⠀⢸⣿⣿⠀⠈⠙⠛⠲⠤⡀⠀⢇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⡆⠀⠀⠀⠀⢠⣏⡀⠀⢠⡴⠟⣷⡀⠀⠀⠀⠀⠀⠀⣸⢇⠀⠀⣸⠀⠀⠀⠀⡀⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠱⠀⠀⠀⠀⠈⠻⢿⡀⠀
-⠀⠀⠀⠀⠀⡜⠀⢠⢻⠇⠀⠀⠀⠀⠀⠀⢸⠃⠀⢣⠀⢸⣿⢿⠀⠀⠀⢀⠀⠀⠀⠀⡞⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣷⡀⠀⠀⠀⣿⣿⣿⣦⣀⣀⣴⣿⣷⡄⠀⠀⠀⠀⢠⣿⠈⢦⠀⡇⠀⠀⠀⢸⡇⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠱⠀⠀⠀⠀⠀⠀⠙⢦
-⠀⠀⠀⠀⢰⠀⠠⠃⡞⠀⠀⠀⠀⠀⠀⠀⣾⠀⠀⠈⡆⡿⣿⠘⡇⠀⠀⣨⠀⠀⠀⠀⢷⡹⡀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣧⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⢀⣾⡇⠠⡈⢠⠃⠀⠀⠀⢸⣧⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢇⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⢠⠃⡠⠃⢀⡇⠀⠀⠀⠀⢀⡄⠀⡇⠀⠀⠀⢸⡇⡏⠀⢧⠀⠀⣿⡆⠀⠀⠀⠘⡗⣝⣄⠀⠀⠀⠀⠀⠀⣠⣿⣿⣿⣿⣀⣼⣿⣿⣿⣿⡿⠟⠉⢿⣿⣿⣿⣿⣆⢀⣾⣿⠃⠀⢡⡏⠀⠀⠀⠀⢸⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢆⠀⠀⠀⠀⠀⠀
-⠀⠀⢀⠆⡰⠁⠀⢸⠁⠀⠀⠀⠀⢸⡇⠀⡇⠀⠀⠀⠀⣧⡇⠀⠸⡀⠀⣿⣷⡀⠀⠀⠀⢹⡀⠙⠳⠦⣄⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⢹⣿⣿⣿⣿⣿⣿⡏⠀⢀⡼⠀⠀⠀⠀⠀⣾⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣦⡀⠀⠀⠀⠀
-⠀⠀⡌⡐⠁⠀⠀⡾⠀⠀⠀⠀⠀⢸⢻⠀⣧⠀⠀⠀⠀⣾⡇⠀⠀⡇⠀⢻⣿⣧⠀⠀⠀⠀⢳⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⣀⣀⠀⣼⣿⣿⣿⣿⣿⡿⠀⢀⣾⠃⠀⠀⠀⠀⣰⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⡝⢦⡀⠀⠀
-⠀⡰⡜⠁⠀⠀⢀⡇⠀⠀⠀⠀⠀⡏⠘⡇⢹⠀⠀⠀⢸⣿⢸⠀⠀⠘⡄⠘⣿⣿⣧⠀⠀⠀⠀⢣⡀⠀⠀⣠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠿⣿⡟⠻⣿⣿⣿⣿⣿⣿⠃⣠⣿⠏⠀⠀⠀⠀⢀⣿⣿⠇⠀⠀⢠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣹⣆⡙⠢⡀
-⢰⡵⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⢠⠇⠀⢳⡘⡆⠀⢀⠇⢻⡼⡀⠀⠀⠱⡀⠹⡟⣿⣧⡀⠀⠀⠀⠳⡀⣠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠁⠀⠀⢿⣿⠀⢸⣿⣿⣿⣿⣧⣾⣿⠏⠀⠀⠀⠀⢀⣾⣿⣿⡄⠀⠀⢸⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡠⠤⠒⠉⠀⠀⢳⠀⠈                                                                            */
-
-//          /*  MeIoN_is_UMP45  */          codeforces id
-//              /*  MeIoN  */               luogu / atcoder id
-//  https://space.bilibili.com/285769347    My bilibili
-//   https://nucleargezi.github.io/         My blog
-//    https://github.com/nucleargezi        My github
-//             /* 604223110 */              QQ
-//  勝つために努力しなければ意味のないゲームです。
-
-```
+- [Z\_H/MeIoN\_H.hpp](#z_h_meion_hhpp)
+- [Z\_H/MeIoN\_IO.hpp](#z_h_meion_iohpp)
+- [Z\_H/MeIoN\_PRET.hpp](#z_h_meion_prethpp)
+- [Z\_H/MeIoN\_debug.hpp](#z_h_meion_debughpp)
+- [Z\_H/fast\_io.hpp](#z_h_fast_iohpp)
+- [ds/LinearBasis.hpp](#ds_linearbasishpp)
+- [ds/Wavelet\_Matrix.hpp](#ds_wavelet_matrixhpp)
+- [ds/a\_monoid/max\_add.hpp](#ds_a_monoid_max_addhpp)
+- [ds/a\_monoid/min\_add.hpp](#ds_a_monoid_min_addhpp)
+- [ds/a\_monoid/minidx\_add.hpp](#ds_a_monoid_minidx_addhpp)
+- [ds/a\_monoid/minmincnt\_add.hpp](#ds_a_monoid_minmincnt_addhpp)
+- [ds/a\_monoid/sum\_add.hpp](#ds_a_monoid_sum_addhpp)
+- [ds/a\_monoid/sum\_cov.hpp](#ds_a_monoid_sum_covhpp)
+- [ds/a\_monoid/sum\_mul.hpp](#ds_a_monoid_sum_mulhpp)
+- [ds/bit\_vec.hpp](#ds_bit_vechpp)
+- [ds/chtholly.hpp](#ds_chthollyhpp)
+- [ds/dsu.hpp](#ds_dsuhpp)
+- [ds/fenw.hpp](#ds_fenwhpp)
+- [ds/hashmap.hpp](#ds_hashmaphpp)
+- [ds/heap.hpp](#ds_heaphpp)
+- [ds/monoid/add.hpp](#ds_monoid_addhpp)
+- [ds/monoid/add\_array.hpp](#ds_monoid_add_arrayhpp)
+- [ds/monoid/add\_pair.hpp](#ds_monoid_add_pairhpp)
+- [ds/monoid/gcd.hpp](#ds_monoid_gcdhpp)
+- [ds/monoid/max.hpp](#ds_monoid_maxhpp)
+- [ds/monoid/max\_idx.hpp](#ds_monoid_max_idxhpp)
+- [ds/monoid/min.hpp](#ds_monoid_minhpp)
+- [ds/monoid/min\_idx.hpp](#ds_monoid_min_idxhpp)
+- [ds/monoid/minmincnt.hpp](#ds_monoid_minmincnthpp)
+- [ds/monoid/mul.hpp](#ds_monoid_mulhpp)
+- [ds/monoid/sum.hpp](#ds_monoid_sumhpp)
+- [ds/monoid/xor.hpp](#ds_monoid_xorhpp)
+- [ds/range\_mex\_query.hpp](#ds_range_mex_queryhpp)
+- [ds/rectangle\_union.hpp](#ds_rectangle_unionhpp)
+- [ds/rollback\_array.hpp](#ds_rollback_arrayhpp)
+- [ds/rollback\_dsu.hpp](#ds_rollback_dsuhpp)
+- [ds/seg/dynamic\_seg.hpp](#ds_seg_dynamic_seghpp)
+- [ds/seg/lazy\_dynamic\_seg.hpp](#ds_seg_lazy_dynamic_seghpp)
+- [ds/seg/lazy\_seg\_base.hpp](#ds_seg_lazy_seg_basehpp)
+- [ds/seg/seg\_base.hpp](#ds_seg_seg_basehpp)
+- [ds/splay.hpp](#ds_splayhpp)
+- [ds/sqrt\_tree.hpp](#ds_sqrt_treehpp)
+- [ds/st\_table.hpp](#ds_st_tablehpp)
+- [flow/hungarian.hpp](#flow_hungarianhpp)
+- [flow/max\_flow.hpp](#flow_max_flowhpp)
+- [flow/max\_flow\_min\_cost.hpp](#flow_max_flow_min_costhpp)
+- [flow/maxflow.hpp](#flow_maxflowhpp)
+- [geo/1-base.hpp](#geo_1_basehpp)
+- [geo/10-triangle\_area.hpp](#geo_10_triangle_areahpp)
+- [geo/11-in\_circle.hpp](#geo_11_in_circlehpp)
+- [geo/12-line\_inside\_polygon.hpp](#geo_12_line_inside_polygonhpp)
+- [geo/13-manhattan\_mst.hpp](#geo_13_manhattan_msthpp)
+- [geo/14-max\_norm\_sum.hpp](#geo_14_max_norm_sumhpp)
+- [geo/15-minkowski\_sum.hpp](#geo_15_minkowski_sumhpp)
+- [geo/16-out\_circle.hpp](#geo_16_out_circlehpp)
+- [geo/17-minimum\_enclosing\_circle.hpp](#geo_17_minimum_enclosing_circlehpp)
+- [geo/2-apollonian\_circle.hpp](#geo_2_apollonian_circlehpp)
+- [geo/3-angle\_sort.hpp](#geo_3_angle_sorthpp)
+- [geo/4-closest\_pair.hpp](#geo_4_closest_pairhpp)
+- [geo/5-hull.hpp](#geo_5_hullhpp)
+- [geo/6-convex\_polygon.hpp](#geo_6_convex_polygonhpp)
+- [geo/7-points\_in\_triangles.hpp](#geo_7_points_in_triangleshpp)
+- [geo/8-distance.hpp](#geo_8_distancehpp)
+- [geo/9-furthest\_pair.hpp](#geo_9_furthest_pairhpp)
+- [graph/Apck/Basic.hpp](#graph_apck_basichpp)
+- [graph/Apck/bellman\_ford.hpp](#graph_apck_bellman_fordhpp)
+- [graph/Apck/block\_cut\_tree.hpp](#graph_apck_block_cut_treehpp)
+- [graph/Apck/dag\_path\_cover.hpp](#graph_apck_dag_path_coverhpp)
+- [graph/Apck/dijkstra.hpp](#graph_apck_dijkstrahpp)
+- [graph/Apck/dominator\_tree.hpp](#graph_apck_dominator_treehpp)
+- [graph/Tree/Basic.hpp](#graph_tree_basichpp)
+- [graph/bellman\_ford.hpp](#graph_bellman_fordhpp)
+- [graph/dijkstra.hpp](#graph_dijkstrahpp)
+- [graph/find\_cycle\_directed.hpp](#graph_find_cycle_directedhpp)
+- [graph/floyd.hpp](#graph_floydhpp)
+- [graph/scc.hpp](#graph_scchpp)
+- [graph/triangle\_counting.hpp](#graph_triangle_countinghpp)
+- [graph/two\_sat.hpp](#graph_two_sathpp)
+- [math/Big\_int.hpp](#math_big_inthpp)
+- [math/counting/count\_rectangle.hpp](#math_counting_count_rectanglehpp)
+- [math/crt.hpp](#math_crthpp)
+- [math/exgcd.hpp](#math_exgcdhpp)
+- [math/line/transpose.hpp](#math_line_transposehpp)
+- [math/line/vector\_space.hpp](#math_line_vector_spacehpp)
+- [math/mat.hpp](#math_mathpp)
+- [math/mod/barrett.hpp](#math_mod_barretthpp)
+- [math/mod/count\_terms.hpp](#math_mod_count_termshpp)
+- [math/mod/differentiate.hpp](#math_mod_differentiatehpp)
+- [math/mod/fps\_div.hpp](#math_mod_fps_divhpp)
+- [math/mod/fps\_div\_mod.hpp](#math_mod_fps_div_modhpp)
+- [math/mod/fps\_exp.hpp](#math_mod_fps_exphpp)
+- [math/mod/fps\_inv.hpp](#math_mod_fps_invhpp)
+- [math/mod/fps\_log.hpp](#math_mod_fps_loghpp)
+- [math/mod/fps\_pow.hpp](#math_mod_fps_powhpp)
+- [math/mod/fps\_sqrt.hpp](#math_mod_fps_sqrthpp)
+- [math/mod/integrate.hpp](#math_mod_integratehpp)
+- [math/mod/lag.hpp](#math_mod_laghpp)
+- [math/mod/mod\_sqrt.hpp](#math_mod_mod_sqrthpp)
+- [math/mod/modint.hpp](#math_mod_modinthpp)
+- [math/mod/modint64.hpp](#math_mod_modint64hpp)
+- [math/mod/modint64\_d.hpp](#math_mod_modint64_dhpp)
+- [math/mod/modint\_common.hpp](#math_mod_modint_commonhpp)
+- [math/mod/modint\_d.hpp](#math_mod_modint_dhpp)
+- [math/mod/modint\_inv.hpp](#math_mod_modint_invhpp)
+- [math/mod/modint\_pow.hpp](#math_mod_modint_powhpp)
+- [math/mod/ntt\_fft.hpp](#math_mod_ntt_ffthpp)
+- [math/mod/powertable.hpp](#math_mod_powertablehpp)
+- [math/mod/primitive\_root.hpp](#math_mod_primitive_roothpp)
+- [math/prims\_test.hpp](#math_prims_testhpp)
+- [math/primtable.hpp](#math_primtablehpp)
+- [math/radix\_sort.hpp](#math_radix_sorthpp)
+- [math/sieve.hpp](#math_sievehpp)
+- [others/date\_time.hpp](#others_date_timehpp)
+- [random/random.hpp](#random_randomhpp)
+- [string/SA.hpp](#string_sahpp)
+- [string/SAM.hpp](#string_samhpp)
+- [string/SAM\_EX.hpp](#string_sam_exhpp)
+- [string/acam.hpp](#string_acamhpp)
+- [string/hash.hpp](#string_hashhpp)
+- [string/manache.hpp](#string_manachehpp)
+- [string/trie.hpp](#string_triehpp)
+- [string/zfunction.hpp](#string_zfunctionhpp)
+- [tree/LCA.hpp](#tree_lcahpp)
+- [tree/LCA\_with\_w.hpp](#tree_lca_with_whpp)
+- [tree/LCT.hpp](#tree_lcthpp)
+- [tree/LTT.hpp](#tree_ltthpp)
+- [tree/centroid.hpp](#tree_centroidhpp)
+- [tree/unrooted\_tree\_hash.hpp](#tree_unrooted_tree_hashhpp)
 
 ## Z_H/MeIoN_H.hpp
 
@@ -571,51 +496,6 @@ std::string to_debug(T x, std::string s)
 #else
 #define debug(...) void(0721)
 #endif
-```
-
-## Z_H/MeIoN_sth_for_os.hpp
-
-内容：
-
-```cpp
-#include <pthread.h>
-#include <sys/shm.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <sys/un.h>
-#include <sys/wait.h>
-#include <unistd.h>
-
-#include <algorithm>
-#include <array>
-#include <bitset>
-#include <cassert>
-#include <cctype>
-#include <chrono>
-#include <cmath>
-#include <cstring>
-#include <ctime>
-#include <fstream>
-#include <functional>
-#include <iomanip>
-#include <iostream>
-#include <limits>
-#include <list>
-#include <map>
-#include <mutex>
-#include <queue>
-#include <random>
-#include <ranges>
-#include <regex>
-#include <set>
-#include <stack>
-#include <string>
-#include <thread>
-#include <tuple>
-#include <type_traits>
-#include <typeindex>
-#include <unordered_map>
-#include <unordered_set>
 ```
 
 ## Z_H/fast_io.hpp
