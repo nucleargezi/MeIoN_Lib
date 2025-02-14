@@ -85,9 +85,10 @@ struct graph {
         for (int i{}, x, y; i < m; ++i) {
             std::cin >> x >> y;
             x -= off, y -= off;
-            if constexpr (wt) {
+            if constexpr (not wt) {
                 add(x, y);
             } else {
+                assert(false);
                 T w;
                 std::cin >> w;
                 add(x, y, w);
