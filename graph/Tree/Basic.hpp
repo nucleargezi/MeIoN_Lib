@@ -1,3 +1,4 @@
+#pragma once
 #include "../Apck/Basic.hpp"
 
 // https://www.luogu.com.cn/problem/P3379 LCA
