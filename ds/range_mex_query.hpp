@@ -2,6 +2,7 @@
 #include "seg/seg_base.hpp"
 #include "monoid/min.hpp"
 
+// query[L, R) for A[0, N)
 template <int BEGIN, typename T = ll>
 struct range_mex_query {
     vector<T>& A;
