@@ -10,138 +10,140 @@
 
 # 目录
 
-- [MeIoN_all.hpp](#MeIoN_all.hpp)
-- [Z_H/MeIoN_H.hpp](#Z_H/MeIoN_H.hpp)
-- [Z_H/MeIoN_IO.hpp](#Z_H/MeIoN_IO.hpp)
-- [Z_H/MeIoN_PRET.hpp](#Z_H/MeIoN_PRET.hpp)
-- [Z_H/MeIoN_debug.hpp](#Z_H/MeIoN_debug.hpp)
-- [Z_H/MeIoN_sth_for_os.hpp](#Z_H/MeIoN_sth_for_os.hpp)
-- [Z_H/fast_io.hpp](#Z_H/fast_io.hpp)
-- [ds/LinearBasis.hpp](#ds/LinearBasis.hpp)
-- [ds/Wavelet_Matrix.hpp](#ds/Wavelet_Matrix.hpp)
-- [ds/a_monoid/max_add.hpp](#ds/a_monoid/max_add.hpp)
-- [ds/a_monoid/min_add.hpp](#ds/a_monoid/min_add.hpp)
-- [ds/a_monoid/minidx_add.hpp](#ds/a_monoid/minidx_add.hpp)
-- [ds/a_monoid/minmincnt_add.hpp](#ds/a_monoid/minmincnt_add.hpp)
-- [ds/a_monoid/sum_add.hpp](#ds/a_monoid/sum_add.hpp)
-- [ds/a_monoid/sum_cov.hpp](#ds/a_monoid/sum_cov.hpp)
-- [ds/a_monoid/sum_mul.hpp](#ds/a_monoid/sum_mul.hpp)
-- [ds/bit_vec.hpp](#ds/bit_vec.hpp)
-- [ds/chtholly.hpp](#ds/chtholly.hpp)
-- [ds/dsu.hpp](#ds/dsu.hpp)
-- [ds/fenw.hpp](#ds/fenw.hpp)
-- [ds/hashmap.hpp](#ds/hashmap.hpp)
-- [ds/heap.hpp](#ds/heap.hpp)
-- [ds/monoid/add.hpp](#ds/monoid/add.hpp)
-- [ds/monoid/add_array.hpp](#ds/monoid/add_array.hpp)
-- [ds/monoid/add_pair.hpp](#ds/monoid/add_pair.hpp)
-- [ds/monoid/gcd.hpp](#ds/monoid/gcd.hpp)
-- [ds/monoid/max.hpp](#ds/monoid/max.hpp)
-- [ds/monoid/max_idx.hpp](#ds/monoid/max_idx.hpp)
-- [ds/monoid/min.hpp](#ds/monoid/min.hpp)
-- [ds/monoid/min_idx.hpp](#ds/monoid/min_idx.hpp)
-- [ds/monoid/minmincnt.hpp](#ds/monoid/minmincnt.hpp)
-- [ds/monoid/mul.hpp](#ds/monoid/mul.hpp)
-- [ds/monoid/sum.hpp](#ds/monoid/sum.hpp)
-- [ds/monoid/xor.hpp](#ds/monoid/xor.hpp)
-- [ds/range_mex_query.hpp](#ds/range_mex_query.hpp)
-- [ds/rectangle_union.hpp](#ds/rectangle_union.hpp)
-- [ds/rollback_array.hpp](#ds/rollback_array.hpp)
-- [ds/rollback_dsu.hpp](#ds/rollback_dsu.hpp)
-- [ds/seg/dynamic_seg.hpp](#ds/seg/dynamic_seg.hpp)
-- [ds/seg/lazy_dynamic_seg.hpp](#ds/seg/lazy_dynamic_seg.hpp)
-- [ds/seg/lazy_seg_base.hpp](#ds/seg/lazy_seg_base.hpp)
-- [ds/seg/seg_base.hpp](#ds/seg/seg_base.hpp)
-- [ds/splay.hpp](#ds/splay.hpp)
-- [ds/sqrt_tree.hpp](#ds/sqrt_tree.hpp)
-- [ds/st_table.hpp](#ds/st_table.hpp)
-- [flow/hungarian.hpp](#flow/hungarian.hpp)
-- [flow/max_flow.hpp](#flow/max_flow.hpp)
-- [flow/max_flow_min_cost.hpp](#flow/max_flow_min_cost.hpp)
-- [flow/maxflow.hpp](#flow/maxflow.hpp)
-- [geo/1-base.hpp](#geo/1-base.hpp)
-- [geo/10-triangle_area.hpp](#geo/10-triangle_area.hpp)
-- [geo/11-in_circle.hpp](#geo/11-in_circle.hpp)
-- [geo/12-line_inside_polygon.hpp](#geo/12-line_inside_polygon.hpp)
-- [geo/13-manhattan_mst.hpp](#geo/13-manhattan_mst.hpp)
-- [geo/14-max_norm_sum.hpp](#geo/14-max_norm_sum.hpp)
-- [geo/15-minkowski_sum.hpp](#geo/15-minkowski_sum.hpp)
-- [geo/16-out_circle.hpp](#geo/16-out_circle.hpp)
-- [geo/17-minimum_enclosing_circle.hpp](#geo/17-minimum_enclosing_circle.hpp)
-- [geo/2-apollonian_circle.hpp](#geo/2-apollonian_circle.hpp)
-- [geo/3-angle_sort.hpp](#geo/3-angle_sort.hpp)
-- [geo/4-closest_pair.hpp](#geo/4-closest_pair.hpp)
-- [geo/5-hull.hpp](#geo/5-hull.hpp)
-- [geo/6-convex_polygon.hpp](#geo/6-convex_polygon.hpp)
-- [geo/7-points_in_triangles.hpp](#geo/7-points_in_triangles.hpp)
-- [geo/8-distance.hpp](#geo/8-distance.hpp)
-- [geo/9-furthest_pair.hpp](#geo/9-furthest_pair.hpp)
-- [graph/Apck/Basic.hpp](#graph/Apck/Basic.hpp)
-- [graph/Apck/bellman_ford.hpp](#graph/Apck/bellman_ford.hpp)
-- [graph/Apck/block_cut_tree.hpp](#graph/Apck/block_cut_tree.hpp)
-- [graph/Apck/dag_path_cover.hpp](#graph/Apck/dag_path_cover.hpp)
-- [graph/Apck/dijkstra.hpp](#graph/Apck/dijkstra.hpp)
-- [graph/Apck/dominator_tree.hpp](#graph/Apck/dominator_tree.hpp)
-- [graph/Tree/Basic.hpp](#graph/Tree/Basic.hpp)
-- [graph/bellman_ford.hpp](#graph/bellman_ford.hpp)
-- [graph/dijkstra.hpp](#graph/dijkstra.hpp)
-- [graph/find_cycle_directed.hpp](#graph/find_cycle_directed.hpp)
-- [graph/floyd.hpp](#graph/floyd.hpp)
-- [graph/scc.hpp](#graph/scc.hpp)
-- [graph/triangle_counting.hpp](#graph/triangle_counting.hpp)
-- [graph/two_sat.hpp](#graph/two_sat.hpp)
-- [math/Big_int.hpp](#math/Big_int.hpp)
-- [math/counting/count_rectangle.hpp](#math/counting/count_rectangle.hpp)
-- [math/crt.hpp](#math/crt.hpp)
-- [math/exgcd.hpp](#math/exgcd.hpp)
-- [math/line/transpose.hpp](#math/line/transpose.hpp)
-- [math/line/vector_space.hpp](#math/line/vector_space.hpp)
-- [math/mat.hpp](#math/mat.hpp)
-- [math/mod/barrett.hpp](#math/mod/barrett.hpp)
-- [math/mod/count_terms.hpp](#math/mod/count_terms.hpp)
-- [math/mod/differentiate.hpp](#math/mod/differentiate.hpp)
-- [math/mod/fps_div.hpp](#math/mod/fps_div.hpp)
-- [math/mod/fps_div_mod.hpp](#math/mod/fps_div_mod.hpp)
-- [math/mod/fps_exp.hpp](#math/mod/fps_exp.hpp)
-- [math/mod/fps_inv.hpp](#math/mod/fps_inv.hpp)
-- [math/mod/fps_log.hpp](#math/mod/fps_log.hpp)
-- [math/mod/fps_pow.hpp](#math/mod/fps_pow.hpp)
-- [math/mod/fps_sqrt.hpp](#math/mod/fps_sqrt.hpp)
-- [math/mod/integrate.hpp](#math/mod/integrate.hpp)
-- [math/mod/lag.hpp](#math/mod/lag.hpp)
-- [math/mod/mod_sqrt.hpp](#math/mod/mod_sqrt.hpp)
-- [math/mod/modint.hpp](#math/mod/modint.hpp)
-- [math/mod/modint64.hpp](#math/mod/modint64.hpp)
-- [math/mod/modint64_d.hpp](#math/mod/modint64_d.hpp)
-- [math/mod/modint_common.hpp](#math/mod/modint_common.hpp)
-- [math/mod/modint_d.hpp](#math/mod/modint_d.hpp)
-- [math/mod/modint_inv.hpp](#math/mod/modint_inv.hpp)
-- [math/mod/modint_pow.hpp](#math/mod/modint_pow.hpp)
-- [math/mod/ntt_fft.hpp](#math/mod/ntt_fft.hpp)
-- [math/mod/powertable.hpp](#math/mod/powertable.hpp)
-- [math/mod/primitive_root.hpp](#math/mod/primitive_root.hpp)
-- [math/prims_test.hpp](#math/prims_test.hpp)
-- [math/primtable.hpp](#math/primtable.hpp)
-- [math/radix_sort.hpp](#math/radix_sort.hpp)
-- [math/sieve.hpp](#math/sieve.hpp)
-- [others/date_time.hpp](#others/date_time.hpp)
-- [random/random.hpp](#random/random.hpp)
-- [string/SA.hpp](#string/SA.hpp)
-- [string/SAM.hpp](#string/SAM.hpp)
-- [string/SAM_EX.hpp](#string/SAM_EX.hpp)
-- [string/acam.hpp](#string/acam.hpp)
-- [string/hash.hpp](#string/hash.hpp)
-- [string/manache.hpp](#string/manache.hpp)
-- [string/trie.hpp](#string/trie.hpp)
-- [string/zfunction.hpp](#string/zfunction.hpp)
-- [tree/LCA.hpp](#tree/LCA.hpp)
-- [tree/LCA_with_w.hpp](#tree/LCA_with_w.hpp)
-- [tree/LCT.hpp](#tree/LCT.hpp)
-- [tree/LTT.hpp](#tree/LTT.hpp)
-- [tree/centroid.hpp](#tree/centroid.hpp)
-- [tree/unrooted_tree_hash.hpp](#tree/unrooted_tree_hash.hpp)
+- [MeIoN_all.hpp](#meion-all-hpp)
+- [Z_H/MeIoN_H.hpp](#z-h-meion-h-hpp)
+- [Z_H/MeIoN_IO.hpp](#z-h-meion-io-hpp)
+- [Z_H/MeIoN_PRET.hpp](#z-h-meion-pret-hpp)
+- [Z_H/MeIoN_debug.hpp](#z-h-meion-debug-hpp)
+- [Z_H/MeIoN_sth_for_os.hpp](#z-h-meion-sth-for-os-hpp)
+- [Z_H/fast_io.hpp](#z-h-fast-io-hpp)
+- [ds/LinearBasis.hpp](#ds-linearbasis-hpp)
+- [ds/Wavelet_Matrix.hpp](#ds-wavelet-matrix-hpp)
+- [ds/a_monoid/max_add.hpp](#ds-a-monoid-max-add-hpp)
+- [ds/a_monoid/min_add.hpp](#ds-a-monoid-min-add-hpp)
+- [ds/a_monoid/minidx_add.hpp](#ds-a-monoid-minidx-add-hpp)
+- [ds/a_monoid/minmincnt_add.hpp](#ds-a-monoid-minmincnt-add-hpp)
+- [ds/a_monoid/sum_add.hpp](#ds-a-monoid-sum-add-hpp)
+- [ds/a_monoid/sum_cov.hpp](#ds-a-monoid-sum-cov-hpp)
+- [ds/a_monoid/sum_mul.hpp](#ds-a-monoid-sum-mul-hpp)
+- [ds/bit_vec.hpp](#ds-bit-vec-hpp)
+- [ds/chtholly.hpp](#ds-chtholly-hpp)
+- [ds/dsu.hpp](#ds-dsu-hpp)
+- [ds/fenw.hpp](#ds-fenw-hpp)
+- [ds/hashmap.hpp](#ds-hashmap-hpp)
+- [ds/heap.hpp](#ds-heap-hpp)
+- [ds/monoid/add.hpp](#ds-monoid-add-hpp)
+- [ds/monoid/add_array.hpp](#ds-monoid-add-array-hpp)
+- [ds/monoid/add_pair.hpp](#ds-monoid-add-pair-hpp)
+- [ds/monoid/gcd.hpp](#ds-monoid-gcd-hpp)
+- [ds/monoid/max.hpp](#ds-monoid-max-hpp)
+- [ds/monoid/max_idx.hpp](#ds-monoid-max-idx-hpp)
+- [ds/monoid/min.hpp](#ds-monoid-min-hpp)
+- [ds/monoid/min_idx.hpp](#ds-monoid-min-idx-hpp)
+- [ds/monoid/minmincnt.hpp](#ds-monoid-minmincnt-hpp)
+- [ds/monoid/mul.hpp](#ds-monoid-mul-hpp)
+- [ds/monoid/sum.hpp](#ds-monoid-sum-hpp)
+- [ds/monoid/xor.hpp](#ds-monoid-xor-hpp)
+- [ds/range_mex_query.hpp](#ds-range-mex-query-hpp)
+- [ds/rectangle_union.hpp](#ds-rectangle-union-hpp)
+- [ds/rollback_array.hpp](#ds-rollback-array-hpp)
+- [ds/rollback_dsu.hpp](#ds-rollback-dsu-hpp)
+- [ds/seg/dynamic_seg.hpp](#ds-seg-dynamic-seg-hpp)
+- [ds/seg/lazy_dynamic_seg.hpp](#ds-seg-lazy-dynamic-seg-hpp)
+- [ds/seg/lazy_seg_base.hpp](#ds-seg-lazy-seg-base-hpp)
+- [ds/seg/seg_base.hpp](#ds-seg-seg-base-hpp)
+- [ds/splay.hpp](#ds-splay-hpp)
+- [ds/sqrt_tree.hpp](#ds-sqrt-tree-hpp)
+- [ds/st_table.hpp](#ds-st-table-hpp)
+- [flow/hungarian.hpp](#flow-hungarian-hpp)
+- [flow/max_flow.hpp](#flow-max-flow-hpp)
+- [flow/max_flow_min_cost.hpp](#flow-max-flow-min-cost-hpp)
+- [flow/maxflow.hpp](#flow-maxflow-hpp)
+- [geo/1-base.hpp](#geo-1-base-hpp)
+- [geo/10-triangle_area.hpp](#geo-10-triangle-area-hpp)
+- [geo/11-in_circle.hpp](#geo-11-in-circle-hpp)
+- [geo/12-line_inside_polygon.hpp](#geo-12-line-inside-polygon-hpp)
+- [geo/13-manhattan_mst.hpp](#geo-13-manhattan-mst-hpp)
+- [geo/14-max_norm_sum.hpp](#geo-14-max-norm-sum-hpp)
+- [geo/15-minkowski_sum.hpp](#geo-15-minkowski-sum-hpp)
+- [geo/16-out_circle.hpp](#geo-16-out-circle-hpp)
+- [geo/17-minimum_enclosing_circle.hpp](#geo-17-minimum-enclosing-circle-hpp)
+- [geo/2-apollonian_circle.hpp](#geo-2-apollonian-circle-hpp)
+- [geo/3-angle_sort.hpp](#geo-3-angle-sort-hpp)
+- [geo/4-closest_pair.hpp](#geo-4-closest-pair-hpp)
+- [geo/5-hull.hpp](#geo-5-hull-hpp)
+- [geo/6-convex_polygon.hpp](#geo-6-convex-polygon-hpp)
+- [geo/7-points_in_triangles.hpp](#geo-7-points-in-triangles-hpp)
+- [geo/8-distance.hpp](#geo-8-distance-hpp)
+- [geo/9-furthest_pair.hpp](#geo-9-furthest-pair-hpp)
+- [graph/Apck/Basic.hpp](#graph-apck-basic-hpp)
+- [graph/Apck/bellman_ford.hpp](#graph-apck-bellman-ford-hpp)
+- [graph/Apck/block_cut_tree.hpp](#graph-apck-block-cut-tree-hpp)
+- [graph/Apck/dag_path_cover.hpp](#graph-apck-dag-path-cover-hpp)
+- [graph/Apck/dijkstra.hpp](#graph-apck-dijkstra-hpp)
+- [graph/Apck/dominator_tree.hpp](#graph-apck-dominator-tree-hpp)
+- [graph/Tree/Basic.hpp](#graph-tree-basic-hpp)
+- [graph/bellman_ford.hpp](#graph-bellman-ford-hpp)
+- [graph/dijkstra.hpp](#graph-dijkstra-hpp)
+- [graph/find_cycle_directed.hpp](#graph-find-cycle-directed-hpp)
+- [graph/floyd.hpp](#graph-floyd-hpp)
+- [graph/scc.hpp](#graph-scc-hpp)
+- [graph/triangle_counting.hpp](#graph-triangle-counting-hpp)
+- [graph/two_sat.hpp](#graph-two-sat-hpp)
+- [math/Big_int.hpp](#math-big-int-hpp)
+- [math/counting/count_rectangle.hpp](#math-counting-count-rectangle-hpp)
+- [math/crt.hpp](#math-crt-hpp)
+- [math/exgcd.hpp](#math-exgcd-hpp)
+- [math/line/transpose.hpp](#math-line-transpose-hpp)
+- [math/line/vector_space.hpp](#math-line-vector-space-hpp)
+- [math/mat.hpp](#math-mat-hpp)
+- [math/mod/barrett.hpp](#math-mod-barrett-hpp)
+- [math/mod/count_terms.hpp](#math-mod-count-terms-hpp)
+- [math/mod/differentiate.hpp](#math-mod-differentiate-hpp)
+- [math/mod/fps_div.hpp](#math-mod-fps-div-hpp)
+- [math/mod/fps_div_mod.hpp](#math-mod-fps-div-mod-hpp)
+- [math/mod/fps_exp.hpp](#math-mod-fps-exp-hpp)
+- [math/mod/fps_inv.hpp](#math-mod-fps-inv-hpp)
+- [math/mod/fps_log.hpp](#math-mod-fps-log-hpp)
+- [math/mod/fps_pow.hpp](#math-mod-fps-pow-hpp)
+- [math/mod/fps_sqrt.hpp](#math-mod-fps-sqrt-hpp)
+- [math/mod/integrate.hpp](#math-mod-integrate-hpp)
+- [math/mod/lag.hpp](#math-mod-lag-hpp)
+- [math/mod/mod_sqrt.hpp](#math-mod-mod-sqrt-hpp)
+- [math/mod/modint.hpp](#math-mod-modint-hpp)
+- [math/mod/modint64.hpp](#math-mod-modint64-hpp)
+- [math/mod/modint64_d.hpp](#math-mod-modint64-d-hpp)
+- [math/mod/modint_common.hpp](#math-mod-modint-common-hpp)
+- [math/mod/modint_d.hpp](#math-mod-modint-d-hpp)
+- [math/mod/modint_inv.hpp](#math-mod-modint-inv-hpp)
+- [math/mod/modint_pow.hpp](#math-mod-modint-pow-hpp)
+- [math/mod/ntt_fft.hpp](#math-mod-ntt-fft-hpp)
+- [math/mod/powertable.hpp](#math-mod-powertable-hpp)
+- [math/mod/primitive_root.hpp](#math-mod-primitive-root-hpp)
+- [math/prims_test.hpp](#math-prims-test-hpp)
+- [math/primtable.hpp](#math-primtable-hpp)
+- [math/radix_sort.hpp](#math-radix-sort-hpp)
+- [math/sieve.hpp](#math-sieve-hpp)
+- [others/date_time.hpp](#others-date-time-hpp)
+- [random/random.hpp](#random-random-hpp)
+- [string/SA.hpp](#string-sa-hpp)
+- [string/SAM.hpp](#string-sam-hpp)
+- [string/SAM_EX.hpp](#string-sam-ex-hpp)
+- [string/acam.hpp](#string-acam-hpp)
+- [string/hash.hpp](#string-hash-hpp)
+- [string/manache.hpp](#string-manache-hpp)
+- [string/trie.hpp](#string-trie-hpp)
+- [string/zfunction.hpp](#string-zfunction-hpp)
+- [tree/LCA.hpp](#tree-lca-hpp)
+- [tree/LCA_with_w.hpp](#tree-lca-with-w-hpp)
+- [tree/LCT.hpp](#tree-lct-hpp)
+- [tree/LTT.hpp](#tree-ltt-hpp)
+- [tree/centroid.hpp](#tree-centroid-hpp)
+- [tree/unrooted_tree_hash.hpp](#tree-unrooted-tree-hash-hpp)
 
 ## MeIoN_all.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -214,6 +216,8 @@
 
 ## Z_H/MeIoN_H.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include <algorithm>
@@ -257,6 +261,8 @@ using ld = long double;  using i128 = __int128_t; using u128 = __uint128_t;  usi
 ```
 
 ## Z_H/MeIoN_IO.hpp
+
+内容：
 
 ```cpp
 namespace MeIoN_IO {
@@ -377,6 +383,8 @@ namespace MeIoN_IO {
 ```
 
 ## Z_H/MeIoN_PRET.hpp
+
+内容：
 
 ```cpp
 namespace MeIoN_Pre_Things {
@@ -529,6 +537,8 @@ namespace MeIoN_Pre_Things {
 
 ## Z_H/MeIoN_debug.hpp
 
+内容：
+
 ```cpp
 // copy from https://github.com/Heltion/debug.h
 template <class T, size_t size = std::tuple_size<T>::value>
@@ -564,6 +574,8 @@ std::string to_debug(T x, std::string s)
 ```
 
 ## Z_H/MeIoN_sth_for_os.hpp
+
+内容：
 
 ```cpp
 #include <pthread.h>
@@ -607,6 +619,8 @@ std::string to_debug(T x, std::string s)
 ```
 
 ## Z_H/fast_io.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -865,6 +879,8 @@ namespace std {
 
 ## ds/LinearBasis.hpp
 
+内容：
+
 ```cpp
 struct LinearBasis {
     static const int B = 30;
@@ -927,6 +943,8 @@ struct LinearBasis_64 {
 ```
 
 ## ds/Wavelet_Matrix.hpp
+
+内容：
 
 ```cpp
 struct Bit_Vector {
@@ -1028,6 +1046,8 @@ struct Wavelet_Matrix {
 
 ## ds/a_monoid/max_add.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "../monoid/add.hpp"
@@ -1047,6 +1067,8 @@ struct a_monoid_max_add {
 ```
 
 ## ds/a_monoid/min_add.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -1068,6 +1090,8 @@ struct a_monoid_min_add {
 
 ## ds/a_monoid/minidx_add.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "../monoid/add.hpp"
@@ -1087,6 +1111,8 @@ struct a_monoid_min_idx_add {
 ```
 
 ## ds/a_monoid/minmincnt_add.hpp
+
+内容：
 
 ```cpp
 #include "../monoid/add.hpp"
@@ -1108,6 +1134,8 @@ struct a_monoid_minmincnt_add {
 
 ## ds/a_monoid/sum_add.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "../monoid/add.hpp"
@@ -1125,6 +1153,8 @@ struct a_monoid_sum_add {
 ```
 
 ## ds/a_monoid/sum_cov.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -1156,6 +1186,8 @@ struct a_monoid_sum_cov {
 
 ## ds/a_monoid/sum_mul.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "../monoid/mul.hpp"
@@ -1173,6 +1205,8 @@ struct a_monoid_sum_add {
 ```
 
 ## ds/bit_vec.hpp
+
+内容：
 
 ```cpp
 template <const int N>
@@ -1349,6 +1383,8 @@ struct bitvector {
 
 ## ds/chtholly.hpp
 
+内容：
+
 ```cpp
 template <typename DAT>
 struct coler_seg {
@@ -1416,6 +1452,8 @@ struct Chtholly : std::set<coler_seg<DAT>> {
 
 ## ds/dsu.hpp
 
+内容：
+
 ```cpp
 struct dsu{     //MeIoNのdsu
 public:
@@ -1448,6 +1486,8 @@ private:
 ```
 
 ## ds/fenw.hpp
+
+内容：
 
 ```cpp
 template <class T = ll>
@@ -1575,6 +1615,8 @@ struct Fenw01 {
 
 ## ds/hashmap.hpp
 
+内容：
+
 ```cpp
 template <typename Val>
 struct hash_map {
@@ -1648,6 +1690,8 @@ private :
 
 ## ds/heap.hpp
 
+内容：
+
 ```cpp
 template <typename T>
 struct heap {
@@ -1697,6 +1741,8 @@ struct heap {
 
 ## ds/monoid/add.hpp
 
+内容：
+
 ```cpp
 #pragma once
 
@@ -1713,6 +1759,8 @@ struct monoid_add {
 ```
 
 ## ds/monoid/add_array.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -1740,6 +1788,8 @@ struct monoid_add_array {
 
 ## ds/monoid/add_pair.hpp
 
+内容：
+
 ```cpp
 #pragma once
 
@@ -1758,6 +1808,8 @@ struct monoid_add_pair {
 
 ## ds/monoid/gcd.hpp
 
+内容：
+
 ```cpp
 #pragma once
 
@@ -1772,6 +1824,8 @@ struct monoid_gcd {
 
 ## ds/monoid/max.hpp
 
+内容：
+
 ```cpp
 #pragma once
 
@@ -1785,6 +1839,8 @@ struct monoid_max {
 ```
 
 ## ds/monoid/max_idx.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -1806,6 +1862,8 @@ struct monoid_max_idx {
 
 ## ds/monoid/min.hpp
 
+内容：
+
 ```cpp
 #pragma once
 
@@ -1819,6 +1877,8 @@ struct monoid_min {
 ```
 
 ## ds/monoid/min_idx.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -1839,6 +1899,8 @@ struct monoid_min_idx {
 ```
 
 ## ds/monoid/minmincnt.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -1861,6 +1923,8 @@ struct monoid_minmincnt {
 
 ## ds/monoid/mul.hpp
 
+内容：
+
 ```cpp
 #pragma once
 
@@ -1877,6 +1941,8 @@ struct monoid_mul {
 
 ## ds/monoid/sum.hpp
 
+内容：
+
 ```cpp
 #pragma once
 
@@ -1890,6 +1956,8 @@ struct monoid_sum {
 ```
 
 ## ds/monoid/xor.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -1908,6 +1976,8 @@ struct monoid_xor {
 ```
 
 ## ds/range_mex_query.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -1952,6 +2022,8 @@ struct range_mex_query {
 ```
 
 ## ds/rectangle_union.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -2003,6 +2075,8 @@ struct rectangle_union {
 
 ## ds/rollback_array.hpp
 
+内容：
+
 ```cpp
 #pragma once
 template <typename T>
@@ -2048,6 +2122,8 @@ struct RollbackArray {
 
 ## ds/rollback_dsu.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "rollback_array.hpp"
@@ -2085,6 +2161,8 @@ struct rollback_dsu {
 ```
 
 ## ds/seg/dynamic_seg.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -2292,6 +2370,8 @@ struct dynamic_seg {
 ```
 
 ## ds/seg/lazy_dynamic_seg.hpp
+
+内容：
 
 ```cpp
 template <typename ActedMonoid, bool persistent>
@@ -2554,6 +2634,8 @@ struct lazy_dynamic_seg {
 
 ## ds/seg/lazy_seg_base.hpp
 
+内容：
+
 ```cpp
 #pragma once
 template <typename a_monoid>
@@ -2727,6 +2809,8 @@ struct lazy_seg {
 
 ## ds/seg/seg_base.hpp
 
+内容：
+
 ```cpp
 #pragma once
 template <class monoid>
@@ -2832,6 +2916,8 @@ struct Seg {
 ```
 
 ## ds/splay.hpp
+
+内容：
 
 ```cpp
 constexpr int N = 1'000'000 + 10 << 2;
@@ -2960,6 +3046,8 @@ struct MeIoN_Splay {
 
 ## ds/sqrt_tree.hpp
 
+内容：
+
 ```cpp
 #pragma once
 template <typename Monoid>
@@ -3057,6 +3145,8 @@ struct sqrt_tree {   // nlog^2 预处理 O1查询区间信息 满足结合律
 
 ## ds/st_table.hpp
 
+内容：
+
 ```cpp
 namespace RMQ {
     vector<int> lg(2);
@@ -3098,6 +3188,8 @@ namespace RMQ {
 ```
 
 ## flow/hungarian.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -3166,6 +3258,8 @@ tuple<T, vector<int>, vector<T>, vector<T>> hungarian(vector<vector<T>> &C) {
 
 ## flow/max_flow.hpp
 
+内容：
+
 ```cpp
 namespace FL {
     using flowt = long long;
@@ -3230,6 +3324,8 @@ namespace FL {
 ```
 
 ## flow/max_flow_min_cost.hpp
+
+内容：
 
 ```cpp
 namespace internal {
@@ -3475,6 +3571,8 @@ private:
 
 ## flow/maxflow.hpp
 
+内容：
+
 ```cpp
 // incremental に辺を追加してよい
 // 辺の容量の変更が可能
@@ -3714,6 +3812,8 @@ struct max_flow {
 ```
 
 ## geo/1-base.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -3995,6 +4095,8 @@ std::tuple<bool, point<T>, point<T>> cross_point_circle(circle<T> C1,
 
 ## geo/10-triangle_area.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "1-base.hpp"
@@ -4010,6 +4112,8 @@ RE triangle_area_2(point<T> a, point<T> b, point<T> c) {
 ```
 
 ## geo/11-in_circle.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -4029,6 +4133,8 @@ circle<REAL> in_circle(point<T> A, point<T> B, point<T> C) { // 内接圆
 ```
 
 ## geo/12-line_inside_polygon.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -4075,6 +4181,8 @@ bool inside_polygon(const vector<point<T>> &polygon, segment<T> s) { // 判断�
 ```
 
 ## geo/13-manhattan_mst.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -4133,6 +4241,8 @@ vector<vector<pair<int, T>>> manhattan_mst(vector<point<T>> &points) {
 ```
 
 ## geo/14-max_norm_sum.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -4219,6 +4329,8 @@ pair<VAL, vector<int>> max_norm_sum_with_ps(vector<point<T>> dat) {
 
 ## geo/15-minkowski_sum.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "1-base.hpp"
@@ -4260,6 +4372,8 @@ vector<point<T>> minkowski_sum(vector<point<T>> A,
 
 ## geo/16-out_circle.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "1-base.hpp"
@@ -4300,6 +4414,8 @@ int out_circle_side(point<T> A, point<T> B, point<T> C, point<T> p) {
 ```
 
 ## geo/17-minimum_enclosing_circle.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -4370,6 +4486,8 @@ std::tuple<circle<RE>, int, int, int> minimum_enclosing_circle( // 一组点的�
 
 ## geo/2-apollonian_circle.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "1-base.hpp"
@@ -4387,6 +4505,8 @@ circle<REAL> apollonian_circle(point<T> A, point<T> B, T a, T b) {
 ```
 
 ## geo/3-angle_sort.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -4431,6 +4551,8 @@ vector<int> angle_sort(const vector<pair<T, T>> &v) {
 ```
 
 ## geo/4-closest_pair.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -4537,6 +4659,8 @@ pair<int, int> closest_pair2(vector<point<T>> points) {
 
 ## geo/5-hull.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "1-base.hpp"
@@ -4601,6 +4725,8 @@ vector<int> convex_hull(vector<point<T>> &p, string mode = "full",
 ```
 
 ## geo/6-convex_polygon.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -4742,6 +4868,8 @@ struct convex_polygon {
 
 ## geo/7-points_in_triangles.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "../ds/fenw.hpp"
@@ -4880,6 +5008,8 @@ struct count_points_in_triangles {
 
 ## geo/8-distance.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "1-base.hpp"
@@ -4918,6 +5048,8 @@ REAL distance(segment<T> s1, segment<T> s2) {
 ```
 
 ## geo/9-furthest_pair.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -4964,6 +5096,8 @@ pair<int, int> furthest_pair(vector<point<T>> points) {
 ```
 
 ## graph/Apck/Basic.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -5246,6 +5380,8 @@ struct graph {
 
 ## graph/Apck/bellman_ford.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "Basic.hpp"
@@ -5291,6 +5427,8 @@ tuple<vector<T>, vector<int>> bellman_ford(const GT &v, int s) {
 ```
 
 ## graph/Apck/block_cut_tree.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -5352,6 +5490,8 @@ graph<int, false> block_cut(GT &g) {
 
 ## graph/Apck/dag_path_cover.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "Basic.hpp"
@@ -5393,6 +5533,8 @@ vector<int> dag_path_cover(DAG &v) {
 
 ## graph/Apck/dijkstra.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "Basic.hpp"
@@ -5426,6 +5568,8 @@ pair<vector<ll>, vector<int>> dijkstra(const GT &v, int s) {
 ```
 
 ## graph/Apck/dominator_tree.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -5493,11 +5637,15 @@ vector<int> get_fa(const GT &v, int s) {
 
 ## graph/Tree/Basic.hpp
 
+内容：
+
 ```cpp
 
 ```
 
 ## graph/bellman_ford.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -5579,6 +5727,8 @@ tuple<vector<T>, vector<int>> bellman_ford(
 
 ## graph/dijkstra.hpp
 
+内容：
+
 ```cpp
 template <typename T = ll, typename VAL>
 pair<vector<T>, vector<int>> dijkstra(const vector<vector<pair<int, VAL>>> &v,
@@ -5608,6 +5758,8 @@ pair<vector<T>, vector<int>> dijkstra(const vector<vector<pair<int, VAL>>> &v,
 ```
 
 ## graph/find_cycle_directed.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -5677,6 +5829,8 @@ pair<vector<int>, vector<int>> find_cycle_directed(
 
 ## graph/floyd.hpp
 
+内容：
+
 ```cpp
 #pragma once
 // https://www.luogu.com.cn/problem/B3647
@@ -5704,6 +5858,8 @@ array<array<T, N>, N> floyd(const vector<std::tuple<int, int, T>> &e, int n = N,
 ```
 
 ## graph/scc.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -5798,6 +5954,8 @@ vector<vector<int>> get_new_graph(const vector<vector<int>> &scc, const vector<i
 
 ## graph/triangle_counting.hpp
 
+内容：
+
 ```cpp
 #pragma once
 // https://www.luogu.com.cn/problem/P1989
@@ -5839,6 +5997,8 @@ int triangle_count(const vector<pair<int, int>> &e, const int n) {
 ```
 
 ## graph/two_sat.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -5911,6 +6071,8 @@ public:
 ```
 
 ## math/Big_int.hpp
+
+内容：
 
 ```cpp
 namespace BGI {
@@ -6637,6 +6799,8 @@ namespace BGI {
 
 ## math/counting/count_rectangle.hpp
 
+内容：
+
 ```cpp
 #pragma once
 // https://codeforces.com/contest/1194/problem/E
@@ -6673,6 +6837,8 @@ ll count_rectangle(const vector<tuple<T, T, T, T>> &lines) {
 ```
 
 ## math/crt.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -6747,6 +6913,8 @@ i128 CRT(vector<T> vals, vector<T> mods, ll new_mod = -1) {
 
 ## math/exgcd.hpp
 
+内容：
+
 ```cpp
 ll exgcd(ll a, ll b, ll &x, ll &y){
     if (b == 0){
@@ -6760,6 +6928,8 @@ ll exgcd(ll a, ll b, ll &x, ll &y){
 ```
 
 ## math/line/transpose.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -6799,6 +6969,8 @@ vector<T> transpose(int n, int m, vector<T> &a, bool keep_a = true) {
 ```
 
 ## math/line/vector_space.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -6909,6 +7081,8 @@ struct vector_space {
 
 ## math/mat.hpp
 
+内容：
+
 ```cpp
 #pragma once
 // https://codeforces.com/contest/2065/problem/H  *
@@ -6993,6 +7167,8 @@ struct MAT {
 
 ## math/mod/barrett.hpp
 
+内容：
+
 ```cpp
 #pragma once
 struct Barrett {
@@ -7048,6 +7224,8 @@ struct Barrett_64 {
 
 ## math/mod/count_terms.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "modint.hpp"
@@ -7061,6 +7239,8 @@ int count_terms(const vector<mint> &f) {
 ```
 
 ## math/mod/differentiate.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -7076,6 +7256,8 @@ vector<mint> differentiate(const vector<mint> &f) {
 ```
 
 ## math/mod/fps_div.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -7116,6 +7298,8 @@ vector<mint> fps_div_sparse(vector<mint> f, vector<mint> &g) {
 
 ## math/mod/fps_div_mod.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "fps_inv.hpp"
@@ -7142,6 +7326,8 @@ pair<vector<mint>, vector<mint>> fps_div_mod(vector<mint> f, vector<mint> g) {
 ```
 
 ## math/mod/fps_exp.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -7286,6 +7472,8 @@ fps_exp_dense(vector<mint> &f) {
 
 ## math/mod/fps_inv.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "ntt_fft.hpp"
@@ -7363,6 +7551,8 @@ vector<mint> fps_inv(const vector<mint> &f) {
 
 ## math/mod/fps_log.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "fps_inv.hpp"
@@ -7413,6 +7603,8 @@ vector<mint> fps_log(const vector<mint> &f) {
 ```
 
 ## math/mod/fps_pow.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -7486,6 +7678,8 @@ vector<mint> fps_pow_1(const vector<mint> &f, mint K) {
 
 ## math/mod/fps_sqrt.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "mod_sqrt.hpp"
@@ -7551,6 +7745,8 @@ vector<mint> fps_sqrt_any(vector<mint> &f) {
 
 ## math/mod/integrate.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "modint.hpp"
@@ -7564,6 +7760,8 @@ vector<mint> integrate(const vector<mint> &f) {
 ```
 
 ## math/mod/lag.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -7608,6 +7806,8 @@ struct lag {
 ```
 
 ## math/mod/mod_sqrt.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -7681,6 +7881,8 @@ ll mod_sqrt_64(ll a, ll p) {
 ```
 
 ## math/mod/modint.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -7769,6 +7971,8 @@ struct modint {
 
 ## math/mod/modint64.hpp
 
+内容：
+
 ```cpp
 #pragma once
 template <ll mod>
@@ -7837,6 +8041,8 @@ struct modint_64bit {
 ```
 
 ## math/mod/modint64_d.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -7928,6 +8134,8 @@ Barrett_64 Dynamic_Modint_64<id>::bt;
 ```
 
 ## math/mod/modint_common.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -8068,6 +8276,8 @@ mint C_negative(ll n, ll d) {
 
 ## math/mod/modint_d.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "barrett.hpp"
@@ -8183,6 +8393,8 @@ Barrett Dynamic_Modint<id>::bt;
 
 ## math/mod/modint_inv.hpp
 
+内容：
+
 ```cpp
 #pragma once
 ll mod_inv(ll val, ll mod) {
@@ -8201,6 +8413,8 @@ ll mod_inv(ll val, ll mod) {
 ```
 
 ## math/mod/modint_pow.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -8226,6 +8440,8 @@ ull mod_pow_64(ull a, ull n, ull mod) {
 ```
 
 ## math/mod/ntt_fft.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -8612,6 +8828,8 @@ vector<mint> convolution(const vector<mint> &a, const vector<mint> &b) {
 
 ## math/mod/powertable.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "../../MeIoN_all.hpp"
@@ -8650,6 +8868,8 @@ vector<mint> power_table_2(mint e, ll n) {
 
 ## math/mod/primitive_root.hpp
 
+内容：
+
 ```cpp
 #pragma once
 #include "../prims_set.hpp"
@@ -8686,6 +8906,8 @@ ll primitive_root_64(ll p) {
 ```
 
 ## math/prims_test.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -8818,6 +9040,8 @@ vector<pair<ll, int>> factor_by_lpf(ll n, vector<int>& lpf) {
 
 ## math/primtable.hpp
 
+内容：
+
 ```cpp
 #pragma once
 template <typename T = int>
@@ -8855,6 +9079,8 @@ vector<T> primtable(int LIM) {
 
 ## math/radix_sort.hpp
 
+内容：
+
 ```cpp
 template <const int N>
 void radix_sort(int n, int a[]) {
@@ -8877,6 +9103,8 @@ void radix_sort(int n, int a[]) {
 ```
 
 ## math/sieve.hpp
+
+内容：
 
 ```cpp
 vector<int> minp, primes;
@@ -8904,6 +9132,8 @@ void sieve(int n) {
 ```
 
 ## others/date_time.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -9009,6 +9239,8 @@ struct DateTime {
 ```
 
 ## random/random.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -9179,6 +9411,8 @@ namespace MeIoN_random_hash {
 
 ## string/SA.hpp
 
+内容：
+
 ```cpp
 struct MeIoN_SA {
     std::vector<int> p, rank;
@@ -9224,6 +9458,8 @@ struct MeIoN_SA {
 ```
 
 ## string/SAM.hpp
+
+内容：
 
 ```cpp
 namespace MeIoN_SAM {
@@ -9288,6 +9524,8 @@ namespace MeIoN_SAM {
 
 ## string/SAM_EX.hpp
 
+内容：
+
 ```cpp
 namespace MeIoN_SAM_ {
     static constexpr int ALPHABET = 26;
@@ -9343,6 +9581,8 @@ using SAM = MeIoN_SAM_::MeIoN_SAM;
 ```
 
 ## string/acam.hpp
+
+内容：
 
 ```cpp
 struct MeIoN_ACAM {
@@ -9403,6 +9643,8 @@ using AC = MeIoN_ACAM;
 ```
 
 ## string/hash.hpp
+
+内容：
 
 ```cpp
 namespace getmod {
@@ -9526,6 +9768,8 @@ bool hash_same(const HASH &h1, int l1, const HASH &h2, int l2, int sz) {
 
 ## string/manache.hpp
 
+内容：
+
 ```cpp
 namespace MeIoN_namache{
     ll n;
@@ -9562,6 +9806,8 @@ namespace MeIoN_namache{
 ```
 
 ## string/trie.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -9649,6 +9895,8 @@ struct trie {
 
 ## string/zfunction.hpp
 
+内容：
+
 ```cpp
 #pragma once
 
@@ -9670,6 +9918,8 @@ vector<int> z_function(String& s){   // MeIoNのZ 后缀最长公共前缀
 ```
 
 ## tree/LCA.hpp
+
+内容：
 
 ```cpp
 template <const int N>
@@ -9728,6 +9978,8 @@ struct LCA {
 ```
 
 ## tree/LCA_with_w.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -9793,6 +10045,8 @@ struct LCA {
 ```
 
 ## tree/LCT.hpp
+
+内容：
 
 ```cpp
 #pragma once
@@ -10178,6 +10432,8 @@ struct lct_node_commutative_monoid {
 
 ## tree/LTT.hpp
 
+内容：
+
 ```cpp
 vector<int> get_fa(const vector<vector<int>> &v, int s) {
     int n = v.size();
@@ -10238,6 +10494,8 @@ vector<int> get_fa(const vector<vector<int>> &v, int s) {
 
 ## tree/centroid.hpp
 
+内容：
+
 ```cpp
 vector<int> centroid(const vector<vector<int>> &v) {
     const int n = (int)v.size();
@@ -10285,6 +10543,8 @@ vector<int> centroid(const vector<vector<int>> &v) {
 ```
 
 ## tree/unrooted_tree_hash.hpp
+
+内容：
 
 ```cpp
 #pragma once
