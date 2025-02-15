@@ -6085,7 +6085,7 @@ tuple<vector<vector<int>>, vector<int>> get_scc_dir(const vector<vector<int>> &v
             ++cnt;
         }
     };
-    for (int i{}; i < n; ++i) if (not dfn[i]) tarjan(tarjan, i);
+    for (int i{}; i < n; ++i) if (not dfn[i]) tarjan(tarjan, -1), s.clear();
     iroha {scc, id};
 }
 
@@ -6121,8 +6121,41 @@ tuple<vector<vector<int>>, vector<int>> get_scc_undir(const vector<vector<int>> 
             ++cnt;
         }
     };
-    for (int i{}; i < n; ++i) if (not dfn[i]) tarjan(tarjan, i, i);
+    for (int i{}; i < n; ++i) if (not dfn[i]) tarjan(tarjan, i, -1), s.clear();
     iroha {scc, id};
+}
+// 需要 e_id
+tuple<vector<vector<int>>, vector<int>> get_dcc_undir(const vector<vector<pair<int, int>>> &v) {
+    const int n = int(v.size());
+    vector<int> s, low(n), dfn(n), id(n);
+    int cnt{}, tot{};
+    vector<vector<int>> dcc;
+    meion tarjan = [&](meion &tarjan, int n, int fa) -> void {
+        low[n] = dfn[n] = ++tot;
+        s.emplace_back(n);
+        for (meion [i, id] : v[n]) {
+            if (id == fa) continue;
+            if (not dfn[i]) {
+                tarjan(tarjan, i, id);
+                chmin(low[n], low[i]);
+            } else {
+                chmin(low[n], dfn[i]);
+            }
+        }
+        if (dfn[n] == low[n]) {
+            dcc.emplace_back();
+            while (not s.empty()) {
+                int x = s.back();
+                s.pop_back();
+                id[x] = cnt;
+                dcc[cnt].emplace_back(x);
+                if (x == n) break;
+            }
+            ++cnt;
+        }
+    };
+    for (int i{}; i < n; ++i) if (not dfn[i]) tarjan(tarjan, i, -1), s.clear();
+    iroha {dcc, id};
 }
 
 vector<vector<int>> get_new_graph(const vector<vector<int>> &scc, const vector<int> &id, const vector<vector<int>> &v) {
