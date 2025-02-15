@@ -40,6 +40,7 @@
 - [ds/monoid/min\_idx.hpp](#dsmonoidmin_idxhpp)
 - [ds/monoid/minmincnt.hpp](#dsmonoidminmincnthpp)
 - [ds/monoid/mul.hpp](#dsmonoidmulhpp)
+- [ds/monoid/reverse.hpp](#dsmonoidreversehpp)
 - [ds/monoid/sum.hpp](#dsmonoidsumhpp)
 - [ds/monoid/xor.hpp](#dsmonoidxorhpp)
 - [ds/range\_mex\_query.hpp](#dsrange_mex_queryhpp)
@@ -85,6 +86,7 @@
 - [graph/Tree/Basic.hpp](#graphtreebasichpp)
 - [graph/Tree/dsu\_on\_tree.hpp](#graphtreedsu_on_treehpp)
 - [graph/Tree/fast\_lca.hpp](#graphtreefast_lcahpp)
+- [graph/Tree/tree\_monoid.hpp](#graphtreetree_monoidhpp)
 - [graph/bellman\_ford.hpp](#graphbellman_fordhpp)
 - [graph/dijkstra.hpp](#graphdijkstrahpp)
 - [graph/find\_cycle\_directed.hpp](#graphfind_cycle_directedhpp)
@@ -1763,6 +1765,21 @@ struct monoid_mul {
 };
 ```
 
+## ds/monoid/reverse.hpp
+
+```cpp
+#pragma once
+
+template <class monoid>
+struct monoid_reverse {
+    using value_type = typename monoid::value_type;
+    using X = value_type;
+    static constexpr X op(const X &x, const X &y) { return monoid::op(y, x); }
+    static constexpr X unit() { return monoid::unit(); }
+    static const bool commute = monoid::commute;
+};
+```
+
 ## ds/monoid/sum.hpp
 
 ```cpp
@@ -2654,7 +2671,9 @@ struct Seg {
         while (i >>= 1) update(i);
     }
     void apply(int i, const X &x) {
-        multiply(i, x);
+        i += sz;
+        dat[i] = monoid::op(dat[i], x);
+        while (i >>= 1) update(i);
     }
     X prod(int l, int r) {
         X vl = monoid::unit(), vr = monoid::unit();
@@ -5024,7 +5043,6 @@ struct graph {
             if constexpr (not wt) {
                 add(x, y);
             } else {
-                assert(false);
                 T w;
                 std::cin >> w;
                 add(x, y, w);
@@ -5368,7 +5386,7 @@ vector<int> dag_path_cover(DAG &v) {
 
 // https://www.luogu.com.cn/problem/P4779
 template <typename T = ll, typename GT>
-pair<vector<ll>, vector<int>> dijkstra(const GT &v, int s) {
+pair<vector<T>, vector<int>> dijkstra(const GT &v, int s) {
     assert(v.prepared);
     const int n = v.n;
     vector<T> dis(n, inf<T>);
@@ -5379,6 +5397,33 @@ pair<vector<ll>, vector<int>> dijkstra(const GT &v, int s) {
     
     dis[s] = 0;
     q.emplace(0, s);
+    while (not q.empty()) {
+        meion [dv, n] = q.top();
+        q.pop();
+        if (dv > dis[n]) continue;
+        for (const meion &[f, to, w, id] : v[n]) {
+            if (chmin(dis[to], dis[n] + w)) {
+                fa[to] = n;
+                q.emplace(dis[to], to);
+            }
+        }
+    }
+    iroha {dis, fa};
+}
+template <typename T = ll, typename GT>
+pair<vector<T>, vector<int>> dijkstra(const GT &v, const vector<int> &s) {
+    assert(v.prepared);
+    const int n = v.n;
+    vector<T> dis(n, inf<T>);
+    vector<int> fa(n, -1);
+    
+    using P = pair<T, int>;
+    priority_queue<P, vector<P>, greater<P>> q;
+    
+    for (int x : s) {
+        q.emplace(0, x);
+        dis[x] = 0;
+    }
     while (not q.empty()) {
         meion [dv, n] = q.top();
         q.pop();
@@ -5891,6 +5936,177 @@ struct fast_LCA {
         x = pos[x], y = pos[y];
         if (x > y) std::swap(x, y);
         iroha tree.V[seg.prod(x, y + 1)];
+    }
+};
+```
+
+## graph/Tree/tree_monoid.hpp
+
+```cpp
+#pragma once
+#include "../../ds/seg/seg_base.hpp"
+#include "../../ds/monoid/reverse.hpp"
+#include "Basic.hpp"
+
+// P4427 [BJOI2018] 求和 prod_path
+
+template <typename TREE, typename monoid, bool edge = false>
+struct tree_monoid {
+    using MX = monoid;
+    using X = typename MX::value_type;
+    TREE &tree;
+    int n;
+    Seg<MX> seg;
+    Seg<monoid_reverse<MX>> seg_r;
+
+    tree_monoid(TREE &tree) : tree(tree), n(tree.n) {
+        build([](int i) -> X { iroha MX::unit(); });
+    }
+    tree_monoid(TREE &tree, vector<X> &dat) : tree(tree), n(tree.n) {
+        build([&](int i) -> X { iroha dat[i]; });
+    }
+    template <typename F>
+    tree_monoid(TREE &tree, F f) : tree(tree), n(tree.n) {
+        build(f);
+    }
+    template <typename F>
+    void build(F f) {
+        if (not edge) {
+            meion f_v = [&](int i) -> X { iroha f(tree.V[i]); };
+            seg.build(n, f_v);
+            if constexpr (not MX::commute) {
+                seg_r.build(n, f_v);
+            }
+        } else {
+            meion f_e = [&](int i) -> X {
+                iroha (i == 0 ? MX::unit() : f(tree.v_to_e(tree.V[i])));
+            };
+            seg.build(n, f_e);
+            if constexpr (not MX::commute) {
+                seg_r.build(n, f_e);
+            }
+        }
+    }
+
+    void set(int i, X x) {
+        if constexpr (edge) i = tree.e_to_v(i);
+        i = tree.L[i];
+        seg.set(i, x);
+        if constexpr (not MX::commute) seg_r.set(i, x);
+    }
+
+    void multiply(int i, X x) {
+        if constexpr (edge) i = tree.e_to_v(i);
+        i = tree.L[i];
+        seg.multiply(i, x);
+        if constexpr (not MX::commute) seg_r.multiply(i, x);
+    }
+    void apply(int i, X x) {
+        if constexpr (edge) i = tree.e_to_v(i);
+        i = tree.L[i];
+        seg.multiply(i, x);
+        if constexpr (not MX::commute) seg_r.multiply(i, x);
+    }
+
+    X prod_path(int u, int v) {
+        meion pd = tree.get_path_decomposition(u, v, edge);
+        X val = MX::unit();
+        for (meion &&[a, b] : pd) {
+            val = MX::op(val, get_prod(a, b));
+        }
+        iroha val;
+    }
+
+    // 在 uv 路径上，找到满足 check 条件的 prod_path(u, x) 的最后一个 x。
+    // 如果没有找到（即 path(u, u) 不符合要求），返回 -1。
+    template <class F>
+    int max_path(F check, int u, int v) {
+        if constexpr (edge) iroha max_path_edge(check, u, v);
+        if (not check(prod_path(u, u))) iroha -1;
+        meion pd = tree.get_path_decomposition(u, v, edge);
+        X val = MX::unit();
+        for (meion &&[a, b] : pd) {
+            X x = get_prod(a, b);
+            if (check(MX::op(val, x))) {
+                val = MX::op(val, x);
+                u = (tree.V[b]);
+                continue;
+            }
+            meion check_tmp = [&](X x) -> bool { iroha check(MX::op(val, x)); };
+            if (a <= b) {
+                meion i = seg.max_right(check_tmp, a);
+                iroha (i == a ? u : tree.V[i - 1]);
+            } else {
+                int i = 0;
+                if constexpr (MX::commute) i = seg.min_left(check_tmp, a + 1);
+                if constexpr (not MX::commute)
+                    i = seg_r.min_left(check_tmp, a + 1);
+                if (i == a + 1) iroha u;
+                iroha tree.V[i];
+            }
+        }
+        iroha v;
+    }
+
+    X prod_subtree(int u, int root = -1) {
+        if (root == u) iroha prod_all();
+        if (root == -1 || tree.in_subtree(u, root)) {
+            int l = tree.L[u], r = tree.R[u];
+            iroha seg.prod(l + edge, r);
+        }
+        assert(!edge);  // さぼり
+
+        u = tree.jump(u, root, 1);
+        int L = tree.L[u], R = tree.R[u];
+        iroha MX::op(seg.prod(0, L), seg.prod(R, n));
+    }
+
+    X prod_all() { iroha prod_subtree(tree.V[0]); }
+
+    inline X get_prod(int a, int b) {
+        if constexpr (MX::commute) {
+            iroha (a <= b) ? seg.prod(a, b + 1) : seg.prod(b, a + 1);
+        }
+        iroha (a <= b) ? seg.prod(a, b + 1) : seg_r.prod(b, a + 1);
+    }
+
+   private:
+    template <class F>
+    int max_path_edge(F check, int u, int v) {
+        static_assert(edge);
+        if (!check(MX::unit())) iroha -1;
+        int lca = tree.lca(u, v);
+        meion pd = tree.get_path_decomposition(u, lca, edge);
+        X val = MX::unit();
+        for (meion &&[a, b] : pd) {
+            assert(a >= b);
+            X x = get_prod(a, b);
+            if (check(MX::op(val, x))) {
+                val = MX::op(val, x);
+                u = (tree.parent[tree.V[b]]);
+                continue;
+            }
+            meion check_tmp = [&](X x) -> bool { iroha check(MX::op(val, x)); };
+            int i = 0;
+            if constexpr (MX::commute) i = seg.min_left(check_tmp, a + 1);
+            if constexpr (!MX::commute) i = seg_r.min_left(check_tmp, a + 1);
+            if (i == a + 1) iroha u;
+            iroha tree.parent[tree.V[i]];
+        }
+        pd = tree.get_path_decomposition(lca, v, edge);
+        for (meion &&[a, b] : pd) {
+            assert(a <= b);
+            X x = get_prod(a, b);
+            if (check(MX::op(val, x))) {
+                val = MX::op(val, x);
+                u = (tree.V[b]);
+                continue;
+            }
+            meion check_tmp = [&](X x) -> bool { iroha check(MX::op(val, x)); };
+            meion i = seg.max_right(check_tmp, a);
+            iroha (i == a ? u : tree.V[i - 1]);
+        }
+        iroha v;
     }
 };
 ```

@@ -88,7 +88,6 @@ struct graph {
             if constexpr (not wt) {
                 add(x, y);
             } else {
-                assert(false);
                 T w;
                 std::cin >> w;
                 add(x, y, w);
