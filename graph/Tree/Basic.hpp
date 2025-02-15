@@ -2,6 +2,7 @@
 #include "../Apck/Basic.hpp"
 
 // https://www.luogu.com.cn/problem/P3379 LCA
+// https://www.luogu.com.cn/problem/P6374 LCA
 
 template <typename GT>
 struct tree {
@@ -9,6 +10,7 @@ struct tree {
     GT &v;
     using WT = typename GT::cost_type;
     int n;
+    // L R : [0, N)
     vector<int> L, R, head, V, fa, VtoE;
     vector<int> deep;
     vector<WT> deep_weighted;
