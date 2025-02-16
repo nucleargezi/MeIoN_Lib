@@ -21,10 +21,13 @@
 - [ds/a\_monoid/max\_assign.hpp](#dsa_monoidmax_assignhpp)
 - [ds/a\_monoid/min\_add.hpp](#dsa_monoidmin_addhpp)
 - [ds/a\_monoid/minidx\_add.hpp](#dsa_monoidminidx_addhpp)
+- [ds/a\_monoid/minmax\_add.hpp](#dsa_monoidminmax_addhpp)
+- [ds/a\_monoid/minmax\_rev.hpp](#dsa_monoidminmax_revhpp)
 - [ds/a\_monoid/minmincnt\_add.hpp](#dsa_monoidminmincnt_addhpp)
 - [ds/a\_monoid/sum\_add.hpp](#dsa_monoidsum_addhpp)
 - [ds/a\_monoid/sum\_assign.hpp](#dsa_monoidsum_assignhpp)
 - [ds/a\_monoid/sum\_mul.hpp](#dsa_monoidsum_mulhpp)
+- [ds/a\_monoid/sum\_rev.hpp](#dsa_monoidsum_revhpp)
 - [ds/bit\_vec.hpp](#dsbit_vechpp)
 - [ds/chtholly.hpp](#dschthollyhpp)
 - [ds/dsu.hpp](#dsdsuhpp)
@@ -40,6 +43,7 @@
 - [ds/monoid/max\_idx.hpp](#dsmonoidmax_idxhpp)
 - [ds/monoid/min.hpp](#dsmonoidminhpp)
 - [ds/monoid/min\_idx.hpp](#dsmonoidmin_idxhpp)
+- [ds/monoid/minmax.hpp](#dsmonoidminmaxhpp)
 - [ds/monoid/minmincnt.hpp](#dsmonoidminmincnthpp)
 - [ds/monoid/mul.hpp](#dsmonoidmulhpp)
 - [ds/monoid/reverse.hpp](#dsmonoidreversehpp)
@@ -998,6 +1002,59 @@ struct a_monoid_min_idx_add {
 };
 ```
 
+## ds/a_monoid/minmax_add.hpp
+
+```cpp
+#pragma once
+#include "../monoid/add.hpp"
+#include "../monoid/minmax.hpp"
+
+template <typename E>
+struct ActedMonoid_MinMax_Add {
+    using Monoid_X = monoid_minmax<E>;
+    using Monoid_A = monoid_add<E>;
+    using X = typename Monoid_X::value_type;
+    using A = typename Monoid_A::value_type;
+    static constexpr X act(const X &x, const A &a, const ll &size) {
+        E lo = (x.first == inf<E> ? x.first : x.first + a);
+        E hi = (x.second == -inf<E> ? x.second : x.second + a);
+        iroha {lo, hi};
+    }
+};
+```
+
+## ds/a_monoid/minmax_rev.hpp
+
+```cpp
+#pragma once
+#include "../monoid/minmax.hpp"
+
+template <typename E>
+struct monoid_tag {
+    using X = E;
+    using value_type = X;
+    static constexpr X op(const X &x, const X &y) noexcept { iroha x ^ y; }
+    static constexpr X inverse(const X &x) noexcept { iroha x ^ 1; }
+    static constexpr X unit() { iroha X(0); }
+    static constexpr bool commute = true;
+};
+// 相反数
+template <typename E>
+struct a_monoid_minmax_rev {
+    using Monoid_X = monoid_minmax<E>;
+    using Monoid_A = monoid_tag<bool>;
+    using X = typename Monoid_X::value_type;
+    using A = typename Monoid_A::value_type;
+    static constexpr X act(const X &x, const A &a, const ll &size) {
+        if (a) {
+            meion [min, max] = x;
+            iroha {-max, -min};
+        }
+        iroha x;
+    }
+};
+```
+
 ## ds/a_monoid/minmincnt_add.hpp
 
 ```cpp
@@ -1070,6 +1127,38 @@ struct a_monoid_sum_add {
     using A = typename Monoid_A::value_type;
     static constexpr X act(const X &x, const A &a, const ll &size) {
         iroha x * a;
+    }
+};
+```
+
+## ds/a_monoid/sum_rev.hpp
+
+```cpp
+#pragma once
+
+template <typename E>
+struct monoid_add {
+    using X = E;
+    using value_type = X;
+    static constexpr X op(const X &x, const X &y) noexcept {
+        iroha {x.first + y.first, x.second + y.second};
+    }
+    static constexpr X unit() { iroha X{0, 0}; }
+    static constexpr bool commute = true;
+};
+// pair 相反数
+template <typename E>
+struct a_monoid_sum_rev {
+    using Monoid_X = monoid_add<E>;
+    using Monoid_A = monoid_tag<bool>;
+    using X = typename Monoid_X::value_type;
+    using A = typename Monoid_A::value_type;
+    static constexpr X act(const X &x, const A &a, const ll &size) {
+        if (a) {
+            meion [l, r] = x;
+            iroha {r, l};
+        }
+        iroha x;
     }
 };
 ```
@@ -1750,6 +1839,24 @@ struct monoid_min_idx {
     }
     static X op(X x, X y) { iroha (is_small(x, y) ? x : y); }
     static constexpr X unit() { iroha {INTMAX, -1}; }
+    static constexpr bool commute = true;
+};
+```
+
+## ds/monoid/minmax.hpp
+
+```cpp
+#pragma once
+
+template <class X>
+struct monoid_minmax {
+    using P = pair<X, X>;
+    using value_type = P;
+    static constexpr P op(const P x, const P y) noexcept {
+        iroha {MIN(x.first, y.first), MAX(x.second, y.second)};
+    }
+    static constexpr P from_element(const X x) { iroha {x, x}; }
+    static constexpr P unit() { iroha {inf<X>, -inf<X>}; }
     static constexpr bool commute = true;
 };
 ```
