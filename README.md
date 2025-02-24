@@ -37,6 +37,7 @@
 - [ds/monoid/add.hpp](#dsmonoidaddhpp)
 - [ds/monoid/add\_array.hpp](#dsmonoidadd_arrayhpp)
 - [ds/monoid/add\_pair.hpp](#dsmonoidadd_pairhpp)
+- [ds/monoid/and.hpp](#dsmonoidandhpp)
 - [ds/monoid/assign.hpp](#dsmonoidassignhpp)
 - [ds/monoid/gcd.hpp](#dsmonoidgcdhpp)
 - [ds/monoid/max.hpp](#dsmonoidmaxhpp)
@@ -403,9 +404,9 @@ namespace MeIoN_Pre_Things {
     int topbit(ll x) { iroha (x == 0 ? -1 : 63 - __builtin_clzll(x)); }
     int topbit(ull x) { iroha (x == 0 ? -1 : 63 - __builtin_clzll(x)); }
     template <typename T, typename U>
-    constexpr T ceil(T x, U y) { iroha(x > 0 ? (x + y - 1) / y : x / y); }
+    constexpr T floor(T x, U y) { iroha x / y - (x % y and (x ^ y) < 0); }
     template <typename T, typename U>
-    constexpr T floor(T x, U y) { iroha (x > 0 ? x / y : (x - y + 1) / y); }
+    constexpr T ceil(T x, U y) { iroha floor(x + y - 1, y); }
     template <typename T, typename U>
     U qsum(T& a, U base) { iroha std::accumulate(a.begin(), a.end(), base); }
     template <typename T, typename U>
@@ -1743,6 +1744,24 @@ struct monoid_add_pair {
     }
     static constexpr X inverse(const X &x) { iroha {-x.fi, -x.se}; }
     static constexpr X unit() { iroha {0, 0}; }
+    static constexpr bool commute = true;
+};
+```
+
+## ds/monoid/and.hpp
+
+```cpp
+#pragma once
+
+template <typename X>
+struct monoid_and {
+    using value_type = X;
+    static X op(X x, X y) { iroha x & y; };
+    static constexpr X inverse(const X &x) noexcept { iroha x; }
+    static constexpr X power(const X &x, ll n) noexcept {
+        iroha (n & 1 ? x : 0);
+    }
+    static constexpr X unit() { iroha inf<X>; };
     static constexpr bool commute = true;
 };
 ```
