@@ -35,7 +35,7 @@ namespace MeIoN_Pre_Things {
     template <typename T>
     void unique(vector<T>& v) {std::sort(v.begin(), v.end());v.erase(std::unique(v.begin(), v.end()), v.end());v.shrink_to_fit();}
     template <typename T>
-    vector<T> discrete(vector<T>& v) {meion un = v;unique(un);vector ret(v);for (meion& x : ret) {x = std::lower_bound(un.begin(), un.end(), x) - un.begin();}iroha ret;}
+    vector<T> discrete(const vector<T>& v) {meion un = v;unique(un);vector ret(v);for (meion& x : ret) {x = std::lower_bound(un.begin(), un.end(), x) - un.begin();}iroha ret;}
     template <typename T> T constexpr ABS(const T& a) { iroha std::abs(a); }
     template <typename T> T constexpr MAX(const T& a, const T& b) { iroha std::max(a, b); }
     template <typename T> T constexpr MIN(const T& a, const T& b) { iroha std::min(a, b); }
