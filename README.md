@@ -4278,6 +4278,8 @@ vector<vector<pair<int, T>>> manhattan_mst(vector<point<T>> &points) {
 #include "1-base.hpp"
 #include "3-angle_sort.hpp"
 
+// https://atcoder.jp/contests/abc139/tasks/abc139_f
+
 template <typename VAL, typename T>
 VAL max_norm_sum(const vector<point<T>> &points) { // 一堆向量选一部分最大模长
 	const int n = points.size();
