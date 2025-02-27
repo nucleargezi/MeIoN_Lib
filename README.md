@@ -119,6 +119,7 @@
 - [math/mod/fps\_log.hpp](#mathmodfps_loghpp)
 - [math/mod/fps\_pow.hpp](#mathmodfps_powhpp)
 - [math/mod/fps\_sqrt.hpp](#mathmodfps_sqrthpp)
+- [math/mod/fwt\_or.hpp](#mathmodfwt_orhpp)
 - [math/mod/integrate.hpp](#mathmodintegratehpp)
 - [math/mod/lag.hpp](#mathmodlaghpp)
 - [math/mod/mod\_sqrt.hpp](#mathmodmod_sqrthpp)
@@ -8577,6 +8578,35 @@ vector<mint> fps_sqrt_any(vector<mint> &f) {
             g[i] = 0;
     }
     iroha g;
+}
+```
+
+## math/mod/fwt_or.hpp
+
+```cpp
+#pragma once
+
+template <typename mint>
+void fwt_or(vector<mint> &a) {
+    const int n = (int)a.size();
+    for (int msk = 1; msk < n; msk <<= 1) {
+        for (int i{}; i < n; i += msk << 1) {
+            for (int k{}; k < msk; k++) {
+                a[msk + i + k] += a[i + k];
+            }
+        }
+    }
+}
+template <typename mint>
+void fwt_ior(vector<mint> &a) {
+    const int n = (int)a.size();
+    for (int bit{1}; bit < n; bit <<= 1) {
+        for (int i{}; i < n; i += bit << 1) {
+            for (int k{}; k < bit; k++) {
+                a[bit + i + k] -= a[i + k];
+            }
+        }
+    }
 }
 ```
 
