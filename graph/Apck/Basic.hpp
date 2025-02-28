@@ -153,16 +153,16 @@ struct graph {
         if (not prepared) {
             std::cout << "f, to, cost, id\n";
             for (meion &&e : edges) {
-                std::cout << std::format("{}, {}, {}, {}\n", e.f, e.to, e.cost,
-                                         e.id);
+                std::cout << e.f << ' ' << e.to << ' ' << e.cost << ' ' << e.id
+                          << '\n';
             }
         } else {
             std::cout << "indptr: " << indptr << '\n';
             std::cout << "f, to, cost, id\n";
             for (int i{}; i < n; ++i) {
                 for (meion &&e : (*this)[i]) {
-                    std::cout << std::format("{}, {}, {}, {}\n", e.f, e.to,
-                                             e.cost, e.id);
+                    std::cout << e.f << ' ' << e.to << ' ' << e.cost << ' '
+                              << e.id << '\n';
                 }
             }
         }
