@@ -3,7 +3,7 @@
 
 // https://www.luogu.com.cn/problem/P1807
 template <typename T = ll, bool END = true, typename GT>
-tuple<vector<T>, vector<int>> bellman_ford(const GT &v, int s) {
+pair<vector<T>, vector<int>> bellman_ford(const GT &v, int s) {
     assert(v.prepared);
     const int n = v.n;
     vector<T> dis(n, inf<T>);
