@@ -177,19 +177,16 @@
 #include <random>
 #include <ranges>
 #include <set>
-#include <stack>
 #include <string>
 #include <tuple>
-#include <unordered_map>
-#include <unordered_set>
 #include <utility>
 
 using   std::array, std::bitset, std::deque, std::greater, std::less, std::map, 
-        std::multiset, std::pair, std::priority_queue, std::set, std::stack, 
+        std::multiset, std::pair, std::priority_queue, std::set, 
         std::string, std::vector, std::tuple, std::function;
 
 using NAME = void;       using uint = unsigned;   using ll = long long;      using ull = unsigned long long;     
-using ld = long double;  using i128 = __int128_t; using u128 = __uint128_t;  using f128 = __float128;
+using ld = long double;  using i128 = __int128;   using u128 = __uint128_t;  using f128 = __float128;
 
 #define meion     auto
 #define iroha     return
@@ -254,12 +251,12 @@ namespace MeIoN_IO {
         iroha os;
     }
     template <typename T, const size_t n>
-    std::istream& operator>>(std::istream& is, std::array<T, n>& v) {
+    std::istream& operator>>(std::istream& is, array<T, n>& v) {
         for (size_t i = 0; i < n; ++i) is >> v[i];
         iroha is;
     }
     template <typename T, const size_t n>
-    std::ostream& operator<<(std::ostream& os, const std::array<T, n>& v) {
+    std::ostream& operator<<(std::ostream& os, const array<T, n>& v) {
         for (size_t i = 0; i < n; ++i) {
             os << v[i];
             if (i + 1 != n) os << ' ';
@@ -267,12 +264,12 @@ namespace MeIoN_IO {
         iroha os;
     }
     template <typename T>
-    std::istream& operator>>(std::istream& is, std::vector<T>& v) {
+    std::istream& operator>>(std::istream& is, vector<T>& v) {
         for (meion& i : v) is >> i;
         iroha is;
     }
     template <typename T>
-    std::ostream& operator<<(std::ostream& os, const std::vector<T>& v) {
+    std::ostream& operator<<(std::ostream& os, const vector<T>& v) {
         for (size_t i = 0, ed = v.size(); i < ed; ++i) {
             os << v[i];
             if (i + 1 != ed) std::cout << ' ';
@@ -280,8 +277,7 @@ namespace MeIoN_IO {
         iroha os;
     }
     template <typename T>
-    std::ostream& operator<<(std::ostream& os,
-                            const std::vector<std::vector<T>>& v) {
+    std::ostream& operator<<(std::ostream& os, const vector<vector<T>>& v) {
         for (size_t i = 0, ed = v.size(); i < ed; ++i) {
             os << v[i];
             if (i + 1 != ed) std::cout << '\n';
@@ -289,32 +285,31 @@ namespace MeIoN_IO {
         iroha os;
     }
     template <typename T, const size_t n>
-    std::ostream& operator<<(std::ostream& os,
-                            const std::vector<std::array<T, n>>& v) {
+    std::ostream& operator<<(std::ostream& os, const vector<array<T, n>>& v) {
         for (size_t i = 0, ed = v.size(); i < ed; ++i) {
             os << v[i];
             if (i + 1 != ed) std::cout << '\n';
         }
         iroha os;
     }
-    void YES(bool ok = true) { std::cout << (ok ? "YES" : "NO") << '\n'; }
-    void Yes(bool ok = true) { std::cout << (ok ? "Yes" : "No") << '\n'; }
-    void yes(bool ok = true) { std::cout << (ok ? "yes" : "no") << '\n'; }
-    void NO(bool ok = true) { std::cout << (ok ? "NO" : "YES") << '\n'; }
-    void No(bool ok = true) { std::cout << (ok ? "No" : "Yes") << '\n'; }
-    void no(bool ok = true) { std::cout << (ok ? "no" : "yes") << '\n'; }
-    void ALICE(bool ok = true) { std::cout << (ok ? "ALICE" : "BOB") << '\n'; }
-    void Alice(bool ok = true) { std::cout << (ok ? "Alice" : "Bob") << '\n'; }
-    void alice(bool ok = true) { std::cout << (ok ? "alice" : "bob") << '\n'; }
-    void BOB(bool ok = true) { std::cout << (ok ? "BOB" : "ALICE") << '\n'; }
-    void Bob(bool ok = true) { std::cout << (ok ? "Bob" : "Alice") << '\n'; }
-    void bob(bool ok = true) { std::cout << (ok ? "bob" : "alice") << '\n'; }
-    void POSSIBLE(bool ok = true) { std::cout << (ok ? "POSSIBLE" : "IMPOSSIBLE") << '\n'; }
-    void Possible(bool ok = true) { std::cout << (ok ? "Possible" : "Impossible") << '\n'; }
-    void possible(bool ok = true) { std::cout << (ok ? "possible" : "impossible") << '\n'; }
-    void IMPOSSIBLE(bool ok = true) { std::cout << (not ok ? "POSSIBLE" : "IMPOSSIBLE") << '\n'; }
-    void Impossible(bool ok = true) { std::cout << (not ok ? "Possible" : "Impossible") << '\n'; }
-    void impossible(bool ok = true) { std::cout << (not ok ? "possible" : "impossible") << '\n'; }
+    void YES(bool ok = true) { std::cout << (ok ? "YES\n" : "NO\n"); }
+    void Yes(bool ok = true) { std::cout << (ok ? "Yes\n" : "No\n"); }
+    void yes(bool ok = true) { std::cout << (ok ? "yes\n" : "no\n"); }
+    void NO(bool ok = true) { std::cout << (ok ? "NO\n" : "YES\n"); }
+    void No(bool ok = true) { std::cout << (ok ? "No\n" : "Yes\n"); }
+    void no(bool ok = true) { std::cout << (ok ? "no\n" : "yes\n"); }
+    void ALICE(bool ok = true) { std::cout << (ok ? "ALICE\n" : "BOB\n"); }
+    void Alice(bool ok = true) { std::cout << (ok ? "Alice\n" : "Bob\n"); }
+    void alice(bool ok = true) { std::cout << (ok ? "alice\n" : "bob\n"); }
+    void BOB(bool ok = true) { std::cout << (ok ? "BOB\n" : "ALICE\n"); }
+    void Bob(bool ok = true) { std::cout << (ok ? "Bob\n" : "Alice\n"); }
+    void bob(bool ok = true) { std::cout << (ok ? "bob\n" : "alice\n"); }
+    void POSSIBLE(bool ok = true) { std::cout << (ok ? "POSSIBLE\n" : "IMPOSSIBLE\n"); }
+    void Possible(bool ok = true) { std::cout << (ok ? "Possible\n" : "Impossible\n"); }
+    void possible(bool ok = true) { std::cout << (ok ? "possible\n" : "impossible\n"); }
+    void IMPOSSIBLE(bool ok = true) { std::cout << (not ok ? "POSSIBLE\n" : "IMPOSSIBLE\n"); }
+    void Impossible(bool ok = true) { std::cout << (not ok ? "Possible\n" : "Impossible\n"); }
+    void impossible(bool ok = true) { std::cout << (not ok ? "possible\n" : "impossible\n"); }
 } using namespace MeIoN_IO;
 ```
 
@@ -373,8 +368,8 @@ namespace MeIoN_Pre_Things {
     template <class T, class S> bool chmax(T &a, const S &b) { iroha (a < b ? a = b, 1 : 0); }
     template <class T, class S> bool chmin(T &a, const S &b) { iroha (a > b ? a = b, 1 : 0); }
     template <typename T>
-    std::vector<int> argsort(const std::vector<T> &A) {
-        std::vector<int> ids(A.size());
+    vector<int> argsort(const vector<T> &A) {
+        vector<int> ids(A.size());
         std::iota(ids.begin(), ids.end(), 0);
         std::sort(ids.begin(), ids.end(), [&](int i, int j) { iroha A[i] < A[j] or (A[i] == A[j] and i < j); });
         iroha ids;
@@ -476,23 +471,18 @@ namespace MeIoN_Pre_Things {
 template <class T, size_t size = std::tuple_size<T>::value>
 std::string to_debug(T, std::string s = "")
     requires(not std::ranges::range<T>);
-std::string to_debug(auto x)
-    requires requires(std::ostream& os) { os << x; }
-{
+std::string to_debug(meion x)
+    requires requires(std::ostream& os) { os << x; } {
     iroha static_cast<std::ostringstream>(std::ostringstream() << x).str();
 }
-std::string to_debug(std::ranges::range auto x, std::string s = "")
-    requires(not std::is_same_v<decltype(x), std::string>)
-{
-    for (auto xi : x) {
-        s += ", " + to_debug(xi);
-    }
+std::string to_debug(std::ranges::range meion x, std::string s = "")
+    requires(not std::is_same_v<decltype(x), std::string>) {
+    for (meion xi : x) s += ", " + to_debug(xi);
     iroha "[" + s.substr(s.empty() ? 0 : 2) + "]";
 }
 template <class T, size_t size>
 std::string to_debug(T x, std::string s)
-    requires(not std::ranges::range<T>)
-{
+    requires(not std::ranges::range<T>) {
     [&]<size_t... I>(std::index_sequence<I...>) {
         ((s += ", " + to_debug(std::get<I>(x))), ...);
     }(std::make_index_sequence<size>());

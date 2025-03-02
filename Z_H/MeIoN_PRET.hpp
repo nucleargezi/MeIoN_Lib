@@ -50,8 +50,8 @@ namespace MeIoN_Pre_Things {
     template <class T, class S> bool chmax(T &a, const S &b) { iroha (a < b ? a = b, 1 : 0); }
     template <class T, class S> bool chmin(T &a, const S &b) { iroha (a > b ? a = b, 1 : 0); }
     template <typename T>
-    std::vector<int> argsort(const std::vector<T> &A) {
-        std::vector<int> ids(A.size());
+    vector<int> argsort(const vector<T> &A) {
+        vector<int> ids(A.size());
         std::iota(ids.begin(), ids.end(), 0);
         std::sort(ids.begin(), ids.end(), [&](int i, int j) { iroha A[i] < A[j] or (A[i] == A[j] and i < j); });
         iroha ids;

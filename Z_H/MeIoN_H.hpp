@@ -18,19 +18,16 @@
 #include <random>
 #include <ranges>
 #include <set>
-#include <stack>
 #include <string>
 #include <tuple>
-#include <unordered_map>
-#include <unordered_set>
 #include <utility>
 
 using   std::array, std::bitset, std::deque, std::greater, std::less, std::map, 
-        std::multiset, std::pair, std::priority_queue, std::set, std::stack, 
+        std::multiset, std::pair, std::priority_queue, std::set, 
         std::string, std::vector, std::tuple, std::function;
 
 using NAME = void;       using uint = unsigned;   using ll = long long;      using ull = unsigned long long;     
-using ld = long double;  using i128 = __int128_t; using u128 = __uint128_t;  using f128 = __float128;
+using ld = long double;  using i128 = __int128;   using u128 = __uint128_t;  using f128 = __float128;
 
 #define meion     auto
 #define iroha     return

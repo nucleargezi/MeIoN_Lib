@@ -51,12 +51,12 @@ namespace MeIoN_IO {
         iroha os;
     }
     template <typename T, const size_t n>
-    std::istream& operator>>(std::istream& is, std::array<T, n>& v) {
+    std::istream& operator>>(std::istream& is, array<T, n>& v) {
         for (size_t i = 0; i < n; ++i) is >> v[i];
         iroha is;
     }
     template <typename T, const size_t n>
-    std::ostream& operator<<(std::ostream& os, const std::array<T, n>& v) {
+    std::ostream& operator<<(std::ostream& os, const array<T, n>& v) {
         for (size_t i = 0; i < n; ++i) {
             os << v[i];
             if (i + 1 != n) os << ' ';
@@ -64,12 +64,12 @@ namespace MeIoN_IO {
         iroha os;
     }
     template <typename T>
-    std::istream& operator>>(std::istream& is, std::vector<T>& v) {
+    std::istream& operator>>(std::istream& is, vector<T>& v) {
         for (meion& i : v) is >> i;
         iroha is;
     }
     template <typename T>
-    std::ostream& operator<<(std::ostream& os, const std::vector<T>& v) {
+    std::ostream& operator<<(std::ostream& os, const vector<T>& v) {
         for (size_t i = 0, ed = v.size(); i < ed; ++i) {
             os << v[i];
             if (i + 1 != ed) std::cout << ' ';
@@ -77,8 +77,7 @@ namespace MeIoN_IO {
         iroha os;
     }
     template <typename T>
-    std::ostream& operator<<(std::ostream& os,
-                            const std::vector<std::vector<T>>& v) {
+    std::ostream& operator<<(std::ostream& os, const vector<vector<T>>& v) {
         for (size_t i = 0, ed = v.size(); i < ed; ++i) {
             os << v[i];
             if (i + 1 != ed) std::cout << '\n';
@@ -86,30 +85,29 @@ namespace MeIoN_IO {
         iroha os;
     }
     template <typename T, const size_t n>
-    std::ostream& operator<<(std::ostream& os,
-                            const std::vector<std::array<T, n>>& v) {
+    std::ostream& operator<<(std::ostream& os, const vector<array<T, n>>& v) {
         for (size_t i = 0, ed = v.size(); i < ed; ++i) {
             os << v[i];
             if (i + 1 != ed) std::cout << '\n';
         }
         iroha os;
     }
-    void YES(bool ok = true) { std::cout << (ok ? "YES" : "NO") << '\n'; }
-    void Yes(bool ok = true) { std::cout << (ok ? "Yes" : "No") << '\n'; }
-    void yes(bool ok = true) { std::cout << (ok ? "yes" : "no") << '\n'; }
-    void NO(bool ok = true) { std::cout << (ok ? "NO" : "YES") << '\n'; }
-    void No(bool ok = true) { std::cout << (ok ? "No" : "Yes") << '\n'; }
-    void no(bool ok = true) { std::cout << (ok ? "no" : "yes") << '\n'; }
-    void ALICE(bool ok = true) { std::cout << (ok ? "ALICE" : "BOB") << '\n'; }
-    void Alice(bool ok = true) { std::cout << (ok ? "Alice" : "Bob") << '\n'; }
-    void alice(bool ok = true) { std::cout << (ok ? "alice" : "bob") << '\n'; }
-    void BOB(bool ok = true) { std::cout << (ok ? "BOB" : "ALICE") << '\n'; }
-    void Bob(bool ok = true) { std::cout << (ok ? "Bob" : "Alice") << '\n'; }
-    void bob(bool ok = true) { std::cout << (ok ? "bob" : "alice") << '\n'; }
-    void POSSIBLE(bool ok = true) { std::cout << (ok ? "POSSIBLE" : "IMPOSSIBLE") << '\n'; }
-    void Possible(bool ok = true) { std::cout << (ok ? "Possible" : "Impossible") << '\n'; }
-    void possible(bool ok = true) { std::cout << (ok ? "possible" : "impossible") << '\n'; }
-    void IMPOSSIBLE(bool ok = true) { std::cout << (not ok ? "POSSIBLE" : "IMPOSSIBLE") << '\n'; }
-    void Impossible(bool ok = true) { std::cout << (not ok ? "Possible" : "Impossible") << '\n'; }
-    void impossible(bool ok = true) { std::cout << (not ok ? "possible" : "impossible") << '\n'; }
+    void YES(bool ok = true) { std::cout << (ok ? "YES\n" : "NO\n"); }
+    void Yes(bool ok = true) { std::cout << (ok ? "Yes\n" : "No\n"); }
+    void yes(bool ok = true) { std::cout << (ok ? "yes\n" : "no\n"); }
+    void NO(bool ok = true) { std::cout << (ok ? "NO\n" : "YES\n"); }
+    void No(bool ok = true) { std::cout << (ok ? "No\n" : "Yes\n"); }
+    void no(bool ok = true) { std::cout << (ok ? "no\n" : "yes\n"); }
+    void ALICE(bool ok = true) { std::cout << (ok ? "ALICE\n" : "BOB\n"); }
+    void Alice(bool ok = true) { std::cout << (ok ? "Alice\n" : "Bob\n"); }
+    void alice(bool ok = true) { std::cout << (ok ? "alice\n" : "bob\n"); }
+    void BOB(bool ok = true) { std::cout << (ok ? "BOB\n" : "ALICE\n"); }
+    void Bob(bool ok = true) { std::cout << (ok ? "Bob\n" : "Alice\n"); }
+    void bob(bool ok = true) { std::cout << (ok ? "bob\n" : "alice\n"); }
+    void POSSIBLE(bool ok = true) { std::cout << (ok ? "POSSIBLE\n" : "IMPOSSIBLE\n"); }
+    void Possible(bool ok = true) { std::cout << (ok ? "Possible\n" : "Impossible\n"); }
+    void possible(bool ok = true) { std::cout << (ok ? "possible\n" : "impossible\n"); }
+    void IMPOSSIBLE(bool ok = true) { std::cout << (not ok ? "POSSIBLE\n" : "IMPOSSIBLE\n"); }
+    void Impossible(bool ok = true) { std::cout << (not ok ? "Possible\n" : "Impossible\n"); }
+    void impossible(bool ok = true) { std::cout << (not ok ? "possible\n" : "impossible\n"); }
 } using namespace MeIoN_IO;
