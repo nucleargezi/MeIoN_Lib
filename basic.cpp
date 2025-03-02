@@ -11,8 +11,8 @@ NAME MeIoN_is_UMP45() {
 int main() {
     std::cin.tie(nullptr)->sync_with_stdio(false);
     std::cout << std::fixed << std::setprecision(12);
-    // freopen("in","r",stdin);
-    // freopen("outt","w",stdout);
+    // std::ifstream in("in"); std::cin.rdbuf(in.rdbuf());
+    // std::ofstream ou("out"); std::cout.rdbuf(ou.rdbuf());
     before();
 #ifdef tests
     std::cin >> T;
