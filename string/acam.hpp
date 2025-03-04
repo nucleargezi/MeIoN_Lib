@@ -1,3 +1,6 @@
+#pragma once
+#include "../graph/Tree/Basic.hpp"
+
 template <typename T = int, int ALPHABET = 26>
 struct AC {
     struct Node {
@@ -62,12 +65,13 @@ struct AC {
         }
         prepare = true;
     }
-    vector<vector<int>> get_tree() {
+    graph<int, true> get_graph() {
         assert(prepare);
-        vector<vector<int>> v((int)t.size());
+        graph<int, true> v((int)t.size());
         for (int i{1}; i < (int)t.size(); ++i) {
-            v[fail(i)].emplace_back(i);
+            v.add(fail(i), i);
         }
+        v.build();
         iroha v;
     }
     
