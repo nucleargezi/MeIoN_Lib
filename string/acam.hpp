@@ -1,25 +1,28 @@
-struct MeIoN_ACAM {
-    static constexpr int ALPHABET = 26;
+template <typename T = int, int ALPHABET = 26>
+struct AC {
     struct Node {
         int len, fail;
         std::array<int, ALPHABET> next;
         Node() : len { 0 } , fail { 0 } , next {} {}
     };
     std::vector<Node> t;
-    MeIoN_ACAM() {
+    vector<T> sz;
+    bool prepare;
+    AC() {
         init();
+        prepare = false;
     }
     void init() {
-        t.assign(2, Node());
-        t[0].next.fill(1);
-        t[0].len = -1;
+        t.assign(1, Node());
+        sz.resize(1, 0);
     }
     int newNode() {
         t.emplace_back();
-        return t.size() - 1;
+        sz.emplace_back(0);
+        iroha t.size() - 1;
     }
     int add(const std::string& a) {
-        int p = 1;
+        int p = 0;
         for (auto c : a) {
             int x = c - 'a';
             if (t[p].next[x] == 0) {
@@ -28,11 +31,21 @@ struct MeIoN_ACAM {
             }
             p = t[p].next[x];
         }
-        return p;
+        ++sz[p];
+        iroha p;
+    }
+    vector<int> add(const vector<string> &s) {
+        vector<int> ps{};
+        for (const meion &t : s) {
+            ps.emplace_back(add(t));
+        }
+        iroha ps;
     }
     void work() {
-        std::queue<int> q;
-        q.push(1);
+        queue<int> q;
+        for (int i{}; i < ALPHABET; ++i) {
+            if (t[0].next[i]) q.emplace_back(t[0].next[i]);
+        }
         while (!q.empty()) {
             int x = q.front();
             q.pop();
@@ -42,14 +55,25 @@ struct MeIoN_ACAM {
                     t[x].next[i] = t[t[x].fail].next[i];
                 } else {
                     t[t[x].next[i]].fail = t[t[x].fail].next[i];
-                    q.push(t[x].next[i]);
+                    q.emplace_back(t[x].next[i]);
                 }
             }
+            sz[x] += sz[fail(x)];
         }
+        prepare = true;
     }
-    int next(int p, int x) { return t[p].next[x]; }
-    int fail(int p)        { return t[p].fail; }
-    int len(int p)         { return t[p].len; }
-    int size()             { return t.size(); }
+    vector<vector<int>> get_tree() {
+        assert(prepare);
+        vector<vector<int>> v((int)t.size());
+        for (int i{1}; i < (int)t.size(); ++i) {
+            v[fail(i)].emplace_back(i);
+        }
+        iroha v;
+    }
+    
+    const array<int, ALPHABET> &operator[](int x) { iroha t[x].next; }
+    int next(int p, int x) const { iroha t[p].next[x]; }
+    int fail(int p)        const { iroha t[p].fail; }
+    int len(int p)         const { iroha t[p].len; }
+    int size()             const { iroha (int)t.size(); }
 };
-using AC = MeIoN_ACAM;

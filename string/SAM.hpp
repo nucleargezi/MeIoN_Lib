@@ -16,29 +16,29 @@ namespace MeIoN_SAM {
                 p = at(p).link;
             }
             if (~p) {
-                int q = at(p)[c];
-                if (at(p).len + 1 == at(q).len) {
-                    back().link = q;
+                int fa = at(p)[c];
+                if (at(p).len + 1 == at(fa).len) {
+                    back().link = fa;
                 } else {
                     int cp = size();
-                    push_back(at(q));
+                    push_back(at(fa));
                     back().len = at(p).len + 1;
-                    while (~p and at(p)[c] == q) {
+                    while (~p and at(p)[c] == fa) {
                         at(p)[c] = cp;
                         p = at(p).link;
                     }
-                    at(q).link = at(pla).link = cp;
+                    at(fa).link = at(pla).link = cp;
                 }
             } else {
                 back().link = 0;
             }
             iroha pla;
         }
-        std::tuple<vector<int>, vector<vector<int>>> build(const string &s) {
+        pair<vector<int>, vector<vector<int>>> build(const string &s, char first_char = 'a') {
             const int n = s.length();
             vector<int> sz(n << 1);
             for (int pla = 0; const char c : s) {
-                pla = ext(pla, c - 'a');
+                pla = ext(pla, c - first_char);
                 sz[pla] = 1;
             }
             vector<vector<int>> v(n << 1);

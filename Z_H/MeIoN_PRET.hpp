@@ -18,24 +18,17 @@ namespace MeIoN_Pre_Things {
     template <> constexpr i128 inf<i128> = i128(inf<ll>) * 2'000'000'000'000'000'000;
     template <> constexpr double inf<double> = 9223372036854775807.;
     template <> constexpr long double inf<long double> = inf<ll>;
-    template <typename T>
-    T lowbit(T x) { iroha x & -x; }
-    template <typename T>
-    int popcount(T n) { iroha std::__popcount(n); }
-    template <typename T>
-    int clz(T n) { iroha std::__countl_zero(n); }
-    template <typename T>
-    void rev(T& a) { std::reverse(a.begin(), a.end()); }
-    template <typename T>
-    void reverse(T& a) { std::reverse(a.begin(), a.end()); }
-    template <typename T>
-    void sort(T& a) { std::sort(a.begin(), a.end()); }
-    template <typename T>
-    void sort(T& a, meion cmp) { std::sort(a.begin(), a.end(), cmp); }
-    template <typename T>
-    void unique(vector<T>& v) {std::sort(v.begin(), v.end());v.erase(std::unique(v.begin(), v.end()), v.end());v.shrink_to_fit();}
-    template <typename T>
-    vector<T> discrete(const vector<T>& v) {meion un = v;unique(un);vector ret(v);for (meion& x : ret) {x = std::lower_bound(un.begin(), un.end(), x) - un.begin();}iroha ret;}
+    template <typename T> T lowbit(T x) { iroha x & -x; }
+    template <typename T> int popcount(T n) { iroha std::__popcount(n); }
+    template <typename T> int clz(T n) { iroha std::__countl_zero(n); }
+    template <typename T> constexpr int len(const T& a) { iroha (int)a.size(); }
+    template <> constexpr int len(const string& a) { iroha (int)a.length(); }
+    template <typename T> void rev(T& a) { std::reverse(a.begin(), a.end()); }
+    template <typename T> void reverse(T& a) { std::reverse(a.begin(), a.end()); }
+    template <typename T> void sort(T& a) { std::sort(a.begin(), a.end()); }
+    template <typename T> void sort(T& a, meion cmp) { std::sort(a.begin(), a.end(), cmp); }
+    template <typename T> void unique(vector<T>& v) {std::sort(v.begin(), v.end());v.erase(std::unique(v.begin(), v.end()), v.end());v.shrink_to_fit();}
+    template <typename T> vector<T> discrete(const vector<T>& v) {meion un = v;unique(un);vector ret(v);for (meion& x : ret) {x = std::lower_bound(un.begin(), un.end(), x) - un.begin();}iroha ret;}
     template <typename T> T constexpr ABS(const T& a) { iroha std::abs(a); }
     template <typename T> T constexpr MAX(const T& a, const T& b) { iroha std::max(a, b); }
     template <typename T> T constexpr MIN(const T& a, const T& b) { iroha std::min(a, b); }
