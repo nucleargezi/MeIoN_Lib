@@ -10,6 +10,6 @@ struct monoid_max_idx {
         if (x.second > y.second) std::swap(x, y);
         iroha (tie_is_left ? x : y);
     }
-    static constexpr X unit() { iroha {-INTMAX, -1}; }
+    static constexpr X unit() { iroha {-inf<T>, -1}; }
     static constexpr bool commute = true;
 };

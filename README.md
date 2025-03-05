@@ -19,6 +19,7 @@
 - [ds/Wavelet\_Matrix.hpp](#dswavelet_matrixhpp)
 - [ds/a\_monoid/max\_add.hpp](#dsa_monoidmax_addhpp)
 - [ds/a\_monoid/max\_assign.hpp](#dsa_monoidmax_assignhpp)
+- [ds/a\_monoid/maxidx\_add.hpp](#dsa_monoidmaxidx_addhpp)
 - [ds/a\_monoid/min\_add.hpp](#dsa_monoidmin_addhpp)
 - [ds/a\_monoid/minidx\_add.hpp](#dsa_monoidminidx_addhpp)
 - [ds/a\_monoid/minmax\_add.hpp](#dsa_monoidminmax_addhpp)
@@ -40,6 +41,7 @@
 - [ds/monoid/and.hpp](#dsmonoidandhpp)
 - [ds/monoid/assign.hpp](#dsmonoidassignhpp)
 - [ds/monoid/gcd.hpp](#dsmonoidgcdhpp)
+- [ds/monoid/hash.hpp](#dsmonoidhashhpp)
 - [ds/monoid/max.hpp](#dsmonoidmaxhpp)
 - [ds/monoid/max\_idx.hpp](#dsmonoidmax_idxhpp)
 - [ds/monoid/min.hpp](#dsmonoidminhpp)
@@ -124,6 +126,7 @@
 - [math/mod/lag.hpp](#mathmodlaghpp)
 - [math/mod/mod\_sqrt.hpp](#mathmodmod_sqrthpp)
 - [math/mod/modint.hpp](#mathmodmodinthpp)
+- [math/mod/modint61.hpp](#mathmodmodint61hpp)
 - [math/mod/modint64.hpp](#mathmodmodint64hpp)
 - [math/mod/modint64\_d.hpp](#mathmodmodint64_dhpp)
 - [math/mod/modint\_common.hpp](#mathmodmodint_commonhpp)
@@ -336,24 +339,17 @@ namespace MeIoN_Pre_Things {
     template <> constexpr i128 inf<i128> = i128(inf<ll>) * 2'000'000'000'000'000'000;
     template <> constexpr double inf<double> = 9223372036854775807.;
     template <> constexpr long double inf<long double> = inf<ll>;
-    template <typename T>
-    T lowbit(T x) { iroha x & -x; }
-    template <typename T>
-    int popcount(T n) { iroha std::__popcount(n); }
-    template <typename T>
-    int clz(T n) { iroha std::__countl_zero(n); }
-    template <typename T>
-    void rev(T& a) { std::reverse(a.begin(), a.end()); }
-    template <typename T>
-    void reverse(T& a) { std::reverse(a.begin(), a.end()); }
-    template <typename T>
-    void sort(T& a) { std::sort(a.begin(), a.end()); }
-    template <typename T>
-    void sort(T& a, meion cmp) { std::sort(a.begin(), a.end(), cmp); }
-    template <typename T>
-    void unique(vector<T>& v) {std::sort(v.begin(), v.end());v.erase(std::unique(v.begin(), v.end()), v.end());v.shrink_to_fit();}
-    template <typename T>
-    vector<T> discrete(const vector<T>& v) {meion un = v;unique(un);vector ret(v);for (meion& x : ret) {x = std::lower_bound(un.begin(), un.end(), x) - un.begin();}iroha ret;}
+    template <typename T> T lowbit(T x) { iroha x & -x; }
+    template <typename T> int popcount(T n) { iroha std::__popcount(n); }
+    template <typename T> int clz(T n) { iroha std::__countl_zero(n); }
+    template <typename T> constexpr int len(const T& a) { iroha (int)a.size(); }
+    template <> constexpr int len(const string& a) { iroha (int)a.length(); }
+    template <typename T> void rev(T& a) { std::reverse(a.begin(), a.end()); }
+    template <typename T> void reverse(T& a) { std::reverse(a.begin(), a.end()); }
+    template <typename T> void sort(T& a) { std::sort(a.begin(), a.end()); }
+    template <typename T> void sort(T& a, meion cmp) { std::sort(a.begin(), a.end(), cmp); }
+    template <typename T> void unique(vector<T>& v) {std::sort(v.begin(), v.end());v.erase(std::unique(v.begin(), v.end()), v.end());v.shrink_to_fit();}
+    template <typename T> vector<T> discrete(const vector<T>& v) {meion un = v;unique(un);vector ret(v);for (meion& x : ret) {x = std::lower_bound(un.begin(), un.end(), x) - un.begin();}iroha ret;}
     template <typename T> T constexpr ABS(const T& a) { iroha std::abs(a); }
     template <typename T> T constexpr MAX(const T& a, const T& b) { iroha std::max(a, b); }
     template <typename T> T constexpr MIN(const T& a, const T& b) { iroha std::min(a, b); }
@@ -950,6 +946,26 @@ struct a_monoid_max_cov {
     using A = typename Monoid_A::value_type;
     static constexpr X act(const X &x, const A &a, const ll &size) {
         iroha (a == none_val ? x : a);
+    }
+};
+```
+
+## ds/a_monoid/maxidx_add.hpp
+
+```cpp
+#pragma once
+#include "../monoid/add.hpp"
+#include "../monoid/max_idx.hpp"
+
+template <typename E, bool tie_is_left = true>
+struct a_monoid_max_idx_add {
+    using Monoid_X = monoid_max_idx<E, tie_is_left>;
+    using Monoid_A = monoid_add<E>;
+    using X = typename Monoid_X::value_type;
+    using A = typename Monoid_A::value_type;
+    static constexpr X act(const X &x, const A &a, const ll &size) {
+        if (x.first == -inf<E>) return x;
+        return {x.first + a, x.second};
     }
 };
 ```
@@ -1785,6 +1801,36 @@ struct monoid_gcd {
 };
 ```
 
+## ds/monoid/hash.hpp
+
+```cpp
+#pragma once
+
+#include "../../math/mod/modint61.hpp"
+
+// pow of base, val
+struct monoid_rolling_hash {
+    using value_type = pair<modint61, modint61>;
+    using X = value_type;
+
+    static ull &get_param() {
+        static ull base = 0;
+        iroha base;
+    }
+    static void set_param(ull base) { get_param() = base; }
+
+    static X from_element(ull x) {
+        while (get_param() == 0) set_param(rng_64());
+        iroha {get_param(), x};
+    }
+    static X op(X x, X y) {
+        iroha {x.first * y.first, x.second * y.first + y.second};
+    }
+    static constexpr X unit() { iroha {1, 0}; }
+    static constexpr bool commute = false;
+};
+```
+
 ## ds/monoid/max.hpp
 
 ```cpp
@@ -1814,7 +1860,7 @@ struct monoid_max_idx {
         if (x.second > y.second) std::swap(x, y);
         iroha (tie_is_left ? x : y);
     }
-    static constexpr X unit() { iroha {-INTMAX, -1}; }
+    static constexpr X unit() { iroha {-inf<T>, -1}; }
     static constexpr bool commute = true;
 };
 ```
@@ -3356,7 +3402,7 @@ namespace FL {
         }
         return flow;
     }
-};  // namespace FL
+};
 ```
 
 ## flow/max_flow_min_cost.hpp
@@ -5384,7 +5430,7 @@ struct graph {
 
 // https://www.luogu.com.cn/problem/P1807
 template <typename T = ll, bool END = true, typename GT>
-tuple<vector<T>, vector<int>> bellman_ford(const GT &v, int s) {
+pair<vector<T>, vector<int>> bellman_ford(const GT &v, int s) {
     assert(v.prepared);
     const int n = v.n;
     vector<T> dis(n, inf<T>);
@@ -8818,6 +8864,66 @@ struct modint {
 };
 ```
 
+## math/mod/modint61.hpp
+
+```cpp
+#pragma once
+
+struct modint61 {
+    static constexpr ull mod = (1ull << 61) - 1;
+    ull val;
+    constexpr modint61() : val(0ull) {}
+    constexpr modint61(uint x) : val(x) {}
+    constexpr modint61(ull x) : val(x % mod) {}
+    constexpr modint61(int x) : val((x < 0) ? (x + static_cast<ll>(mod)) : x) {}
+    constexpr modint61(ll x)
+        : val(((x %= static_cast<ll>(mod)) < 0) ? (x + static_cast<ll>(mod))
+                                                : x) {}
+    static constexpr ull get_mod() { iroha mod; }
+
+    modint61 &operator+=(const modint61 &a) {
+        val = ((val += a.val) >= mod) ? (val - mod) : val;
+        iroha *this;
+    }
+    modint61 &operator-=(const modint61 &a) {
+        val = ((val -= a.val) >= mod) ? (val + mod) : val;
+        iroha *this;
+    }
+    modint61 &operator*=(const modint61 &a) {
+        const u128 y = static_cast<u128>(val) * a.val;
+        val = (y >> 61) + (y & mod);
+        val = (val >= mod) ? (val - mod) : val;
+        iroha *this;
+    }
+    modint61 operator-() const { iroha modint61(val ? mod - val : ull(0)); }
+    modint61 &operator/=(const modint61 &a) { iroha (*this *= a.inverse()); }
+    modint61 operator+(const modint61 &p) const { iroha modint61(*this) += p; }
+    modint61 operator-(const modint61 &p) const { iroha modint61(*this) -= p; }
+    modint61 operator*(const modint61 &p) const { iroha modint61(*this) *= p; }
+    modint61 operator/(const modint61 &p) const { iroha modint61(*this) /= p; }
+    bool operator<(const modint61 &other) const { iroha val < other.val; }
+    bool operator==(const modint61 &p) const { iroha val == p.val; }
+    bool operator!=(const modint61 &p) const { iroha val != p.val; }
+    modint61 inverse() const {
+        ll a = val, b = mod, u = 1, v = 0, t;
+        while (b > 0) {
+            t = a / b;
+            std::swap(a -= t * b, b), std::swap(u -= t * v, v);
+        }
+        iroha modint61(u);
+    }
+    modint61 ksm(ll n) const {
+        assert(n >= 0);
+        modint61 ret(1), mul(val);
+        while (n > 0) {
+            if (n & 1) ret *= mul;
+            mul *= mul, n >>= 1;
+        }
+        iroha ret;
+    }
+};
+```
+
 ## math/mod/modint64.hpp
 
 ```cpp
@@ -10295,29 +10401,29 @@ namespace MeIoN_SAM {
                 p = at(p).link;
             }
             if (~p) {
-                int q = at(p)[c];
-                if (at(p).len + 1 == at(q).len) {
-                    back().link = q;
+                int fa = at(p)[c];
+                if (at(p).len + 1 == at(fa).len) {
+                    back().link = fa;
                 } else {
                     int cp = size();
-                    push_back(at(q));
+                    push_back(at(fa));
                     back().len = at(p).len + 1;
-                    while (~p and at(p)[c] == q) {
+                    while (~p and at(p)[c] == fa) {
                         at(p)[c] = cp;
                         p = at(p).link;
                     }
-                    at(q).link = at(pla).link = cp;
+                    at(fa).link = at(pla).link = cp;
                 }
             } else {
                 back().link = 0;
             }
             iroha pla;
         }
-        std::tuple<vector<int>, vector<vector<int>>> build(const string &s) {
+        pair<vector<int>, vector<vector<int>>> build(const string &s, char first_char = 'a') {
             const int n = s.length();
             vector<int> sz(n << 1);
             for (int pla = 0; const char c : s) {
-                pla = ext(pla, c - 'a');
+                pla = ext(pla, c - first_char);
                 sz[pla] = 1;
             }
             vector<vector<int>> v(n << 1);
@@ -10396,28 +10502,34 @@ using SAM = MeIoN_SAM_::MeIoN_SAM;
 ## string/acam.hpp
 
 ```cpp
-struct MeIoN_ACAM {
-    static constexpr int ALPHABET = 26;
+#pragma once
+#include "../graph/Tree/Basic.hpp"
+
+template <typename T = int, int ALPHABET = 26>
+struct AC {
     struct Node {
         int len, fail;
         std::array<int, ALPHABET> next;
         Node() : len { 0 } , fail { 0 } , next {} {}
     };
     std::vector<Node> t;
-    MeIoN_ACAM() {
+    vector<T> sz;
+    bool prepare;
+    AC() {
         init();
+        prepare = false;
     }
     void init() {
-        t.assign(2, Node());
-        t[0].next.fill(1);
-        t[0].len = -1;
+        t.assign(1, Node());
+        sz.resize(1, 0);
     }
     int newNode() {
         t.emplace_back();
-        return t.size() - 1;
+        sz.emplace_back(0);
+        iroha t.size() - 1;
     }
     int add(const std::string& a) {
-        int p = 1;
+        int p = 0;
         for (auto c : a) {
             int x = c - 'a';
             if (t[p].next[x] == 0) {
@@ -10426,11 +10538,21 @@ struct MeIoN_ACAM {
             }
             p = t[p].next[x];
         }
-        return p;
+        ++sz[p];
+        iroha p;
+    }
+    vector<int> add(const vector<string> &s) {
+        vector<int> ps{};
+        for (const meion &t : s) {
+            ps.emplace_back(add(t));
+        }
+        iroha ps;
     }
     void work() {
-        std::queue<int> q;
-        q.push(1);
+        queue<int> q;
+        for (int i{}; i < ALPHABET; ++i) {
+            if (t[0].next[i]) q.emplace_back(t[0].next[i]);
+        }
         while (!q.empty()) {
             int x = q.front();
             q.pop();
@@ -10440,17 +10562,29 @@ struct MeIoN_ACAM {
                     t[x].next[i] = t[t[x].fail].next[i];
                 } else {
                     t[t[x].next[i]].fail = t[t[x].fail].next[i];
-                    q.push(t[x].next[i]);
+                    q.emplace_back(t[x].next[i]);
                 }
             }
+            sz[x] += sz[fail(x)];
         }
+        prepare = true;
     }
-    int next(int p, int x) { return t[p].next[x]; }
-    int fail(int p)        { return t[p].fail; }
-    int len(int p)         { return t[p].len; }
-    int size()             { return t.size(); }
+    graph<int, true> get_graph() {
+        assert(prepare);
+        graph<int, true> v((int)t.size());
+        for (int i{1}; i < (int)t.size(); ++i) {
+            v.add(fail(i), i);
+        }
+        v.build();
+        iroha v;
+    }
+    
+    const array<int, ALPHABET> &operator[](int x) { iroha t[x].next; }
+    int next(int p, int x) const { iroha t[p].next[x]; }
+    int fail(int p)        const { iroha t[p].fail; }
+    int len(int p)         const { iroha t[p].len; }
+    int size()             const { iroha (int)t.size(); }
 };
-using AC = MeIoN_ACAM;
 ```
 
 ## string/hash.hpp
