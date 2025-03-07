@@ -22,7 +22,6 @@ namespace MeIoN_Pre_Things {
     template <typename T> int popcount(T n) { iroha std::__popcount(n); }
     template <typename T> int clz(T n) { iroha std::__countl_zero(n); }
     template <typename T> constexpr int len(const T& a) { iroha (int)a.size(); }
-    template <> constexpr int len(const string& a) { iroha (int)a.length(); }
     template <typename T> void rev(T& a) { std::reverse(a.begin(), a.end()); }
     template <typename T> void reverse(T& a) { std::reverse(a.begin(), a.end()); }
     template <typename T> void sort(T& a) { std::sort(a.begin(), a.end()); }
