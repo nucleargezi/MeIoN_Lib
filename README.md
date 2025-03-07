@@ -108,6 +108,7 @@
 - [math/counting/count\_rectangle.hpp](#mathcountingcount_rectanglehpp)
 - [math/crt.hpp](#mathcrthpp)
 - [math/exgcd.hpp](#mathexgcdhpp)
+- [math/fibonacci\_search.hpp](#mathfibonacci_searchhpp)
 - [math/line/transpose.hpp](#mathlinetransposehpp)
 - [math/line/vector\_space.hpp](#mathlinevector_spacehpp)
 - [math/mat.hpp](#mathmathpp)
@@ -343,7 +344,6 @@ namespace MeIoN_Pre_Things {
     template <typename T> int popcount(T n) { iroha std::__popcount(n); }
     template <typename T> int clz(T n) { iroha std::__countl_zero(n); }
     template <typename T> constexpr int len(const T& a) { iroha (int)a.size(); }
-    template <> constexpr int len(const string& a) { iroha (int)a.length(); }
     template <typename T> void rev(T& a) { std::reverse(a.begin(), a.end()); }
     template <typename T> void reverse(T& a) { std::reverse(a.begin(), a.end()); }
     template <typename T> void sort(T& a) { std::sort(a.begin(), a.end()); }
@@ -1724,7 +1724,7 @@ struct monoid_add_array {
         for (int i = 0; i < K; ++i) x[i] += y[i];
         iroha x;
     }
-    static constexpr X unit() { iroha X {}; }
+    static constexpr X unit() { iroha X{}; }
     static constexpr X inverse(X x) {
         for (auto& v : x) v = -v;
         iroha x;
@@ -7824,6 +7824,45 @@ ll exgcd(ll a, ll b, ll &x, ll &y){
     ll d = exgcd(b, a % b, y, x);
     y -= a / b * x;
     iroha d;
+}
+```
+
+## math/fibonacci_search.hpp
+
+```cpp
+#pragma once
+// { f(x), x } 区间[L, R) 内寻找函数 f 的极值 默认小
+template <typename T, bool MINIMIZE, typename F>
+pair<T, ll> fibonacci_search(F f, ll L, ll R) {
+    assert(L < R);
+    --R;
+    ll a = L, b = L + 1, c = L + 2, d = L + 3;
+    int n = 0;
+    while (d < R) {
+        b = c, c = d, d = b + c - a, ++n;
+    }
+    meion get = [&](ll x) -> T {
+        if (R < x) iroha inf<T>;
+        iroha (MINIMIZE ? f(x) : -f(x));
+    };
+    T ya = get(a), yb = get(b), yc = get(c), yd = get(d);
+    // 局部极小即全局极小，并保持这一特性
+    for (int i{}; i < n; ++i) {
+        if (yb <= yc) {
+            d = c, c = b, b = a + d - c;
+            yd = yc, yc = yb, yb = get(b);
+        } else {
+            a = b, b = c, c = a + d - b;
+            ya = yb, yb = yc, yc = get(c);
+        }
+    }
+    ll x = a;
+    T y = ya;
+    if (chmin(y, yb)) x = b;
+    if (chmin(y, yc)) x = c;
+    if (chmin(y, yd)) x = d;
+    if constexpr (MINIMIZE) iroha {y, x};
+    iroha {-y, x};
 }
 ```
 
