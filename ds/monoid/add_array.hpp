@@ -8,7 +8,7 @@ struct monoid_add_array {
         for (int i = 0; i < K; ++i) x[i] += y[i];
         iroha x;
     }
-    static constexpr X unit() { iroha X {}; }
+    static constexpr X unit() { iroha X{}; }
     static constexpr X inverse(X x) {
         for (auto& v : x) v = -v;
         iroha x;
