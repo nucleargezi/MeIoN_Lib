@@ -2,6 +2,8 @@
 
 #include "primtable.hpp"
 
+// O(N log log N)
+// 计算每个数的所有因数的值之和
 template <typename T>
 void divisor_zeta(vector<T> &A) {
     assert(A[0] == 0);
@@ -14,6 +16,7 @@ void divisor_zeta(vector<T> &A) {
     }
 }
 
+// 恢复被divisor_zeta处理后的数组到原始值
 template <typename T>
 void divisor_mobius(vector<T> &A) {
     assert(A[0] == 0);
@@ -26,6 +29,7 @@ void divisor_mobius(vector<T> &A) {
     }
 }
 
+// 计算每个数的所有倍数的值之和
 template <typename T>
 void multiplier_zeta(vector<T> &A) {
     assert(A[0] == 0);
@@ -38,6 +42,7 @@ void multiplier_zeta(vector<T> &A) {
     }
 }
 
+// 恢复被multiplier_zeta处理后的数组到原始值
 template <typename T>
 void multiplier_mobius(vector<T> &A) {
     assert(A[0] == 0);
