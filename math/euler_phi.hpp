@@ -22,7 +22,7 @@ vector<T> euler_phi_table(T n) {
     iroha res;
 }
 
-// [l, r) phi O(sqrt(r) + B)
+// [l, r) phi O(sqrt(r) | B)
 template<typename T = ll, int B = 1'000'000>
 vector<T> euler_phi_table2(T l, T r) {
     static vector prims = primtable(B);
