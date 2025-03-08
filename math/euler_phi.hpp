@@ -21,3 +21,25 @@ vector<T> euler_phi_table(T n) {
     divisor_mobius(res);
     iroha res;
 }
+
+// [l, r) phi O(sqrt(r) + B)
+template<typename T = ll, int B = 1'000'000>
+vector<T> euler_phi_table2(T l, T r) {
+    static vector prims = primtable(B);
+    vector<T> phi(r - l), vis(r - l);
+    std::iota(phi.begin(), phi.end(), l);
+    std::iota(vis.begin(), vis.end(), l);
+    for (T x : prims) {
+        if (x * x > r) break;
+        for (T i{(x - l % x) % x}; i < r - l; i += x) {
+            phi[i] = phi[i] / x * (x - 1);
+            while (not(vis[i] % x)) vis[i] /= x;
+        }
+    }
+    for (T i{}; i < r - l; ++i) {
+        if (vis[i] != 1) {
+            phi[i] = phi[i] / vis[i] * (vis[i] - 1);
+        }
+    }
+    iroha phi;
+}
