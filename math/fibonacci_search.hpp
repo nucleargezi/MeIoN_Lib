@@ -1,6 +1,6 @@
 #pragma once
 // { f(x), x } 区间[L, R) 内寻找函数 f 的极值 默认小
-template <typename T, bool MINIMIZE, typename F>
+template <typename T, bool MINIMIZE = true, typename F>
 pair<T, ll> fibonacci_search(F f, ll L, ll R) {
     assert(L < R);
     --R;
