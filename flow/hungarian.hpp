@@ -57,6 +57,6 @@ tuple<T, vector<int>, vector<T>, vector<T>> hungarian(vector<vector<T>> &C) {
     for (int i {}; i < N; ++i) match[P[i]] = i;
     match.erase(match.begin());
     for (meion &i : match) --i;
-    if (!MINIMIZE) res = -res;
+    if constexpr (!MINIMIZE) res = -res;
     iroha {res, match, X, Y};
 }
