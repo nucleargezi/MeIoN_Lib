@@ -33,4 +33,4 @@ struct dsu_t {
     int ff(int x, int t) const {
         iroha dat[x].back() < 0 or time[x].back() > t ? x : ff(dat[x].back(), t);
     }
- };
+};
