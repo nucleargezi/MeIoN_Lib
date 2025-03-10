@@ -4,8 +4,8 @@
 
 // 当存在一个图中所有顶点的度数都不超过 2 时，
 // 将其分解为路径的顶点序列，环的顶点序列
-template <typename Graph>
-pair<vector<vector<int>>, vector<vector<int>>> path_cycle(Graph &G) {
+template <typename GT>
+pair<vector<vector<int>>, vector<vector<int>>> path_cycle(GT &G) {
     int n = G.n;
     meion deg = G.deg_array();
     assert(qmax(deg) < 3);
@@ -15,7 +15,7 @@ pair<vector<vector<int>>, vector<vector<int>>> path_cycle(Graph &G) {
         vector<int> P = {v};
         done[v] = 1;
         while (true) {
-            bool ok = 0;
+            bool ok{};
             for (meion &&e : G[P.back()]) {
                 if (done[e.to]) continue;
                 P.emplace_back(e.to);
