@@ -33,3 +33,4 @@ using ld = long double;  using i128 = __int128;   using u128 = __uint128_t;  usi
 #define iroha     return
 #define ST_T      auto  start = std::chrono::high_resolution_clock::now()
 #define OT_T      auto  end = std::chrono::high_resolution_clock::now(); std::chrono::duration<double> elapsed = end - start; std::cout << "Elapsed time: " << elapsed.count() << "s\n"
+#define TRUE(...)   (__VA_ARGS__, true)
