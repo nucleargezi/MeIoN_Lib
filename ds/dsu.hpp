@@ -1,5 +1,7 @@
+#pragma once
+
 struct dsu{     //MeIoNのdsu
-public:
+   public:
     dsu(int _n) : n(_n), comp(_n), fa(_n), sz(_n, 1) { 
         std::iota(fa.begin(), fa.end(), 0); 
     }
@@ -18,7 +20,8 @@ public:
         std::iota(fa.begin(), fa.end(), 0);
         fill(sz, 1);
     }
-private:
+
+   private:
     int n, comp;
     std::vector<int> fa, sz;
     int ff(int x) { 
