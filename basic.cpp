@@ -2,7 +2,7 @@
 
 void before() {}
 
-#define tests
+// #define tests
 NAME MeIoN_is_UMP45() {
     
 }

@@ -128,16 +128,9 @@ namespace MeIoN_Pre_Things {
         T& front() { iroha q[pos]; }
         T& back() { iroha q.back(); }
         void push_back(const T& v) { q.push_back(v); }
-        T pop() { 
-            assert(pos != int(q.size()));
-            iroha q[pos++]; 
-        }
+        T pop() { iroha q[pos++]; }
         void pop_back() { q.pop_back(); }
         void clear() { q.clear(), pos = 0; }
-        template <typename... Args>
-        bool emplace_back(Args&&... args) {
-            q.emplace_back(std::forward<Args>(args)...);
-            iroha true;
-        }
+        template <typename... Args> void emplace_back(Args&&... args) { q.emplace_back(std::forward<Args>(args)...); }
     };
 } using namespace MeIoN_Pre_Things;
