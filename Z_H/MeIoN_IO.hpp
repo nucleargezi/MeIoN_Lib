@@ -92,6 +92,28 @@ namespace MeIoN_IO {
         }
         iroha os;
     }
+    void IN() {}
+    template <class Head, class... Tail>
+    void IN(Head &head, Tail &...tail) {
+        std::cin >> head, IN(tail...);
+    }
+    void UL() { std::cout << '\n'; }
+    template <class Head, class... Tail>
+    void UL(Head &&head, Tail &&...tail) {
+        std::cout << head;
+        if constexpr (sizeof...(Tail)) std::cout << ' ';
+        UL(std::forward<Tail>(tail)...);
+    }
+    #define INT(...)  int    __VA_ARGS__; IN(__VA_ARGS__)
+    #define LL(...)   ll     __VA_ARGS__; IN(__VA_ARGS__)
+    #define I128(...) i128   __VA_ARGS__; IN(__VA_ARGS__)
+    #define STR(...)  string __VA_ARGS__; IN(__VA_ARGS__)
+    #define CHAR(...) char   __VA_ARGS__; IN(__VA_ARGS__)
+    #define DB(...)   double __VA_ARGS__; IN(__VA_ARGS__)
+    #define LD(...)   ld     __VA_ARGS__; IN(__VA_ARGS__)
+    #define REAL(...) RE     __VA_ARGS__; IN(__VA_ARGS__)
+    #define VEC(T, a, n) vector<T> a(n);  IN(a)
+    #define VVEC(T, a, n, m) vector a(n, vector<T>(m)); IN(a)
     void YES(bool ok = true) { std::cout << (ok ? "YES\n" : "NO\n"); }
     void Yes(bool ok = true) { std::cout << (ok ? "Yes\n" : "No\n"); }
     void yes(bool ok = true) { std::cout << (ok ? "yes\n" : "no\n"); }

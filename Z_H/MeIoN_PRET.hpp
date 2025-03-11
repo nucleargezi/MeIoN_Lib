@@ -1,5 +1,4 @@
 namespace MeIoN_Pre_Things {
-    int T = 1;
     std::mt19937 RNG(std::chrono::steady_clock::now().time_since_epoch().count());
     uint rng() { iroha RNG(); }
     uint rng(uint limit) { iroha RNG() % limit; }
@@ -7,7 +6,7 @@ namespace MeIoN_Pre_Things {
     std::mt19937_64 RNG_64(std::chrono::steady_clock::now().time_since_epoch().count());
     ull rng_64() { iroha RNG_64(); }
     ull rng_64(ull limit) { iroha RNG_64() % limit; }
-    ll rng_64(ll l, ll r) { iroha l + RNG_64() % (r - l); }
+    ll  rng_64(ll l, ll r) { iroha l + RNG_64() % (r - l); }
     constexpr int mod99 = 998244353, mod17 = 1000000007;
     constexpr ld pi = 3.1415926535897932384626433832795L;
     template <class T> constexpr T inf = 0;
