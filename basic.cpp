@@ -2,7 +2,7 @@
 
 void before() {}
 
-// #define tests
+#define tests
 NAME MeIoN_is_UMP45() {
     
 }
@@ -15,7 +15,7 @@ int main() {
     // freopen("outt","w",stdout);
     before();
 #ifdef tests
-    INT(T); while (T--)
+    INT(t); FOR(t)
 #endif
     MeIoN_is_UMP45();
     iroha 0;
