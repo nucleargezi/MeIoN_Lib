@@ -15,8 +15,8 @@ int main() {
     // freopen("outt","w",stdout);
     before();
 #ifdef tests
-    std::cin >> T;
+    INT(T); while (T--)
 #endif
-    while (T--) { MeIoN_is_UMP45(); }
+    MeIoN_is_UMP45();
     iroha 0;
 }

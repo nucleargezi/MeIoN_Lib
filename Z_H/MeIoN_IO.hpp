@@ -107,7 +107,7 @@ namespace MeIoN_IO {
     #define INT(...)  int    __VA_ARGS__; IN(__VA_ARGS__)
     #define LL(...)   ll     __VA_ARGS__; IN(__VA_ARGS__)
     #define I128(...) i128   __VA_ARGS__; IN(__VA_ARGS__)
-    #define STR(...)  string __VA_ARGS__; IN(__VA_ARGS__)
+    #define S(...)    string __VA_ARGS__; IN(__VA_ARGS__)
     #define CHAR(...) char   __VA_ARGS__; IN(__VA_ARGS__)
     #define DB(...)   double __VA_ARGS__; IN(__VA_ARGS__)
     #define LD(...)   ld     __VA_ARGS__; IN(__VA_ARGS__)
