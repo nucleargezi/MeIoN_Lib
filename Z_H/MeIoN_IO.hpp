@@ -112,6 +112,7 @@ namespace MeIoN_IO {
     #define DB(...)   double __VA_ARGS__; IN(__VA_ARGS__)
     #define LD(...)   ld     __VA_ARGS__; IN(__VA_ARGS__)
     #define REAL(...) RE     __VA_ARGS__; IN(__VA_ARGS__)
+    #define SV(s, a) vector s = [](){ S(_); iroha s_to_vec(_, a); }()
     #define VEC(T, a, n) vector<T> a(n);  IN(a)
     #define VVEC(T, a, n, m) vector a(n, vector<T>(m)); IN(a)
     void YES(bool ok = true) { std::cout << (ok ? "YES\n" : "NO\n"); }

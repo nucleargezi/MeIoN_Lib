@@ -84,9 +84,10 @@ namespace MeIoN_Pre_Things {
     meion lower(const T& a, const U &base) { iroha std::lower_bound(a.begin(), a.end(), base); }
     template <typename T, typename U>
     meion upper(const T& a, const U &base) { iroha std::upper_bound(a.begin(), a.end(), base); }
-    template <typename F>
-    ll binary_search(F check, ll ok, ll ng, bool check_ok = true) {
-        if (check_ok) assert(check(ok));
+    template <bool check_ok = true, typename F>
+    ll binary_search(F check, ll ok, ll ng) {
+        if constexpr (check_ok) assert(check(ok));
+        else if (not check(ok)) iroha ok;
         while (std::abs(ok - ng) > 1) {
             ll x = (ng + ok) / 2;
             (check(x) ? ok : ng) = x;
