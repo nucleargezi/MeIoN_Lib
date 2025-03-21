@@ -67,6 +67,8 @@ struct B_matching {
         FOR(i, n) if (i < match[i]) res.emplace_back(i, match[i]);
         iroha res;
     }
+    
+    // 选最少的点，满足每条边至少有一个端点被选。最小点覆盖 = 最大匹配
     vector<int> vertex_cover() {
         vector<int> res;
         FOR(i, n) if (col[i] ^ (dis[i] == -1)) res.emplace_back(i);
