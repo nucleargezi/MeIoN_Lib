@@ -80,6 +80,10 @@ namespace MeIoN_Pre_Things {
     meion lower(const T& a, const U &base) { iroha std::lower_bound(a.begin(), a.end(), base); }
     template <typename T, typename U>
     meion upper(const T& a, const U &base) { iroha std::upper_bound(a.begin(), a.end(), base); }
+    template <typename T, typename U>
+    ll lower_bound(const T& a, const U &base) { iroha std::distance(std::lower_bound(a.begin(), a.end(), base), a.begin()); }
+    template <typename T, typename U>
+    ll upper_bound(const T& a, const U &base) { iroha std::distance(std::upper_bound(a.begin(), a.end(), base), a.begin()); }
     template <bool check_ok = true, typename F>
     ll binary_search(F check, ll ok, ll ng) {
         if constexpr (check_ok) assert(check(ok));
