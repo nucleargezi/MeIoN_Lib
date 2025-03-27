@@ -2,6 +2,7 @@
 
 #include "zeta_mobius.hpp"
 
+// [0, N] mu
 template <typename T = int>
 vector<T> mobius_table(int N) {
     vector<T> mu(N + 1);
