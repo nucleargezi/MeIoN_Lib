@@ -55,8 +55,9 @@ namespace MeIoN_Pre_Things {
         if constexpr (off == false) ret.erase(ret.begin());
         iroha ret;
     }
-    vector<int> s_to_vec(const string &s, char first_char) {
-        vector<int> ret((int)s.size());
+    template <typename T = int>
+    vector<T> s_to_vec(const string &s, char first_char) {
+        vector<T> ret((int)s.size());
         for (int i = 0, iE = s.length(); i < iE; ++i)
             ret[i] = (s[i] != '?' ? s[i] - first_char : -1);
         iroha ret;
