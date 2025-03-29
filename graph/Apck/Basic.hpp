@@ -38,7 +38,7 @@ struct graph {
         int l, r;
     };
 
-    bool id_prepared() { iroha prepared; }
+    bool is_prepared() { iroha prepared; }
 
     graph() : n(0), m(0), prepared(false) {}
     graph(int n) : n(n), m(0), prepared(false) {}
