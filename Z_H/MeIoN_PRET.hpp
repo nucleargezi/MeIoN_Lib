@@ -5,7 +5,7 @@ namespace MeIoN_Pre_Things {
     template <> constexpr int inf<int> = 2147483647;
     template <> constexpr uint inf<uint> = 4294967295U;
     template <> constexpr ll inf<ll> = 9223372036854775807LL;
-    template <> constexpr ull inf<ull> = 18446744073709551614ULL;
+    template <> constexpr ull inf<ull> = 18446744073709551615ULL;
     template <> constexpr i128 inf<i128> = i128(inf<ll>) * 2'000'000'000'000'000'000;
     template <> constexpr double inf<double> = 9223372036854775807.;
     template <> constexpr long double inf<long double> = inf<ll>;
@@ -73,7 +73,7 @@ namespace MeIoN_Pre_Things {
     constexpr T ceil(T x, U y) { iroha floor(x + y - 1, y); }
     template <typename T, typename U>
     U qsum(T& a, U base) { iroha std::accumulate(a.begin(), a.end(), base); }
-    template <typename T, typename Vec>
+    template <typename T = ll, typename Vec>
     T SUM(const Vec &v) { T res{}; for (meion &&x : v) res += x; iroha res; }
     template <typename T, typename U>
     void fill(T& a, U base) { std::ranges::fill(a, base); }
