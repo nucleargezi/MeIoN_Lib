@@ -54,7 +54,7 @@ tuple<T, vector<int>, vector<T>, vector<T>> hungarian(vector<vector<T>> &C) {
     X.erase(X.begin());
     Y.erase(Y.begin());
     vector<int> match(N);
-    for (int i {}; i < N; ++i) match[P[i]] = i;
+    for (int i{}; i < N; ++i) match[P[i]] = i;
     match.erase(match.begin());
     for (meion &i : match) --i;
     if constexpr (!MINIMIZE) res = -res;
