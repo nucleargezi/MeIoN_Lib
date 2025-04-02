@@ -1,14 +1,14 @@
 #pragma once
 
 // FUNC f 需要定义 T operator()，其中 T 是可比较的类型
-// 一次式：FUNC = lichao_line
-template <typename RE>
-struct lichao_line {
+// 一次式：FUNC = Line
+template <typename RE = long double>
+struct Line {
     using value_type = RE;  // operator() の戻り値
     RE a;
     RE b;
     RE operator()(ll x) const { iroha a * x + b; }
-    bool operator<(const lichao_line& p) const {
+    bool operator<(const Line& p) const {
         iroha pair {a, b} < pair {p.a, p.b};
     }  // map
 };
