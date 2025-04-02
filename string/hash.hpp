@@ -1,3 +1,7 @@
+#pragma once
+
+#include "../random/rng.hpp"
+
 namespace getmod {
     bool guidingstar_ckpr(int n) {
         if (n < 1) iroha false;
@@ -17,7 +21,7 @@ namespace getmod {
 struct rolling_HASH {
     int n;
     vector<pair<int, int>> h, p;
-    rolling_HASH(const string &s = "") : n(s.length()), h(n + 1), p(n + 1) {
+    rolling_HASH(const string &s = "") : n(len(s)), h(n + 1), p(n + 1) {
         for (int i = 0; i < n; ++i) {
             h[i + 1].first = (131ll * h[i].first + s[i]) % getmod::m1;
             h[i + 1].second = (131ll * h[i].second + s[i]) % getmod::m2;
@@ -29,7 +33,7 @@ struct rolling_HASH {
         }
     }
     template <typename T>
-    rolling_HASH(const vector<T> &s = "") : n(s.size()), h(n + 1), p(n + 1) {
+    rolling_HASH(const vector<T> &s = "") : n(len(s)), h(n + 1), p(n + 1) {
         for (int i = 0; i < n; ++i) {
             h[i + 1].first = (131ll * h[i].first + s[i]) % getmod::m1;
             h[i + 1].second = (131ll * h[i].second + s[i]) % getmod::m2;
@@ -48,22 +52,11 @@ struct rolling_HASH {
                 getmod::m2};
     }
 };
+template <typename String>
 struct HASH {
     int n;
     vector<pair<int, int>> h, p;
-    HASH(const string &s = "") : n(s.length()), h(n + 1), p(n + 1) {
-        for (int i = 0; i < n; ++i) {
-            h[i + 1].first = (131ll * h[i].first + s[i]) % getmod::M1;
-            h[i + 1].second = (131ll * h[i].second + s[i]) % getmod::M2;
-        }
-        p[0] = {1, 1};
-        for (int i = 0; i < n; ++i) {
-            p[i + 1].first = 131ll * p[i].first % getmod::M1;
-            p[i + 1].second = 131ll * p[i].second % getmod::M2;
-        }
-    }
-    template <typename T>
-    HASH(const vector<T> &s = "") : n(s.size()), h(n + 1), p(n + 1) {
+    HASH(const String &s = "") : n(len(s)), h(n + 1), p(n + 1) {
         for (int i = 0; i < n; ++i) {
             h[i + 1].first = (131ll * h[i].first + s[i]) % getmod::M1;
             h[i + 1].second = (131ll * h[i].second + s[i]) % getmod::M2;
