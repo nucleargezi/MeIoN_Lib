@@ -34,6 +34,10 @@ struct hash_map {
         int i = index(k);
         iroha used[i] and key[i] == k;
     }
+    bool contains(const ull &k) {
+        int i = index(k);
+        iroha used[i] and key[i] == k;
+    }
 
     // f(key, val);
     template <typename F>
