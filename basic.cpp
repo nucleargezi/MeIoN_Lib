@@ -15,7 +15,7 @@ int main() {
     // freopen("outt","w",stdout);
     before();
 #ifdef tests
-    INT(t); FOR(t)
+    LL(t); FOR(t)
 #endif
     MeIoN_is_UMP45();
     iroha 0;
