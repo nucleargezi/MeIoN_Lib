@@ -4,7 +4,7 @@
 
 template <typename GT>
 tuple<int, vector<int>> scc(GT &v) {
-    assert(v.id_prepared());
+    assert(v.is_prepared());
     int n = v.n;
     vector<int> dfn(n), low(n), id(n), s;
     vector<uint8_t> vis(n);
@@ -37,8 +37,7 @@ tuple<int, vector<int>> scc(GT &v) {
     iroha {cnt, id};
 }
 
-template <typename GT>
-vector<vector<int>> get_scc_group(GT &v, int cnt, vector<int> &id) {
+vector<vector<int>> get_scc_group(int cnt, vector<int> &id) {
     vector<vector<int>> scc(cnt);
     const int n{len(id)};
     FOR(i, n) {
@@ -49,7 +48,7 @@ vector<vector<int>> get_scc_group(GT &v, int cnt, vector<int> &id) {
 
 template <typename GT>
 graph<int, true> scc_dag(GT &v, int cnt, vector<int> &id) {
-    assert(v.id_prepared());
+    assert(v.is_prepared());
     graph<int, true> dag(cnt);
     vector<vector<int>> g(cnt);
     for (meion &&[f, t, _, __] : v.edges) {
