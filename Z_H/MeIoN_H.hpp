@@ -28,6 +28,11 @@ using   std::array, std::bitset, std::deque, std::greater, std::less, std::map,
 
 using NAME = void;       using uint = unsigned;   using ll = long long;      using ull = unsigned long long;     
 using ld = long double;  using i128 = __int128;   using u128 = __uint128_t;  using f128 = __float128;
+template <typename T> using Pair = pair<T, T>;
+template <typename T> using T1 = tuple<T>;
+template <typename T> using T2 = tuple<T, T>;
+template <typename T> using T3 = tuple<T, T, T>;
+template <typename T> using T4 = tuple<T, T, T, T>;
 
 #define meion     auto
 #define iroha     return
