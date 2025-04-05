@@ -3,7 +3,9 @@
 void before() {}
 
 // #define tests
-NAME MeIoN_is_UMP45() {}
+NAME MeIoN_is_UMP45() {
+  
+}
 
 // 日々を貪り尽くしてきた
 int main() {

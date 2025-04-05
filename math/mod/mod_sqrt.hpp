@@ -1,10 +1,10 @@
 #pragma once
-#include "../../random/random.hpp"
+#include "../../random/rng.hpp"
 #include "modint.hpp"
+#include "modint_pow.hpp"
 
 // p は素数. 解なしは -1.
 int mod_sqrt(int a, int p) {
-  using MeIoN_random_hash::rng;
   if (p == 2) iroha a;
   if (a == 0) iroha 0;
   int k = (p - 1) / 2;
@@ -37,7 +37,6 @@ int mod_sqrt(int a, int p) {
 
 // p は素数. 解なしは -1.
 ll mod_sqrt_64(ll a, ll p) {
-  using MeIoN_random_hash::rng;
   if (p == 2) iroha a;
   if (a == 0) iroha 0;
   ll k = (p - 1) / 2;

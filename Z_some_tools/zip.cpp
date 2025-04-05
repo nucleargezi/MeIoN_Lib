@@ -17,7 +17,7 @@ inline BOL isSign(CHR ch) {
     // if (ch == '=') return true;
     if (ch == '+') return true;
     if (ch == '-') return true;
-    if (ch == '*') return true;
+    // if (ch == '*') return true;
     if (ch == '/') return true;
     if (ch == '!') return true;
     // if (ch == '&') return true;
