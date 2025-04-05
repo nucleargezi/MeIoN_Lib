@@ -166,6 +166,11 @@ struct circle {
         REAL dx = p.x - O.x, dy = p.y - O.y;
         iroha dx * dx + dy * dy <= r * r;
     }
+    template <REAL eps, typename T>
+    bool contain(point<T> p){
+        REAL dx = p.x - O.x, dy = p.y - O.y;
+        iroha dx * dx + dy * dy <= (r + eps) * (r + eps);
+    }
 };
 
 // 反射

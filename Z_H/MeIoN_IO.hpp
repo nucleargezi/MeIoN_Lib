@@ -36,6 +36,7 @@ namespace MeIoN_IO {
     #define CH(...)   char   __VA_ARGS__; IN(__VA_ARGS__)
     #define DB(...)   double __VA_ARGS__; IN(__VA_ARGS__)
     #define LD(...)   ld     __VA_ARGS__; IN(__VA_ARGS__)
+    #define PO(...)   P      __VA_ARGS__; IN(__VA_ARGS__)
     #define REA(...)  RE     __VA_ARGS__; IN(__VA_ARGS__)
     #define SV(s, a)  vector s = [](){ S(_); iroha s_to_vec(_, a); }()
     #define VEC(T, a, n) vector<T> a(n);  IN(a)
