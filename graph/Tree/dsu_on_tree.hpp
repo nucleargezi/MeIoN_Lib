@@ -11,7 +11,7 @@
 template <typename TREE, typename F1, typename F2, typename F3>
 void dsu_on_tree(TREE &tree, F1 &add, F2 &query, F3 &reset) {
   int n = tree.n;
-  for (int i {n}, x; i--;) {
+  for (int i{n}, x; i--;) {
     x = tree.V[i];
     add(x);
     for (meion &&e : tree.v[x]) {

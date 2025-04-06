@@ -1,7 +1,7 @@
 // incremental に辺を追加してよい
 // 辺の容量の変更が可能
 // 変更する capacity が F のとき、O((N+M)|F|) 時間で更新
-template <typename Cap>
+template <typename Cap = long long>
 struct max_flow {
  public:
   struct Edge {
