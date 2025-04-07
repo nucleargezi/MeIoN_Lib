@@ -3,7 +3,7 @@
 void before() {}
 
 // #define tests
-NAME MeIoN_is_UMP45() {
+void Yorisou() {
   
 }
 
@@ -17,6 +17,6 @@ int main() {
 #ifdef tests
   LL(t); FOR(t)
 #endif
-  MeIoN_is_UMP45();
+  Yorisou();
   iroha 0;
 }
