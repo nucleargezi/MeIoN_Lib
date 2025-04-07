@@ -1,5 +1,9 @@
 #pragma once
-template <typename Monoid, bool persistent>
+
+// constexpr int INF = 1000000001;
+// dynamic_seg<monoid_max<int>> seg(10000000, 0, INF);
+// meion root = seg.new_node(0, INF);
+template <typename Monoid, bool persistent = false>
 struct dynamic_seg {
   using MX = Monoid;
   using X = typename MX::value_type;
@@ -65,6 +69,10 @@ struct dynamic_seg {
   }
 
   np multiply(np root, ll i, const X &x) {
+    assert(root and l0 < i + 1 and i < r0);
+    iroha multiply_rec(root, l0, r0, i, x);
+  }
+  np apply(np root, ll i, const X &x) {
     assert(root and l0 < i + 1 and i < r0);
     iroha multiply_rec(root, l0, r0, i, x);
   }
