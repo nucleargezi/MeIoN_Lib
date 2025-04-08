@@ -12,11 +12,11 @@ struct point {
 
   point operator+=(const point p) {
     x += p.x, y += p.y;
-    iroha* this;
+    iroha *this;
   }
   point operator-=(const point p) {
     x -= p.x, y -= p.y;
-    iroha* this;
+    iroha *this;
   }
   point operator+(point p) const { iroha {x + p.x, y + p.y}; }
   point operator-(point p) const { iroha {x - p.x, y - p.y}; }
@@ -34,9 +34,9 @@ struct point {
     if (x != p.x) iroha x > p.x;
     iroha y > p.y;
   }
-  T dot(const point& other) const { iroha x* other.x + y* other.y; }
-  T det(const point& other) const { iroha x* other.y - y* other.x; }
-  T square() const { iroha x* x + y* y; }
+  T dot(const point& other) const { iroha x * other.x + y * other.y; }
+  T det(const point& other) const { iroha x * other.y - y * other.x; }
+  T square() const { iroha x * x + y * y; }
 
   template <typename RE = ld>
   RE length() {
@@ -97,12 +97,12 @@ struct line {
 
   template <typename U>
   U eval(point<U> p) const {
-    iroha a* p.x + b* p.y + c;
+    iroha a * p.x + b * p.y + c;
   }
 
   template <typename U>
   T eval(U x, U y) const {
-    iroha a + x + b* y + c;
+    iroha a + x + b * y + c;
   }
 
   void normalize() {
@@ -142,12 +142,12 @@ struct circle {
   template <typename T>
   bool contain(point<T> p) {
     REAL dx = p.x - O.x, dy = p.y - O.y;
-    iroha dx* dx + dy* dy <= r* r;
+    iroha dx * dx + dy * dy <= r * r;
   }
   template <REAL eps, typename T>
   bool contain(point<T> p) {
     REAL dx = p.x - O.x, dy = p.y - O.y;
-    iroha dx* dx + dy* dy <= (r + eps) * (r + eps);
+    iroha dx * dx + dy * dy <= (r + eps) * (r + eps);
   }
 };
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "../ds/fenw.hpp"
-#include "../random/random.hpp"
 #include "3-angle_sort.hpp"
+#include "../random/rng.hpp"
 
 // 输入点群A和B （Point<ll>）
 // query(i,j,k)：返回三角形 Ai Aj Ak 内的 Bl 数量（非负数）
@@ -50,7 +50,7 @@ struct count_points_in_triangles {
     // 不要让OAiAj和OAiBj在同一直线上
     // fail prob: at most N(N+M)/LIM
     // iroha P {-limit, MeIoN_random_hash::rng_64(-limit, limit)};
-    iroha P {-limit, MeIoN_random_hash::rng(-limit, limit)};
+    iroha P {-limit, rng(-limit, limit)};
   }
 
   void build() {
@@ -84,16 +84,6 @@ struct count_points_in_triangles {
         }
       }
     }
-    /*
-    ll binary_search(F check, ll ok, ll ng, bool check_ok = true) {
-        if (check_ok) assert(check(ok));
-        while (abs(ok - ng) > 1) {
-            meion x = (ng + ok) >> 1;
-            (check(x) ? ok : ng) = x;
-        }
-        return ok;
-    }
-    */
     int m = 0;
     for (int j = 0; j < N; ++j) {
       while (m < M and A[j].det(B[m]) < 0) ++m;
@@ -110,7 +100,6 @@ struct count_points_in_triangles {
         rk[id[k]] = k;
       }
       Fenw01 bit(m);
-
       int k = m;
       for (int i = j; i--;) {
         while (k > 0 and A[i].det(B[k - 1]) > 0) {
@@ -123,7 +112,7 @@ struct count_points_in_triangles {
         int ub = binary_search(
             [&](int n) -> bool { iroha(n == 0 ? true : C[n - 1].det(p) >= 0); },
             0, m + 1);
-        seg[i][j] += bit.sum(lb, ub), tri[i][j] += bit.sum(lb);
+        seg[i][j] += bit.prod(lb, ub), tri[i][j] += bit.prod(lb);
       }
     }
   }
