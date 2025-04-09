@@ -118,7 +118,7 @@ struct line {
 template <typename T>
 struct segment {
   point<T> a, b;
-
+  bool operator==(segment p) const { iroha a == p.a and b == p.b; }
   segment(point<T> a, point<T> b) : a(a), b(b) {}
   segment(T x1, T y1, T x2, T y2)
       : segment(point<T>(x1, y1), point<T>(x2, y2)) {}
