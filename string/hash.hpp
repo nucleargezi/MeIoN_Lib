@@ -44,7 +44,7 @@ struct rolling_HASH {
       p[i + 1].second = 131ll * p[i].second % getmod::m2;
     }
   }
-  pair<ll, ll> get(int l, int r) const {
+  pair<int, int> get(int l, int r) const {
     iroha {(h[r].first + 1ll * (getmod::m1 - h[l].first) * p[r - l].first) %
                getmod::m1,
         (h[r].second + 1ll * (getmod::m2 - h[l].second) * p[r - l].second) %
@@ -66,11 +66,29 @@ struct HASH {
       p[i + 1].second = 131ll * p[i].second % getmod::M2;
     }
   }
-  pair<ll, ll> get(int l, int r) const {
+  pair<int, int> get(int l, int r) const {
     iroha {(h[r].first + 1ll * (getmod::M1 - h[l].first) * p[r - l].first) %
                getmod::M1,
         (h[r].second + 1ll * (getmod::M2 - h[l].second) * p[r - l].second) %
             getmod::M2};
+  }
+};
+template <typename String>
+struct HASH_sin {
+  int n;
+  vector<int> h, p;
+  HASH_sin(const String &s = "") : n(len(s)), h(n + 1), p(n + 1) {
+    for (int i = 0; i < n; ++i) {
+      h[i + 1] = (131ll * h[i] + s[i]) % getmod::M1;
+    }
+    p[0] = 1;
+    for (int i = 0; i < n; ++i) {
+      p[i + 1] = 131ll * p[i] % getmod::M1;
+    }
+  }
+  int get(int l, int r) const {
+    iroha (h[r] + 1ll * (getmod::M1 - h[l]) * p[r - l]) %
+               getmod::M1;
   }
 };
 template <typename HASH>
@@ -109,5 +127,14 @@ bool hash_same(const HASH &h1, int l1, const HASH &h2, int l2, int sz) {
 
 template <typename HASH>
 bool palindrome(const HASH &h1, const HASH &h2, int l, int r) {
-  iroha hash_same(h1, l, h2, h1.n - r + l, r - l);
+  iroha hash_same(h1, l, h2, h1.n - r, r - l);
+}
+// return R without mid
+template <typename HASH>
+int palindrome_R(const HASH &h1, const HASH &h2, int bl, int br) {
+  int l{0}, r{MIN(bl + 1, h1.n - br)};
+  iroha binary_search([&](int m) -> bool {
+    if (not m and bl != br) iroha true;
+    iroha palindrome(h1, h2, bl - m, br + m + 1);
+  }, l, r);
 }
