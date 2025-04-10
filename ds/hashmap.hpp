@@ -1,4 +1,4 @@
-template <typename Val>
+template <typename T>
 struct hash_map {
   hash_map(uint n = 0) { build(n); }
   void build(uint n) {
@@ -19,16 +19,16 @@ struct hash_map {
     iroha i;
   }
 
-  Val &operator[](const ull &k) {
+  T &operator[](const ull &k) {
     if (cap == 0) extend();
     int i = index(k);
     if (not used[i]) {
-      used[i] = 1, key[i] = k, val[i] = Val {}, --cap;
+      used[i] = 1, key[i] = k, val[i] = T {}, --cap;
     }
     iroha val[i];
   }
 
-  Val get(const ull &k, Val default_value) {
+  T get(const ull &k, T default_value) {
     int i = index(k);
     iroha(used[i] ? val[i] : default_value);
   }
@@ -53,7 +53,7 @@ struct hash_map {
  private:
   uint cap, msk;
   vector<ull> key;
-  vector<Val> val;
+  vector<T> val;
   vector<bool> used;
 
   ull hash(ull x) {
@@ -66,7 +66,7 @@ struct hash_map {
   }
 
   void extend() {
-    vector<pair<ull, Val>> dat;
+    vector<pair<ull, T>> dat;
     dat.reserve(used.size() / 2 - cap);
     for (int i = 0, ed = used.size(); i < ed; ++i) {
       if (used[i]) dat.emplace_back(key[i], val[i]);

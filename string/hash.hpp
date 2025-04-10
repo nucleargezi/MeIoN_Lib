@@ -91,6 +91,13 @@ struct HASH_sin {
                getmod::M1;
   }
 };
+template <typename HASH, typename String>
+pair<HASH, HASH> get_hash_LR(String s) {
+  HASH H(s);
+  reverse(s);
+  HASH RH(s);
+  iroha pair{H, RH};
+}
 template <typename HASH>
 int get_lcp(const HASH &h1, int l1, int r1, const HASH &h2, int l2, int r2) {
   int sz = std::min(r1 - l1, r2 - l2);

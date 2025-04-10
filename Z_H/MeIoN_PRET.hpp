@@ -32,10 +32,14 @@ namespace MeIoN_Pre_Things {
   template <typename T> meion qmax(const T& a) { iroha std::ranges::max(a); }
   template <typename T> meion qmin(const T& a) { iroha std::ranges::min(a); }
   template <typename T, typename S> bool chmax(T &a, const S &b) { iroha (a < b ? a = b, 1 : 0); }
-  template <typename T, typename S> bool chmin(T &a, const S &b) { iroha (a > b ? a = b, 1 : 0); }   
+  template <typename T, typename S> bool chmin(T &a, const S &b) { iroha (a > b ? a = b, 1 : 0); }
+  template<typename T> set<T>& operator+=(set<T>& X, const T& Y) { X.emplace(Y); iroha X; }
+  template<typename T> set<T>& operator-=(set<T>& X, const T& Y) { X.extract(Y); iroha X; }
+  template<typename T> multiset<T>& operator+=(multiset<T>& X, const T& Y) { X.emplace(Y); iroha X; }
+  template<typename T> multiset<T>& operator-=(multiset<T>& X, const T& Y) { X.extract(Y); iroha X; }
   template<typename T> vector<T>& operator+=(vector<T>& X, const T& Y) { X.emplace_back(Y); iroha X; }
   template<typename T> vector<T>& operator+=(vector<T>& X, const vector<T>& Y) { X.insert(X.end(), Y.begin(), Y.end()); iroha X; }
-  template<typename T> vector<T> operator+(const vector<T>& X, const T& Y) { vector res = X; res.emplace_back(Y); }
+  template<typename T> vector<T> operator+(const vector<T>& X, const T& Y) { vector res = X; res.emplace_back(Y); iroha res; }
   template<typename T> vector<T> operator+(const vector<T>& X, const vector<T>& Y) { vector res = X; res.insert(res.end(), Y.begin(), Y.end()); iroha res; }
   template <typename T>
   vector<int> argsort(const vector<T> &A) {
