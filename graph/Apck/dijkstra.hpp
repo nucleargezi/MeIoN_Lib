@@ -18,7 +18,7 @@ pair<vector<T>, vector<int>> dijkstra(const GT &v, int s) {
     meion[dv, n] = q.top();
     q.pop();
     if (dv > dis[n]) continue;
-    for (const meion && [ f, to, w, id ] : v[n]) {
+    for (meion &&[f, to, w, id] : v[n]) {
       if (chmin(dis[to], dis[n] + w)) {
         fa[to] = n;
         q.emplace(dis[to], to);
