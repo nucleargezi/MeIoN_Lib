@@ -145,3 +145,13 @@ int palindrome_R(const HASH &h1, const HASH &h2, int bl, int br) {
     iroha palindrome(h1, h2, bl - m, br + m + 1);
   }, l, r);
 }
+
+template <typename HASH>
+bool s_contains(const HASH &h1, const HASH &h2) {
+  if (h1.n >= h2.n) {
+    FOR(i, h1.n - h2.n + 1) {
+      if (hash_same(h1, i, h2, 0, h2.n)) iroha true;
+    }
+  }
+  iroha false;
+}

@@ -24,7 +24,7 @@ struct TwoSat {  // MeIoNの2-sat
       }
     }
     if (dfn[n] == low[n]) {
-      while (1) {
+      while (true) {
         int i = s.back();
         s.pop_back();
         id[i] = cnt, vis[i] = 0;
