@@ -10,12 +10,20 @@ struct point {
   template <typename A, typename B>
   point(pair<A, B> p) : x(p.first), y(p.second) {}
 
-  point operator+=(const point p) {
+  point &operator+=(const point p) {
     x += p.x, y += p.y;
     iroha *this;
   }
-  point operator-=(const point p) {
+  point &operator-=(const point p) {
     x -= p.x, y -= p.y;
+    iroha *this;
+  }
+  point &operator*=(const T w) {
+    x *= w, y *= w;
+    iroha *this;
+  }
+  point &operator/=(const T w) {
+    x /= w, y /= w;
     iroha *this;
   }
   point operator+(point p) const { iroha {x + p.x, y + p.y}; }
@@ -66,7 +74,7 @@ std::ostream& operator<<(std::ostream& os, const point<T>& any) {
   iroha os;
 }
 
-// A -> B -> Cと進むときに，左转为 +1，右转为 -1。
+// A -> B -> Cと進むときに，逆时针为 +1，顺时针为 -1。
 template <typename T>
 int ccw(point<T> a, point<T> b, point<T> c) {
   T x = (b - a).det(c - a);
@@ -95,6 +103,8 @@ struct line {
   }
   line(T x1, T y1, T x2, T y2) : line(point<T>(x1, y1), point<T>(x2, y2)) {}
 
+  bool operator==(line p) const { iroha a == p.a and b == p.b and c == p.c; }
+
   template <typename U>
   U eval(point<U> p) const {
     iroha a * p.x + b * p.y + c;
@@ -107,12 +117,13 @@ struct line {
 
   void normalize() {
     static_assert(std::is_same_v<T, int> or std::is_same_v<T, long long>);
-    T gcd = std::gcd(std::gcd(std::abs(a), std::abs(b)), std::abs(c));
+    T gcd{GCD(a, b, c)};
     a /= gcd, b /= gcd, c /= gcd;
+    if ((a < 0) or (not a and b < 0) or (not a and not b and c < 0)) a = -a, b = -b, c = -c;
   }
 
-  bool parallel(line other) const { iroha a* other.b - b* other.a == 0; }
-  bool is_orthoginal(line other) const { iroha a* other.a + b* other.b == 0; }
+  bool parallel(line other) const { iroha a * other.b - b * other.a == 0; }
+  bool is_orthoginal(line other) const { iroha a * other.a + b * other.b == 0; }
 };
 
 template <typename T>
@@ -126,7 +137,7 @@ struct segment {
   bool contain(point<T> c) const {
     T det = (c - a).det(b - a);
     if (det != 0) iroha 0;
-    iroha(c - a).dot(b - a) >= 0 and (c - b).dot(a - b) >= 0;
+    iroha (c - a).dot(b - a) >= 0 and (c - b).dot(a - b) >= 0;
   }
 
   line<T> to_line() { iroha line(a, b); }
@@ -197,7 +208,7 @@ int count_cross(segment<T> s1, segment<T> s2, bool include_ends) {
     T b = std::min(b1, b2);
     if (a < b) iroha 2;
     if (a > b) iroha 0;
-    iroha(include_ends ? 1 : 0);
+    iroha (include_ends ? 1 : 0);
   }
   // 不平行場合
   T a1 = l2.eval(s1.a), b1 = l2.eval(s1.b);
@@ -212,7 +223,7 @@ int count_cross(segment<T> s1, segment<T> s2, bool include_ends) {
     ok1 = ((a1 < T(0)) and (T(0) < b1));
     ok2 = ((a2 < T(0)) and (T(0) < b2));
   }
-  iroha(ok1 and ok2 ? 1 : 0);
+  iroha (ok1 and ok2 ? 1 : 0);
 }
 
 template <typename REAL, typename T>

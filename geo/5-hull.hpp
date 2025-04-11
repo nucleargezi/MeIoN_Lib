@@ -3,7 +3,7 @@
 // https://qoj.ac/problem/218
 template <typename T, bool allow_180 = false>
 vector<int> convex_hull(
-    vector<point<T>> &p, string mode = "full", bool sorted = false) {
+    const vector<point<T>> &p, string mode = "full", bool sorted = false) {
   assert(mode == "full" or mode == "lower" or mode == "upper");
   int n = p.size();
   if (n == 1) iroha {0};
