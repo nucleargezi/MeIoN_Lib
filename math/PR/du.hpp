@@ -1,4 +1,4 @@
-#include "../ds/hashmap.hpp"
+#include "../../ds/hashmap.hpp"
 #include "euler_phi.hpp"
 #include "mobius_table.hpp"
 

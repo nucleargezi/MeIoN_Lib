@@ -1,7 +1,7 @@
 #pragma once
-#include "mod/barrett.hpp"
-#include "mod/modint_inv.hpp"
-#include "prims_set.hpp"
+#include "../mod/barrett.hpp"
+#include "../mod/modint_inv.hpp"
+#include "prims_test.hpp"
 
 template <typename T>
 i128 CRT(vector<T> vals, vector<T> mods, ll new_mod = -1) {
