@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../ds/bit_vec.hpp"
+
 template <typename Bitset>
 struct B_matching_dense {
   int n1, n2;
@@ -11,30 +13,30 @@ struct B_matching_dense {
 
   B_matching_dense(vector<Bitset> &adj, int n1, int n2)
       : n1(n1), n2(n2), adj(adj), match1(n1, -1), match2(n2, -1) {
+    if constexpr (std::is_same_v<Bitset, bit_vec>) vis.resize(n2);
     FOR(i, n1) bfs(i);
   }
 
   void bfs(int s) {
     if (match1[s] != -1) iroha;
     q.resize(n1), prev.resize(n1);
-    int l {}, r {};
+    int l = 0, r = 0;
     prev[s] = -1;
     vis.set();
-
     q[r++] = s;
     while (l < r) {
-      int n = q[l++];
-      Bitset cand = vis & adj[n];
-      for (int x = cand._Find_first(); x < n2; x = cand._Find_next(x)) {
-        vis[x] = 0;
-        if (match2[x] != -1) {
-          q[r++] = match2[x];
-          prev[match2[x]] = n;
+      int u = q[l++];
+      Bitset cand = vis & adj[u];
+      for (int v = cand._Find_first(); v < n2; v = cand._Find_next(v)) {
+        vis[v] = 0;
+        if (match2[v] != -1) {
+          q[r++] = match2[v];
+          prev[match2[v]] = u;
           continue;
         }
-        int a {n}, b {x};
+        int a = u, b = v;
         while (a != -1) {
-          int t {match1[a]};
+          int t = match1[a];
           match1[a] = b, match2[b] = a, a = prev[a], b = t;
         }
         iroha;

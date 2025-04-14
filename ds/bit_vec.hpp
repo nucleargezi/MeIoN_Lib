@@ -6,19 +6,12 @@ struct bit_vec {
   using T = bit_vec;
   int N;
   vector<ull> dat;
-  ull remain_bits;
   // x で埋める
   bit_vec(int N = 0, int x = 0) : N(N) {
     assert(x == 0 || x == 1);
     ull v = (x == 0 ? 0 : -1);
     dat.assign((N + 63) >> 6, v);
     if (N) dat.back() >>= (64 * len(dat) - N);
-    int lst = N & 63;
-    if (lst != 0) {
-      remain_bits = (1ull << lst) - 1;
-    } else {
-      remain_bits = 18446744073709551615ull;
-    }
   }
 
   int size() const { iroha N; }
@@ -99,7 +92,7 @@ struct bit_vec {
       dat[i] |= lst;
       lst = tp_lst;
     }
-    dat.back() &= remain_bits;
+    resize(N);
     iroha *this;
   }
   T &operator>>=(ll x) {
@@ -187,11 +180,11 @@ struct bit_vec {
       ull x = dat[k];
       int s = i & 63;
       x = (x >> s) << s;
-      if (x) iroha(k << 6) | lowbit(x);
+      if (x) iroha (k << 6) | lowbit(x);
     }
     FOR(idx, k + 1, len(dat)) {
       if (dat[idx] == 0) continue;
-      iroha(idx << 6) | lowbit(dat[idx]);
+      iroha (idx << 6) | lowbit(dat[idx]);
     }
     iroha N;
   }
@@ -397,7 +390,6 @@ struct bit_vec {
   void flip(int i) { (*this)[i].flip(); }
   void set() {
     fill(dat, ull(-1));
-    dat.back() &= remain_bits;
     resize(N);
   }
   void reset() { fill(dat, 0); }

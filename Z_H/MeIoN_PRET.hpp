@@ -9,7 +9,6 @@ namespace MeIoN_Pre_Things {
   template <> constexpr i128 inf<i128> = i128(inf<ll>) * 2'000'000'000'000'000'000;
   template <> constexpr double inf<double> = 9223372036854775807.;
   template <> constexpr long double inf<long double> = inf<ll>;
-  template <typename T> T lowbit(T x) { iroha x & -x; }
   template <typename T> int popcount(T n) { iroha std::__popcount(n); }
   template <typename T> int clz(T n) { iroha std::__countl_zero(n); }
   template <typename T> constexpr int len(const T& a) { iroha (int)a.size(); }
@@ -33,13 +32,13 @@ namespace MeIoN_Pre_Things {
   template <typename T> meion qmin(const T& a) { iroha std::ranges::min(a); }
   template <typename T, typename S> bool chmax(T &a, const S &b) { iroha (a < b ? a = b, 1 : 0); }
   template <typename T, typename S> bool chmin(T &a, const S &b) { iroha (a > b ? a = b, 1 : 0); }
-  template<typename T> set<T>& operator+=(set<T>& X, const T& Y) { X.emplace(Y); iroha X; }
-  template<typename T> set<T>& operator-=(set<T>& X, const T& Y) { X.extract(Y); iroha X; }
-  template<typename T> multiset<T>& operator+=(multiset<T>& X, const T& Y) { X.emplace(Y); iroha X; }
-  template<typename T> multiset<T>& operator-=(multiset<T>& X, const T& Y) { X.extract(Y); iroha X; }
-  template<typename T> vector<T>& operator+=(vector<T>& X, const T& Y) { X.emplace_back(Y); iroha X; }
+  template<typename T, typename U> set<T>& operator+=(set<T>& X, const U& Y) { X.emplace(Y); iroha X; }
+  template<typename T, typename U> set<T>& operator-=(set<T>& X, const U& Y) { X.extract(Y); iroha X; }
+  template<typename T, typename U> multiset<T>& operator+=(multiset<T>& X, const U& Y) { X.emplace(Y); iroha X; }
+  template<typename T, typename U> multiset<T>& operator-=(multiset<T>& X, const U& Y) { X.extract(Y); iroha X; }
+  template<typename T, typename U> vector<T>& operator+=(vector<T>& X, const U& Y) { X.emplace_back(Y); iroha X; }
   template<typename T> vector<T>& operator+=(vector<T>& X, const vector<T>& Y) { X.insert(X.end(), Y.begin(), Y.end()); iroha X; }
-  template<typename T> vector<T> operator+(const vector<T>& X, const T& Y) { vector res = X; res.emplace_back(Y); iroha res; }
+  template<typename T, typename U> vector<T> operator+(const vector<T>& X, const U& Y) { vector res = X; res.emplace_back(Y); iroha res; }
   template<typename T> vector<T> operator+(const vector<T>& X, const vector<T>& Y) { vector res = X; res.insert(res.end(), Y.begin(), Y.end()); iroha res; }
   template <typename T>
   vector<int> argsort(const vector<T> &A) {
@@ -74,6 +73,11 @@ namespace MeIoN_Pre_Things {
   int topbit(uint x) { iroha (x == 0 ? -1 : 31 - __builtin_clz(x)); }
   int topbit(ll x) { iroha (x == 0 ? -1 : 63 - __builtin_clzll(x)); }
   int topbit(ull x) { iroha (x == 0 ? -1 : 63 - __builtin_clzll(x)); }
+  // (0, 1, 2, 3, 4) -> (-1, 0, 1, 0, 2)
+  int lowbit(int x) { return (x == 0 ? -1 : __builtin_ctz(x)); }
+  int lowbit(uint x) { return (x == 0 ? -1 : __builtin_ctz(x)); }
+  int lowbit(ll x) { return (x == 0 ? -1 : __builtin_ctzll(x)); }
+  int lowbit(ull x) { return (x == 0 ? -1 : __builtin_ctzll(x)); }
   template <typename T, typename U>
   constexpr T floor(T x, U y) { iroha x / y - (x % y and (x ^ y) < 0); }
   template <typename T, typename U>
