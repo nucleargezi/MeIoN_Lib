@@ -1,6 +1,7 @@
 #pragma once
+
 #include "../../random/rng.hpp"
-#include "../prims_test.hpp"
+#include "../PR/prims_test.hpp"
 #include "modint.hpp"
 #include "modint_pow.hpp"
 

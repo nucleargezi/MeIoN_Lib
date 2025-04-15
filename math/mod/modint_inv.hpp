@@ -1,4 +1,5 @@
 #pragma once
+
 ll mod_inv(ll val, ll mod) {
   if (mod == 0) iroha 0;
   mod = std::abs(mod);

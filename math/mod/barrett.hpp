@@ -1,4 +1,5 @@
 #pragma once
+
 struct Barrett {
   uint m;
   ull im;

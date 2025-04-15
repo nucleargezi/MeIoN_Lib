@@ -1,6 +1,7 @@
 #pragma once
+
 #include "../../MeIoN_all.hpp"
-#include "../primtable.hpp"
+#include "../PR/primtable.hpp"
 
 // https://codeforces.com/contest/1194/problem/F
 // a^0, ..., a^N

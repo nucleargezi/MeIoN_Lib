@@ -1,5 +1,7 @@
 #pragma once
+
 #include "modint.hpp"
+
 template <typename mint>
 mint lagrange_interpolate_iota(vector<mint> &f, mint c) {
   /*  Input: f(0), ..., f(n-1) and c

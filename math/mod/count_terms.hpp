@@ -1,4 +1,5 @@
 #pragma once
+
 #include "modint.hpp"
 
 template <typename mint>
