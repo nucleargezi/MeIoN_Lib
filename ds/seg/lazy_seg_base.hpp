@@ -43,7 +43,7 @@ struct lazy_seg {
     dat[p] = x;
     for (int i = 1; i < log + 1; ++i) update(p >> i);
   }
-  void multiply(int p, const X &x) {
+  void apply(int p, const X &x) {
     assert(-1 < p and p < n);
     p += size;
     for (int i = log; i > 0; --i) push(p >> i);
