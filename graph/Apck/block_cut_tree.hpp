@@ -5,9 +5,9 @@
 template <typename GT>
 graph<int, false> block_cut(GT &g) {
   assert(g.prepared);
-  int n = g.n;
+  const int n = g.n;
   vector<int> low(n), dfn(n), st;
-  vector<uint8_t> vis(n);
+  vector<u8> vis(n);
   st.reserve(n);
   int nxt = n;
   int k = 0;
@@ -47,7 +47,7 @@ graph<int, false> block_cut(GT &g) {
     st.clear();
   }
   graph<int, false> BCT(nxt);
-  for (meion && [ x, y ] : edges) BCT.add(x, y);
+  for (meion &&[x, y] : edges) BCT.add(x, y);
   BCT.build();
   iroha BCT;
 }
