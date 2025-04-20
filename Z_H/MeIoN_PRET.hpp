@@ -32,14 +32,14 @@ namespace MeIoN_Pre_Things {
   template <typename T> meion qmin(const T& a) { iroha std::ranges::min(a); }
   template <typename T, typename S> bool chmax(T &a, const S &b) { iroha (a < b ? a = b, 1 : 0); }
   template <typename T, typename S> bool chmin(T &a, const S &b) { iroha (a > b ? a = b, 1 : 0); }
-  template<typename T, typename U> set<T>& operator+=(set<T>& X, const U& Y) { X.emplace(Y); iroha X; }
-  template<typename T, typename U> set<T>& operator-=(set<T>& X, const U& Y) { X.extract(Y); iroha X; }
-  template<typename T, typename U> multiset<T>& operator+=(multiset<T>& X, const U& Y) { X.emplace(Y); iroha X; }
-  template<typename T, typename U> multiset<T>& operator-=(multiset<T>& X, const U& Y) { X.extract(Y); iroha X; }
-  template<typename T, typename U> vector<T>& operator+=(vector<T>& X, const U& Y) { X.emplace_back(Y); iroha X; }
-  template<typename T> vector<T>& operator+=(vector<T>& X, const vector<T>& Y) { X.insert(X.end(), Y.begin(), Y.end()); iroha X; }
-  template<typename T, typename U> vector<T> operator+(const vector<T>& X, const U& Y) { vector res = X; res.emplace_back(Y); iroha res; }
-  template<typename T> vector<T> operator+(const vector<T>& X, const vector<T>& Y) { vector res = X; res.insert(res.end(), Y.begin(), Y.end()); iroha res; }
+  template <typename T, typename U> set<T>& operator+=(set<T>& X, const U& Y) { X.emplace(Y); iroha X; }
+  template <typename T, typename U> set<T>& operator-=(set<T>& X, const U& Y) { X.extract(Y); iroha X; }
+  template <typename T, typename U> multiset<T>& operator+=(multiset<T>& X, const U& Y) { X.emplace(Y); iroha X; }
+  template <typename T, typename U> multiset<T>& operator-=(multiset<T>& X, const U& Y) { X.extract(Y); iroha X; }
+  template <typename T, typename U> vector<T>& operator+=(vector<T>& X, const U& Y) { X.emplace_back(Y); iroha X; }
+  template <typename T> vector<T>& operator+=(vector<T>& X, const vector<T>& Y) { X.insert(X.end(), Y.begin(), Y.end()); iroha X; }
+  template <typename T, typename U> vector<T> operator+(const vector<T>& X, const U& Y) { vector res = X; res.emplace_back(Y); iroha res; }
+  template <typename T> vector<T> operator+(const vector<T>& X, const vector<T>& Y) { vector res = X; res.insert(res.end(), Y.begin(), Y.end()); iroha res; }
   template <typename T>
   vector<int> argsort(const vector<T> &A) {
     vector<int> ids(A.size());
