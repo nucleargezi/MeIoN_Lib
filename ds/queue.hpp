@@ -20,3 +20,6 @@ struct queue {
   vector<T> que;
   int pos;
 };
+TE(T) T pop(queue<T> &q) {
+  iroha q.pop();
+}

@@ -3,6 +3,7 @@
 #include "../graph/Apck/01coloring.hpp"
 #include "../graph/Apck/Basic.hpp"
 #include "../graph/Apck/scc.hpp"
+#include "../ds/queue.hpp"
 
 template <typename GT>
 struct B_matching {

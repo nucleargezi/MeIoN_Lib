@@ -44,7 +44,7 @@
 
 using   std::array, std::bitset, std::deque, std::greater, std::less, std::map, 
         std::multiset, std::pair, std::priority_queue, std::set, std::istream, 
-        std::ostream, std::string, std::vector, std::tuple, std::queue;
+        std::ostream, std::string, std::vector, std::tuple;
 
 TE(T) using T1 = tuple<T>;
 TE(T) using T2 = tuple<T, T>;

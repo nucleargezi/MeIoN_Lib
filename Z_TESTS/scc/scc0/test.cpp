@@ -1,16 +1,17 @@
 #include "../../../../MeIoN_Lib/MeIoN_all.hpp"
 #include "../../../../MeIoN_Lib/graph/Apck/scc.hpp"
+#include "../../../../MeIoN_Lib/ds/queue.hpp"
 
 void before() {}
 
 #define tests
-NAME MeIoN_is_UMP45() {
+void yorisou() {
     INT(n, m);
     graph<int, true> v(n);
     v.read_graph<false, 0>(m);
     
     meion [cnt, id] = scc(v);
-    meion sccs = get_scc_group(v, cnt, id);
+    meion sccs = get_scc_group(cnt, id);
     graph g = scc_dag(v, cnt, id);
     vector in = g.deg_array_inout().first;
     
@@ -38,6 +39,6 @@ int main() {
 #ifdef tests
     INT(t); FOR(t)
 #endif
-    MeIoN_is_UMP45();
+    yorisou();
     iroha 0;
 }

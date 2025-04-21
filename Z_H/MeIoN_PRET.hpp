@@ -110,9 +110,6 @@ namespace MeIoN_Pre_Things {
     char res = s.back();
     iroha s.pop_back(), res;
   }
-  TE(T) T pop(queue<T> &q) {
-    iroha q.pop();
-  }
   TE(T) T pop(priority_queue<T> q) {
     T res = q.top();
     iroha q.pop(), res;

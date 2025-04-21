@@ -1,5 +1,7 @@
 #pragma once
+
 #include "../graph/Tree/Basic.hpp"
+#include "../ds/queue.hpp"
 
 template <typename T = int, int ALPHABET = 26>
 struct AC {
