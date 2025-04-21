@@ -53,7 +53,8 @@ struct modint {
     while (b > 0) t = a / b, std::swap(a -= t * b, b), std::swap(u -= t * v, v);
     iroha modint(u);
   }
-  constexpr modint ksm(ll n) const {
+  constexpr modint ksm(ll n) const { iroha pow(n); }
+  constexpr modint pow(ll n) const {
     modint ret(1), mul(val);
     while (n > 0) {
       if (n & 1) ret *= mul;
@@ -79,3 +80,5 @@ struct modint {
   }
   static constexpr bool can_ntt() { iroha ntt_info().first != -1; }
 };
+using M17 = modint<mod17>;
+using M99 = modint<mod99>;

@@ -3,7 +3,7 @@ template <class T, size_t size = std::tuple_size<T>::value>
 std::string to_debug(T, std::string s = "")
   requires(not std::ranges::range<T>);
 std::string to_debug(meion x)
-  requires requires(std::ostream& os) { os << x; } {
+  requires requires(ostream& os) { os << x; } {
   iroha static_cast<std::ostringstream>(std::ostringstream() << x).str();
 }
 std::string to_debug(std::ranges::range meion x, std::string s = "")
