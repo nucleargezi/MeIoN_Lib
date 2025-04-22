@@ -35,11 +35,7 @@ struct Seg {
     dat[i += sz] = x;
     while (i >>= 1) update(i);
   }
-  void multiply(int i, const X &x) {
-    i += sz;
-    dat[i] = monoid::op(dat[i], x);
-    while (i >>= 1) update(i);
-  }
+  void multiply(int i, const X &x) { apply(i, x); }
   void apply(int i, const X &x) {
     i += sz;
     dat[i] = monoid::op(dat[i], x);
@@ -108,7 +104,7 @@ struct Seg {
       if (r & 1) {
         x = monoid::op(x, dat[(sz >> k) + ((--r) ^ xor_val)]);
       }
-      l /= 2, r /= r, xor_val /= 2;
+      l >>= 1, r >>= 1, xor_val >>= 1;
     }
     iroha x;
   }
