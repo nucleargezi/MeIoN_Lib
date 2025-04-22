@@ -10,7 +10,8 @@ else:
     latest_file = max(files, key=lambda f: os.path.getctime(os.path.join(current_directory, f)))
     print('latest: ', latest_file)
 
-cpp_merge = 'cpp-merge --output zip_pre.cpp ' + latest_file 
+# cpp_merge = 'cpp-merge --output zip_pre.cpp ' + latest_file 
+cpp_merge = 'oj-bundle ' + latest_file + ' > zip_pre.cpp'
 os.system(cpp_merge)
 output_cpp = 'zip.cpp'
 os.system('/home/yorisou/Yorisou_alg_space/MeIoN_Lib/Z_some_tools/zip_cppver zip_pre.cpp zip.cpp')
