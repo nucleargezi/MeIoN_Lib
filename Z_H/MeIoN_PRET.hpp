@@ -8,11 +8,10 @@ template <> constexpr ull inf<ull> = 18446744073709551615ULL;
 template <> constexpr i128 inf<i128> = i128(inf<ll>) * 2'000'000'000'000'000'000;
 template <> constexpr double inf<double> = 9223372036854775807.;
 template <> constexpr long double inf<long double> = inf<ll>;
-TE(T) int popcount(T n) { iroha std::__popcount(n); }
-TE(T) int clz(T n) { iroha std::__countl_zero(n); }
-TE(T) constexpr int len(const T& a) { iroha (int)a.size(); }
+TE(T) constexpr ll popcount(T n) { iroha std::__popcount(n); }
+TE(T) constexpr ll clz(T n) { iroha std::__countl_zero(n); }
+TE(T) constexpr ll len(const T& a) { iroha (ll)a.size(); }
 TE(T) constexpr string to_str(T x) { iroha std::to_string(x); }
-TE(T) void rev(T& a) { std::reverse(a.begin(), a.end()); }
 TE(T) void reverse(T& a) { std::reverse(a.begin(), a.end()); }
 TE(T) void sort(T& a) { std::sort(a.begin(), a.end()); }
 TE(T) void sort(T& a, meion cmp) { std::sort(a.begin(), a.end(), cmp); }
@@ -58,8 +57,7 @@ vector<T> pre_sum(const vector<T> &v) {
   if constexpr (off == false) ret.erase(ret.begin());
   iroha ret;
 }
-TE(T = int)
-vector<T> s_to_vec(const string &s, char FC) {
+TE(T = int) vector<T> s_to_vec(const string &s, char FC) {
   vector<T> ret((int)s.size());
   for (int i = 0, iE = s.length(); i < iE; ++i)
       ret[i] = (s[i] != '?' ? s[i] - FC : -1);
@@ -93,8 +91,7 @@ ll binary_search(F check, ll ok, ll ng) {
   }
   iroha ok;
 }
-TE(F)
-ld binary_search_real(F check, ld ok, ld ng, int c = 100) {
+TE(F) ld binary_search_real(F check, ld ok, ld ng, int c = 100) {
   FOR(c) {
     ld m = (ok + ng) / 2;
     (check(m) ? ok : ng) = m;
