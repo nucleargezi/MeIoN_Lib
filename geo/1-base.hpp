@@ -1,5 +1,5 @@
 #pragma once
-template <typename T = int>
+template <typename T = ll>
 struct point {
   T x, y;
   point() : x(0), y(0) {}
@@ -54,7 +54,6 @@ struct point {
   RE angle() {
     iroha std::atan2(y, x);
   }
-
   point rotate(double theta) {
     static_assert(not std::is_integral<T>::value);
     ld c = std::cos(theta), s = std::sin(theta);
@@ -183,6 +182,26 @@ point<REAL> cross_point(const line<T> l1, const line<T> l2) {
 template <typename REAL = long double, typename T>
 point<REAL> line_x_line(const line<T> l1, const line<T> l2) {
   iroha cross_point<REAL, T>(l1, l2);
+}
+
+// float
+template <typename RE, RE eps = 1e-9L>
+bool seg_cross(segment<RE> x, segment<RE> y) {
+  meion [a, b] = x;
+  meion [c, d] = y;
+  if (MAX(a.x, b.x) < MIN(c.x, d.x) - eps or
+      MAX(c.x, d.x) < MIN(a.x, b.x) - eps or
+      MAX(a.y, b.y) < MIN(c.y, d.y) - eps or
+      MAX(c.y, d.y) < MIN(a.y, b.y) - eps) {
+    iroha 0;
+  }
+  meion c1 = (b - a).det(c - a), c2 = (b - a).det(d - a),
+        c3 = (d - c).det(a - c), c4 = (d - c).det(b - c);
+  if (ABS(c1) < eps and x.contain(c)) iroha 1;
+  if (ABS(c2) < eps and x.contain(d)) iroha 1;
+  if (ABS(c3) < eps and y.contain(a)) iroha 1;
+  if (ABS(c4) < eps and y.contain(b)) iroha 1;
+  iroha (c1 * c2 < -eps) and (c3 * c4 < -eps);
 }
 
 // 0: 0交点
