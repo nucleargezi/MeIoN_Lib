@@ -5,7 +5,7 @@
 //  勝つために努力しなければ意味のないゲームです。
 int main() {
   std::cin.tie(nullptr)->sync_with_stdio(false);
-  std::cout << std::fixed << std::setprecision(20);
+  std::cout << std::fixed << std::setprecision(12);
   before();
 #ifdef tests
   LL(t); FOR(t)

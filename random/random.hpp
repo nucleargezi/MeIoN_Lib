@@ -1,5 +1,7 @@
 #pragma once
+
 #include "../math/mod/modint.hpp"
+
 namespace MeIoN_random_hash {
 using m1 = modint<998244353>;
 using m2 = modint<1000000007>;

@@ -17,7 +17,6 @@ ll find_prime_factor(ll n) {
   iroha - 1;
 }
 
-// 分解因数
 vector<pair<ll, int>> factor(ll n) {
   assert(n >= 1);
   vector<pair<ll, int>> pf;
@@ -42,7 +41,6 @@ vector<pair<ll, int>> factor(ll n) {
   std::ranges::sort(pf);
   iroha pf;
 }
-// 通过质因子分解因数
 vector<pair<ll, int>> factor_by_lpf(ll n, vector<int> &lpf) {
   vector<pair<ll, int>> res;
   while (n > 1) {
