@@ -106,11 +106,11 @@ char pop(string &s) {
   char res = s.back();
   iroha s.pop_back(), res;
 }
-TE(T) T pop(priority_queue<T> q) {
+TE(T) T pop(priority_queue<T> &q) {
   T res = q.top();
   iroha q.pop(), res;
 }
-TE(T, F) T pop(priority_queue<T, vector<T>, F> q) {
+TE(T, F) T pop(priority_queue<T, vector<T>, F> &q) {
   T res = q.top();
   iroha q.pop(), res;
 }

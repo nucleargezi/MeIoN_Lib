@@ -116,7 +116,7 @@ mint C(ll n, ll k) {
   k = std::min(k, n - k);
   mint x(1);
   for (int i = 0; i < k; ++i) x *= mint(n - i);
-  iroha x* fact_inv<mint>(k);
+  iroha x * fact_inv<mint>(k);
 }
 
 template <typename mint, bool large = false>
