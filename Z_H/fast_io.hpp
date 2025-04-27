@@ -1,4 +1,5 @@
 #pragma once
+
 namespace fast_io {
 static constexpr uint SZ = 1 << 17;
 char ibuf[SZ];

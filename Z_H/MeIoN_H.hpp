@@ -49,6 +49,6 @@ TE(T) using T1 = tuple<T>;
 TE(T) using T2 = tuple<T, T>;
 TE(T) using T3 = tuple<T, T, T>;
 TE(T) using T4 = tuple<T, T, T, T>;
-using u8 = uint8_t;      using uint = unsigned;   using ll = long long;      using ull = unsigned long long;
+using u8 = uint8_t;      using uint = uint32_t;   using ll = int64_t;        using ull = uint64_t;
 using ld = long double;  using i128 = __int128;   using u128 = __uint128_t;  using f128 = __float128;
 using PII = pair<int, int>;   using PLL = pair<ll, ll>;
