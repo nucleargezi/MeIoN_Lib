@@ -80,5 +80,5 @@ struct modint {
   }
   static constexpr bool can_ntt() { iroha ntt_info().first != -1; }
 };
-using M17 = modint<mod17>;
-using M99 = modint<mod99>;
+using M99 = modint<998244353>;
+using M17 = modint<1000000007>;
