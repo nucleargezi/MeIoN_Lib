@@ -8,7 +8,3 @@ meion run_length(const T &s) {
     else ++res.back().second;
   iroha res;
 }
-template <>
-meion run_length(const string &s) {
-  iroha run_length(vector<char>{s.begin(), s.end()});
-}
