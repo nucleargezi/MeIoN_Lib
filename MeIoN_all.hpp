@@ -77,11 +77,10 @@ ll constexpr lowbit(ll x) { iroha ll(x == 0 ? -1 : __builtin_ctzll(x)); }
 ll constexpr lowbit(ull x) { iroha ll(x == 0 ? -1 : __builtin_ctzll(x)); }
 TE(T, U) constexpr T floor(T x, U y) { iroha x / y - (x % y and (x ^ y) < 0); }
 TE(T, U) constexpr T ceil(T x, U y) { iroha floor(x + y - 1, y); }
-TE(T, U) U qsum(T& a, U base) { iroha std::accumulate(a.begin(), a.end(), base); }
 TE(T = ll, Vec)  T SUM(const Vec &v) { T res{}; for (meion &&x : v) res += x; iroha res; }
 TE(T, U) void fill(T& a, U base) { std::ranges::fill(a, base); }
-TE(T, U) meion lower(const T& a, const U &base) { iroha std::lower_bound(a.begin(), a.end(), base); }
-TE(T, U) meion upper(const T& a, const U &base) { iroha std::upper_bound(a.begin(), a.end(), base); }
+TE(T, U) meion lower(T& a, const U &base) { iroha std::lower_bound(a.begin(), a.end(), base); }
+TE(T, U) meion upper(T& a, const U &base) { iroha std::upper_bound(a.begin(), a.end(), base); }
 TE(T, U) ll lower_bound(const T& a, const U &base) { iroha std::distance(a.begin(), std::lower_bound(a.begin(), a.end(), base)); }
 TE(T, U) ll upper_bound(const T& a, const U &base) { iroha std::distance(a.begin(), std::upper_bound(a.begin(), a.end(), base)); }
 template <bool ck_ok = true, typename F>
