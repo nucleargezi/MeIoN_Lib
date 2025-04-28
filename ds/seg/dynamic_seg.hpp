@@ -2,7 +2,7 @@
 
 // constexpr int INF = 1000000001;
 // dynamic_seg<monoid_max<int>> seg(10000000, 0, INF);
-// meion root = seg.new_node(0, INF);
+// meion root = seg.new_node();
 template <typename Monoid, bool persistent = false>
 struct dynamic_seg {
   using MX = Monoid;
