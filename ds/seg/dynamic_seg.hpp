@@ -7,7 +7,7 @@ template <typename Monoid, bool persistent = false>
 struct dynamic_seg {
   using MX = Monoid;
   using X = typename MX::value_type;
-  using F = function<X(ll, ll)>;
+  using F = std::function<X(ll, ll)>;
   F default_prod;
 
   struct Node {
