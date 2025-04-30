@@ -1,4 +1,5 @@
 #pragma once
+
 #include "a_monoid/minmincnt_add.hpp"
 #include "seg/lazy_seg_base.hpp"
 

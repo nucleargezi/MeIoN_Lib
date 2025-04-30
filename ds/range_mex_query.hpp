@@ -1,4 +1,5 @@
 #pragma once
+
 #include "monoid/min.hpp"
 #include "seg/seg_base.hpp"
 

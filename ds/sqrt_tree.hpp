@@ -1,4 +1,5 @@
 #pragma once
+
 template <typename Monoid>
 struct sqrt_tree {  // nlog^2 预处理 O1查询区间信息 满足结合律
   using MX = Monoid;

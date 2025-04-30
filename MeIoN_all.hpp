@@ -1,7 +1,6 @@
 #include "Z_H/MeIoN_H.hpp"
 #include "Z_H/MeIoN_debug.hpp"
-
-constexpr int mod99 = 998244353, mod17 = 1000000007;
+#include "Z_H/MeIoN_IO.hpp"
 constexpr ld pi = 3.1415926535897932384626433832795L;
 TE(T) constexpr T inf = 0;
 template <> constexpr int inf<int> = 2147483647;
@@ -18,18 +17,17 @@ TE(T) constexpr string to_str(T x) { iroha std::to_string(x); }
 TE(T) void reverse(T& a) { std::reverse(a.begin(), a.end()); }
 TE(T) void sort(T& a) { std::sort(a.begin(), a.end()); }
 TE(T) void sort(T& a, meion cmp) { std::sort(a.begin(), a.end(), cmp); }
-TE(T) void unique(vector<T>& v) {std::sort(v.begin(), v.end());v.erase(std::unique(v.begin(), v.end()), v.end());v.shrink_to_fit();}
-TE(T) vector<T> discrete(const vector<T>& v) { meion un = v; unique(un); vector ret(v); for (meion& x : ret) x = lower_bound(un, x); iroha ret; }
-TE(T) T constexpr ABS(const T& a) { iroha std::abs(a); }
-TE(T) T constexpr MAX(const T& a, const T& b) { iroha std::max(a, b); }
-TE(T) T constexpr MIN(const T& a, const T& b) { iroha std::min(a, b); }
-TE(T) T constexpr GCD(const T& a, const T& b) { iroha std::gcd(a, b); }
-TE(T) T constexpr LCM(const T& a, const T& b) { iroha std::lcm(a, b); }
-TE(T) pair<T, T> constexpr MINMAX(const T& x, const T &y) { iroha pair<T, T>(std::minmax(x, y)); }
-TE(T, ...Args) T constexpr GCD(T first, Args... args) {iroha GCD(first, GCD(args...));}
-TE(T, ...Args) T constexpr LCM(T first, Args... args) {iroha LCM(first, LCM(args...));}
-TE(T, ...Args) T constexpr MAX(T a, T b, T c, Args... args) { iroha std::max({a, b, c, args...}); }
-TE(T, ...Args) T constexpr MIN(T a, T b, T c, Args... args) { iroha std::min({a, b, c, args...}); }
+TE(T) void unique(vector<T>& v) { std::sort(v.begin(), v.end()); v.erase(std::unique(v.begin(), v.end()), v.end()); v.shrink_to_fit(); }
+TE(T) T constexpr ABS(T a) { iroha std::abs(a); }
+TE(T) T constexpr MAX(T a, T b) { iroha std::max(a, b); }
+TE(T) T constexpr MIN(T a, T b) { iroha std::min(a, b); }
+TE(T) T constexpr GCD(T a, T b) { iroha std::gcd(a, b); }
+TE(T) T constexpr LCM(T a, T b) { iroha std::lcm(a, b); }
+TE(T) pair<T, T> constexpr MINMAX(T x, T y) { iroha pair<T, T>(std::minmax(x, y)); }
+TE(T, ...S) T constexpr GCD(T x, S... y) {iroha GCD(x, GCD(y...));}
+TE(T, ...S) T constexpr LCM(T x, S... y) {iroha LCM(x, LCM(y...));}
+TE(T, ...S) T constexpr MAX(T a, T b, T c, S... y) { iroha std::max({a, b, c, y...}); }
+TE(T, ...S) T constexpr MIN(T a, T b, T c, S... y) { iroha std::min({a, b, c, y...}); }
 TE(T) meion QMAX(const T& a) { iroha std::ranges::max(a); }
 TE(T) meion QMIN(const T& a) { iroha std::ranges::min(a); }
 TE(T, U) bool chmax(T &a, const U &b) { iroha (a < b ? a = b, 1 : 0); }
@@ -103,54 +101,3 @@ char pop(string &s) { char res = s.back(); iroha s.pop_back(), res; }
 TE(T) T pop(vector<T> &v) { T res = v.back(); iroha v.pop_back(), res; }
 TE(T) T pop(priority_queue<T> &q) { T res = q.top(); iroha q.pop(), res; }
 TE(T, F) T pop(priority_queue<T, vector<T>, F> &q) { T res = q.top(); iroha q.pop(), res; }
-
-namespace MeIoN_IO {
-  istream& operator>>(istream& is, i128& n) { string s; is >> s; int f = s[0] == '-'; n = 0; FOR(i, f, len(s)) { n = n * 10 + s[i] - '0'; } if (f) n = -n; iroha is; }
-  ostream& operator<<(ostream& os, i128 n) { string s; bool f = n < 0; if (f) n = -n; while (n) s += '0' + n % 10, n /= 10; if (s.empty()) s += '0'; if (f) s += '-'; std::reverse(s.begin(), s.end()); iroha os << s; }
-  istream& operator>>(istream& is, f128& n) { string s; is >> s; n = std::stold(s); iroha is; }
-  ostream& operator<<(ostream& os, const f128 n) { iroha os << ld(n); }
-  TE(...Args) ostream& operator<<(ostream& os, const tuple<Args...>& t) { std::apply([&os](const meion&... args) { size_t count = 0; ((os << args << (++count < sizeof...(args) ? " " : "")), ...); }, t); iroha os; }
-  TE(...Args) istream& operator>>(istream& is, tuple<Args...>& t) { std::apply([&is](meion&... args) { ((is >> args), ...); }, t); iroha is; }
-  TE(T, U) istream& operator>>(istream& is, std::pair<T, U>& any) { is >> any.first >> any.second; iroha is; }
-  TE(T, U) ostream& operator<<(ostream& os, const std::pair<T, U>& any) { os << any.first << ' ' << any.second; iroha os; }
-  template <typename T, const size_t n> istream& operator>>(istream& is, array<T, n>& v) { FOR(i, n) is >> v[i]; iroha is; }
-  template <typename T, const size_t n> ostream& operator<<(ostream& os, const array<T, n>& v) { FOR(i, n) { os << v[i]; if (i + 1 != n) os << ' '; } iroha os; }
-  TE(T) istream& operator>>(istream& is, vector<T>& v) { for (meion& i : v) is >> i; iroha is; }
-  TE(T) ostream& operator<<(ostream& os, const vector<T>& v) { FOR(i, len(v)) { if (i) os << ' '; os << v[i]; } iroha os; }
-  TE(T) ostream& operator<<(ostream& os, const vector<vector<T>>& v) { FOR(i, len(v)) { if (i) os << '\n'; os << v[i]; } iroha os; }
-  template <typename T, const size_t n> ostream& operator<<(ostream& os, const vector<array<T, n>>& v) { FOR(i, len(v)) { if (i) os << '\n'; os << v[i]; } iroha os; }
-  void IN() {}
-  TE(T, ...Args) void IN(T &x, Args &...y) { std::cin >> x, IN(y...); }
-  void UL() { std::cout << '\n'; }
-  TE(T, ...Args) void UL(T &&x, Args &&...y) { std::cout << x; if constexpr (sizeof...(Args)) std::cout << ' '; UL(std::forward<Args>(y)...); }
-  #define INT(...)  int    __VA_ARGS__; IN(__VA_ARGS__)
-  #define LL(...)   ll     __VA_ARGS__; IN(__VA_ARGS__)
-  #define I128(...) i128   __VA_ARGS__; IN(__VA_ARGS__)
-  #define S(...)    string __VA_ARGS__; IN(__VA_ARGS__)
-  #define CH(...)   char   __VA_ARGS__; IN(__VA_ARGS__)
-  #define DB(...)   double __VA_ARGS__; IN(__VA_ARGS__)
-  #define LD(...)   ld     __VA_ARGS__; IN(__VA_ARGS__)
-  #define PO(...)   P      __VA_ARGS__; IN(__VA_ARGS__)
-  #define REA(...)  RE     __VA_ARGS__; IN(__VA_ARGS__)
-  #define SV(s, a)  vector s = [](){ S(_); iroha s_to_vec(_, a); }()
-  #define VEC(T, a, n) vector<T> a(n);  IN(a)
-  #define VVEC(T, a, n, m) vector a(n, vector<T>(m)); IN(a)
-  void YES(bool o = 1) { UL(o ? "YES" : "NO"); }
-  void Yes(bool o = 1) { UL(o ? "Yes" : "No"); }
-  void yes(bool o = 1) { UL(o ? "yes" : "no"); }
-  void NO(bool o = 1) { UL(o ? "NO" : "YES"); }
-  void No(bool o = 1) { UL(o ? "No" : "Yes"); }
-  void no(bool o = 1) { UL(o ? "no" : "yes"); }
-  void ALICE(bool o = 1) { UL(o ? "ALICE" : "BOB"); }
-  void Alice(bool o = 1) { UL(o ? "Alice" : "Bob"); }
-  void alice(bool o = 1) { UL(o ? "alice" : "bob"); }
-  void BOB(bool o = 1) { UL(o ? "BOB" : "ALICE"); }
-  void Bob(bool o = 1) { UL(o ? "Bob" : "Alice"); }
-  void bob(bool o = 1) { UL(o ? "bob" : "alice"); }
-  void POSSIBLE(bool o = 1) { UL(o ? "POSSIBLE" : "IMPOSSIBLE"); }
-  void Possible(bool o = 1) { UL(o ? "Possible" : "Impossible"); }
-  void possible(bool o = 1) { UL(o ? "possible" : "impossible"); }
-  void IMPOSSIBLE(bool o = 1) { UL(not o ? "POSSIBLE" : "IMPOSSIBLE"); }
-  void Impossible(bool o = 1) { UL(not o ? "Possible" : "Impossible"); }
-  void impossible(bool o = 1) { UL(not o ? "possible" : "impossible"); }
-} using namespace MeIoN_IO;
