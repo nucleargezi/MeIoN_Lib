@@ -1,5 +1,7 @@
 #pragma once
+
 #include "rollback_array.hpp"
+
 struct rollback_dsu {
   RollbackArray<int> dat;
   rollback_dsu(int n) : dat(std::vector<int>(n, -1)) {}
