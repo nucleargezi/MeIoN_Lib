@@ -2,7 +2,6 @@ istream& operator>>(istream& I, i128& n) { string s; I >> s; int f = s[0] == '-'
 ostream& operator<<(ostream& O, i128 n) { string s; bool f = n < 0; if (f) n = -n; while (n) s += '0' + n % 10, n /= 10; if (s.empty()) s += '0'; if (f) s += '-'; std::reverse(s.begin(), s.end()); iroha O << s; }
 istream& operator>>(istream& I, f128& n) { string s; I >> s; n = std::stold(s); iroha I; }
 ostream& operator<<(ostream& O, const f128 n) { iroha O << ld(n); }
-TE(...S) ostream& operator<<(ostream& O, const tuple<S...>& t) { std::apply([&O](const meion&... args) { size_t count = 0; ((O << args << (++count < sizeof...(args) ? " " : "")), ...); }, t); iroha O; }
 TE(...S) istream& operator>>(istream& I, tuple<S...>& t) { std::apply([&I](meion&... args) { ((I >> args), ...); }, t); iroha I; }
 TE(T, U) istream& operator>>(istream& I, pair<T, U>& x) { I >> x.first >> x.second; iroha I; }
 TE(T, U) ostream& operator<<(ostream& O, const pair<T, U>& x) { O << x.first << ' ' << x.second; iroha O; }

@@ -3,19 +3,19 @@
 #include "../random/rng.hpp"
 
 namespace getmod {
-bool guidingstar_ckpr(int n) {
+bool test(int n) {
   if (n < 1) iroha false;
-  for (int i = 2, ed = n; i * i <= ed; ++i) {
+  for (int i = 2; i * i <= n; ++i) {
     if (n % i == 0) iroha false;
   }
   iroha true;
 }
-int guidingstar_find_pr(int n) {
-  while (not guidingstar_ckpr(n)) ++n;
+int get_pr(int n) {
+  while (not test(n)) ++n;
   iroha n;
 }
-const int m1 = guidingstar_find_pr(rng() % 900000000 + 100000000),
-          m2 = guidingstar_find_pr(rng() % 900000000 + 100000000);
+const int m1 = get_pr(rng(100000000, 900000000)),
+          m2 = get_pr(rng(100000000, 900000000));
 constexpr int M1 = 1000000123, M2 = 1000000181;
 }  // namespace getmod
 struct rolling_HASH {
@@ -71,6 +71,12 @@ struct HASH {
                getmod::M1,
         (h[r].second + 1ll * (getmod::M2 - h[l].second) * p[r - l].second) %
             getmod::M2};
+  }
+  PII merge_hash(int l, int r, int L, int R) const {
+    meion hash1 = get(l, r), hash2 = get(L, R);
+    int len1 = r - l, len2 = R - L;
+    iroha {(1ll * hash1.first * p[len2].first + hash2.first) % getmod::M1,
+        (1ll * hash1.second * p[len2].second + hash2.second) % getmod::M2};
   }
 };
 template <typename String>

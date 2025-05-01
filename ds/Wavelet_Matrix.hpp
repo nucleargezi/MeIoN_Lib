@@ -34,7 +34,7 @@ struct Wavelet_Matrix {
       }
       key.shrink_to_fit();
     }
-    if (lg == -1) lg = std::__lg(std::max<ll>(qmax(A), 1)) + 1;
+    if (lg == -1) lg = std::__lg(std::max<ll>(QMAX(A), 1)) + 1;
     mid.resize(lg);
     bv.assign(lg, Bit_Vector(N));
     vector<T> A0(N), A1(N);
