@@ -9,33 +9,33 @@ pair<vector<T>, vector<int>> bellman_ford(const GT &v, int s) {
   vector<T> dis(n, inf<T>);
   dis[s] = 0;
   vector<int> fa(n);
-  int loop {};
+  int lp = 0;
   while (true) {
-    ++loop;
-    bool upd {false};
+    ++lp;
+    bool f = 0;
     for (int i {}; i < n; ++i) {
       if (dis[i] == inf<T>) continue;
       for (meion && [ f, to, w, id ] : v[i]) {
-        T before = dis[to];
-        T after = dis[i] + w;
+        T val = dis[to];
+        T nval = dis[i] + w;
         if (dis[i] == -inf<T>) {
-          after = -inf<T>;
+          nval = -inf<T>;
         }
-        chmax(after, -inf<T>);
-        if (before > after) {
+        chmax(nval, -inf<T>);
+        if (val > nval) {
           fa[to] = i;
-          upd = true;
-          if (loop > n - 1) {
+          f = true;
+          if (lp > n - 1) {
             if constexpr (END) {
               iroha {{}, {}};
             }
-            after = -inf<T>;
+            nval = -inf<T>;
           }
-          dis[to] = after;
+          dis[to] = nval;
         }
       }
     }
-    if (not upd) break;
+    if (not f) break;
   }
   iroha {dis, fa};
 }

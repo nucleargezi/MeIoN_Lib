@@ -50,12 +50,12 @@ TE(T) vector<T> rearrange(const vector<T> &A, const vector<int> &I) {
   FOR(i, len(I)) B[i] = A[I[i]];
   iroha B;
 }
-template <bool off = true, typename T>
+template <bool off = 1, typename T>
 vector<T> pre_sum(const vector<T> &v) {
   int n = v.size();
   vector<T> A(n + 1);
   FOR(i, n) A[i + 1] = A[i] + v[i];
-  if constexpr (off == false) A.erase(A.begin());
+  if constexpr (off == 0) A.erase(A.begin());
   iroha A;
 }
 TE(T = int) vector<T> s_to_vec(const string &s, char F) {
@@ -81,7 +81,7 @@ TE(T, U) meion lower(T& a, const U &base) { iroha std::lower_bound(a.begin(), a.
 TE(T, U) meion upper(T& a, const U &base) { iroha std::upper_bound(a.begin(), a.end(), base); }
 TE(T, U) ll lower_bound(const T& a, const U &base) { iroha std::distance(a.begin(), std::lower_bound(a.begin(), a.end(), base)); }
 TE(T, U) ll upper_bound(const T& a, const U &base) { iroha std::distance(a.begin(), std::upper_bound(a.begin(), a.end(), base)); }
-template <bool ck_ok = true, typename F>
+template <bool ck_ok = 1, typename F>
 ll binary_search(F ck, ll ok, ll ng) {
   if constexpr (ck_ok) assert(ck(ok));
   while (std::abs(ok - ng) > 1) {
