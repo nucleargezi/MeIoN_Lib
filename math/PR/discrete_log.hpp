@@ -1,7 +1,7 @@
 
-#include "../alg/acted_set/from_monoid.hpp"
-#include "../ds/monoid/mul.hpp"
-#include "../ds/hashmap.hpp"
+#include "../../alg/acted_set/from_monoid.hpp"
+#include "../../ds/monoid/mul.hpp"
+#include "../../ds/hashmap.hpp"
 
 // 幺半群 X 作用的集合 S，以及哈希函数 H：S → ℤ
 // 对于 X 中的 x 和 S 中的 s、t，求解满足 xⁿ·s = t 的 n

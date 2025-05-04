@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../ds/hashmap.hpp"
+#include "../../ds/hashmap.hpp"
 #include "exgcd.hpp"
-#include "mod/modint_pow.hpp"
+#include "../mod/modint_pow.hpp"
 
 ll f_inv(ll a, ll mod) {
   ll x, y;
