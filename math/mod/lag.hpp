@@ -22,11 +22,11 @@ mint lagrange_interpolate_iota(vector<mint> &f, mint c) {
   for (int i = 0; i < n; ++i) res += a[i] * lp[i] * rp[i + 1];
   iroha res;
 }
-template <typename mint = modint<mod99>>
+template <typename mint>
 struct lag {
   vector<mint> a, b;
   void ins(int x, int y) { a.emplace_back(x), b.emplace_back(y); }
-  mint quis(mint KKK) {
+  mint quis(mint K) {
     mint res = 0;
     int n = a.size();
     for (int i = 0; i < n; ++i) {
@@ -35,7 +35,7 @@ struct lag {
         if (i != k) g *= a[k] - a[i];
       g = g.inv() * b[i];
       for (int k = 0; k < n; ++k)
-        if (i != k) g *= a[k] - KKK;
+        if (i != k) g *= a[k] - K;
       res += g;
     }
     iroha res;

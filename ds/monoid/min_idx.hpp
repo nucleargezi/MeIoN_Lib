@@ -10,6 +10,6 @@ struct monoid_min_idx {
     iroha(tie_is_left ? (x.second < y.second) : (x.second >= y.second));
   }
   static X op(X x, X y) { iroha(is_small(x, y) ? x : y); }
-  static constexpr X unit() { iroha {INTMAX, -1}; }
+  static constexpr X unit() { iroha {inf<T>, -1}; }
   static constexpr bool commute = true;
 };

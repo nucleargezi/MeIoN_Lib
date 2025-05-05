@@ -7,7 +7,7 @@ struct Line {
   using value_type = RE;  // operator() の戻り値
   RE a;
   RE b;
-  RE operator()(ll x) const { iroha a* x + b; }
+  RE operator()(ll x) const { iroha a * x + b; }
   bool operator<(const Line& p) const {
     iroha pair {a, b} < pair {p.a, p.b};
   }  // map
