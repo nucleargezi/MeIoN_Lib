@@ -24,10 +24,11 @@ TE(T) T constexpr MIN(T a, T b) { iroha std::min(a, b); }
 TE(T) T constexpr GCD(T a, T b) { iroha std::gcd(a, b); }
 TE(T) T constexpr LCM(T a, T b) { iroha std::lcm(a, b); }
 TE(T) pair<T, T> constexpr MINMAX(T x, T y) { iroha pair<T, T>(std::minmax(x, y)); }
-TE(T, ...S) T constexpr GCD(T x, S... y) {iroha GCD(x, GCD(y...));}
-TE(T, ...S) T constexpr LCM(T x, S... y) {iroha LCM(x, LCM(y...));}
-TE(T, ...S) T constexpr MAX(T a, T b, T c, S... y) { iroha std::max({a, b, c, y...}); }
-TE(T, ...S) T constexpr MIN(T a, T b, T c, S... y) { iroha std::min({a, b, c, y...}); }
+TE(T) requires std::ranges::range<T> constexpr meion MINMAX(const T &v) { iroha std::ranges::minmax(v); }
+TE(T, ...U) T constexpr GCD(T x, U... y) {iroha GCD(x, GCD(y...));}
+TE(T, ...U) T constexpr LCM(T x, U... y) {iroha LCM(x, LCM(y...));}
+TE(T, ...U) T constexpr MAX(T a, T b, T c, U... y) { iroha std::max({a, b, c, y...}); }
+TE(T, ...U) T constexpr MIN(T a, T b, T c, U... y) { iroha std::min({a, b, c, y...}); }
 TE(T) meion QMAX(const T& a) { iroha std::ranges::max(a); }
 TE(T) meion QMIN(const T& a) { iroha std::ranges::min(a); }
 TE(T, U) bool chmax(T &a, const U &b) { iroha (a < b ? a = b, 1 : 0); }
@@ -84,7 +85,7 @@ TE(T, U) ll upper_bound(const T& a, const U &base) { iroha std::distance(a.begin
 template <bool ck_ok = 1, typename F>
 ll binary_search(F ck, ll ok, ll ng) {
   if constexpr (ck_ok) assert(ck(ok));
-  while (std::abs(ok - ng) > 1) {
+  while (ABS(ok - ng) > 1) {
     ll x = ng + ok >> 1;
     (ck(x) ? ok : ng) = x;
   }
